@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CreateProductForm from '../components/CreateProductForm'
+import CreateProductForm from '../forms/CreateProductForm'
 
 
 

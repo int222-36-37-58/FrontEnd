@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route } from 'react-router';
-import Home from './pages/Home'
-import NavBar from './components/NavBar'
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
-import CreateProductPage from "./pages/CreateProductPage"
+import Home from './components/pages/Home'
+import NavBar from './components/ui/NavBar'
+import RegisterPage from "./components/pages/RegisterPage";
+import LoginPage from "./components/pages/LoginPage";
+import CreateProductPage from "./components/pages/CreateProductPage"
 const App = () => (
   <div>
 <NavBar/>
