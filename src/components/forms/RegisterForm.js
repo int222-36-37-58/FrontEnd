@@ -61,28 +61,32 @@ export default class RegisterForm extends Component {
     render() {
         return (
            
-                <Container maxWidth="md" style={{ marginTop : 5 + 'rem', padding : 50+ 'px', backgroundColor : 'white' ,borderRadius : 1 + '%'}} >
-                <Typography variant="h5" style={{ marginBottom : 20 + 'px' }}><u>Register Information</u></Typography>
-                <form >
+                <Container maxWidth="md" style={{ marginTop : 3 + 'rem', backgroundColor : 'white' ,borderRadius : 1 + '%'}} >
+               <Grid container>
+               <Grid item xs={12}><div className="headerRegister">
+                   <Typography variant="h5" style={{ marginBottom : 20 + 'px' }}>Register Information</Typography></div>
+                </Grid>
                 
+                <Grid item xs={12} style={{ padding : 20+'px' }}>
+                <form >
                 <Grid container direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                <Grid item xs={6}>
-                <TextField required error={this.state.errors.username} type="text" inputProps={{ minLength: 3,maxLength: 20}} id="username" name="username" label="Username" helperText="contain 3-20 character" onChange={this.onChange}/>
+                <Grid item xs={12} sm={6}>
+                <TextField variant="outlined" fullWidth required error={this.state.errors.username} type="text" inputProps={{ minLength: 3,maxLength: 20}} id="username" name="username" label="Username" helperText="contain 3-20 character" onChange={this.onChange}/>
                </Grid>
-               <Grid  item xs={6}>
-                <TextField required error={this.state.errors.name} type="text" inputProps={{  minLength: 2,maxLength: 30}} id="name"  name="name" label="Name" helperText="Enter your name" onChange={this.onChange}/>
+               <Grid  item xs={12} sm={6}>
+                <TextField variant="outlined" fullWidth required error={this.state.errors.name} type="text" inputProps={{  minLength: 2,maxLength: 30}} id="name"  name="name" label="Name" helperText="Enter your name" onChange={this.onChange}/>
                 </Grid>
                 <Grid  item xs={12}>
-                <TextField fullWidth required error={this.state.errors.address} type="textarea" inputProps={{  minLength: 5,maxLength: 90}} id="address"  name="address" label="Address"onChange={this.onChange} />
+                <TextField variant="outlined" fullWidth required error={this.state.errors.address} type="textarea" inputProps={{  minLength: 5,maxLength: 90}} id="address"  name="address" label="Address"onChange={this.onChange} />
              </Grid>
              <Grid  item xs={12}>
-                <TextField required error={this.state.errors.tel} type="text" inputProps={{ minLength: 10,maxLength: 10}} id="tel" name="tel"  label="Telephone" helperText="contain 10 number"onChange={this.onChange}/>
+                <TextField variant="outlined" required error={this.state.errors.tel} type="text" inputProps={{ minLength: 10,maxLength: 10}} id="tel" name="tel"  label="Telephone" helperText="contain 10 number"onChange={this.onChange}/>
               </Grid>
-              <Grid  item xs={6}>
-                <TextField required error={this.state.errors.password} type="password" inputProps={{ minLength: 3, maxLength: 20}} id="password" name="password"  label="Password" helperText="contain A-Z a-z 0-9"onChange={this.onChange}/>
+              <Grid  item xs={12} sm={6}>
+                <TextField variant="outlined" fullWidth required error={this.state.errors.password} type="password" inputProps={{ minLength: 3, maxLength: 20}} id="password" name="password"  label="Password" helperText="contain A-Z a-z 0-9"onChange={this.onChange}/>
             </Grid>
-            <Grid  item xs={6}>
-                <TextField required error={this.state.errors.confirmPassword} type="password" inputProps={{ minLength: 3,maxLength: 20}} id="confirmPassword" name="confirmPassword"  label="Confirm Password" helperText="Confirm your password"onChange={this.onChange}/>
+            <Grid  item xs={12} sm={6}>
+                <TextField variant="outlined" fullWidth required error={this.state.errors.confirmPassword} type="password" inputProps={{ minLength: 3,maxLength: 20}} id="confirmPassword" name="confirmPassword"  label="Confirm Password" helperText="Confirm your password"onChange={this.onChange}/>
             </Grid>
             <Grid  item xs={12} align="center">
                 <Button variant="contained" color="primary" style={{marginTop : 60 +  "px" , paddingRight : 35 + "px", paddingLeft : 35 + "px"}} onClick={this.onSubmit}>Submit</Button> 
@@ -91,8 +95,9 @@ export default class RegisterForm extends Component {
                 
                 </Grid>
                 </form>
+                </Grid>
 
-
+                </Grid>
                 </Container>
        
         )

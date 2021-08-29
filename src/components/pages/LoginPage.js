@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { login } from '../../actions/authen'
 
+
 class LoginPage extends Component {
 
 submit = data => {
@@ -15,7 +16,9 @@ this.props.login(data)
     render() {
         return (
             <div>
-                    <LoginForm submit={this.submit}/>
+                <LoginForm submit={this.submit}/>
+                    
+         
             </div>
         )
     }

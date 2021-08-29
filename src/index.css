@@ -1,17 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
+
+
 body {
-
-background-color:  #969faf;
-
-
+background-color:  #202020;
+font-family: 'Prompt', sans-serif;
 } 
-
-
-
 
 .underlineHover:hover {
 
 text-decoration: underline;
 cursor : pointer;
+}
 
+.loginBack {
+
+background-color: black;
+color :white;
+height: 400px;
+width :auto;
+text-align: center;
+justify-content: center;
+}
+
+
+.loginBack > div {
+
+position: relative;
+padding-top: 200px;
+}
+
+.headerRegister {
+padding-top: 20px;
+padding-bottom: 5px;
+margin-top: 20px;
+z-index: 999;
+background-color: #181818;
+color : white;
+width :100%;
+border-radius: 15px;
+}
+
+.headerRegister > * {
+    padding-left: 20px;
+}
+
+
+
+
+.titleWrap {
+  margin-top: -1px;;
+  width: 180px; 
+  max-width: 94%;
+  word-wrap : break-word;
+  font-family: 'Prompt', sans-serif;
+  margin-bottom: -1px;
+  color: #333435;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 5px 0;
+  min-height: 48px;
+  line-height: 24px;
+}
+
+
+.AddButton {
+
+color: #3595f6;
+border-color: #3595f6;
+border-style: solid;
+width: 90%;
+background-color: #d1eafd;
+border-radius: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-bottom: 5px;
+}
+
+.AddButton:hover {
+cursor: pointer;
+color: #d1eafd;
+border-color: #d1eafd;
+border-style: solid;
+
+background-color: #3595f6;
+}
+
+
+.InfoButton {
+color: #7bcb34;
+border-color: #7bcb34;
+border-style: solid;
+width: 90%;
+background-color: #d1eafd;
+border-radius: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-bottom: 5px;
+}
+
+.InfoButton:hover {
+    cursor: pointer;
+    color: #d1eafd;
+    border-color: #d1eafd;
+    border-style: solid;
+
+    background-color: #7bcb34;
+    }
+
+
+.filterBox {
+    border-style:solid;
+    border-color: #e6e8eb;
+    background-color : white;
+    border-radius: 5%;
+    margin-top: 30px;
+    padding : 10px;
+    
 
 }
+
+
+.filterBox > .header {
+border-style: solid;
+border-color : #e6e8eb;
+border-width: 0 0 2px 0;
+line-height: 24px;
+min-height: 36px;
+
+}    
+
+
+.checkBoxContent {
+
+display: grid;
+
+}
+
+
+
+

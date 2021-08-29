@@ -12,8 +12,9 @@ productName : "",
 description : "",
 price : "",
 type : "",
-imageFile : null
+
 },
+imageFile : null,
 imagePreview : noImage,
 errors : {}
 }
@@ -25,8 +26,17 @@ this.setState({
 onSubmit = () => {
     const invalid =this.validate(this.state.data);
     if(invalid !== "err"){
-   
-    this.props.submit(this.state.data);
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var bodyFormdata = new FormData();
+    bodyFormdata.append('imageName' , this.state.data.imageName);
+    bodyFormdata.append('productName' , this.state.data.productName);
+    bodyFormdata.append('description' , this.state.data.description);
+    bodyFormdata.append('price' , this.state.data.price);
+    bodyFormdata.append('type' , this.state.data.type);
+    bodyFormdata.append('date' , date);
+    bodyFormdata.append('imageFile',this.state.imageFile)
+    this.props.submit(bodyFormdata);
     }
 }
 
@@ -82,7 +92,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
 
 
 
-            <img src={this.state.imagePreview} alt="imagePreview" style={{ maxWidth : 400 + 'px',maxHeight : 400 + 'px' , borderRadius : 5 + 'px'}}/>
+            <img src={this.state.imagePreview} alt="imagePreview" style={{ width:'auto',height:'auto', maxWidth : 100+'%',maxHeight : 400 + 'px' , borderRadius : 5 + 'px'}} />
 
 
             <Grid item xs={12}> 
@@ -97,10 +107,14 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 <TextField required fullWidth  error={this.state.errors.description} type="textarea" inputProps={{minLength: 5,maxLength: 200}} id="description" name="description" label="Description" onChange={this.onChange} 
                 helperText="describe your Product"/>
                 </Grid> 
-                <Grid item xs={12}>
-                <TextField required fullWidth  error={this.state.errors.price} type="number" inputProps={{minLength: 5,maxLength: 200}} id="price" name="price" label="Price" onChange={this.onChange} 
+                <Grid item xs={12} sm={6}>
+                <TextField required fullWidth  error={this.state.errors.price} type="number" inputProps={{minLength: 1,maxLength: 10}} id="price" name="price" label="Price" onChange={this.onChange} 
                 helperText="enter Product Price"/>
-                </Grid> 
+               
+                </Grid>  
+                <Grid item xs={12} sm={6}>
+                <TextField required fullWidth  error={this.state.errors.price} type="number" inputProps={{minLength: 1,maxLength: 10}} id="quantity" name="quantity" label="Quantity" onChange={this.onChange} 
+                helperText="enter Product Quantity"/></Grid>
 
                 <Grid item xs={12} >
                     <FormControl style={{minWidth: 100}}>
@@ -113,7 +127,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 
 
                 <Grid item xs={12} align="center">
-                 <Button variant="contained" color="primary" style={{marginTop : 30 +  "px" }} onClick={this.onSubmit}>Submit</Button>
+                 <Button  variant="contained" color="primary" style={{marginTop : 30 +  "px" }} onClick={this.onSubmit}>Submit</Button>
                  </Grid>
                  
                  </Grid>

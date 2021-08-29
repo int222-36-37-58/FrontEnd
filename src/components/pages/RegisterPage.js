@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import RegisterForm from '../forms/RegisterForm'
+import { register } from '../../actions/authen'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 
-export default class RegisterPage extends Component {
+
+class RegisterPage extends Component {
 
     submit = data => {
-
-        console.log(data)
-        
+        this.props.register(data);
         }
 
     render() {
@@ -18,3 +20,14 @@ export default class RegisterPage extends Component {
         )
     }
 }
+
+
+
+RegisterPage.propTypes = {
+
+register : PropTypes.func.isRequired
+
+}
+
+
+export default connect(null, { register })(RegisterPage)
