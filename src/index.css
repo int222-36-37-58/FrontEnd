@@ -52,14 +52,21 @@ border-radius: 15px;
   width: 180px; 
   max-width: 94%;
   word-wrap : break-word;
-  font-family: 'Prompt', sans-serif;
   margin-bottom: -1px;
   color: #333435;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   margin: 5px 0;
-  min-height: 48px;
-  line-height: 24px;
+  min-height: 60px;
+  line-height: 18px;
+}
+
+
+.titleWrap:hover{
+    cursor: pointer;
+    color : #3595f6;
+
+
 }
 
 
@@ -68,7 +75,8 @@ border-radius: 15px;
 color: #3595f6;
 border-color: #3595f6;
 border-style: solid;
-width: 90%;
+font-family: 'Prompt', sans-serif;
+font-weight: 900;
 background-color: #d1eafd;
 border-radius: 5px;
 padding-top: 5px;
@@ -81,7 +89,7 @@ cursor: pointer;
 color: #d1eafd;
 border-color: #d1eafd;
 border-style: solid;
-
+transition-duration: 0.5s;
 background-color: #3595f6;
 }
 
@@ -90,7 +98,9 @@ background-color: #3595f6;
 color: #7bcb34;
 border-color: #7bcb34;
 border-style: solid;
-width: 90%;
+
+font-weight: 900;
+font-family: 'Prompt', sans-serif;
 background-color: #d1eafd;
 border-radius: 5px;
 padding-top: 5px;
@@ -103,7 +113,7 @@ margin-bottom: 5px;
     color: #d1eafd;
     border-color: #d1eafd;
     border-style: solid;
-
+    transition-duration: 0.5s;
     background-color: #7bcb34;
     }
 
@@ -135,6 +145,102 @@ min-height: 36px;
 display: grid;
 
 }
+
+
+.plusMinus > h4{
+
+margin-bottom: 5px;
+}
+
+
+.plusMinusQuantity {
+display : flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width : 15%;
+border-style: solid;
+border-color : #ebebeb;
+border-width: 2px;
+border-radius: 10px;
+font-weight: 900;
+font-size: 16px;
+color : #545454;
+margin-bottom: 25px;
+padding : 10px 15px;
+text-align: center;
+}
+
+.plusMinusQuantity > *{
+
+flex:  auto;
+
+}
+
+.minusButton:hover , .plusButton:hover{
+cursor: pointer;
+
+}
+
+
+
+
+
+.infoBox {
+display:flex; 
+flex-flow:row wrap;
+border-style: solid;
+border-width: 0.1px 0 0.1px 0;
+border-color : #ebebeb;
+color: #666666;
+font-size: 14px;
+}
+
+
+.infoBox:hover {
+transition-duration: 0.5s;
+cursor: pointer;
+color: #3595f6;
+}
+
+
+.infoText {
+text-align: right;
+width: 55%;
+
+}
+
+
+.plusIcon {
+text-align: right;
+
+width: 40%;
+}
+
+
+.infoShow , .commentShow {   
+color: #666666;
+
+font-size: 14px;
+}
+
+.infoShow {
+padding-left : 35px ;
+padding-right : 35px;
+    text-align: center;
+}
+
+
+.commentBox {
+
+    border-style: solid;
+    border-width: 0 0 0.1px 0;
+    border-color : #ebebeb;
+    color: #666666;
+
+}
+
+
 
 
 

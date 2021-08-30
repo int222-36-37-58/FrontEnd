@@ -92,7 +92,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
 
 
 
-            <img src={this.state.imagePreview} alt="imagePreview" style={{ width:'auto',height:'auto', maxWidth : 100+'%',maxHeight : 400 + 'px' , borderRadius : 5 + 'px'}} />
+            <img src={this.state.imagePreview} alt="imagePreview" style={{ width:'auto',height:'auto', maxWidth : 100+'%',maxHeight : 350 + 'px' , borderRadius : 5 + 'px'}} />
 
 
             <Grid item xs={12}> 

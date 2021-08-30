@@ -31,7 +31,7 @@ axios.get(`${process.env.REACT_APP_API_URL}/api/userProduct/${userId}`)
 );
 
 export const addProduct = data =>
-axios.post(`${process.env.REACT_APP_API_URL}/api/createProduct`, data, { headers: { "Content-Type": "multipart/form-data" } },);    
+axios.post(`${process.env.REACT_APP_API_URL}/api/createProduct`, data, { headers: { "Content-Type": "multipart/form-data" } });    
 
 
 export const delProduct = data =>

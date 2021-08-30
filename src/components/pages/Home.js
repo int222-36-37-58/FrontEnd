@@ -8,6 +8,28 @@ export default class Home extends Component {
 
 state = {
 
+    products : [
+        {id : 1, productName: '(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา...่ม 6',
+        price : 275.00 },
+        {id : 2, productName: 'asdasda sdasdasdas STUVWXYZABCDEFGHIJLMno',
+        price : 275.00 },
+        {id : 3, productName: '(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา...่ม 6',
+        price : 275.00 },
+        {id : 4, productName: 'asdasda sdasdasdas STUVWXYZABCDEFGHIJLMno',
+        price : 275.00 },
+        {id : 5, productName: '(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา...่ม 6',
+        price : 275.00 },
+        {id : 6, productName: 'asdasda sdasdasdas STUVWXYZABCDEFGHIJLMno',
+        price : 275.00 }
+
+
+
+    ]
+
+
+    
+
+
 }
 
     render() {
@@ -28,13 +50,10 @@ state = {
             <Grid item xs={12} md={8}>
             <Container  style={{ padding:10+'px', paddingTop : 30+'px'}}>
           <Grid container direction="row" spacing={6} >
-          <Grid item xs={12} sm={6} md={5} lg={3}><ProductCard title="(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา...่ม 6" price="275.00"></ProductCard></Grid>  
-          <Grid item xs={12} sm={6}  md={5} lg={3}><ProductCard title="ABCDEFGHIJLMNOPQURSTUVWXYZABCDEFGHIJLM" price="275.00"></ProductCard></Grid>  
-          <Grid item xs={12} sm={6} md={5} lg={3}><ProductCard title="(LN) เรื่องฝันปั่นป่วยข" price="275.00"></ProductCard></Grid>  
-          <Grid item xs={12} sm={6} md={5} lg={3}><ProductCard></ProductCard></Grid>  
-          <Grid item xs={12} sm={6} md={5} lg={3}><ProductCard></ProductCard></Grid>  
-          <Grid item xs={12} sm={6} md={5} lg={3}><ProductCard></ProductCard></Grid>  
-           
+            {this.state.products.map( (product,index) => {
+                return  <Grid item  xs={12} sm={6} md={5} lg={3}><ProductCard productId={product.id} title={product.productName} price={product.price}></ProductCard></Grid>  
+            })}
+          
             </Grid>
             </Container>
             </Grid>

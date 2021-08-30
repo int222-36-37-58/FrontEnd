@@ -5,6 +5,7 @@ import NavBar from './components/ui/NavBar'
 import RegisterPage from "./components/pages/RegisterPage";
 import LoginPage from "./components/pages/LoginPage";
 import CreateProductPage from "./components/pages/CreateProductPage"
+import ProductPage from './components/pages/ProductPage';
 const App = () => (
   <div>
 <NavBar/>
@@ -13,7 +14,7 @@ const App = () => (
 <Route path="/register" exact component={RegisterPage}/>
 <Route path="/login" exact component={LoginPage}/>
 <Route path="/createproduct" exact component={CreateProductPage}/>
-
+<Route path="/product/:id" exact component={ProductPage}/>
 
 
 </div>

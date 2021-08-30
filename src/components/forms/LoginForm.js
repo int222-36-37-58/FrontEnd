@@ -25,17 +25,16 @@ onChange = e =>
 onSubmit = () => {
 const invalid =this.validate(this.state.data);
 if(invalid !== "err"){
-console.log("success")
 this.props.submit(this.state.data);
 }
 }
 
 validate = (e) => {
     const errors = []
-        if(!e.username || e.username.length <= 1){
+        if(!e.username ){
             errors.username = true;
         }
-        if(!e.password || e.password.length <= 4){
+        if(!e.password ){
            errors.password = true;
         }
 this.setState({errors});

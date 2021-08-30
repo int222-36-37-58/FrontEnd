@@ -25,15 +25,13 @@ export default class RegisterForm extends Component {
             });
         onSubmit = () =>  {
             const invalid =this.validate(this.state.data);
-            if(invalid !== "err"){
-           
+            if(invalid !== "err"){    
             this.props.submit(this.state.data);
             }
         }    
         validate = e => {
-            console.log(e.password)
             const errors = {}
-            if(!e.username || e.username.length <= 1){
+            if(!e.username || e.username.length <= 5 || ( !e.username.match(/^[a-z]/) )){
                 errors.username = true;
             }
             if(!e.password || e.password.length <= 4 || (!e.password.match(/^[A-Z]/) && !e.password.match(/^[a-z]/) &&!e.password.match(/^[0-9]/)) ){
