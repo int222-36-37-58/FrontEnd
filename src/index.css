@@ -6,6 +6,11 @@ background-color:  #202020;
 font-family: 'Prompt', sans-serif;
 } 
 
+.hoverCursor:hover {
+cursor: pointer;
+
+}
+
 .underlineHover:hover {
 
 text-decoration: underline;
@@ -144,6 +149,44 @@ min-height: 36px;
 
 display: grid;
 
+}
+.radioGroup {
+margin-top: -10px;
+margin-bottom: -10px;
+}
+
+
+.radioGroup  input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.radioGroup  label {
+    display: inline-block;
+
+    padding: 3px 5px;
+ 
+    margin-right : 3px;
+    margin-top : 5px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #545454;
+    border-radius: 4px;
+}
+
+.radioGroup  input[type="radio"]:checked + label {
+    color: white;
+    background-color: #545454;
+    border-color: #545454;
+}
+
+.radioGroup  input[type="radio"]:hover + label {
+    cursor: pointer;
+    color: white;
+    background-color: #545454;
+    border-color: #545454;
 }
 
 

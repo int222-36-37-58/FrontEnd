@@ -1,8 +1,6 @@
-import { Container, Grid, Modal } from '@material-ui/core'
+import { Container, Grid } from '@material-ui/core'
 import React, { Component } from 'react'
 import testProduct from "../../images/testProduct.jpg"
-
-
 
 export default class ProductPage extends Component {
 
@@ -14,31 +12,31 @@ export default class ProductPage extends Component {
             saleDate : '12-12-2021',
             quantity: 20,
             imageName : 'testProduct',
-            colors : [{id : 1,colorName : 'red'},{id:2,colorName: 'blue'}],
+            colors : [{id : 1,colorName : 'red'}
+            ,{id:2,colorName: 'blue'}
+            ,{id:3,colorName: 'green'}
+            ,{id:4,colorName: 'black'}
+            ,{id:5,colorName: 'yellow'}
+            ,{id:6,colorName: 'orange'}
+            ,{id:7,colorName: 'purple'}
+            ,{id:8,colorName: 'white'}
+            ,{id:9,colorName: 'pink'}
+            ,{id:10,colorName: 'nocolor'}],
             comment : [{userName: 'testUser'
             ,content :'(LN) เรื่องฝันปั่นป่วยของผมกับแม่สาวน้อยช่างฝัน เล่ม 6(LN) เรื่องฝันปั่นป่วยของผมกับแม่สาวน้อยช่างฝัน เล่ม 6'} ]  
         },
         quantityAdd : 1,
         isShowInfo : false,
         isShowComments : false,
-        isShowColors : false,
-       
+        selectedColor : 0,
+        noColor : false
     }
 
 
-    handleColor = () => {
-        let colorClick = true;
-      
-        this.setState({isShowColors : colorClick})
-        
+    chooseColor = e => {
+        this.setState({selectedColor : e.target.value})
     }
 
-    handleClose = () => {
-        let colorClick = false;
-       
-        this.setState({isShowColors : colorClick})
-
-    }
 
 
     minusQuantity = () => {
@@ -70,6 +68,19 @@ export default class ProductPage extends Component {
         this.setState({isShowComments : commentClick})
     }
 
+    addToCart = () => {
+        if(this.state.selectedColor === 0) {
+            this.setState({noColor : true})
+            return ;
+        } else {
+            this.setState({noColor : false})
+
+
+        }
+
+
+
+    }
    
 
 
@@ -79,7 +90,7 @@ export default class ProductPage extends Component {
             <Container maxWidth='lg' style={{padding: 40+'px', marginTop : 2 + 'rem', backgroundColor : 'white' ,borderRadius : 10 + "px"}}>
             <Grid container justifyContent="center">
             <Grid item xs={12} sm={7} md={6}>
-            <img src={ testProduct } alt="imgProduct" style={{paddingLeft : 15+'%', weight : 'auto',height : 'auto', maxHeight: '400px'}}/>
+            <img src={ testProduct } alt="imgProduct" style={{paddingLeft : 15+'%', width : 'auto',height : 'auto', maxHeight: '400px'}}/>
             </Grid>
 
             <Grid item xs={12} sm={7} md={6}>
@@ -87,7 +98,19 @@ export default class ProductPage extends Component {
                 <h5 style={{ marginTop : -5+'px' }}>sale date : { this.state.product.saleDate} </h5>
 
                 <h3 style={{fontSize : 23+'px'}}>฿{ this.state.product.price} </h3>
-                
+
+                <div className="radioGroup">
+                    <h4 style={{marginBottom: 10+'px'}}>colors</h4>
+                    { this.state.product.colors.map((color) => { 
+                    return  <span><input type="radio" id={color.colorName}  name="color" value={`${color.id}`} onChange={this.chooseColor}/>
+                    <label for={color.colorName} >{color.colorName}</label></span>
+                    
+                    })}
+                    { this.state.noColor &&<h5 style={{color : 'red' , marginTop : 5+'px' }}>please select color!</h5>}
+                </div>
+
+
+
                 <div class="plusMinus">
                 <h4>quantity</h4>
                 <div className="plusMinusQuantity">
@@ -97,17 +120,7 @@ export default class ProductPage extends Component {
                 </div>
                 </div>
 
-                <button className="InfoButton" style={{padding : 10+'px' ,width : 45+'%' ,marginRight :5+ 'px'}} onClick={this.handleColor}>Color</button>
 
-                <Modal open={this.state.isShowColors} onClose={this.handleClose}>
-               
-                {/* {this.state.product.colors.map( color => {
-                    return <div>{color.id}</div>
-                })} */}
-
-                <div>{this.state.product.colors[0].colorName}</div>
-                </Modal>
-                
                 <button className="AddButton" style={{padding : 10+'px' ,width : 45+'%'}} onClick={this.addToCart}>Add - ฿{this.state.product.price*this.state.quantityAdd} </button>
                 </Grid>
 

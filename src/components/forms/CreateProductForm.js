@@ -3,6 +3,14 @@ import { Grid,TextField,Button,Select } from '@material-ui/core'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import noImage from '../../images/noImage.jpg';
+import Checkbox from '@material-ui/core/Checkbox';
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+
+
+
 export default class CreateProductForm extends Component {
 
 state = {
@@ -12,8 +20,15 @@ productName : "",
 description : "",
 price : "",
 type : "",
-
+colors : [],
 },
+types : [
+    {id : 1,type : 'Electronic'},
+    {id : 2,type : 'Kitchen'},
+    {id : 3,type : 'Gaming'},
+    {id : 4,type : 'Musicz'}
+  ],
+colors : [{id : 1,colorName : 'red'},{id:2,colorName: 'blue'}],  
 imageFile : null,
 imagePreview : noImage,
 errors : {}
@@ -23,21 +38,38 @@ this.setState({
   data: { ...this.state.data, [e.target.name]: e.target.value }
 });
 
+chooseColor = e => {
+let colorList = [...this.state.data.colors , e.target.value]
+    if(this.state.data.colors.findIndex(f => f.id === e.target.value) !== -1){
+     colorList = colorList.filter(f => f !== e.target.value)
+    }
+    this.setState({
+        data : { ...this.state.data , colors: colorList 
+        }
+    })
+
+}
+
+
+
 onSubmit = () => {
     const invalid =this.validate(this.state.data);
-    if(invalid !== "err"){
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var bodyFormdata = new FormData();
-    bodyFormdata.append('imageName' , this.state.data.imageName);
-    bodyFormdata.append('productName' , this.state.data.productName);
-    bodyFormdata.append('description' , this.state.data.description);
-    bodyFormdata.append('price' , this.state.data.price);
-    bodyFormdata.append('type' , this.state.data.type);
-    bodyFormdata.append('date' , date);
-    bodyFormdata.append('imageFile',this.state.imageFile)
-    this.props.submit(bodyFormdata);
-    }
+   if(invalid !== "err"){
+   var nowDate = new Date()
+   var today = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+    var bodyFormData = new FormData();
+
+    var intColor = this.state.data.colors.map( a => parseInt(a))
+    var colorObj = intColor.map( cl => ( this.state.colors.find( c => c.id === cl )   ))
+ 
+    var data = this.state.data;
+    data.colors = colorObj;
+    data.date = today;
+    data.userId = 'test';
+    bodyFormData.append('product' , data);
+    bodyFormData.append('imageFile',this.state.imageFile)
+    this.props.submit(bodyFormData);
+   }
 }
 
 validate = (e) => {
@@ -119,12 +151,28 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 <Grid item xs={12} >
                     <FormControl style={{minWidth: 100}}>
                     <InputLabel  htmlFor="type" >type</InputLabel>
-                    <Select required error={this.state.errors.type}  id="type" name="type" onChange={this.onChange}>
-                        <MenuItem value="Electronic">Electronic</MenuItem>
+                    <Select required error={this.state.errors.type} name="type" onChange={this.onChange}>
+                        { this.state.types.map((typeRow) => {
+                        return <MenuItem value={typeRow.id}>{typeRow.type}</MenuItem>
+                        })}
+                        
                     </Select>
                     </FormControl>
                 </Grid>
                 
+                <Grid item xs={12} >
+                <div className="type">
+            <div>colors</div>
+            <FormGroup row className="checkBoxContent">
+              { this.state.colors.map((color)=> {
+                return  <FormControlLabel control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.chooseColor} value={color.id}/>} label={color.colorName}></FormControlLabel>
+              }) }
+            </FormGroup>
+          </div>
+                </Grid>
+                        
+
+
 
                 <Grid item xs={12} align="center">
                  <Button  variant="contained" color="primary" style={{marginTop : 30 +  "px" }} onClick={this.onSubmit}>Submit</Button>
