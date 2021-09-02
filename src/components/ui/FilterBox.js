@@ -12,7 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export default class FilterBox extends Component {
 
   state= {
-
+    
     filters : [
       {id : 1,type : 'Electronic'},
       {id : 2,type : 'Kitchen'},
@@ -51,7 +51,7 @@ export default class FilterBox extends Component {
           <div className="type">
             <div>type</div>
             <div className="checkBoxContent">
-              { this.state.filters.map((filter,index)=> {
+              { this.state.filters.map((filter)=> {
                 return  <FormControlLabel control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.type}/>} label={filter.type}></FormControlLabel>
               }) }
             </div>

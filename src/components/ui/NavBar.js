@@ -1,25 +1,60 @@
-import React from 'react'
+
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
+
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 import '../../index.css'
+import { InputBase } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 
-const NavBar = () => (
-<div>
-    <AppBar position="static" style={{ top : 0}}>
+
+import React, { Component } from 'react'
+
+export default class NavBar extends Component {
+
+   
+
+
+
+onChange = (e) => {
+
+console.log(e.target.value)
+}
+
+
+    render() {
+        return (
+            <AppBar position="static" style={{ top : 0}}>
     <Toolbar>
-        <Typography style={{flexGrow: 1}}><Link to="/" style={{ color:'white', textDecoration: 'none' }}><span className="underlineHover"> Home</span></Link></Typography>
+       
+       <Link to="/" style={{ color:'white', textDecoration: 'none' }} className="underlineHover"> Home</Link>
+       <div class="searchWrap">
+
+        <div className="searchBox" >  
+           <InputBase className="searchInput" placeholder="Search…" variant="outlined"  type="text" id="searchText" name="searchText" onChange={this.onChange} />  
+         <div className="searchIcon">
+            <SearchIcon />
+        </div>
+     
+        
+      
+
+        </div>
+
+       
+  
+        </div>
         <Button variant="contained" color="default"  style={{marginRight : 20 + "px"}}><Link to="/register" style={{ textDecoration: 'none' }}> Register</Link></Button>
         <Button variant="contained" color="default" style={{marginRight : 20 + "px"}}><Link to="/login" style={{ textDecoration: 'none' }}>Log in</Link></Button>
         <Button variant="contained" color="default" style={{marginRight : 20 + "px"}}><Link to="/createproduct" style={{ textDecoration: 'none' }}>Add product</Link></Button>
+        <Button variant="contained" color="default" style={{marginRight : 20 + "px"}}><Link to="/profile" style={{ textDecoration: 'none' }}>Profile</Link></Button>
     </Toolbar>
 
 </AppBar>
-</div>
-);
+        )
+    }
+}
 
-export default NavBar;

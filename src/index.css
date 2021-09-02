@@ -3,8 +3,22 @@
 
 body {
 background-color:  #202020;
-font-family: 'Prompt', sans-serif;
+   font-family: 'Prompt', sans-serif;
 } 
+
+.pageContainer {
+
+    width: 100%;
+    height: 100%;
+    display :flex;
+flex-direction: column;
+min-height: 100vh;
+}
+
+.pageContainer > .pageContent{
+flex : 1;
+
+}
 
 .hoverCursor:hover {
 cursor: pointer;
@@ -17,8 +31,57 @@ text-decoration: underline;
 cursor : pointer;
 }
 
-.loginBack {
 
+
+.searchBox{
+    position: relative;
+	width: 350px;
+	height: 40px;margin : 5px;
+}
+
+
+.searchBox > .searchInput {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 600;
+    position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 10px ;
+    padding-bottom :10px;
+    padding-right: 50px;
+    padding-left: 15px;
+	border-radius: 3px;
+	font-size: 18px;
+    background-color: white;
+   
+}
+
+
+.searchBox > .searchIcon {
+
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+	top: 1;
+	right: 0;
+	width: 40px;
+	height: 95%;
+    margin : 1px;
+	background: #3f51b5;
+    border-radius: 5px;
+	z-index: 1;
+	cursor: pointer;
+    display: flex;
+}
+
+.searchBox > .searchIcon:hover {
+    transition: 1s;
+    background: #7690da;
+}
+
+.loginBack {
 background-color: black;
 color :white;
 height: 400px;
@@ -188,6 +251,12 @@ margin-bottom: -10px;
     background-color: #545454;
     border-color: #545454;
 }
+.plusMinus *{
+
+    outline:none;
+}
+
+
 
 
 .plusMinus > h4{
@@ -283,7 +352,27 @@ padding-right : 35px;
 
 }
 
+.footer {
+position: relative;
+bottom : 0;
+left : 0;
 
+
+margin : 0 ;
+background-color: black;
+color : white;
+width: 100%;
+
+}
+
+
+.footer > .footerContent {
+
+    margin-top:  200px;
+    padding :30px;
+  
+    font-weight: 100;
+}
 
 
 

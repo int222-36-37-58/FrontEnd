@@ -62,7 +62,7 @@ export default class RegisterForm extends Component {
                 <Container maxWidth="md" style={{ marginTop : 3 + 'rem', backgroundColor : 'white' ,borderRadius : 1 + '%'}} >
                <Grid container>
                <Grid item xs={12}><div className="headerRegister">
-                   <Typography variant="h5" style={{ marginBottom : 20 + 'px' }}>Register Information</Typography></div>
+                   <Typography variant="h5" style={{ marginBottom : 20 + 'px' }}>Your Information</Typography></div>
                 </Grid>
                 
                 <Grid item xs={12} style={{ padding : 20+'px' }}>
@@ -75,7 +75,7 @@ export default class RegisterForm extends Component {
                 <TextField variant="outlined" fullWidth required error={this.state.errors.name} type="text" inputProps={{  minLength: 2,maxLength: 30}} id="name"  name="name" label="Name" helperText="Enter your name" onChange={this.onChange}/>
                 </Grid>
                 <Grid  item xs={12}>
-                <TextField variant="outlined" fullWidth required error={this.state.errors.address} type="textarea" inputProps={{  minLength: 5,maxLength: 90}} id="address"  name="address" label="Address"onChange={this.onChange} />
+                <TextField variant="outlined" fullWidth multiline required error={this.state.errors.address} type="textarea" inputProps={{  minLength: 5,maxLength: 90}} id="address"  name="address" label="Address"onChange={this.onChange} />
              </Grid>
              <Grid  item xs={12}>
                 <TextField variant="outlined" required error={this.state.errors.tel} type="text" inputProps={{ minLength: 10,maxLength: 10}} id="tel" name="tel"  label="Telephone" helperText="contain 10 number"onChange={this.onChange}/>
