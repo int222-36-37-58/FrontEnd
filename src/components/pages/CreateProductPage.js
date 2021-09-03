@@ -1,27 +1,24 @@
-import React, { Component } from 'react'
+
 import CreateProductForm from '../forms/CreateProductForm'
 
 
 
 
-export default class CreateProductPage extends Component {
+import React from 'react'
 
-submit = (e) => {
-
-console.log(e)
-
-}
+export default function CreateProductPage() {
 
 
+    const submit = (e) => {
 
 
+        console.log(e);
 
-
-    render() {
-        return (
-            <div>
-                <CreateProductForm submit={this.submit}/>
-            </div>
-        )
     }
+
+
+
+    return (
+        <CreateProductForm submit={submit}/>
+    )
 }

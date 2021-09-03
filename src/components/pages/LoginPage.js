@@ -1,33 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LoginForm from '../forms/LoginForm'
-import PropTypes from 'prop-types'
-import { connect } from "react-redux";
-import { login } from '../../actions/authen'
+//import PropTypes from 'prop-types'
+//import { connect } from "react-redux";
+//import { login } from '../../actions/authen'
 
 
-class LoginPage extends Component {
 
-submit = data => {
 
-this.props.login(data)
+export default function LoginPage() {
 
-}
 
-    render() {
-        return (
-            <div>
-                <LoginForm submit={this.submit}/>
-                    
-         
-            </div>
-        )
-    }
-}
+const submit = (e) => {
 
-LoginPage.propTypes = {
-
-    login : PropTypes.func.isRequired
+    console.log(e);
 
 }
 
-export default connect(null, { login })(LoginPage)
+
+
+    return (
+        <div>
+       
+                <LoginForm submit={submit}/>
+          
+        </div>
+    )
+}
+

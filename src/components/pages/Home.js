@@ -62,16 +62,6 @@ state = {
             </Grid>
             </Container>
 
-
-
-
-
-        
-            
-
-
-
-                
             
             </div>
         )

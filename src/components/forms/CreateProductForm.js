@@ -65,8 +65,13 @@ onSubmit = () => {
     var data = this.state.data;
     data.colors = colorObj;
     data.date = today;
-    data.userId = 'test';
-    bodyFormData.append('product' , data);
+    data.userId = 1;
+
+    const blob = new Blob([JSON.stringify(this.data)], {
+        type: 'application/json'
+    })
+
+    bodyFormData.append('product' , blob);
     bodyFormData.append('imageFile',this.state.imageFile)
     this.props.submit(bodyFormData);
    }

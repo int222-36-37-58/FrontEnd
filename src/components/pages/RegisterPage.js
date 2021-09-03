@@ -9,7 +9,8 @@ import { connect } from 'react-redux'
 class RegisterPage extends Component {
 
     submit = data => {
-        this.props.register(data);
+        //this.props.register(data);
+        console.log(data);
         }
 
     render() {

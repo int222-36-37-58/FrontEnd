@@ -1,25 +1,44 @@
 import { Grid,Container } from '@material-ui/core'
-import React, { Component } from 'react'
 import RegisterForm from '../forms/RegisterForm'
-export default class ProfilePage extends Component {
-
-   
+import React, { useState } from 'react'
 
 
-    render() {
-        return (
-            <Container >
+
+
+export default function ProfilePage() {
+
+
+    const [ userData ] = useState(
+        {
+        id : '1',
+        username : 'userTest',
+        password : 'Aa123456',
+        name : 'nametest',
+        address : 'Home Bangkok Thailand',
+        tel : '0123456789',
+    });
+
+    const update = (e) => {
+
+    console.log(e)
+
+    }
+
+
+ 
+
+    return (
+        <Container >
             <Grid container justifyContent="center">
             <Grid item={4}>
        
             </Grid>    
 
             <Grid item={6}>    
-            <RegisterForm></RegisterForm>
+            <RegisterForm userData={userData} editMode={true} submit={update}></RegisterForm>
             </Grid>
 
             </Grid>
             </Container>
-        )
-    }
+    )
 }
