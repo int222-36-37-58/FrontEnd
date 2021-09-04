@@ -13,8 +13,10 @@ import Footer from './components/ui/Footer';
 const App = () => (
   <div className="pageContainer">
 
-<div className="pageContent">
+<div className="pageContent " style={{ marginBottom : 250+'px'}}>
+
 <NavBar/>
+
 
 <Route path="/" exact component={Home}/>
 <Route path="/register" exact component={RegisterPage}/>
@@ -22,9 +24,9 @@ const App = () => (
 <Route path="/createproduct" exact component={CreateProductPage}/>
 <Route path="/product/:id" exact component={ProductPage}/>
 <Route path="/profile" exact component={ProfilePage}/>
-
-<Footer/>
 </div>
+<Footer/>
+
 </div>
 )
 

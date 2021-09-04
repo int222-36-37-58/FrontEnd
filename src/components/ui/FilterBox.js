@@ -36,23 +36,16 @@ export default class FilterBox extends Component {
   }
 
 
-
-     
-
-  
-
-
-
   render() {
     return (
-      <Container className="filterBox">
+      <Container id="filterBox" className="filterBox">
           <div className="header">Filter</div>
   
           <div className="type">
             <div>type</div>
             <div className="checkBoxContent">
               { this.state.filters.map((filter)=> {
-                return  <FormControlLabel control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.type}/>} label={filter.type}></FormControlLabel>
+                return  <FormControlLabel key={filter.id} control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.type}/>} label={filter.type}></FormControlLabel>
               }) }
             </div>
           </div>

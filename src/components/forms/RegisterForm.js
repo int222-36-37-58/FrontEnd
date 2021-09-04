@@ -168,7 +168,7 @@ export default class RegisterForm extends Component {
            {!editMode &&
             <Grid  item xs={12} sm={6}>
                 <TextField variant="outlined"  fullWidth required error={this.state.errors.confirmPassword} type="password" inputProps={{ minLength: 3,maxLength: 20}} id="confirmPassword" name="confirmPassword" 
-                 label="Confirm Password" helperText="Confirm your password" onChange={this.onConfirmPassword } value={this.state.confirmpassword}/>
+                 label="Confirm Password" helperText="Confirm your password" onChange={this.onConfirmPassword } value={this.state.confirmPassword}/>
             </Grid> }
 
 
@@ -221,8 +221,6 @@ RegisterForm.propTypes = {
         name : PropTypes.string.isRequired,
         address : PropTypes.string.isRequired,
         tel :PropTypes.string.isRequired,
-
-
     }).isRequired
     };
 
@@ -234,11 +232,7 @@ RegisterForm.defaultProps = {
         password : "",
         name : "",
         address : "",
-        tel :"",
-        confirmPassword : ""
+        tel :""        
     }
-
-
-
 
 }
