@@ -11,7 +11,7 @@ state = {
     products : [
         {id : 1, productName: '(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา.fdgfdgdfgม 6',
         price : 275.00 },
-        {id : 2, productName: 'asdasda sdasdasdas STUVWXYZABCDEFGHIJLMno',
+        {id : 2, productName: 'asdasdaAsdasdasdasASTUVWXYZABCDEFGHIJLMno',
         price : 275.00 },
         {id : 3, productName: '(LN) เรื่องฝันปั่นป่วยของผมกับแม่สา...่ม 6',
         price : 275.00 },

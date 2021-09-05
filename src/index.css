@@ -32,18 +32,36 @@ cursor : pointer;
 }
 
 .navbarIcon {
-
+color:white;
 margin-right: 20px;
-
-
 }
 
 
 .navbarIcon:hover {
-
+transition: 0.5s;
+color: #333435;   
 cursor: pointer;
-
+border-radius: 10px;
+background-color: white;
+padding : 5px;
 }
+
+.personIcon {
+    color:white;
+margin-right: 20px;
+}
+
+
+.personIcon:hover {
+    transition: 0.5s;
+    color: #333435;   
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: white;
+    padding : 5px;
+    padding-top: 5px;
+}
+
 
 .navbarContent {
 display: flex;
@@ -116,6 +134,59 @@ align-items: center;
 .searchBox > .searchIcon:hover {
     transition: 1s;
     background: #7690da;
+}
+
+
+.productInCart {
+    border-style: solid;
+    border-color: #545454;
+    border-width: 2px;
+    border-radius: 5px;
+    display :flex;
+    padding  : 5px;
+    width: 325px;
+}
+
+
+.productInCartInfo {
+
+line-height: 16px;
+min-height: 30px;
+margin : 5px;
+margin-top: -20px;
+
+}
+.productInCartInfo > .InCartTitle {
+max-width: 185px;
+
+}
+
+.productInCartInfo > h5 {
+    word-wrap:break-word;
+    
+    margin-bottom: -15px;
+}
+
+.delFromCart {
+    width: auto;
+    height: 30%;
+    color : #D83C2D;
+    background-color: #FFCCBB;
+    border-color: #D83C2D;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: 'Prompt', sans-serif;
+    border-width: 2px;
+    font-weight: 600;
+}
+
+.delFromCart:hover {
+
+    color: #FFCCBB;
+    background-color: #D83C2D;
+    cursor: pointer;
+    transition: 0.5s;
+
 }
 
 .loginBack {
