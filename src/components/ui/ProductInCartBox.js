@@ -26,7 +26,7 @@ export default function ProductInCartBox(props) {
             
             </div>
             <div>
-            <button className="delFromCart">remove</button>
+            <button className="delFromCart" style={{height: 30 + '%'}}>remove</button>
             </div>
 
         </div>

@@ -111,7 +111,7 @@ export default class ProductPage extends Component {
 
 
 
-                <div class="plusMinus">
+                <div class="plusMinus" style={{color : '#545454'}}>
                 <h4>quantity</h4>
                 <div className="plusMinusQuantity">
                 <div className="minusButton" onClick={this.minusQuantity}>-</div>

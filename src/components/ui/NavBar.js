@@ -23,6 +23,12 @@ const handleCart = (open) => event => {
     setIsShowCart(open)
 }
 
+const handleCheckOut = () => {
+
+    
+}
+
+
     return (
     <div>
 
@@ -39,6 +45,7 @@ const handleCart = (open) => event => {
         <ListItem><ProductInCartBox/></ListItem>
         <ListItem><ProductInCartBox/></ListItem>
         <ListItem><ProductInCartBox/></ListItem>
+        <ListItem><button className="AddButton" onClick={handleCheckOut}>CheckOut</button></ListItem>
         </List>
 
         </Drawer>

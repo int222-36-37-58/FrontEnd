@@ -180,6 +180,14 @@ export default class RegisterForm extends Component {
             </Grid>
             }
 
+
+            {editMode && 
+            <Grid  item xs={12}>
+                <h4 style={{ marginBottom : -10 +'px' , color : '#545454'}}>If you want you can change Password here</h4>
+            </Grid>
+
+            }
+
             {editMode &&  <Grid  item xs={12} sm={6}>
                 <TextField variant="outlined"  fullWidth  type="text" error={this.state.errors.newpassword} inputProps={{ minLength: 3, maxLength: 20}} id="newpassword" name="password"  label="New Password"
                  helperText="new password" onChange={this.newPassword} />
