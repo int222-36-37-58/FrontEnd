@@ -23,7 +23,6 @@ export const getProducts = products => ({
 //     ,product
 //     })    
 
-
 export const getUserProducts = userId => dispatch =>
 axios.get(`${process.env.REACT_APP_API_URL}/api/userProduct/${userId}`)
 .then(

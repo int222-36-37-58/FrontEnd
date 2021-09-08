@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 export default class FilterBox extends Component {
-
+  
   state= {
     
     filters : [
@@ -32,7 +32,7 @@ export default class FilterBox extends Component {
      newCheck = newCheck.filter(f => f !== e.target.value)
     }
     this.setState({ checkData : newCheck});
-
+    console.log(process.env.REACT_APP_API_URL)
   }
 
 

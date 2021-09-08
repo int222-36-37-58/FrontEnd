@@ -8,6 +8,7 @@ import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import axios from 'axios';
 
 
 
@@ -23,12 +24,14 @@ type : "",
 colors : [],
 },
 types : [
-    {id : 1,type : 'Electronic'},
-    {id : 2,type : 'Kitchen'},
-    {id : 3,type : 'Gaming'},
-    {id : 4,type : 'Musicz'}
+    // {id : 1,type : 'Electronic'},
+    // {id : 2,type : 'Kitchen'},
+    // {id : 3,type : 'Gaming'},
+    // {id : 4,type : 'Musicz'}
   ],
-colors : [{id : 1,colorName : 'red'},{id:2,colorName: 'blue'}],  
+colors : [
+   // {id : 1,colorName : 'red'},{id:2,colorName: 'blue'}
+],  
 imageFile : null,
 imagePreview : noImage,
 errors : {}
@@ -47,6 +50,21 @@ let colorList = [...this.state.data.colors , e.target.value]
         data : { ...this.state.data , colors: colorList 
         }
     })
+
+}
+
+componentDidMount() {
+    axios.get(`${process.env.REACT_APP_API_URL}/brands`).then(res => {
+        const types = res.data;
+        this.setState({types : types})
+    })
+
+    axios.get(`${process.env.REACT_APP_API_URL}/colors`).then(res => {
+    const colors = res.data;
+    this.setState({colors : colors})
+    })
+
+
 
 }
 
@@ -158,7 +176,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                     <InputLabel  htmlFor="type" >type</InputLabel>
                     <Select required error={this.state.errors.type} name="type" onChange={this.onChange}>
                         { this.state.types.map((typeRow) => {
-                        return <MenuItem value={typeRow.id}>{typeRow.type}</MenuItem>
+                        return <MenuItem value={typeRow.typeId}>{typeRow.name}</MenuItem>
                         })}
                         
                     </Select>

@@ -1,30 +1,12 @@
 import { Container, Grid } from '@material-ui/core'
+import axios from 'axios'
 import React, { Component } from 'react'
 import testProduct from "../../images/testProduct.jpg"
 
 export default class ProductPage extends Component {
 
     state = {
-        product : {
-            productName: "(LN) เรื่องฝันปั่นป่วยของผมกับแม่สาวน้อยช่างฝัน เล่ม 6",
-            description : "“เธอสองคนอยู่ก่อนแต่งกันมาตั้งแต่เมื่อไหร่”ซาคุตะตกอยู่ในสถานการณ์ที่ยากลำบากที่สุดในชีวิต เพราะเรื่องที่เขาและโชโกะ (คนที่เป็นเด็กสาววัยนักศึกษา) อาศัยอยู่ด้วยกันถูกมาอิจับได้ ขณะเดียวกัน โชโกะอีกคน (คนที่เป็นเด็กหญิงวัยมัธยมต้น) กำลังรักษาตัวในโรงพยาบาลเนื่องจากอาการป่วยที่ทรุดหนักความลับของโชโกะทั้งสองคนที่ต่างวัยกันถึงเวลาที่จะได้คลี่คลายปมปริศนานั้นเสียที",
-            price : "315.00",
-            saleDate : '12-12-2021',
-            quantity: 20,
-            imageName : 'testProduct',
-            colors : [{id : 1,colorName : 'red'}
-            ,{id:2,colorName: 'blue'}
-            ,{id:3,colorName: 'green'}
-            ,{id:4,colorName: 'black'}
-            ,{id:5,colorName: 'yellow'}
-            ,{id:6,colorName: 'orange'}
-            ,{id:7,colorName: 'purple'}
-            ,{id:8,colorName: 'white'}
-            ,{id:9,colorName: 'pink'}
-            ,{id:10,colorName: 'nocolor'}],
-            comment : [{userName: 'testUser'
-            ,content :'(LN) เรื่องฝันปั่นป่วยของผมกับแม่สาวน้อยช่างฝัน เล่ม 6(LN) เรื่องฝันปั่นป่วยของผมกับแม่สาวน้อยช่างฝัน เล่ม 6'} ]  
-        },
+        product : {},
         quantityAdd : 1,
         isShowInfo : false,
         isShowComments : false,
@@ -32,6 +14,17 @@ export default class ProductPage extends Component {
         noColor : false
     }
 
+    componentDidMount() {
+        
+           let id = window.location.pathname.slice(9,window.location.pathname.length)
+
+        axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`).then(res => {
+            const prods = res.data;
+            this.setState({product : prods})
+            console.log(this.state.product.color)
+    })
+  
+    }
 
     chooseColor = e => {
         this.setState({selectedColor : e.target.value})
@@ -40,6 +33,7 @@ export default class ProductPage extends Component {
 
 
     minusQuantity = () => {
+        console.log(this.state.product.color)
         if(this.state.quantityAdd > 1){
             
             
@@ -82,10 +76,9 @@ export default class ProductPage extends Component {
 
     }
    
-
-
-
     render() {
+        const colors = this.state.product.color;
+
         return (
             <Container maxWidth='lg' style={{padding: 40+'px', marginTop : 2 + 'rem', backgroundColor : 'white' ,borderRadius : 10 + "px"}}>
             <Grid container justifyContent="center">
@@ -94,23 +87,23 @@ export default class ProductPage extends Component {
             </Grid>
 
             <Grid item xs={12} sm={7} md={6}>
-                <h3 style={{fontSize : 23+'px'}}>{ this.state.product.productName}</h3>
+                <h3 style={{fontSize : 23+'px'}}>{ this.state.product.name}</h3>
                 <h5 style={{ marginTop : -5+'px' }}>sale date : { this.state.product.saleDate} </h5>
 
                 <h3 style={{fontSize : 23+'px'}}>฿{ this.state.product.price} </h3>
 
-                <div className="radioGroup">
+                { this.state.product.color &&
+                 <div className="radioGroup">
                     <h4 style={{marginBottom: 10+'px'}}>colors</h4>
-                    { this.state.product.colors.map((color) => { 
-                    return  <span><input type="radio" id={color.colorName}  name="color" value={`${color.id}`} onChange={this.chooseColor}/>
-                    <label for={color.colorName} >{color.colorName}</label></span>
+                    { colors.map((col) => { 
+                    return  <span key={col.colorId}><input type="radio" id={col.colorName}  name="color" value={`${col.colorId}`} onChange={this.chooseColor}/>
+                    <label for={col.colorName} >{col.colorName}</label></span>
                     
                     })}
                     { this.state.noColor &&<h5 style={{color : 'red' , marginTop : 5+'px' }}>please select color!</h5>}
-                </div>
-
-
-
+                </div>  
+                }
+               
                 <div class="plusMinus" style={{color : '#545454'}}>
                 <h4>quantity</h4>
                 <div className="plusMinusQuantity">
@@ -138,8 +131,9 @@ export default class ProductPage extends Component {
 
             {this.state.isShowInfo &&
             <div className="infoShow">
-            <h3 style={{ color :'black', fontWeight: 'bold'}}>{this.state.product.productName}</h3>  
-            <h3 style={{ color :'black', fontWeight: 'bold'}}>Quantity : {this.state.product.quantity}</h3>     
+           <h3 style={{ color :'black', fontWeight: 'bold',fontSize:20+'px'}}>{this.state.product.name}</h3> 
+           <span style={{ color :'black', fontWeight: 'bold',fontSize:16+'px'}}>Type : {this.state.product.type.name} </span>
+            <span style={{ color :'black', fontWeight: 'bold',fontSize:16+'px'}}>quantity : {this.state.product.quantity}  </span>   
             <h3>{this.state.product.description}</h3>   
             </div> 
             } 
@@ -154,8 +148,8 @@ export default class ProductPage extends Component {
             this.state.isShowComments && 
             <div className="commentShow">
             <div className="commentBox">
-            <h3>{this.state.product.comment[0].userName}</h3>
-            <h3>{this.state.product.comment[0].content}</h3>
+            {/* <h3>{this.state.product.comment[0].userName}</h3>
+            <h3>{this.state.product.comment[0].content}</h3> */}
             </div>
             </div> 
             } 

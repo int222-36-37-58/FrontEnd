@@ -76,7 +76,7 @@ function ProductCard(props) {
                   type="radio"
                   id={color.colorName}
                   name="color"
-                  value={`${color.id}`}
+                  value={`${color.colorId}`}
                   onChange={chooseColor}
                 />
                 <label for={color.colorName}>{color.colorName}</label>
