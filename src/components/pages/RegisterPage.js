@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import RegisterForm from '../forms/RegisterForm'
-import { register } from '../../actions/authen'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+
+import axios from 'axios'
 
 
 
 class RegisterPage extends Component {
 
     submit = data => {
-        //this.props.register(data);
-        console.log(data);
+        const json = JSON.stringify(data);
+        console.log(json);
+     axios.post(`${process.env.REACT_APP_API_URL}/register`,json,{
+        headers: {
+            'Content-Type': 'application/json',
         }
+    })
+    }
 
     render() {
         return (
@@ -23,12 +27,4 @@ class RegisterPage extends Component {
 }
 
 
-
-RegisterPage.propTypes = {
-
-register : PropTypes.func.isRequired
-
-}
-
-
-export default connect(null, { register })(RegisterPage)
+export default RegisterPage

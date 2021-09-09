@@ -15,9 +15,7 @@ export default class ProductPage extends Component {
     }
 
     componentDidMount() {
-        
-           let id = window.location.pathname.slice(9,window.location.pathname.length)
-
+        let id = window.location.pathname.slice(9,window.location.pathname.length)
         axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`).then(res => {
             const prods = res.data;
             this.setState({product : prods})
@@ -29,8 +27,6 @@ export default class ProductPage extends Component {
     chooseColor = e => {
         this.setState({selectedColor : e.target.value})
     }
-
-
 
     minusQuantity = () => {
         console.log(this.state.product.color)

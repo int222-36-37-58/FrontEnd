@@ -23,15 +23,8 @@ price : "",
 type : "",
 colors : [],
 },
-types : [
-    // {id : 1,type : 'Electronic'},
-    // {id : 2,type : 'Kitchen'},
-    // {id : 3,type : 'Gaming'},
-    // {id : 4,type : 'Musicz'}
-  ],
-colors : [
-   // {id : 1,colorName : 'red'},{id:2,colorName: 'blue'}
-],  
+types : [],
+colors : [],  
 imageFile : null,
 imagePreview : noImage,
 errors : {}
@@ -75,16 +68,18 @@ onSubmit = () => {
    if(invalid !== "err"){
    var nowDate = new Date()
    var today = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-    var bodyFormData = new FormData();
+ 
 
     var intColor = this.state.data.colors.map( a => parseInt(a))
     var colorObj = intColor.map( cl => ( this.state.colors.find( c => c.id === cl )   ))
- 
+    var typeObj = this.state.data.type.map( type => this.state.type.find( t => t.id === type ) )
     var data = this.state.data;
     data.colors = colorObj;
+    data.type=typeObj;
     data.date = today;
     data.userId = 1;
 
+    var bodyFormData = new FormData();
     const blob = new Blob([JSON.stringify(this.data)], {
         type: 'application/json'
     })
@@ -129,12 +124,6 @@ const imgName = e.target.files[0].name ;
 this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : imgFile},imagePreview : imgPreview})
 
 }
-
-
-
-
-
-
 
     render() {
         return (

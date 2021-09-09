@@ -1,6 +1,7 @@
 import { Grid,Container } from '@material-ui/core'
 import RegisterForm from '../forms/RegisterForm'
 import React, { useState } from 'react'
+import axios from 'axios';
 
 
 
@@ -18,9 +19,9 @@ export default function ProfilePage() {
         tel : '0123456789',
     });
 
-    const update = (e) => {
+    const update = (data) => {
 
-    console.log(e)
+        axios.put(`${process.env.REACT_APP_API_URL}/users/${data.userId}` , data)
 
     }
 

@@ -10,11 +10,12 @@ import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material
 export default class RegisterForm extends Component {
     state = {
         data : {
-        username : "",
-        name : "",
+        userName : "",
+        fullName : "",
         address : "",
         tel : "",
         password : "",
+        role: "USER"
         }, 
         editMode : false,
         confirmPassword : "",
@@ -36,8 +37,6 @@ export default class RegisterForm extends Component {
         this.setState({showComplete : false})
 
     }
-
-    
 
         onChange = e =>
             this.setState({
@@ -68,6 +67,7 @@ export default class RegisterForm extends Component {
             }
 
             else{
+            
                 this.props.submit(this.state.data);
             }
             }
@@ -76,13 +76,13 @@ export default class RegisterForm extends Component {
 
         validate = e => {
             const errors = {}
-            if(!e.username || e.username.length <= 5 || ( !e.username.match(/^[a-z]/) )){
-                errors.username = true;
+            if(!e.userName || e.userName.length <= 5 || ( !e.userName.match(/^[a-z]/) )){
+                errors.userName = true;
             }
             if(!e.password || e.password.length <= 4 || (!e.password.match(/^[A-Z]/) && !e.password.match(/^[a-z]/) &&!e.password.match(/^[0-9]/)) ){
                errors.password = true;
             }
-            if(!e.name || e.name.length <= 3){
+            if(!e.fullName || e.fullName.length <= 3){
                 errors.name = true;
             }
             if(!e.address || e.address.length < 10){
@@ -142,16 +142,16 @@ export default class RegisterForm extends Component {
                 <form >
                 <Grid container direction="row" justifyContent="center" alignItems="center" spacing={2}>
                 <Grid item xs={12} sm={6}>
-                    { editMode ? <TextField variant="outlined" disabled  fullWidth required  type="text" inputProps={{ minLength: 3,maxLength: 20}} id="username" name="username" label="Username"
-                 value={this.state.data.username} helperText="cant change username"/> : <TextField variant="outlined"  fullWidth required error={this.state.errors.username} type="text" inputProps={{ minLength: 3,maxLength: 20}} id="username" name="username" label="Username"
-                 helperText="contain 3-20 character"  onChange={this.onChange} value={this.state.data.username}/>    
+                    { editMode ? <TextField variant="outlined" disabled  fullWidth required  type="text" inputProps={{ minLength: 3,maxLength: 20}} id="userName" name="userName" label="Username"
+                 value={this.state.data.userName} helperText="cant change userName"/> : <TextField variant="outlined"  fullWidth required error={this.state.errors.userName} type="text" inputProps={{ minLength: 3,maxLength: 20}} id="userName" name="userName" label="Username"
+                 helperText="contain 3-20 character"  onChange={this.onChange} value={this.state.data.userName}/>    
 
                     }
                 
                </Grid>
                <Grid  item xs={12} sm={6}>
-                <TextField variant="outlined"  fullWidth required error={this.state.errors.name} type="text" inputProps={{  minLength: 2,maxLength: 30}}
-                 id="name"  name="name" label="Name" helperText="Enter your name" onChange={this.onChange} value={this.state.data.name}/>
+                <TextField variant="outlined"  fullWidth required error={this.state.errors.fullName} type="text" inputProps={{  minLength: 2,maxLength: 30}}
+                 id="fullName"  name="fullName" label="fullName" helperText="Enter your name" onChange={this.onChange} value={this.state.data.fullName}/>
                 </Grid>
                 <Grid  item xs={12}>
                 <TextField variant="outlined" fullWidth multiline required error={this.state.errors.address} type="textarea" inputProps={{  minLength: 5,maxLength: 90}} id="address"  name="address" label="Address"onChange={this.onChange} value={this.state.data.address}/>
@@ -223,24 +223,26 @@ RegisterForm.propTypes = {
     submit : PropTypes.func.isRequired,
     editMode : PropTypes.bool.isRequired,
     userData : PropTypes.shape({
-        id : PropTypes.string.isRequired,
-        username : PropTypes.string.isRequired,
+        id : PropTypes.string,
+        userName : PropTypes.string.isRequired,
         password : PropTypes.string.isRequired,
-        name : PropTypes.string.isRequired,
+        fullName : PropTypes.string.isRequired,
         address : PropTypes.string.isRequired,
         tel :PropTypes.string.isRequired,
+        role :PropTypes.string.isRequired,
     }).isRequired
     };
 
 RegisterForm.defaultProps = {
     editMode: false,
     userData : {
-        id : "",
-        username : "",
+    
+        userName : "",
         password : "",
-        name : "",
+        fullName : "",
         address : "",
-        tel :""        
+        tel :"" ,
+        role : "USER",       
     }
 
 }

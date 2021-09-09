@@ -5,6 +5,7 @@ import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import axios from 'axios';
 
 
 
@@ -12,19 +13,18 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export default class FilterBox extends Component {
   
   state= {
-    
-    filters : [
-      {id : 1,type : 'Electronic'},
-      {id : 2,type : 'Kitchen'},
-      {id : 3,type : 'Gaming'},
-      {id : 4,type : 'Musicz'}
-
-
-    ],
+    filters : [],
     checkData : []
-
   }
 
+  componentDidMount() {
+
+    axios.get(`${process.env.REACT_APP_API_URL}/brands`).then(res => {
+      const type = res.data;
+      this.setState({filters : type})
+    })
+
+  }
 
   onChange = e => {
     let newCheck = [...this.state.checkData , e.target.value]
@@ -32,7 +32,6 @@ export default class FilterBox extends Component {
      newCheck = newCheck.filter(f => f !== e.target.value)
     }
     this.setState({ checkData : newCheck});
-    console.log(process.env.REACT_APP_API_URL)
   }
 
 
@@ -45,7 +44,7 @@ export default class FilterBox extends Component {
             <div>type</div>
             <div className="checkBoxContent">
               { this.state.filters.map((filter)=> {
-                return  <FormControlLabel key={filter.id} control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.type}/>} label={filter.type}></FormControlLabel>
+                return  <FormControlLabel key={filter.typeId} control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.name}/>} label={filter.name}></FormControlLabel>
               }) }
             </div>
           </div>
