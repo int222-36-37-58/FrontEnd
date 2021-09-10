@@ -2,8 +2,10 @@ import { Box, Container } from "@material-ui/core";
 import React, { useState } from "react";
 import testProduct from "../../images/testProduct.jpg";
 import { Link, useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
+import { addToCart } from '../../actions/cart'
 
-function ProductCard(props) {
+function ProductCard(props,{addToCart}) {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
   const [colorChoose , setColorChoose] = useState(0);
@@ -56,6 +58,7 @@ function ProductCard(props) {
      productToCart.color= colorObj ;
      productToCart.quantity = quantity;
      
+    props.addToCart(productToCart);
     setNoColor(false);
     setColorChoose(0);
     setQuantity(1);
@@ -153,4 +156,12 @@ function ProductCard(props) {
   );
 }
 
-export default ProductCard;
+const mapDispatchToProps = dispatch =>{
+  return {
+      addToCart : (product) => dispatch(addToCart(product))
+
+  }
+
+}
+
+export default connect(null,mapDispatchToProps)(ProductCard);

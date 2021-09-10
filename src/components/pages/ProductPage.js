@@ -5,10 +5,6 @@ import ProductContent from './ProductContent'
 
 const ProductPage = ({addToCart}) => {
 
-
-
-
-
     return (
         <ProductContent addItem={addToCart}/>
     )

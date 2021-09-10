@@ -71,6 +71,8 @@ export default class ProductContent extends Component {
            productToCart.quantity = this.state.quantityAdd;
 
             this.props.addItem(productToCart);
+            this.setState({quantityAdd : 1});
+            this.setState({selectedColor : 0});
         }
 
     }
