@@ -11,7 +11,7 @@ function ProductCard(props) {
   const [noColor , setNoColor] = useState(false);
 
   const seeInfo = () => {
-    history.push(`/product/${props.productId}`);
+    history.push(`/product/${props.product.productId}`);
   };
 
   const showColor = () => {
@@ -28,7 +28,7 @@ function ProductCard(props) {
 }
 
  const plusQuantity = () => {
-    if(quantity < props.quantity){
+    if(quantity < props.product.quantity){
     let currentQuantity = quantity +1;
     setQuantity(currentQuantity)
     }
@@ -50,10 +50,16 @@ function ProductCard(props) {
       setNoColor(true);
     }
     else{
-      setNoColor(false);
-      setColorChoose(0);
-      setQuantity(1);
-      setClickAdd(false);
+     var productToCart = Object.assign({},props.product);
+     var intColor = parseInt(colorChoose);
+     var colorObj = props.product.color.find( c => c.colorId === intColor )
+     productToCart.color= colorObj ;
+     productToCart.quantity = quantity;
+     
+    setNoColor(false);
+    setColorChoose(0);
+    setQuantity(1);
+    setClickAdd(false);
     }
 
 
@@ -63,13 +69,14 @@ function ProductCard(props) {
  
   return (
     <Container style={{ height: 325 + "px", margin: 10 + "px" }}>
-      {clickAdd && (
+      {clickAdd && 
+     
         <div className="colorModal" >
             <div className="colorModalContent">
       
                 <div style={{ marginTop: 5+'px' , marginLeft : 10+'px'}} className="radioGroup"> 
                <span style={{fontWeight : 900}}> Color : </span>
-          {props.colors.map((color) => {
+          {props.product.color.map((color) => {
             return (
               <span>
                 <input
@@ -83,6 +90,7 @@ function ProductCard(props) {
               </span>
             );
           })}
+          
           </div>
           <div class="plusMinus" style={{ color : 'white', width : 90+'%'}}>
                 <h4>quantity</h4>
@@ -109,7 +117,7 @@ function ProductCard(props) {
           </button>
         </div>
         </div>
-      )}
+      }
       <Box display="flex" flexDirection="column" alignItems="center">
         <div>
           <img
@@ -120,17 +128,17 @@ function ProductCard(props) {
         </div>
         <div>
           <Link
-            to={`/product/${props.productId}`}
+            to={`/product/${props.product.productId}`}
             style={{ textDecoration: "none" }}
           >
-            <h5 className="titleWrap">{props.title}</h5>{" "}
+            <h5 className="titleWrap">{props.product.name}</h5>{" "}
           </Link>
           <button
             className="AddButton"
             style={{ width: 90 + "%" }}
             onClick={showColor}
           >
-            Add - ฿{props.price}{" "}
+            Add - ฿{props.product.price}{" "}
           </button>
           <button
             className="InfoButton"

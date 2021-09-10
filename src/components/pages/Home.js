@@ -45,7 +45,7 @@ state = {
           <Grid container direction="row" spacing={6} >
             {this.state.products.map( (product) => {
                 return  <Grid item  xs={12} sm={6} md={5} lg={3} key={product.id}>
-                    <ProductCard  productId={product.productId} title={product.name} price={product.price} colors={product.color} quantity={product.quantity}></ProductCard></Grid>  
+                    <ProductCard  product={product}></ProductCard></Grid>  
             })}
           
             </Grid>

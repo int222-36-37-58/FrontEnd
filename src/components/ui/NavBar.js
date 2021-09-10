@@ -11,8 +11,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import React, { useState } from 'react';
 import ProductInCartBox from './ProductInCartBox';
+import { connect } from 'react-redux';
+import { removeFromCart } from '../../actions/cart';
 
-export default function NavBar() {
+
+const NavBar = ({cart,removeFromCart}) => {
 const [ isShowCart , setIsShowCart] = useState(false);
 
 const onChange = (e) => {
@@ -34,18 +37,15 @@ const handleCheckOut = () => {
 
         <Drawer open={isShowCart} anchor={'right'} onClose={handleCart(false)} >
         <List style={{ width: 375+'px'}}>
-        <ListItem style={{ fontWeight : 600}}>Cart : </ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><ProductInCartBox/></ListItem>
-        <ListItem><button className="AddButton" onClick={handleCheckOut}>CheckOut</button></ListItem>
+       
+        {cart.cart.length === 0 ? <ListItem style={{ fontWeight : 600}}>No product in cart</ListItem> :  <ListItem style={{ fontWeight : 600}}>Cart : </ListItem>}
+        {cart.cart.map( item => {
+            return <ListItem><ProductInCartBox product={item} remove={removeFromCart}/></ListItem>
+        })}
+
+        {cart.cart.length > 0 &&
+        <ListItem><button className="AddButton" onClick={handleCheckOut}>CheckOut</button></ListItem> 
+        }
         </List>
 
         </Drawer>
@@ -83,3 +83,23 @@ const handleCheckOut = () => {
     </div>
     )
 }
+
+const mapStateToProps = (state) => {
+
+return {
+
+    cart : state.cart
+}
+
+}
+
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        removeFromCart : product => dispatch(removeFromCart(product))
+
+    }
+
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar);

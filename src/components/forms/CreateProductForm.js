@@ -21,10 +21,10 @@ productName : "",
 description : "",
 price : "",
 type : "",
-colors : [],
+color : [],
 },
 types : [],
-colors : [],  
+color : [],  
 imageFile : null,
 imagePreview : noImage,
 errors : {}
@@ -35,12 +35,12 @@ this.setState({
 });
 
 chooseColor = e => {
-let colorList = [...this.state.data.colors , e.target.value]
-    if(this.state.data.colors.findIndex(f => f.id === e.target.value) !== -1){
+let colorList = [...this.state.data.color , e.target.value]
+    if(this.state.data.color.findIndex(f => f.id === e.target.value) !== -1){
      colorList = colorList.filter(f => f !== e.target.value)
     }
     this.setState({
-        data : { ...this.state.data , colors: colorList 
+        data : { ...this.state.data , color: colorList 
         }
     })
 
@@ -52,9 +52,9 @@ componentDidMount() {
         this.setState({types : types})
     })
 
-    axios.get(`${process.env.REACT_APP_API_URL}/colors`).then(res => {
-    const colors = res.data;
-    this.setState({colors : colors})
+    axios.get(`${process.env.REACT_APP_API_URL}/color`).then(res => {
+    const color = res.data;
+    this.setState({color : color})
     })
 
 
@@ -70,11 +70,11 @@ onSubmit = () => {
    var today = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
  
 
-    var intColor = this.state.data.colors.map( a => parseInt(a))
-    var colorObj = intColor.map( cl => ( this.state.colors.find( c => c.id === cl )   ))
+    var intColor = this.state.data.color.map( a => parseInt(a))
+    var colorObj = intColor.map( cl => ( this.state.color.find( c => c.id === cl )   ))
     var typeObj = this.state.data.type.map( type => this.state.type.find( t => t.id === type ) )
     var data = this.state.data;
-    data.colors = colorObj;
+    data.color = colorObj;
     data.type=typeObj;
     data.date = today;
     data.userId = 1;
@@ -174,9 +174,9 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 
                 <Grid item xs={12} >
                 <div className="type">
-            <div>colors</div>
+            <div>color</div>
             <FormGroup row className="checkBoxContent">
-              { this.state.colors.map((color)=> {
+              { this.state.color.map((color)=> {
                 return  <FormControlLabel control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.chooseColor} value={color.id}/>} label={color.colorName}></FormControlLabel>
               }) }
             </FormGroup>
