@@ -39,8 +39,8 @@ const handleCheckOut = () => {
         <List style={{ width: 375+'px'}}>
        
         {cart.cart.length === 0 ? <ListItem style={{ fontWeight : 600}}>No product in cart</ListItem> :  <ListItem style={{ fontWeight : 600}}>Cart : </ListItem>}
-        {cart.cart.map( item => {
-            return <ListItem><ProductInCartBox product={item} remove={removeFromCart}/></ListItem>
+        {cart.cart.map( (item,index) => {
+            return <ListItem key={index}><ProductInCartBox product={item} remove={removeFromCart}/></ListItem>
         })}
 
         {cart.cart.length > 0 &&
@@ -55,7 +55,7 @@ const handleCheckOut = () => {
            <div className="navbarContent">
             <div className="navLeftItem">
            <Link to="/" className="navbarIcon" style={{ marginRight : 30+'px' }}><HomeIcon style={{ fontSize : 30+'px' }}/></Link>
-           <div class="searchWrap">
+           <div className="searchWrap">
             <div className="searchBox" >  
                <InputBase className="searchInput" placeholder="Search…" variant="outlined"  type="text" id="searchText" name="searchText" onChange={onChange} />  
              <div className="searchIcon">

@@ -72,7 +72,7 @@ export default class ProductContent extends Component {
 
             this.props.addItem(productToCart);
             this.setState({quantityAdd : 1});
-            this.setState({selectedColor : 0});
+           
         }
 
     }
@@ -98,14 +98,14 @@ export default class ProductContent extends Component {
                     <h4 style={{marginBottom: 10+'px'}}>color</h4>
                     { color.map((col) => { 
                     return  <span key={col.colorId}><input type="radio" id={col.colorName}  name="color" value={`${col.colorId}`} onChange={this.chooseColor}/>
-                    <label for={col.colorName} >{col.colorName}</label></span>
+                    <label htmlFor={col.colorName} >{col.colorName}</label></span>
                     
                     })}
                     { this.state.noColor &&<h5 style={{color : 'red' , marginTop : 5+'px' }}>please select color!</h5>}
                 </div>  
                 }
                
-                <div class="plusMinus" style={{color : '#545454'}}>
+                <div className="plusMinus" style={{color : '#545454'}}>
                 <h4>quantity</h4>
                 <div className="plusMinusQuantity">
                 <div className="minusButton" onClick={this.minusQuantity}>-</div>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as actionTypes from "../actiontype";
 
 const INITIAL_STATE = {
@@ -7,11 +8,21 @@ cart:[],
 
 }
 
+let proCount = [];
 
 const cart = (state = INITIAL_STATE,action = {}) =>{
    
     switch (action.type) {
         case actionTypes.ADD_TO_CART:
+  
+    axios.get(`${process.env.REACT_APP_API_URL}/products/${action.payload.orderDetails.productId}`).then(res => {
+
+    if(proCount.length === 0 || proCount.find(pro => pro.productId !== action.payload.orderDetails.productId)){
+    proCount.push(res.data); }
+
+    })
+    console.log( proCount );
+
             const isAlready = state.cart.find( it => it.productId === action.payload.orderDetails.productId && it.color.colorId === action.payload.orderDetails.color.colorId) ? true : false;      
          return {
                 ...state,

@@ -81,7 +81,7 @@ function ProductCard(props,{addToCart}) {
                <span style={{fontWeight : 900}}> Color : </span>
           {props.product.color.map((color) => {
             return (
-              <span>
+              <span key={color.colorId}>
                 <input
                   type="radio"
                   id={color.colorName}
@@ -89,13 +89,13 @@ function ProductCard(props,{addToCart}) {
                   value={`${color.colorId}`}
                   onChange={chooseColor}
                 />
-                <label for={color.colorName}>{color.colorName}</label>
+                <label htmlFor={color.colorName}>{color.colorName}</label>
               </span>
             );
           })}
           
           </div>
-          <div class="plusMinus" style={{ color : 'white', width : 90+'%'}}>
+          <div className="plusMinus" style={{ color : 'white', width : 90+'%'}}>
                 <h4>quantity</h4>
                 <div className="plusMinusQuantity">
                 <div className="minusButton" style={{ paddingRight : 5+'px'}} onClick={minusQuantity}>-</div>

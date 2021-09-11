@@ -44,7 +44,7 @@ state = {
             <Container  style={{ padding:10+'px', paddingTop : 30+'px'}}>
           <Grid container direction="row" spacing={6} >
             {this.state.products.map( (product) => {
-                return  <Grid item  xs={12} sm={6} md={5} lg={3} key={product.id}>
+                return  <Grid item  xs={12} sm={6} md={5} lg={3} key={product.productId}>
                     <ProductCard  product={product}></ProductCard></Grid>  
             })}
           
