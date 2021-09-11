@@ -20,7 +20,6 @@ export const removeFromCart = productToCart => ({
 })
 
 
-export const loadCurrentItem = productInCart => ({
-    type: type.LOAD_CART_ITEM,
-    payload:productInCart
+export const checkoutItem = () => ({
+    type: type.CHECK_OUT
 })

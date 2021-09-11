@@ -35,8 +35,8 @@ const cart = (state = INITIAL_STATE,action = {}) =>{
             ...state,
             cart : state.cart.filter( item => JSON.stringify(item) !== JSON.stringify(action.payload.orderDetails))
           };
-        case actionTypes.LOAD_CART_ITEM:
-          return action.products;
+        case actionTypes.CHECK_OUT:
+          return axios.post(`${process.env.REACT_APP_API_URL}/order`,state.cart)
         default:
           return state;
       }

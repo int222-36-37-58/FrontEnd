@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core'
+import { Container, Grid, TextField } from '@material-ui/core'
 import React, { Component } from 'react'
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
@@ -14,7 +14,8 @@ export default class FilterBox extends Component {
   
   state= {
     filters : [],
-    checkData : []
+    checkData : [],
+    searchValue : "",
   }
 
   componentDidMount() {
@@ -34,21 +35,31 @@ export default class FilterBox extends Component {
     this.setState({ checkData : newCheck});
   }
 
+  handleSearchChange = e => {
+    this.setState({ searchValue : e.target.value })
+  }
+
+
 
   render() {
     return (
       <Container id="filterBox" className="filterBox">
           <div className="header">Filter</div>
-  
+          <TextField size="small" variant="outlined" type="text" id="Search" name="Search" label="Search..."
+           onChange={this.handleSearchChange} style={{ marginTop : 20+'px', marginBottom : 10+'px', paddingBottom : 5+'px'}}/>
           <div className="type">
             <div>type</div>
-            <div className="checkBoxContent">
+            <Grid>
               { this.state.filters.map((filter)=> {
                 return  <FormControlLabel key={filter.typeId} control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.name}/>} label={filter.name}></FormControlLabel>
               }) }
-            </div>
+            </Grid>
           </div>
         </Container>
+
+
+
+
     )
   }
 }

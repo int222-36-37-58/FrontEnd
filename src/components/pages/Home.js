@@ -1,4 +1,4 @@
-import { Container,Grid,Hidden } from '@material-ui/core'
+import { Container,Grid } from '@material-ui/core'
 import axios from 'axios'
 import React, { Component } from 'react'
 import '../../index.css'
@@ -34,11 +34,14 @@ state = {
             
             <Grid container direction="row" justifyContent="space-between" spacing={1}>
            
-           <Hidden smDown>
-            <Grid  item sm={2} md={3}>
+           
+            <Grid  item xs={12} md={3}>
             <FilterBox></FilterBox>
             </Grid>
-            </Hidden>
+          
+
+
+
 
             <Grid item xs={12} md={8}>
             <Container  style={{ padding:10+'px', paddingTop : 30+'px'}}>
