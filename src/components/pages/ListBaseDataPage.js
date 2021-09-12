@@ -1,6 +1,8 @@
 import { Container, Grid } from '@material-ui/core';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import ColorCard from '../ui/ColorCard';
+import TypeCard from '../ui/TypeCard';
 
 const ListBaseDataPage = () => {
 
@@ -11,7 +13,7 @@ const ListBaseDataPage = () => {
 
         axios.get(`${process.env.REACT_APP_API_URL}/colors`).then(res => setColor(res.data))
         axios.get(`${process.env.REACT_APP_API_URL}/brands`).then(res => setType(res.data))
-        })
+        },[])
 
 
     return (
@@ -20,17 +22,20 @@ const ListBaseDataPage = () => {
              <div style={{ fontWeight: 600 , fontSize: 24+'px', marginBottom : 50+'px'}}>All Colors and Types</div>
              <Grid container>
                 <Grid item xs={12} md={6}>
+                <div style={{fontWeight: 600 , fontSize:20+'px'}}> Colors </div>
                 { color.map( col => {
 
-                    return <div>{col.colorName}</div>
+                    return <ColorCard key={col.colorId} color={col}/>
                 })}</Grid>
 
-                <Grid item xs={12} md={6}></Grid>
+                <Grid item xs={12} md={6}>
+                <div style={{fontWeight: 600, fontSize:20+'px'}}> Types </div>
                 { type.map( type => {
-                return <div> {type.name}</div>
+                return <TypeCard key={type.typeId} type={type} />
                     })}</Grid>
-             
+               </Grid> 
              </div>
+           
         </Container>
     )
 }
