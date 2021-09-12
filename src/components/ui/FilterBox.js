@@ -1,4 +1,4 @@
-import { Container, Grid, TextField } from '@material-ui/core'
+import { Container, Grid, Hidden } from '@material-ui/core'
 import React, { Component } from 'react'
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
@@ -15,7 +15,7 @@ export default class FilterBox extends Component {
   state= {
     filters : [],
     checkData : [],
-    searchValue : "",
+    showType : false,
   }
 
   componentDidMount() {
@@ -35,18 +35,20 @@ export default class FilterBox extends Component {
     this.setState({ checkData : newCheck});
   }
 
-  handleSearchChange = e => {
-    this.setState({ searchValue : e.target.value })
+  handleShowType = () => {
+
+    this.setState({ showType : !this.state.showType })
+
   }
-
-
 
   render() {
     return (
+    
+    <>
+      <Hidden smDown>
       <Container id="filterBox" className="filterBox">
           <div className="header">Filter</div>
-          <TextField size="small" variant="outlined" type="text" id="Search" name="Search" label="Search..."
-           onChange={this.handleSearchChange} style={{ marginTop : 20+'px', marginBottom : 10+'px', paddingBottom : 5+'px'}}/>
+
           <div className="type">
             <div>type</div>
             <Grid>
@@ -56,8 +58,30 @@ export default class FilterBox extends Component {
             </Grid>
           </div>
         </Container>
+</Hidden>
 
+        <Hidden mdUp>
+        <Container id="filterBox" className="filterBox">
+          <div className="headerRes header hoverCursor infoBox" onClick={this.handleShowType}>
+           <div>Filter</div>
+           <div style={{ fontSize : 20+'px', fontWeight : 500}}>+</div>
+            
+            </div>
 
+              { this.state.showType &&  
+           <div className="type">
+            <div>type</div>
+            <Grid>
+              { this.state.filters.map((filter)=> {
+                return  <FormControlLabel key={filter.typeId} control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.onChange} value={filter.name}/>} label={filter.name}></FormControlLabel>
+              }) }
+            </Grid>
+          </div>}
+         
+        </Container>
+      </Hidden>
+
+    </>
 
 
     )

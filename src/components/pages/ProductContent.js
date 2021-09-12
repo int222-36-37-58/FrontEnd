@@ -125,7 +125,7 @@ export default class ProductContent extends Component {
             <Grid container>
 
             <Grid item xs={12}>
-            <div className="infoBox" onClick={this.clickedInfo}>
+            <div className="infoBox" style={{ fontSize : 15+'px'}} onClick={this.clickedInfo}>
             <h2 className="infoText">Information</h2>
             <h2 className="plusIcon">+</h2> 
             </div>
@@ -141,7 +141,7 @@ export default class ProductContent extends Component {
             
             </Grid>
             <Grid item xs={12}> 
-            <div className="infoBox" onClick={this.clickedComments}>
+            <div className="infoBox" style={{ fontSize : 15+'px'}} onClick={this.clickedComments}>
             <h2  className="infoText">comments</h2>
             <h2 className="plusIcon">+</h2>
             </div>

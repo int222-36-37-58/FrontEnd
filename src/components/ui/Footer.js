@@ -12,7 +12,7 @@ export default function Footer() {
 
         <h3 className="footerHeader">KMUTT</h3>
         <h3 className="footerHeader">School of information Technology</h3>
-            
+        <h3 className="footerHeader">INT222 Project</h3> 
         </Grid>
 
         <Grid item xs={12} sm={6} style={{ textAlign : 'right'}}> 

@@ -28,7 +28,7 @@ state = {
     render() {
         return (
                           
-            <div  style={{ marginLeft : 'auto', marginRight:'auto', maxWidth:70+'%', marginTop : 1 + 'rem', backgroundColor : 'white',borderRadius : 1+"%" , paddingBottom : 100 +'px'}}>
+            <div  style={{ marginLeft : 'auto', marginRight:'auto', maxWidth:70+'%', marginTop : 1 + 'rem', backgroundColor : 'white',borderRadius : 15+'px' , paddingBottom : 100 +'px'}}>
             
            <Container >
             
