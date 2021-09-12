@@ -8,6 +8,8 @@ import CreateProductPage from "./components/pages/CreateProductPage"
 import ProductPage from './components/pages/ProductPage';
 import ProfilePage from './components/pages/ProfilePage';
 import Footer from './components/ui/Footer';
+import UserListPage from './components/pages/UserListPage';
+import ListBaseDataPage from './components/pages/ListBaseDataPage';
 
 
 const App = () => (
@@ -24,6 +26,8 @@ const App = () => (
 <Route path="/createproduct" exact component={CreateProductPage}/>
 <Route path="/product/:id" exact component={ProductPage}/>
 <Route path="/profile" exact component={ProfilePage}/>
+<Route path="/listusers" exact component={UserListPage}/>
+<Route path="/listbasedata" exact component={ListBaseDataPage}/>
 </div>
 <Footer/>
 

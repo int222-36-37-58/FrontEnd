@@ -1,14 +1,8 @@
 import React from 'react'
 import LoginForm from '../forms/LoginForm'
-//import PropTypes from 'prop-types'
-//import { connect } from "react-redux";
-//import { login } from '../../actions/authen'
 
 
-
-
-export default function LoginPage() {
-
+const LoginPage = () => {
 
 const submit = (e) => {
 
@@ -16,14 +10,12 @@ const submit = (e) => {
 
 }
 
-
-
     return (
         <div>
-       
                 <LoginForm submit={submit}/>
-          
         </div>
     )
 }
+
+export default LoginPage 
 
