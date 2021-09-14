@@ -20,7 +20,7 @@ export default class FilterBox extends Component {
 
   componentDidMount() {
 
-    axios.get(`${process.env.REACT_APP_API_URL}/brands`).then(res => {
+    axios.get(`${process.env.REACT_APP_API_URL}/types`).then(res => {
       const type = res.data;
       this.setState({filters : type})
     })

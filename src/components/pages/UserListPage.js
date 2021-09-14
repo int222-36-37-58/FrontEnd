@@ -6,32 +6,41 @@ import {
   TableHead,
   TableRow,
   TableFooter,
+  TablePagination,
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TablePagination from "../ui/TablePagination";
 
 const UserListPage = () => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/setest`)
       .then((res) => setUser(res.data));
-  }, []);
+  };
 
   const delUser = (id) => {
-    try {
-      axios.delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`);
-    } catch (err) {
-      alert(err);
-    }
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
+      .catch((err) => alert(err.response.data))
+      .then(alert(`delete user id ${id} success!`))
+      .then(() => getUser());
   };
 
   const handleChangePage = (e, newPage) => {
     setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
@@ -83,7 +92,7 @@ const UserListPage = () => {
                           <button className="AddButton">Edit</button>{" "}
                           <button
                             className="delFromCart"
-                            onClick={delUser(user.userId)}
+                            onClick={() => delUser(user.userId)}
                           >
                             DELETE
                           </button>
@@ -102,14 +111,15 @@ const UserListPage = () => {
 
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={4} align="right">
-                <TablePagination
-                  onPageChange={handleChangePage}
-                  count={user.length}
-                  page={page}
-                  rowsPerPage={rowsPerPage}
-                ></TablePagination>
-              </TableCell>
+              <TablePagination
+                colSpan={4}
+                rowsPerPageOptions={[5, 10]}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                onPageChange={handleChangePage}
+                count={user.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+              ></TablePagination>
             </TableRow>
           </TableFooter>
         </Table>

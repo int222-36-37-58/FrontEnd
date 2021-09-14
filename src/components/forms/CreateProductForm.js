@@ -47,12 +47,12 @@ let colorList = [...this.state.data.color , e.target.value]
 }
 
 componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/brands`).then(res => {
+    axios.get(`${process.env.REACT_APP_API_URL}/types`).then(res => {
         const types = res.data;
         this.setState({types : types})
     })
 
-    axios.get(`${process.env.REACT_APP_API_URL}/color`).then(res => {
+    axios.get(`${process.env.REACT_APP_API_URL}/colors`).then(res => {
     const color = res.data;
     this.setState({color : color})
     })
