@@ -20,8 +20,8 @@ export default class ProductContent extends Component {
       .get(`${process.env.REACT_APP_API_URL}/products/${id}`)
       .then((res) => {
         const prods = res.data;
-        this.setState({ product: prods });}
-        )
+        this.setState({ product: prods });
+      })
       .catch((err) => {
         this.props.notFound();
       });
@@ -67,10 +67,19 @@ export default class ProductContent extends Component {
       var colorObj = this.state.product.color.find(
         (c) => c.colorId === intColor
       );
-      productToCart.color = colorObj;
-      productToCart.quantity = this.state.quantityAdd;
 
-      this.props.addItem(productToCart);
+      var orderDetails = {
+        quantity: this.state.quantityAdd,
+        totalPrice: productToCart.price * this.state.quantityAdd,
+        color: colorObj,
+        product: productToCart,
+        user: {
+          userId: 1,
+          userName: "test",
+        },
+      };
+
+      this.props.addItem(orderDetails);
       this.setState({ quantityAdd: 1 });
     }
   };
