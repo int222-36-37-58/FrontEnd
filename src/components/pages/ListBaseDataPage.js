@@ -42,7 +42,6 @@ const ListBaseDataPage = () => {
   }
 
   const delColor = (id) => {
-    getColor();
     axios
       .delete(`${process.env.REACT_APP_API_URL}/colordelete/${id}`)
       .catch((err) => {

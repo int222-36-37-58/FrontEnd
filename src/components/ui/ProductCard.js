@@ -54,11 +54,7 @@ function ProductCard(props, { addToCart }) {
         quantity: quantity,
         totalPrice: productToCart.price * quantity,
         color: colorObj,
-        product: productToCart,
-        user: {
-          userId: 1,
-          userName: "test",
-        },
+        product: productToCart
       };
       props.addToCart(orderDetails);
       setNoColor(false);

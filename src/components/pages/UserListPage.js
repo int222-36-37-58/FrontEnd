@@ -10,11 +10,14 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import RegisterForm from "../forms/RegisterForm";
 
 const UserListPage = () => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [isEdit, setIsEdit] = useState(false);
+  let [userEdit, setUserEdit] = useState({});
 
   useEffect(() => {
     getUser();
@@ -43,6 +46,32 @@ const UserListPage = () => {
     setPage(0);
   };
 
+  const editUser = (user) => {
+    setUserEdit({});
+    setIsEdit(true);
+    setUserEdit(user);
+  };
+
+  const updateUser = (data) => {
+    console.log(data);
+
+    const json = JSON.stringify(data);
+
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/edituser`, json, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .catch((err) => {
+        alert(err);
+      })
+      .then(alert("update success"))
+      .then( () => { getUser() })
+      .then(setIsEdit(false))
+      ;
+  };
+
   return (
     <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
       <div
@@ -61,6 +90,16 @@ const UserListPage = () => {
         >
           All Users
         </div>
+
+        {isEdit && (
+          <RegisterForm
+            editMode={true}
+            adminMode={true}
+            userData={userEdit}
+            submit={updateUser}
+          ></RegisterForm>
+        )}
+
         <Table style={{ width: 95 + "%", margin: "auto" }}>
           <TableHead>
             <TableRow style={{ backgroundColor: "#3f51b5" }}>
@@ -86,10 +125,15 @@ const UserListPage = () => {
                       <TableCell align="right">{user.userId}</TableCell>
                       <TableCell align="right">{user.userName}</TableCell>
                       <TableCell align="right">{user.role}</TableCell>
-                      {user.role.toLowerCase() !== "admin" && (
+                      {user.role !== "ROLE_ADMIN" && (
                         <TableCell align="right">
                           {" "}
-                          <button className="AddButton">Edit</button>{" "}
+                          <button
+                            className="AddButton"
+                            onClick={() => editUser(user)}
+                          >
+                            Edit
+                          </button>{" "}
                           <button
                             className="delFromCart"
                             onClick={() => delUser(user.userId)}

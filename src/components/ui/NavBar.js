@@ -32,7 +32,19 @@ const NavBar = ({ cart, removeFromCart }) => {
     setIsShowCart(open);
   };
 
-  const handleCheckOut = () => {};
+  const handleCheckOut = () => {
+    var currentDate = new Date();
+    let order = {
+      date: currentDate,
+      orderDetails: cart.cart,
+      user: {
+        userId: 1,
+        userName: "test",
+      },
+    };
+
+    console.log(order);
+  };
 
   const handleShowSearch = (open) => (event) => {
     setIsShowSearch(open);
