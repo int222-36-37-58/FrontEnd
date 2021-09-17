@@ -67,9 +67,10 @@ const UserListPage = () => {
         alert(err);
       })
       .then(alert("update success"))
-      .then( () => { getUser() })
-      .then(setIsEdit(false))
-      ;
+      .then(() => {
+        getUser();
+      })
+      .then(setIsEdit(false));
   };
 
   return (

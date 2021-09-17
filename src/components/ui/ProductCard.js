@@ -40,7 +40,6 @@ function ProductCard(props, { addToCart }) {
     setColorChoose(0);
     let color = e.target.value;
     setColorChoose(color);
-    console.log(colorChoose);
   };
 
   const AddToCart = () => {
@@ -54,7 +53,7 @@ function ProductCard(props, { addToCart }) {
         quantity: quantity,
         totalPrice: productToCart.price * quantity,
         color: colorObj,
-        product: productToCart
+        product: productToCart,
       };
       props.addToCart(orderDetails);
       setNoColor(false);

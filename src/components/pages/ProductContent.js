@@ -72,7 +72,7 @@ export default class ProductContent extends Component {
         quantity: this.state.quantityAdd,
         totalPrice: productToCart.price * this.state.quantityAdd,
         color: colorObj,
-        product: productToCart
+        product: productToCart,
       };
 
       this.props.addItem(orderDetails);

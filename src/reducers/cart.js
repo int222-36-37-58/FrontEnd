@@ -27,20 +27,20 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         });
       const isAlready = state.cart.find(
         (it) =>
-          it.product.productId === action.payload.orderDetails.product.productId &&
+          it.product.productId ===
+            action.payload.orderDetails.product.productId &&
           it.color.colorId === action.payload.orderDetails.color.colorId
       )
         ? true
         : false;
-        console.log(isAlready)
+
       return {
         ...state,
         cart: isAlready
           ? state.cart.map((item) =>
               item.product.productId ===
                 action.payload.orderDetails.product.productId &&
-              item.color.colorId ===
-                action.payload.orderDetails.color.colorId
+              item.color.colorId === action.payload.orderDetails.color.colorId
                 ? {
                     ...item,
                     quantity:

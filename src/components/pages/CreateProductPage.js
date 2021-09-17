@@ -1,24 +1,11 @@
+import CreateProductForm from "../forms/CreateProductForm";
 
-import CreateProductForm from '../forms/CreateProductForm'
-
-
-
-
-import React from 'react'
+import React from "react";
 
 export default function CreateProductPage() {
+  const submit = (e) => {
+    console.log(e);
+  };
 
-
-    const submit = (e) => {
-
-
-        console.log(e);
-
-    }
-
-
-
-    return (
-        <CreateProductForm submit={submit}/>
-    )
+  return <CreateProductForm submit={submit} />;
 }
