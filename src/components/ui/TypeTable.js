@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ResponseDialog from "./ResponseDialog";
 
 const TypeTable = () => {
   const [type, setType] = useState([]);
@@ -17,7 +18,10 @@ const TypeTable = () => {
   const [typeToAdd, setTypeToAdd] = useState("");
   const [typePage, setTypePage] = useState(0);
   const [rowsPerTypePage, setRowsPerTypePage] = useState(5);
-
+  const [isEdit, setIsEdit] = useState(false);
+  const [typeEdit, setTypeEdit] = useState({});
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getType();
   }, []);
@@ -32,16 +36,26 @@ const TypeTable = () => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/deletetype/${id}`)
       .catch((err) => {
-        alert(err.response.data.message);
+        setDialogContent(err.data)
+        .then(setShowDialog(true))
       })
-      .then((res) => alert(res.data))
-      .then(() => getType());
+      .then((res) => setDialogContent(res.data))
+      .then(() => getType())
+      .then(setShowDialog(true));
   };
 
   const handleType = (e) => {
     setTypeToAdd(e.target.value);
   };
 
+  const handleEditType = (e) => {
+    setTypeEdit({ ...typeEdit, name: e.target.value });
+  };
+
+  const editType = (type) => {
+    setIsEdit(true);
+    setTypeEdit(type);
+  };
   const submitType = () => {
     const json = JSON.stringify({ name: typeToAdd });
 
@@ -52,12 +66,16 @@ const TypeTable = () => {
         },
       })
       .catch((err) => {
-        alert(err.data.message);
+        setDialogContent(err.data)
+        .then(setShowDialog(true))
       })
+      .then((res) => setDialogContent(`Add type ${res.data.name} success!!`))
       .then(() => getType())
       .then(setTypeToAdd(""))
-      .then(alert("add Type success. Please wait a sec to see new Change"));
+      .then(setShowDialog(true));
   };
+
+  const submitEdit = () => {};
 
   const handleChangeTypePage = (e, newPage) => {
     setTypePage(newPage);
@@ -68,8 +86,19 @@ const TypeTable = () => {
     setTypePage(0);
   };
 
+  const handleCloseBox = () => {
+    setShowDialog(false);
+    setDialogContent("");
+  };
+
   return (
     <>
+      <ResponseDialog
+        showDialog={showDialog}
+        handleCloseBox={handleCloseBox}
+        dialogContent={dialogContent}
+      />
+
       <div
         style={{
           fontWeight: 600,
@@ -119,6 +148,47 @@ const TypeTable = () => {
         </div>
       )}
 
+      {isEdit && (
+        <div
+          style={{
+            borderRadius: 5 + "px",
+            borderStyle: "solid",
+            borderWidth: 1 + "px",
+            padding: 10 + "px",
+            borderColor: "#545454",
+            width: 90 + "%",
+            marginTop: 10 + "px",
+            marginBottom: 10 + "px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <TextField
+            size="small"
+            variant="outlined"
+            onChange={handleEditType}
+            label="typeName"
+            value={typeEdit.name}
+          />{" "}
+          <button
+            className="delFromCart"
+            style={{ float: "right", padding: 5 + "px", marginLeft: 5 + "px" }}
+            onClick={() => {
+              setIsEdit(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="InfoButton"
+            style={{ float: "right" }}
+            onClick={submitEdit}
+          >
+            Update Type
+          </button>
+        </div>
+      )}
+
       <Table style={{ width: 90 + "%", margin: "auto" }}>
         <TableHead style={{ backgroundColor: "#3f51b5" }}>
           <TableRow>
@@ -145,6 +215,13 @@ const TypeTable = () => {
                     <TableCell align="right">{type.name}</TableCell>
                     <TableCell align="right">
                       <button
+                        className="InfoButton"
+                        onClick={() => editType(type)}
+                      >
+                        EDIT
+                      </button>
+                      <button
+                        style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
                         onClick={() => delType(type.typeId)}
                       >

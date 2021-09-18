@@ -1,14 +1,10 @@
-import {
-  Container,
-  Grid,
-} from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 
 import React from "react";
 import ColorTable from "../ui/ColorTable";
 import TypeTable from "../ui/TypeTable";
 
 const ListBaseDataPage = () => {
-  
   return (
     <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
       <div
@@ -33,7 +29,7 @@ const ListBaseDataPage = () => {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <TypeTable/>
+            <TypeTable />
           </Grid>
         </Grid>
       </div>

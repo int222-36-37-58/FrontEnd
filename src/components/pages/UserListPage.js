@@ -11,30 +11,36 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RegisterForm from "../forms/RegisterForm";
+import ResponseDialog from "../ui/ResponseDialog";
 
 const UserListPage = () => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
-  let [userEdit, setUserEdit] = useState({});
-
+  const [userEdit, setUserEdit] = useState({});
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getUser();
   }, []);
 
   const getUser = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/setest`)
+      .get(`${process.env.REACT_APP_API_URL}/users`)
       .then((res) => setUser(res.data));
   };
 
   const delUser = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
-      .catch((err) => alert(err.response.data))
-      .then(alert(`delete user id ${id} success!`))
-      .then(() => getUser());
+      .catch((err) => {
+        setDialogContent(err.data);
+        setShowDialog(true);
+      })
+      .then((res) => setDialogContent(res.data))
+      .then(() => getUser())
+      .then(setShowDialog(true));
   };
 
   const handleChangePage = (e, newPage) => {
@@ -64,112 +70,145 @@ const UserListPage = () => {
         },
       })
       .catch((err) => {
-        alert(err);
+        setDialogContent(err.data)
+        .then(setShowDialog(true))
       })
-      .then(alert("update success"))
+      .then(setDialogContent( `Update User at userid : ${data.userId} success!!`))
       .then(() => {
         getUser();
       })
-      .then(setIsEdit(false));
+      .then(setIsEdit(false))
+      .then(setShowDialog(true));
   };
-
+  const handleCloseBox = () => {
+    setShowDialog(false);
+    setDialogContent("");
+  };
   return (
-    <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
-      <div
-        style={{
-          backgroundColor: "white",
-          padding: 40 + "px",
-          borderRadius: 10 + "px",
-        }}
-      >
+    <>
+      <ResponseDialog
+        showDialog={showDialog}
+        handleCloseBox={handleCloseBox}
+        dialogContent={dialogContent}
+      />
+
+      <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
         <div
           style={{
-            fontWeight: 600,
-            fontSize: 24 + "px",
-            marginBottom: 50 + "px",
+            backgroundColor: "white",
+            padding: 40 + "px",
+            borderRadius: 10 + "px",
           }}
         >
-          All Users
-        </div>
+          <div
+            style={{
+              fontWeight: 600,
+              fontSize: 24 + "px",
+              marginBottom: 50 + "px",
+            }}
+          >
+            All Users
+          </div>
 
-        {isEdit && (
-          <RegisterForm
-            editMode={true}
-            adminMode={true}
-            userData={userEdit}
-            submit={updateUser}
-          ></RegisterForm>
-        )}
+          {isEdit && (
+            <RegisterForm
+              editMode={true}
+              adminMode={true}
+              userData={userEdit}
+              onIsEdit={() => {
+                setIsEdit(false);
+              }}
+              submit={updateUser}
+            />
+          )}
 
-        <Table style={{ width: 95 + "%", margin: "auto" }}>
-          <TableHead>
-            <TableRow style={{ backgroundColor: "#3f51b5" }}>
-              <TableCell style={{ color: "white" }} align="right">
-                ID
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                Username
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                Role
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="right"></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsPerPage > 0 ? (
-              user
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user) => {
-                  return (
-                    <TableRow key={user.userId}>
-                      <TableCell align="right">{user.userId}</TableCell>
-                      <TableCell align="right">{user.userName}</TableCell>
-                      <TableCell align="right">{user.role}</TableCell>
-                      {user.role !== "ROLE_ADMIN" && (
-                        <TableCell align="right">
-                          {" "}
-                          <button
-                            className="AddButton"
-                            onClick={() => editUser(user)}
-                          >
-                            Edit
-                          </button>{" "}
-                          <button
-                            className="delFromCart"
-                            onClick={() => delUser(user.userId)}
-                          >
-                            DELETE
-                          </button>
-                        </TableCell>
-                      )}
-                    </TableRow>
-                  );
-                })
-            ) : (
-              <TableRow>
-                {" "}
-                <TableCell />
+          <Table style={{ width: 95 + "%", margin: "auto" }}>
+            <TableHead>
+              <TableRow style={{ backgroundColor: "#3f51b5" }}>
+                <TableCell style={{ color: "white" }} align="right">
+                  ID
+                </TableCell>
+                <TableCell style={{ color: "white" }} align="right">
+                  Username
+                </TableCell>
+                <TableCell style={{ color: "white" }} align="right">
+                  Role
+                </TableCell>
+                <TableCell style={{ color: "white" }} align="right"></TableCell>
               </TableRow>
-            )}
-          </TableBody>
+            </TableHead>
+            <TableBody>
+              {rowsPerPage > 0 ? (
+                user
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((user) => {
+                    return (
+                      <TableRow key={user.userId}>
+                        <TableCell align="right">{user.userId}</TableCell>
+                        <TableCell align="right">{user.userName}</TableCell>
+                        <TableCell align="right">{user.role}</TableCell>
+                        {user.role !== "ROLE_ADMIN" && (
+                          <TableCell align="right">
+                            {isEdit ? (
+                              <button
+                                className="disabledButton hoverCursor"
+                                onClick={() => {
+                                  alert(
+                                    "Please Click Submit or Cancel before edit other user"
+                                  );
+                                }}
+                              >
+                                Edit
+                              </button>
+                            ) : (
+                              <button
+                                className="AddButton"
+                                onClick={() => editUser(user)}
+                              >
+                                Edit
+                              </button>
+                            )}
 
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                colSpan={4}
-                rowsPerPageOptions={[5, 10]}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                onPageChange={handleChangePage}
-                count={user.length}
-                page={page}
-                rowsPerPage={rowsPerPage}
-              ></TablePagination>
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
-    </Container>
+                            <button
+                              style={{
+                                padding: 5 + "px",
+                                marginLeft: 5 + "px",
+                              }}
+                              className="delFromCart"
+                              onClick={() => delUser(user.userId)}
+                            >
+                              DELETE
+                            </button>
+                          </TableCell>
+                        )}
+                      </TableRow>
+                    );
+                  })
+              ) : (
+                <TableRow>
+                  {" "}
+                  <TableCell />
+                </TableRow>
+              )}
+            </TableBody>
+
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  colSpan={4}
+                  rowsPerPageOptions={[5, 10]}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  onPageChange={handleChangePage}
+                  count={user.length}
+                  page={page}
+                  rowsPerPage={rowsPerPage}
+                ></TablePagination>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
+      </Container>
+    </>
   );
 };
 

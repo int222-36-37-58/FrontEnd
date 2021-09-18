@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ResponseDialog from "./ResponseDialog";
 
 const ColorTable = () => {
   const [color, setColor] = useState([]);
@@ -17,6 +18,10 @@ const ColorTable = () => {
   const [colorToAdd, setColorToAdd] = useState("");
   const [colorPage, setColorPage] = useState(0);
   const [rowsPerColorPage, setRowsPerColorPage] = useState(5);
+  const [isEdit, setIsEdit] = useState(false);
+  const [colorEdit, setColorEdit] = useState({});
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getColor();
   }, []);
@@ -27,18 +32,29 @@ const ColorTable = () => {
       .then((res) => setColor(res.data));
   }
 
+  const editColor = (color) => {
+    setIsEdit(true);
+    setColorEdit(color);
+  };
+
   const delColor = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/colordelete/${id}`)
       .catch((err) => {
-        alert(err.response.data.message);
+        setDialogContent(`${err.data.message}`);
+        setShowDialog(true);
       })
-      .then((res) => alert(res.data))
-      .then(() => getColor());
+      .then((res) => setDialogContent(res.data))
+      .then(() => getColor())
+      .then(setShowDialog(true));
   };
 
   const handleColor = (e) => {
     setColorToAdd(e.target.value);
+  };
+
+  const handleColorEdit = (e) => {
+    setColorEdit({ ...colorEdit, colorName: e.target.value });
   };
 
   const submitColor = () => {
@@ -50,11 +66,31 @@ const ColorTable = () => {
         },
       })
       .catch((err) => {
-        alert(err.data.message);
+        setDialogContent(err.data).then(setShowDialog(true));
       })
+      .then((res) =>
+        setDialogContent(`Add color ${res.data.colorName} success!!`)
+      )
       .then(() => getColor())
       .then(setColorToAdd(""))
-      .then(alert("add color success. Please wait a sec to see new Change"));
+      .then(setShowDialog(true));
+  };
+
+  const submitEdit = () => {
+    const json = JSON.stringify({ colorEdit });
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/editcolor`, json, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .catch((err) => {
+        setDialogContent(err.data).then(setShowDialog(true));
+      })
+      .then((res) => setDialogContent(`Update color success!!`))
+      .then(() => getColor())
+      .then(setIsEdit(false))
+      .then(setShowDialog(true));
   };
 
   const handleChangeColorPage = (e, newPage) => {
@@ -66,8 +102,19 @@ const ColorTable = () => {
     setColorPage(0);
   };
 
+  const handleCloseBox = () => {
+    setShowDialog(false);
+    setDialogContent("");
+  };
+
   return (
     <>
+      <ResponseDialog
+        showDialog={showDialog}
+        handleCloseBox={handleCloseBox}
+        dialogContent={dialogContent}
+      />
+
       <div
         style={{
           fontWeight: 600,
@@ -117,6 +164,47 @@ const ColorTable = () => {
         </div>
       )}
 
+      {isEdit && (
+        <div
+          style={{
+            borderRadius: 5 + "px",
+            borderStyle: "solid",
+            borderWidth: 1 + "px",
+            padding: 10 + "px",
+            borderColor: "#545454",
+            width: 90 + "%",
+            marginTop: 10 + "px",
+            marginBottom: 10 + "px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <TextField
+            size="small"
+            variant="outlined"
+            onChange={handleColorEdit}
+            label="colorName"
+            value={colorEdit.colorName}
+          />{" "}
+          <button
+            className="delFromCart"
+            style={{ float: "right", padding: 5 + "px", marginLeft: 5 + "px" }}
+            onClick={() => {
+              setIsEdit(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="InfoButton"
+            style={{ float: "right" }}
+            onClick={submitEdit}
+          >
+            Update Color
+          </button>
+        </div>
+      )}
+
       <Table style={{ width: 90 + "%", margin: "auto" }}>
         <TableHead style={{ backgroundColor: "#3f51b5" }}>
           <TableRow>
@@ -143,6 +231,13 @@ const ColorTable = () => {
                     <TableCell align="right">{col.colorName}</TableCell>
                     <TableCell align="right">
                       <button
+                        className="InfoButton"
+                        onClick={() => editColor(col)}
+                      >
+                        EDIT
+                      </button>
+                      <button
+                        style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
                         onClick={() => delColor(col.colorId)}
                       >

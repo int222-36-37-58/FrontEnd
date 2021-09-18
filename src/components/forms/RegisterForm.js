@@ -4,16 +4,7 @@ import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
+import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 
 export default class RegisterForm extends Component {
   state = {
@@ -29,9 +20,7 @@ export default class RegisterForm extends Component {
     adminMode: false,
     confirmPassword: "",
     isPasswordChange: false,
-
     errors: {},
-    showUpdateComplete: false,
   };
 
   componentDidMount() {
@@ -68,7 +57,6 @@ export default class RegisterForm extends Component {
     if (invalid !== "err") {
       if (this.state.editMode) {
         this.props.submit(this.state.data);
-        this.setState({ showUpdateComplete: true });
       } else {
         this.props.submit(this.state.data);
       }
@@ -97,8 +85,7 @@ export default class RegisterForm extends Component {
     }
 
     e.tel = String(e.tel);
-    console.log(e.tel);
-    console.log(e.tel.length);
+
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
@@ -133,21 +120,6 @@ export default class RegisterForm extends Component {
           borderRadius: 1 + "%",
         }}
       >
-        <Dialog
-          open={this.state.showUpdateComplete}
-          onClose={this.handleCloseBox}
-          fullWidth={true}
-        >
-          <DialogTitle id="alert-dialog-title">Congratulation</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              <Typography style={{ fontWeight: 500 }}>
-                Update Success !
-              </Typography>
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-
         <div className="headerRegister">
           <Typography variant="h5" style={{ marginBottom: 20 + "px" }}>
             {title}
@@ -342,6 +314,23 @@ export default class RegisterForm extends Component {
                   >
                     Submit
                   </Button>
+                  {adminMode && (
+                    <Button
+                      variant="contained"
+                      color="error"
+                      style={{
+                        marginTop: 60 + "px",
+                        paddingRight: 35 + "px",
+                        paddingLeft: 35 + "px",
+                        marginLeft: 20 + "px",
+                      }}
+                      onClick={() => {
+                        this.props.onIsEdit();
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
             </form>
@@ -374,6 +363,6 @@ RegisterForm.defaultProps = {
     fullName: "",
     address: "",
     tel: "",
-    role: "USER",
+    role: "ROLE_USER",
   },
 };
