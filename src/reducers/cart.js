@@ -60,7 +60,8 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         ),
       };
     case actionTypes.CHECK_OUT:
-      return axios.post(`${process.env.REACT_APP_API_URL}/order`, state.cart);
+      return {...state,
+      cart: []};
     default:
       return state;
   }

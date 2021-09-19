@@ -34,12 +34,12 @@ const UserListPage = () => {
   const delUser = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
-      .catch((err) => {
-        setDialogContent(err.data);
-        setShowDialog(true);
-      })
+
       .then((res) => setDialogContent(res.data))
       .then(() => getUser())
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
 
@@ -69,15 +69,17 @@ const UserListPage = () => {
           "Content-Type": "application/json",
         },
       })
-      .catch((err) => {
-        setDialogContent(err.data)
-        .then(setShowDialog(true))
-      })
-      .then(setDialogContent( `Update User at userid : ${data.userId} success!!`))
+
+      .then(
+        setDialogContent(`Update User at userid : ${data.userId} success!!`)
+      )
       .then(() => {
         getUser();
       })
       .then(setIsEdit(false))
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
   const handleCloseBox = () => {

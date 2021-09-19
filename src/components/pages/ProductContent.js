@@ -196,15 +196,15 @@ export default class ProductContent extends Component {
                     }}
                   >
                     Type : {this.state.product.type.name}{" "}
-                  </span>
+                  </span> 
                   <span
                     style={{
                       color: "black",
                       fontWeight: "bold",
                       fontSize: 16 + "px",
                     }}
-                  >
-                    quantity : {this.state.product.quantity}{" "}
+                  >|
+                   Sales by : {this.state.product.user.userName}{" "}
                   </span>
                   <h3>{this.state.product.description}</h3>
                 </div>

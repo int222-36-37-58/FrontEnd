@@ -35,12 +35,13 @@ const TypeTable = () => {
   const delType = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/deletetype/${id}`)
-      .catch((err) => {
-        setDialogContent(err.data)
-        .then(setShowDialog(true))
-      })
+
       .then((res) => setDialogContent(res.data))
       .then(() => getType())
+
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
 
@@ -65,13 +66,13 @@ const TypeTable = () => {
           "Content-Type": "application/json",
         },
       })
-      .catch((err) => {
-        setDialogContent(err.data)
-        .then(setShowDialog(true))
-      })
+
       .then((res) => setDialogContent(`Add type ${res.data.name} success!!`))
       .then(() => getType())
       .then(setTypeToAdd(""))
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
 

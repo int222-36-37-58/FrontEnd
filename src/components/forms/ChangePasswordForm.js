@@ -73,7 +73,7 @@ const ChangePasswordForm = () => {
         <Grid
           item
           xs={12}
-          style={{ paddingTop: 30 + "px", maxWidth: 55 + "%" }}
+          style={{ paddingTop: 30 + "px" }}
         >
           <TextField
             variant="outlined"

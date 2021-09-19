@@ -8,13 +8,13 @@ import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import React, { useState } from "react";
-
 import { connect } from "react-redux";
-import { removeFromCart } from "../../actions/cart";
+import { removeFromCart, checkoutItem } from "../../actions/cart";
+
 import CloseIcon from "@material-ui/icons/Close";
 import Cart from "./Cart";
 
-const NavBar = ({ cart, removeFromCart }) => {
+const NavBar = ({ cart, removeFromCart, checkoutItem }) => {
   const [isShowCart, setIsShowCart] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
 
@@ -37,6 +37,7 @@ const NavBar = ({ cart, removeFromCart }) => {
         onHandleCart={handleCart}
         isShowCart={isShowCart}
         remove={removeFromCart}
+        checkout={checkoutItem}
       />
 
       <AppBar position="static" style={{ top: 0, width: 100 + "%" }}>
@@ -151,6 +152,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
+    checkoutItem: () => dispatch(checkoutItem()),
   };
 };
 

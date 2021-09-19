@@ -40,12 +40,12 @@ const ColorTable = () => {
   const delColor = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/colordelete/${id}`)
-      .catch((err) => {
-        setDialogContent(`${err.data.message}`);
-        setShowDialog(true);
-      })
+
       .then((res) => setDialogContent(res.data))
       .then(() => getColor())
+      .catch((err) => {
+        setDialogContent(`${err.response.data.message}`);
+      })
       .then(setShowDialog(true));
   };
 
@@ -65,14 +65,15 @@ const ColorTable = () => {
           "Content-Type": "application/json",
         },
       })
-      .catch((err) => {
-        setDialogContent(err.data).then(setShowDialog(true));
-      })
+
       .then((res) =>
         setDialogContent(`Add color ${res.data.colorName} success!!`)
       )
       .then(() => getColor())
       .then(setColorToAdd(""))
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
 
@@ -84,12 +85,13 @@ const ColorTable = () => {
           "Content-Type": "application/json",
         },
       })
-      .catch((err) => {
-        setDialogContent(err.data).then(setShowDialog(true));
-      })
+
       .then((res) => setDialogContent(`Update color success!!`))
       .then(() => getColor())
       .then(setIsEdit(false))
+      .catch((err) => {
+        setDialogContent(err.response.data.message);
+      })
       .then(setShowDialog(true));
   };
 
