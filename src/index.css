@@ -17,6 +17,11 @@ body {
   flex: 1;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .hoverCursor:hover {
   cursor: pointer;
 }
@@ -24,6 +29,11 @@ body {
 .underlineHover:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.hoverChangeToNavBarColor:hover {
+  cursor: pointer;
+  color: #3f51b5;
 }
 
 .navbarIcon {
@@ -511,7 +521,7 @@ body {
   left: 0;
 
   margin: 0;
-  background-color: black;
+  background-color: #181818;
   color: white;
   width: 100%;
 }

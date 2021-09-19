@@ -19,7 +19,6 @@ export default class RegisterForm extends Component {
     editMode: false,
     adminMode: false,
     confirmPassword: "",
-    isPasswordChange: false,
     errors: {},
   };
 
@@ -53,7 +52,7 @@ export default class RegisterForm extends Component {
 
   onSubmit = () => {
     const invalid = this.validate(this.state.data);
-    console.log(this.state.errors);
+
     if (invalid !== "err") {
       if (this.state.editMode) {
         this.props.submit(this.state.data);
@@ -111,17 +110,16 @@ export default class RegisterForm extends Component {
     const title = editMode ? "Your Profile" : "Register Information";
     return (
       <div
+        className={!editMode ? "center" : null}
         style={{
-          maxWidth: 700 + "px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: 3 + "rem",
+          maxWidth: 680 + "px",
+          height: "auto",
           backgroundColor: "white",
           borderRadius: 1 + "%",
         }}
       >
         <div className="headerRegister">
-          <Typography variant="h5" style={{ marginBottom: 20 + "px" }}>
+          <Typography variant="h5" style={{ marginBottom: 15 + "px" }}>
             {title}
           </Typography>
         </div>
@@ -317,7 +315,7 @@ export default class RegisterForm extends Component {
                   {adminMode && (
                     <Button
                       variant="contained"
-                      color="error"
+                      color="secondary"
                       style={{
                         marginTop: 60 + "px",
                         paddingRight: 35 + "px",

@@ -23,7 +23,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <RegisterForm submit={submit} />
     </div>
   );
