@@ -30,11 +30,11 @@ const UserListPage = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`)
       .then((res) => setUser(res.data))
-      .catch(err => {
+      .catch((err) => {
         setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-        setShowDialog(true)
-      })
+        setDialogContent(err.message);
+        setShowDialog(true);
+      });
       ;
   };
 

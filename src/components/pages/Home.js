@@ -22,7 +22,7 @@ const Home = () => {
       })
       .catch((err) => {
         setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
+        setDialogContent(err.message);
         setShowDialog(true);
       });
   };

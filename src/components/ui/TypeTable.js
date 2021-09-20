@@ -31,11 +31,11 @@ const TypeTable = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/types`)
       .then((res) => setType(res.data))
-      .catch(err => {
+      .catch((err) => {
         setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-        setShowDialog(true)
-      })
+        setDialogContent(err.message);
+        setShowDialog(true);
+      });
       ;
   }
 
