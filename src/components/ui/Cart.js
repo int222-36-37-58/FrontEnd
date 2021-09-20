@@ -7,10 +7,12 @@ import ResponseDialog from "./ResponseDialog";
 
 const Cart = (props) => {
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
 
   const handleCloseBox = () => {
     setShowDialog(false);
+    setDialogHeader('');
     setDialogContent("");
   };
 
@@ -39,9 +41,13 @@ const Cart = (props) => {
           "Content-Type": "application/json",
         },
       })
-      .then(setDialogContent("Check out success!!"))
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent("Check out success!!");
+      })
       .then(() => props.checkout())
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -53,6 +59,7 @@ const Cart = (props) => {
         showDialog={showDialog}
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
       />
       <Drawer
         open={props.isShowCart}

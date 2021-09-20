@@ -21,6 +21,7 @@ const TypeTable = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [typeEdit, setTypeEdit] = useState({});
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getType();
@@ -29,17 +30,27 @@ const TypeTable = () => {
   function getType() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/types`)
-      .then((res) => setType(res.data));
+      .then((res) => setType(res.data))
+      .catch(err => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+        setShowDialog(true)
+      })
+      ;
   }
 
   const delType = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/deletetype/${id}`)
 
-      .then((res) => setDialogContent(res.data))
+      .then((res) => {
+        setDialogHeader("Success!!");
+        setDialogContent(res.data);
+      })
       .then(() => getType())
 
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -67,16 +78,40 @@ const TypeTable = () => {
         },
       })
 
-      .then((res) => setDialogContent(`Add type ${res.data.name} success!!`))
+      .then((res) => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Add type ${res.data.name} success!!`);
+      })
       .then(() => getType())
       .then(setTypeToAdd(""))
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
   };
 
-  const submitEdit = () => {};
+  const submitEdit = () => {
+    const json = JSON.stringify({ typeEdit });
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/edittype`, json, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Update type success!!`);
+      })
+      .then(() => getType())
+      .then(setIsEdit(false))
+      .catch((err) => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+      })
+      .then(setShowDialog(true));
+  };
 
   const handleChangeTypePage = (e, newPage) => {
     setTypePage(newPage);
@@ -89,6 +124,7 @@ const TypeTable = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
+    setDialogHeader("");
     setDialogContent("");
   };
 
@@ -98,6 +134,7 @@ const TypeTable = () => {
         showDialog={showDialog}
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
       />
 
       <div

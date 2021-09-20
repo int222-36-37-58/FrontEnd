@@ -20,6 +20,7 @@ const UserListPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userEdit, setUserEdit] = useState({});
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getUser();
@@ -28,16 +29,26 @@ const UserListPage = () => {
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`)
-      .then((res) => setUser(res.data));
+      .then((res) => setUser(res.data))
+      .catch(err => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+        setShowDialog(true)
+      })
+      ;
   };
 
   const delUser = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
 
-      .then((res) => setDialogContent(res.data))
+      .then((res) => {
+        setDialogHeader("Success!!");
+        setDialogContent(res.data);
+      })
       .then(() => getUser())
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -70,20 +81,23 @@ const UserListPage = () => {
         },
       })
 
-      .then(
-        setDialogContent(`Update User at userid : ${data.userId} success!!`)
-      )
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Update User at userid : ${data.userId} success!!`);
+      })
       .then(() => {
         getUser();
       })
       .then(setIsEdit(false))
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
   };
   const handleCloseBox = () => {
     setShowDialog(false);
+    setDialogHeader("");
     setDialogContent("");
   };
   return (
@@ -92,6 +106,7 @@ const UserListPage = () => {
         showDialog={showDialog}
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
       />
 
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>

@@ -19,13 +19,18 @@ const ProfilePage = () => {
   const [isShowProfile, setIsShowProfile] = useState(true);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
 
   const update = (data) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/edituser`, data)
-      .then(setDialogContent("Update Success"))
+      .then(() =>{
+        setDialogHeader("Success!!")
+        setDialogContent("Update Success")
+      })
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -33,6 +38,7 @@ const ProfilePage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
+    setDialogHeader('');
     setDialogContent("");
   };
 
@@ -42,6 +48,7 @@ const ProfilePage = () => {
         showDialog={showDialog}
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
       />
 
       <Container maxWidth="lg">

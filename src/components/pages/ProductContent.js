@@ -22,7 +22,7 @@ export default class ProductContent extends Component {
         const prods = res.data;
         this.setState({ product: prods });
       })
-      .catch((err) => {
+      .catch(() => {
         this.props.notFound();
       });
   }

@@ -1,23 +1,46 @@
 import { Container, Grid } from "@material-ui/core";
 import axios from "axios";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "../../index.css";
 import FilterBox from "../ui/FilterBox";
 import ProductCard from "../ui/ProductCard";
-export default class Home extends Component {
-  componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/products`).then((res) => {
-      const prods = res.data;
-      this.setState({ products: prods });
-    });
-  }
+import ResponseDialog from "../ui/ResponseDialog";
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
+  const [dialogContent, setDialogContent] = useState("");
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-  state = {
-    products: [],
+  const getProducts = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/products`)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+        setShowDialog(true);
+      });
   };
 
-  render() {
-    return (
+  const handleCloseBox = () => {
+    setShowDialog(false);
+    setDialogContent("");
+    setDialogHeader("");
+  };
+
+  return (
+    <>
+      <ResponseDialog
+        showDialog={showDialog}
+        handleCloseBox={handleCloseBox}
+        dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
+      />
       <div
         style={{
           marginLeft: "auto",
@@ -43,7 +66,7 @@ export default class Home extends Component {
             <Grid item xs={12} md={8}>
               <Container style={{ padding: 10 + "px", paddingTop: 30 + "px" }}>
                 <Grid container direction="row" spacing={6}>
-                  {this.state.products.map((product) => {
+                  {products.map((product) => {
                     return (
                       <Grid
                         item
@@ -63,6 +86,8 @@ export default class Home extends Component {
           </Grid>
         </Container>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+
+export default Home;

@@ -554,3 +554,10 @@ body {
   background-color: black;
   transition: 0.5s;
 }
+
+.dialogHeader {
+
+padding-left:  25px;
+font-size: 28px;
+
+}

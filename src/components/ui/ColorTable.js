@@ -21,6 +21,7 @@ const ColorTable = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [colorEdit, setColorEdit] = useState({});
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   useEffect(() => {
     getColor();
@@ -29,7 +30,14 @@ const ColorTable = () => {
   function getColor() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/colors`)
-      .then((res) => setColor(res.data));
+      .then((res) => setColor(res.data))
+      .catch(err => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+        setShowDialog(true)
+      })
+      
+      ;
   }
 
   const editColor = (color) => {
@@ -41,9 +49,13 @@ const ColorTable = () => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/colordelete/${id}`)
 
-      .then((res) => setDialogContent(res.data))
+      .then((res) => {
+        setDialogHeader("Success!!");
+        setDialogContent(res.data);
+      })
       .then(() => getColor())
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(`${err.response.data.message}`);
       })
       .then(setShowDialog(true));
@@ -66,12 +78,14 @@ const ColorTable = () => {
         },
       })
 
-      .then((res) =>
-        setDialogContent(`Add color ${res.data.colorName} success!!`)
-      )
+      .then((res) => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Add color ${res.data.colorName} success!!`);
+      })
       .then(() => getColor())
       .then(setColorToAdd(""))
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -86,10 +100,14 @@ const ColorTable = () => {
         },
       })
 
-      .then((res) => setDialogContent(`Update color success!!`))
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Update color success!!`);
+      })
       .then(() => getColor())
       .then(setIsEdit(false))
       .catch((err) => {
+        setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
       .then(setShowDialog(true));
@@ -107,6 +125,7 @@ const ColorTable = () => {
   const handleCloseBox = () => {
     setShowDialog(false);
     setDialogContent("");
+    setDialogHeader("");
   };
 
   return (
@@ -115,6 +134,7 @@ const ColorTable = () => {
         showDialog={showDialog}
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
       />
 
       <div

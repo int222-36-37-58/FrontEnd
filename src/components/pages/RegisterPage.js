@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import RegisterForm from "../forms/RegisterForm";
 import axios from "axios";
 import { useHistory } from "react-router";
+import ResponseDialog from "../ui/ResponseDialog";
 
 const RegisterPage = () => {
   const history = useHistory();
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
+  const [dialogContent, setDialogContent] = useState("");
+
   const submit = (data) => {
     const json = JSON.stringify(data);
     axios
@@ -13,19 +18,30 @@ const RegisterPage = () => {
           "Content-Type": "application/json",
         },
       })
-      .then((res) => {
-        if (res.status === 200) {
-          history.push("/login");
-        } else {
-          alert("something wrong please try again");
-        }
+      .then(history.push("/login"))
+      .catch((err) => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+        setShowDialog(true);
       });
   };
 
+  const handleCloseBox = () => {
+    setShowDialog(false);
+    setDialogHeader("");
+    setDialogContent("");
+  };
+
   return (
-    <div style={{}}>
+    <>
+      <ResponseDialog
+        showDialog={showDialog}
+        handleCloseBox={handleCloseBox}
+        dialogContent={dialogContent}
+        dialogHeader={dialogHeader}
+      />
       <RegisterForm submit={submit} />
-    </div>
+    </>
   );
 };
 export default RegisterPage;
