@@ -367,6 +367,7 @@ body {
   border-radius: 20px;
   margin-top: 30px;
   padding: 10px;
+  box-shadow: 10px 10px;
 }
 
 .filterBox > .header {
@@ -536,7 +537,7 @@ body {
 
   bottom: 0;
   left: 0;
-
+  box-shadow: black 10px 10px;
   margin: 0;
   background-color: #181818;
   color: white;
@@ -641,4 +642,13 @@ body {
   max-width: 195px;
   height: 195px;
   transition: 0.3s;
+}
+
+.homeContainer {
+  padding: 30px;
+  margin-top: 30px;
+  padding-top: 50px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 10px 10px;
 }

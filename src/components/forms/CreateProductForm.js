@@ -128,7 +128,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
     render() {
         return (
             <div>
-            <Container maxWidth='md' style={{ marginTop : 2 + 'rem', backgroundColor : 'white' ,borderRadius : 10 + "px"}}>
+            <Container maxWidth='md' style={{ marginTop : 2 + 'rem', backgroundColor : 'white' ,borderRadius : 10 + "px",boxShadow: '10px 10px'}}>
             <Typography  variant="h4" style={{ marginBottom : 10 + 'px'  ,paddingTop : 25 + 'px' ,marginLeft : 20+'px' }}> Product Info</Typography>
 <form>
             <Grid container style={{padding : 25 +'px'}}  direction="row" justifyContent="center" alignItems="center" spacing={2} >

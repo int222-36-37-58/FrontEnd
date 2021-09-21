@@ -57,6 +57,7 @@ const ChangePasswordForm = () => {
         marginTop: "20px",
         maxWidth: 680 + "px",
         width: 100 + "%",
+        boxShadow: "10px 10px",
       }}
     >
       <div className="headerRegister">
@@ -70,11 +71,7 @@ const ChangePasswordForm = () => {
         style={{ padding: 20 + "px", paddingBottom: 50 + "px" }}
         spacing={2}
       >
-        <Grid
-          item
-          xs={12}
-          style={{ paddingTop: 30 + "px" }}
-        >
+        <Grid item xs={12} style={{ paddingTop: 30 + "px" }}>
           <TextField
             variant="outlined"
             size="small"

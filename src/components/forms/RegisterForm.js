@@ -116,6 +116,7 @@ export default class RegisterForm extends Component {
           height: "auto",
           backgroundColor: "white",
           borderRadius: 1 + "%",
+          boxShadow: "10px 10px",
         }}
       >
         <div className="headerRegister">

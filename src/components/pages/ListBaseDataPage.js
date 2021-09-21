@@ -12,6 +12,7 @@ const ListBaseDataPage = () => {
           backgroundColor: "white",
           padding: 15 + "px",
           borderRadius: 10 + "px",
+          boxShadow: '10px 10px'
         }}
       >
         <div

@@ -45,47 +45,46 @@ const Home = () => {
         style={{
           marginLeft: "auto",
           marginRight: "auto",
-          maxWidth:  78+ "%",
+          maxWidth: 78 + "%",
           marginTop: 1 + "rem",
-          
-         
+
           paddingBottom: 100 + "px",
         }}
       >
-        
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            spacing={0}
-          >
-            <Grid item xs={12} md={3} style={{marginLeft :'80px' }}>
-              <FilterBox></FilterBox>
-            </Grid>
-
-            <Grid item xs={12} md={8}>
-              <Container style={{ padding: 30 + "px",marginTop : 30+'px' , paddingTop: 50 + "px" ,backgroundColor:'white' ,borderRadius: 15 + "px",}}>
-                  <h4 style={{ textAlign:'right' ,marginTop: '-15px'}}>{products.length} รายการ</h4>
-                <Grid container direction="row" spacing={2}>
-                  {products.map((product) => {
-                    return (
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={5}
-                        lg={3}
-                        key={product.productId}
-                      >
-                        <ProductCard product={product}></ProductCard>
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </Container>
-            </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          spacing={0}
+        >
+          <Grid item xs={12} md={3} style={{ marginLeft: "80px" }}>
+            <FilterBox></FilterBox>
           </Grid>
-       
+
+          <Grid item xs={12} md={8}>
+            <Container className="homeContainer">
+              <h4 style={{ textAlign: "right", marginTop: "-15px" }}>
+                {products.length} รายการ
+              </h4>
+              <Grid container direction="row" spacing={2}>
+                {products.map((product) => {
+                  return (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={5}
+                      lg={3}
+                      key={product.productId}
+                    >
+                      <ProductCard product={product}></ProductCard>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Container>
+          </Grid>
+        </Grid>
       </div>
     </>
   );

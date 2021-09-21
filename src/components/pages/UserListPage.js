@@ -115,6 +115,7 @@ const UserListPage = () => {
             backgroundColor: "white",
             padding: 40 + "px",
             borderRadius: 10 + "px",
+            boxShadow: '10px 10px'
           }}
         >
           <div
