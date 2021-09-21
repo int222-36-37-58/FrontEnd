@@ -45,27 +45,28 @@ const Home = () => {
         style={{
           marginLeft: "auto",
           marginRight: "auto",
-          maxWidth: 70 + "%",
+          maxWidth:  78+ "%",
           marginTop: 1 + "rem",
-          backgroundColor: "white",
-          borderRadius: 15 + "px",
+          
+         
           paddingBottom: 100 + "px",
         }}
       >
-        <Container maxWidth="xl">
+        
           <Grid
             container
             direction="row"
             justifyContent="space-between"
-            spacing={1}
+            spacing={0}
           >
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} style={{marginLeft :'80px' }}>
               <FilterBox></FilterBox>
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <Container style={{ padding: 10 + "px", paddingTop: 30 + "px" }}>
-                <Grid container direction="row" spacing={6}>
+              <Container style={{ padding: 30 + "px",marginTop : 30+'px' , paddingTop: 50 + "px" ,backgroundColor:'white' ,borderRadius: 15 + "px",}}>
+                  <h4 style={{ textAlign:'right' ,marginTop: '-15px'}}>{products.length} รายการ</h4>
+                <Grid container direction="row" spacing={2}>
                   {products.map((product) => {
                     return (
                       <Grid
@@ -84,7 +85,7 @@ const Home = () => {
               </Container>
             </Grid>
           </Grid>
-        </Container>
+       
       </div>
     </>
   );

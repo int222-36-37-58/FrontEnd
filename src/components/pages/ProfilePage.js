@@ -108,7 +108,7 @@ const ProfilePage = () => {
                     }}
                   >
                     <h2 style={{ float: "left", marginLeft: "20px" }}> Menu</h2>
-                    {isShowMenu ? (
+                    {!isShowMenu ? (
                       <h2
                         className="hoverChangeToNavBarColor IconInMenu"
                         onClick={() => {

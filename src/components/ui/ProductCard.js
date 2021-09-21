@@ -64,7 +64,7 @@ function ProductCard(props, { addToCart }) {
   };
 
   return (
-    <Container style={{ height: 325 + "px", margin: 10 + "px" }}>
+    <Container style={{ height: 325 + "px", margin: 10 + "px" ,marginBottom: 40+'px'}}>
       {clickAdd && (
         <div className="colorModal">
           <div className="colorModalContent">
@@ -134,7 +134,7 @@ function ProductCard(props, { addToCart }) {
           </div>
         </div>
       )}
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box display="flex" flexDirection="column" alignItems="center" style={{marginLeft:'-10px',marginRight:'-10px'}}>
         <div className="imageContainer">
           <Link
             to={`/product/${props.product.productId}`}

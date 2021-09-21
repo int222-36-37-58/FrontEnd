@@ -41,10 +41,10 @@ export default class FilterBox extends Component {
       <>
         <Hidden smDown>
           <Container id="filterBox" className="filterBox">
-            <div className="header">Filter</div>
+            <div className="header" style={{fontSize:"18px",paddingTop:20+'px',fontWeight:600}}>ฟิลเตอร์</div>
 
             <div className="type">
-              <div>type</div>
+              <div style={{paddingTop: 10+'px',paddingBottom:10+'px'}}>ประเภท</div>
               <Grid container>
                 {this.state.filters.map((filter) => {
                   return (
@@ -101,7 +101,7 @@ export default class FilterBox extends Component {
                 
             
               <div className="type typeHidden">
-                <div>type</div>
+                <div style={{paddingTop: 10+'px'}}>type</div>
                 <Grid>
                   {this.state.filters.map((filter) => {
                     return (
