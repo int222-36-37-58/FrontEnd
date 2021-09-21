@@ -135,19 +135,27 @@ function ProductCard(props, { addToCart }) {
         </div>
       )}
       <Box display="flex" flexDirection="column" alignItems="center">
-        <div>
-          <img
-            src={testProduct}
-            alt="imgProduct"
-            style={{ maxWidth: 188 + "px", height: "188px" }}
-          />
+        <div className="imageContainer">
+          <Link
+            to={`/product/${props.product.productId}`}
+            style={{ textDecoration: "none" }}
+          >
+            <img
+              src={testProduct}
+              alt="imgProduct"
+              className="hoverCursor imageProduct"
+            />
+            <div className="hoverImage">
+              <h4 className="textInHoverImage">view</h4>
+            </div>
+          </Link>
         </div>
         <div>
           <Link
             to={`/product/${props.product.productId}`}
             style={{ textDecoration: "none" }}
           >
-            <h5 className="titleWrap">{props.product.name}</h5>{" "}
+            <h5 className="titleWrap">{props.product.name}</h5>
           </Link>
           <button
             className="AddButton"

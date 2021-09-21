@@ -3,6 +3,8 @@ import axios from "axios";
 import React, { Component } from "react";
 import testProduct from "../../images/testProduct.jpg";
 import PropTypes from "prop-types";
+import RemoveIcon from "@material-ui/icons/Remove";
+import AddIcon from "@material-ui/icons/Add";
 
 export default class ProductContent extends Component {
   state = {
@@ -168,65 +170,91 @@ export default class ProductContent extends Component {
         <Container className="productInformation">
           <Grid container>
             <Grid item xs={12}>
-              <div
-                className="infoBox"
-                style={{ fontSize: 15 + "px" }}
-                onClick={this.clickedInfo}
-              >
-                <h2 className="infoText">Information</h2>
-                <h2 className="plusIcon">+</h2>
-              </div>
-
-              {this.state.isShowInfo && (
-                <div className="infoShow">
-                  <h3
-                    style={{
-                      color: "black",
-                      fontWeight: "bold",
-                      fontSize: 20 + "px",
-                    }}
-                  >
-                    {this.state.product.name}
-                  </h3>
-                  <span
-                    style={{
-                      color: "black",
-                      fontWeight: "bold",
-                      fontSize: 16 + "px",
-                    }}
-                  >
-                    Type : {this.state.product.type.name}{" "}
-                  </span> 
-                  <span
-                    style={{
-                      color: "black",
-                      fontWeight: "bold",
-                      fontSize: 16 + "px",
-                    }}
-                  >|
-                   Sales by : {this.state.product.user.userName}{" "}
-                  </span>
-                  <h3>{this.state.product.description}</h3>
+              <label htmlFor="infoProduct">
+                <div
+                  className="infoBox"
+                  style={{ fontSize: 15 + "px" }}
+                  onClick={this.clickedInfo}
+                >
+                  <h2 className="infoText">Information</h2>
+                  {!this.state.isShowInfo ? (
+                    <h5 className="plusIcon">
+                      <AddIcon />{" "}
+                    </h5>
+                  ) : (
+                    <h5 className="plusIcon">
+                      <RemoveIcon />
+                    </h5>
+                  )}
                 </div>
-              )}
+              </label>
+              <input type="checkbox" id="infoProduct" hidden />
+
+              <div className="infoShow">
+                <h3
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    fontSize: 20 + "px",
+                  }}
+                >
+                  {this.state.product.name}
+                </h3>
+                {this.state.product.type && (
+                  <span>
+                    <span
+                      style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontSize: 16 + "px",
+                      }}
+                    >
+                      Type : {this.state.product.type.name}{" "}
+                    </span>
+                    <span
+                      style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontSize: 16 + "px",
+                      }}
+                    >
+                      | Sales by : {this.state.product.user.userName}{" "}
+                    </span>
+                  </span>
+                )}
+
+                <h3>{this.state.product.description}</h3>
+              </div>
             </Grid>
             <Grid item xs={12}>
-              <div
-                className="infoBox"
-                style={{ fontSize: 15 + "px" }}
-                onClick={this.clickedComments}
-              >
-                <h2 className="infoText">comments</h2>
-                <h2 className="plusIcon">+</h2>
-              </div>
-              {this.state.isShowComments && (
-                <div className="commentShow">
-                  <div className="commentBox">
-                    {/* <h3>{this.state.product.comment[0].userName}</h3>
-            <h3>{this.state.product.comment[0].content}</h3> */}
-                  </div>
+              <label htmlFor="commentsProduct">
+                <div
+                  className="infoBox"
+                  style={{ fontSize: 15 + "px" }}
+                  onClick={this.clickedComments}
+                >
+                  <h2 className="infoText">comments</h2>
+                  {!this.state.isShowComments ? (
+                    <h5 className="plusIcon">
+                      <AddIcon />{" "}
+                    </h5>
+                  ) : (
+                    <h5 className="plusIcon">
+                      <RemoveIcon />
+                    </h5>
+                  )}
                 </div>
-              )}
+              </label>
+              <input type="checkbox" id="commentsProduct" hidden />
+
+              <div className="commentShow">
+                <div className="commentBox">
+                  <h3>testuser </h3>
+                  <h3>testuser </h3>
+                  {/* <h3>{this.state.product.comment[0].userName}</h3>
+            <h3>{this.state.product.comment[0].content}</h3> */}
+                </div>
+              </div>
             </Grid>
           </Grid>
         </Container>

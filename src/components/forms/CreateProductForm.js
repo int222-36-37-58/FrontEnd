@@ -148,7 +148,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 label="Product Name" onChange={this.onChange} helperText="3 - 40 Character "/> 
                  </Grid>  
                 <Grid item xs={12}>
-                <TextField required fullWidth  error={this.state.errors.description} type="textarea" inputProps={{minLength: 5,maxLength: 200}} id="description" name="description" label="Description" onChange={this.onChange} 
+                <TextField required fullWidth multiline  error={this.state.errors.description} type="textarea" inputProps={{minLength: 5,maxLength: 200}} id="description" name="description" label="Description" onChange={this.onChange} 
                 helperText="describe your Product"/>
                 </Grid> 
                 <Grid item xs={12} sm={6}>
@@ -174,7 +174,7 @@ this.setState({data : { ...this.state.data ,imageName : imgName , imageFile : im
                 
                 <Grid item xs={12} >
                 <div className="type">
-            <div>color</div>
+            <div>colors</div>
             <FormGroup row className="checkBoxContent">
               { this.state.color.map((color)=> {
                 return  <FormControlLabel control={ <Checkbox color="primary" icon={<CircleUnchecked />} checkedIcon={<CircleCheckedFilled />} onChange={this.chooseColor} value={color.id}/>} label={color.colorName}></FormControlLabel>

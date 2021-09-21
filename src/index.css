@@ -263,7 +263,7 @@ body {
   font-weight: 600;
   margin: 5px 0;
   min-height: 60px;
-  line-height: 18px;
+  line-height: 20px;
 }
 
 .titleWrap:hover {
@@ -491,7 +491,24 @@ body {
 .infoShow {
   padding-left: 35px;
   padding-right: 35px;
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
   text-align: center;
+}
+
+#infoProduct:checked ~ .infoShow {
+  max-height: 30vh;
+}
+
+.commentShow {
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#commentsProduct:checked ~ .commentShow {
+  max-height: 30vh;
 }
 
 .commentBox {
@@ -556,8 +573,72 @@ body {
 }
 
 .dialogHeader {
+  padding-left: 25px;
+  font-size: 28px;
+}
 
-padding-left:  25px;
-font-size: 28px;
+.IconInMenu {
+  float: right;
+  margin-right: 25px;
+  font-size: 21px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
+.menuShow {
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#showProfileMenu:checked ~ .menuShow {
+  max-height: 30vh;
+}
+
+.typeHidden {
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#infoFilter:checked ~ .typeHidden {
+  max-height: 30vh;
+}
+
+.hoverImage {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.textInHoverImage {
+  padding: 10px;
+  border-style: none;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #202020;
+  color: white;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.imageContainer:hover .hoverImage {
+  opacity: 1;
+}
+
+.imageContainer:hover .imageProduct {
+  opacity: 0.6;
+}
+
+.imageProduct {
+  max-width: 188px;
+  height: 188px;
+  transition: 0.3s;
 }

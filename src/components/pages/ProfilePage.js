@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
 import ResponseDialog from "../ui/ResponseDialog";
-
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 const ProfilePage = () => {
   const [userData] = useState({
     id: "1",
@@ -25,9 +26,9 @@ const ProfilePage = () => {
   const update = (data) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/edituser`, data)
-      .then(() =>{
-        setDialogHeader("Success!!")
-        setDialogContent("Update Success")
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent("Update Success");
       })
       .catch((err) => {
         setDialogHeader("Error");
@@ -38,7 +39,7 @@ const ProfilePage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    setDialogHeader('');
+    setDialogHeader("");
     setDialogContent("");
   };
 
@@ -98,52 +99,57 @@ const ProfilePage = () => {
               </Hidden>
 
               <Hidden mdUp>
-                <div
-                  style={{
-                    borderStyle: "solid",
-                    borderWidth: " 0 0 1px 0 ",
-
-                    paddingBottom: "60px",
-                  }}
-                >
-                  <h2 style={{ float: "left" }}> Menu</h2>
-                  <h2
+                <label htmlFor="showProfileMenu">
+                  <div
                     style={{
-                      float: "right",
-                      marginRight: 25 + "px",
-                      fontSize: 21 + "px",
-                      paddingLeft: "20px",
-                      paddingRight: "20px",
-                    }}
-                    className="hoverChangeToNavBarColor"
-                    onClick={() => {
-                      setIsShowMenu(!isShowMenu);
+                      borderStyle: "solid",
+                      borderWidth: " 0 0 1px 0 ",
+                      paddingBottom: "60px",
                     }}
                   >
-                    +
-                  </h2>{" "}
-                </div>
-                {isShowMenu && (
-                  <>
-                    <h4
-                      className="hoverChangeToNavBarColor"
-                      onClick={() => {
-                        setIsShowProfile(true);
-                      }}
-                    >
-                      profile
-                    </h4>
-                    <h4
-                      className="hoverChangeToNavBarColor"
-                      onClick={() => {
-                        setIsShowProfile(false);
-                      }}
-                    >
-                      change password
-                    </h4>
-                    <h4 className="hoverChangeToNavBarColor">log out</h4>
-                  </>
-                )}
+                    <h2 style={{ float: "left", marginLeft: "20px" }}> Menu</h2>
+                    {isShowMenu ? (
+                      <h2
+                        className="hoverChangeToNavBarColor IconInMenu"
+                        onClick={() => {
+                          setIsShowMenu(!isShowMenu);
+                        }}
+                      >
+                        <AddIcon />
+                      </h2>
+                    ) : (
+                      <h2
+                        className="hoverChangeToNavBarColor IconInMenu"
+                        onClick={() => {
+                          setIsShowMenu(!isShowMenu);
+                        }}
+                      >
+                        <RemoveIcon />
+                      </h2>
+                    )}
+                  </div>
+                </label>
+                <input type="checkbox" id="showProfileMenu" hidden />
+
+                <p className="menuShow">
+                  <h4
+                    className="hoverChangeToNavBarColor"
+                    onClick={() => {
+                      setIsShowProfile(true);
+                    }}
+                  >
+                    profile
+                  </h4>
+                  <h4
+                    className="hoverChangeToNavBarColor"
+                    onClick={() => {
+                      setIsShowProfile(false);
+                    }}
+                  >
+                    change password
+                  </h4>
+                  <h4 className="hoverChangeToNavBarColor">log out</h4>
+                </p>
               </Hidden>
             </div>
           </Grid>

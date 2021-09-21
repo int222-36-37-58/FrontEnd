@@ -52,7 +52,7 @@ const Home = () => {
           paddingBottom: 100 + "px",
         }}
       >
-        <Container>
+        <Container maxWidth="xl">
           <Grid
             container
             direction="row"
