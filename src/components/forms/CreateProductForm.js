@@ -72,12 +72,9 @@ export default class CreateProductForm extends Component {
 
   onSubmit = () => {
     let data = Object.assign({}, this.state.data);
-    console.log(data);
     const invalid = this.validate(this.state.data);
-    console.log(this.state.errors);
     if (invalid !== "err") {
       var today = new Date().toISOString();
-      console.log(today)
       var intColor = this.state.data.color.map((a) => parseInt(a));
       var colorObj = intColor.map((cl) =>
         this.state.color.find((c) => c.colorId === cl)
@@ -90,8 +87,6 @@ export default class CreateProductForm extends Component {
       data.color = colorObj;
       data.type = typeObj;
       data.saleDate = today;
-      console.log(data);
-
       var bodyFormData = new FormData();
       var blob = new Blob([JSON.stringify(data)], {
         type: "application/json",
