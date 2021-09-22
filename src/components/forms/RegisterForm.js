@@ -83,8 +83,6 @@ export default class RegisterForm extends Component {
       errors.address = true;
     }
 
-    e.tel = String(e.tel);
-
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
@@ -116,7 +114,6 @@ export default class RegisterForm extends Component {
           height: "auto",
           backgroundColor: "white",
           borderRadius: 1 + "%",
-         
         }}
       >
         <div className="headerRegister">
@@ -349,7 +346,7 @@ RegisterForm.propTypes = {
     password: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    tel: PropTypes.number.isRequired,
+    tel: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
   }).isRequired,
 };

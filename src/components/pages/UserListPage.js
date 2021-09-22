@@ -140,7 +140,7 @@ const UserListPage = () => {
             backgroundColor: "white",
             padding: 40 + "px",
             borderRadius: 10 + "px",
-            boxShadow: "10px 10px",
+            boxShadow: "0px 0px 20px #e6e8eb",
           }}
         >
           <div
@@ -166,7 +166,11 @@ const UserListPage = () => {
           )}
           <button
             className="InfoButton"
-            style={{ marginLeft : '92%',paddingLeft: '10px',paddingRight:'10px'}}
+            style={{
+              marginLeft: "92%",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            }}
             onClick={() => {
               setIsAdd(!isAdd);
             }}
