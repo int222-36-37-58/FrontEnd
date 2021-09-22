@@ -88,7 +88,7 @@ export default class RegisterForm extends Component {
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
-    if (!this.props.adminMode) {
+    if (!this.props.adminMode && !this.props.editMode) {
       if (
         !this.state.confirmPassword ||
         this.state.confirmPassword !== e.password
@@ -116,7 +116,7 @@ export default class RegisterForm extends Component {
           height: "auto",
           backgroundColor: "white",
           borderRadius: 1 + "%",
-          boxShadow: "10px 10px",
+         
         }}
       >
         <div className="headerRegister">

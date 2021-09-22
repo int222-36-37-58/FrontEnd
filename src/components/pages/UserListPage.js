@@ -18,6 +18,7 @@ const UserListPage = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
   const [userEdit, setUserEdit] = useState({});
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
@@ -35,7 +36,6 @@ const UserListPage = () => {
         setDialogContent(err.message);
         setShowDialog(true);
       });
-      ;
   };
 
   const delUser = (id) => {
@@ -95,6 +95,31 @@ const UserListPage = () => {
       })
       .then(setShowDialog(true));
   };
+
+  const addUser = (data) => {
+    const json = JSON.stringify(data);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/register`, json, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      .then(() => {
+        setDialogHeader("Success!!");
+        setDialogContent(`Add user success!!`);
+      })
+      .then(() => {
+        getUser();
+      })
+      .then(setIsAdd(false))
+      .catch((err) => {
+        setDialogHeader("Error");
+        setDialogContent(err.response.data.message);
+      })
+      .then(setShowDialog(true));
+  };
+
   const handleCloseBox = () => {
     setShowDialog(false);
     setDialogHeader("");
@@ -115,7 +140,7 @@ const UserListPage = () => {
             backgroundColor: "white",
             padding: 40 + "px",
             borderRadius: 10 + "px",
-            boxShadow: '10px 10px'
+            boxShadow: "10px 10px",
           }}
         >
           <div
@@ -137,6 +162,25 @@ const UserListPage = () => {
                 setIsEdit(false);
               }}
               submit={updateUser}
+            />
+          )}
+          <button
+            className="InfoButton"
+            style={{ marginLeft : '92%',paddingLeft: '10px',paddingRight:'10px'}}
+            onClick={() => {
+              setIsAdd(!isAdd);
+            }}
+          >
+            Add +
+          </button>
+
+          {isAdd && (
+            <RegisterForm
+              adminMode={true}
+              onIsEdit={() => {
+                setIsAdd(false);
+              }}
+              submit={addUser}
             />
           )}
 
