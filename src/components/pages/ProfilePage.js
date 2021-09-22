@@ -39,7 +39,6 @@ const ProfilePage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    setDialogHeader("");
     setDialogContent("");
   };
 

@@ -122,7 +122,6 @@ const UserListPage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    setDialogHeader("");
     setDialogContent("");
   };
   return (

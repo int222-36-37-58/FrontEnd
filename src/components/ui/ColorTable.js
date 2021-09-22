@@ -126,7 +126,6 @@ const ColorTable = () => {
   const handleCloseBox = () => {
     setShowDialog(false);
     setDialogContent("");
-    setDialogHeader("");
   };
 
   return (

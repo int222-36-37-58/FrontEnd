@@ -12,7 +12,7 @@ const Cart = (props) => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    setDialogHeader('');
+    
     setDialogContent("");
   };
 

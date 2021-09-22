@@ -131,7 +131,6 @@ const TypeTable = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    setDialogHeader("");
     setDialogContent("");
   };
 

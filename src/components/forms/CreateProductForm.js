@@ -20,11 +20,20 @@ export default class CreateProductForm extends Component {
   state = {
     data: {
       imageName: "",
-      productName: "",
+      name: "",
       description: "",
       price: "",
       type: "",
       color: [],
+      user: {
+        userId: 1,
+        userName: "testuser",
+        password: "Testpassword1",
+        address: "home bangkok 10150",
+        tel: 1234567891,
+        fullName: "testfullname",
+        role: "ROLE_USER",
+      },
     },
     types: [],
     color: [],
@@ -62,47 +71,45 @@ export default class CreateProductForm extends Component {
   }
 
   onSubmit = () => {
+    let data = Object.assign({}, this.state.data);
+    console.log(data);
     const invalid = this.validate(this.state.data);
+    console.log(this.state.errors);
     if (invalid !== "err") {
-      var nowDate = new Date();
-      var today =
-        nowDate.getFullYear() +
-        "-" +
-        (nowDate.getMonth() + 1) +
-        "-" +
-        nowDate.getDate();
-
+      var today = new Date().toISOString();
+      console.log(today)
       var intColor = this.state.data.color.map((a) => parseInt(a));
       var colorObj = intColor.map((cl) =>
-        this.state.color.find((c) => c.id === cl)
+        this.state.color.find((c) => c.colorId === cl)
       );
-      var typeObj = this.state.data.type.map((type) =>
-        this.state.type.find((t) => t.id === type)
+
+      var typeObj = this.state.types.find(
+        (t) => t.typeId === this.state.data.type
       );
-      var data = this.state.data;
+
       data.color = colorObj;
       data.type = typeObj;
-      data.date = today;
-      data.userId = 1;
+      data.saleDate = today;
+      console.log(data);
 
       var bodyFormData = new FormData();
-      const blob = new Blob([JSON.stringify(this.data)], {
+      var blob = new Blob([JSON.stringify(data)], {
         type: "application/json",
       });
-
-      bodyFormData.append("product", blob);
       bodyFormData.append("imageFile", this.state.imageFile);
+      bodyFormData.append("product", blob);
+
       this.props.submit(bodyFormData);
     }
   };
 
   validate = (e) => {
     const errors = {};
-    if (!e.imageFile) {
+    if (!e.imageName) {
       errors.imageName = true;
     }
-    if (!e.productName || e.productName.length < 2) {
-      errors.productName = true;
+    if (!e.name || e.name.length < 2) {
+      errors.name = true;
     }
     if (!e.description || e.description.length < 10) {
       errors.description = true;
@@ -125,7 +132,8 @@ export default class CreateProductForm extends Component {
     const imgName = e.target.files[0].name;
 
     this.setState({
-      data: { ...this.state.data, imageName: imgName, imageFile: imgFile },
+      data: { ...this.state.data, imageName: imgName },
+      imageFile: imgFile,
       imagePreview: imgPreview,
     });
   };
@@ -191,11 +199,11 @@ export default class CreateProductForm extends Component {
                 <TextField
                   required
                   fullWidth
-                  error={this.state.errors.productName}
+                  error={this.state.errors.name}
                   type="text"
                   inputProps={{ minLength: 3, maxLength: 40 }}
-                  id="productName"
-                  name="productName"
+                  id="name"
+                  name="name"
                   label="Product Name"
                   onChange={this.onChange}
                   helperText="3 - 40 Character "
@@ -253,10 +261,11 @@ export default class CreateProductForm extends Component {
                     error={this.state.errors.type}
                     name="type"
                     onChange={this.onChange}
+                    defaultValue="0"
                   >
                     {this.state.types.map((typeRow) => {
                       return (
-                        <MenuItem value={typeRow.typeId}>
+                        <MenuItem value={typeRow.typeId} key={typeRow.typeId}>
                           {typeRow.name}
                         </MenuItem>
                       );
@@ -272,13 +281,14 @@ export default class CreateProductForm extends Component {
                     {this.state.color.map((color) => {
                       return (
                         <FormControlLabel
+                          key={color.colorId}
                           control={
                             <Checkbox
                               color="primary"
                               icon={<CircleUnchecked />}
                               checkedIcon={<CircleCheckedFilled />}
                               onChange={this.chooseColor}
-                              value={color.id}
+                              value={color.colorId}
                             />
                           }
                           label={color.colorName}
