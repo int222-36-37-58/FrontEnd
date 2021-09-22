@@ -57,7 +57,7 @@ const ChangePasswordForm = () => {
         marginTop: "20px",
         maxWidth: 680 + "px",
         width: 100 + "%",
-        boxShadow: "10px 10px",
+        boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
       }}
     >
       <div className="headerRegister">

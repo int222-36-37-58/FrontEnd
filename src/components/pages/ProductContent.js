@@ -93,7 +93,7 @@ export default class ProductContent extends Component {
           marginTop: 2 + "rem",
           backgroundColor: "white",
           borderRadius: 10 + "px",
-          boxShadow: '10px 10px'
+          boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
         }}
       >
         <Grid container justifyContent="center">
