@@ -36,8 +36,6 @@ const ColorTable = () => {
         setDialogContent(err.message);
         setShowDialog(true);
       });
-      
-      ;
   }
 
   const editColor = (color) => {
@@ -92,7 +90,10 @@ const ColorTable = () => {
   };
 
   const submitEdit = () => {
-    const json = JSON.stringify({ colorEdit });
+    const json = JSON.stringify({
+      colorId: colorEdit.colorId,
+      colorName: colorEdit.colorName,
+    });
     axios
       .put(`${process.env.REACT_APP_API_URL}/editcolor`, json, {
         headers: {

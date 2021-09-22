@@ -36,7 +36,6 @@ const TypeTable = () => {
         setDialogContent(err.message);
         setShowDialog(true);
       });
-      ;
   }
 
   const delType = (id) => {
@@ -92,13 +91,21 @@ const TypeTable = () => {
   };
 
   const submitEdit = () => {
-    const json = JSON.stringify({ typeEdit });
+    const json = JSON.stringify({
+      typeId: typeEdit.typeId,
+      name: typeEdit.name,
+    });
+
     axios
-      .put(`${process.env.REACT_APP_API_URL}/edittype`, json, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        `${process.env.REACT_APP_API_URL}/edittype/${typeEdit.typeId}`,
+        json,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
       .then(() => {
         setDialogHeader("Success!!");
