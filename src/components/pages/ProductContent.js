@@ -95,17 +95,18 @@ export default class ProductContent extends Component {
           boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
         }}
       >
-        <Grid container justifyContent="center">
-          <Grid item xs={12} sm={7} md={6}>
+        <Grid container alignItems="center" justifyContent="center" spacing={0}>
+          <Grid item xs={12} sm={8} md={6} style={{textAlign:'center'}}>
             <img
               src={`${process.env.REACT_APP_API_URL}/getImage/${this.state.product.imageName}`}
               alt="imgProduct"
               style={{
-                paddingLeft: 1 + "%",
-                width: "auto",
+                marginTop: "10px",
+                paddingLeft: "5px",
+                width: "100%",
                 height: "auto",
-                maxWidth:"400px",
-                maxHeight: "400px",
+                maxWidth: "400px",
+                maxHeight: "350px",
               }}
             />
           </Grid>
