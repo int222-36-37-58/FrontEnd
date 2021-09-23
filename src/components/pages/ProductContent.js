@@ -8,7 +8,7 @@ import noImage from "../../images/noImage.jpg";
 export default class ProductContent extends Component {
   state = {
     product: {},
-    imageProduct : noImage,
+    imageProduct: noImage,
     quantityAdd: 1,
     isShowInfo: false,
     isShowComments: false,
@@ -23,7 +23,9 @@ export default class ProductContent extends Component {
       .then((res) => {
         const prods = res.data;
         this.setState({ product: prods });
-        this.setState({imageProduct : `${process.env.REACT_APP_API_URL}/getImage/${prods.imageName}`})
+        this.setState({
+          imageProduct: `${process.env.REACT_APP_API_URL}/getImage/${prods.imageName}`,
+        });
       })
       .catch(() => {
         this.props.notFound();
@@ -98,21 +100,18 @@ export default class ProductContent extends Component {
         }}
       >
         <Grid container alignItems="center" justifyContent="center" spacing={0}>
-          <Grid item xs={12} sm={8} md={6} style={{textAlign:'center'}}>
-           {this.state.product && <img
-              src={`${this.state.imageProduct}`}
-              alt="imgProduct"
-              style={{
-                marginTop: "10px",
-                paddingLeft: "5px",
-                width: "100%",
-                height: "auto",
-                maxWidth: "400px",
-                maxHeight: "350px",
-              }}
-
-              
-            />}
+          <Grid item xs={12} sm={8} md={6} style={{ textAlign: "center" }}>
+            {this.state.product && (
+              <img
+                src={`${this.state.imageProduct}`}
+                alt="imgProduct"
+                style={{
+                  marginTop: "10px",
+                  height: "375px",
+                  maxWidth: "390px",
+                }}
+              />
+            )}
           </Grid>
 
           <Grid item xs={12} sm={7} md={6}>
