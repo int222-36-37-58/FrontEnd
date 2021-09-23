@@ -4,10 +4,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-
+import noImage from "../../images/noImage.jpg";
 export default class ProductContent extends Component {
   state = {
     product: {},
+    imageProduct : noImage,
     quantityAdd: 1,
     isShowInfo: false,
     isShowComments: false,
@@ -22,6 +23,7 @@ export default class ProductContent extends Component {
       .then((res) => {
         const prods = res.data;
         this.setState({ product: prods });
+        this.setState({imageProduct : `${process.env.REACT_APP_API_URL}/getImage/${prods.imageName}`})
       })
       .catch(() => {
         this.props.notFound();
@@ -97,8 +99,8 @@ export default class ProductContent extends Component {
       >
         <Grid container alignItems="center" justifyContent="center" spacing={0}>
           <Grid item xs={12} sm={8} md={6} style={{textAlign:'center'}}>
-            <img
-              src={`${process.env.REACT_APP_API_URL}/getImage/${this.state.product.imageName}`}
+           {this.state.product && <img
+              src={`${this.state.imageProduct}`}
               alt="imgProduct"
               style={{
                 marginTop: "10px",
@@ -108,7 +110,9 @@ export default class ProductContent extends Component {
                 maxWidth: "400px",
                 maxHeight: "350px",
               }}
-            />
+
+              
+            />}
           </Grid>
 
           <Grid item xs={12} sm={7} md={6}>
