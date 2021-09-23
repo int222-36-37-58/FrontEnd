@@ -56,7 +56,7 @@ const Home = () => {
           justifyContent="space-between"
           spacing={0}
         >
-          <Grid item xs={12} md={3} style={{ marginLeft: "80px" }}>
+          <Grid item xs={12} md={3}>
             <FilterBox></FilterBox>
           </Grid>
 

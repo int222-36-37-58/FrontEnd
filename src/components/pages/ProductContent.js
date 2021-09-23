@@ -1,7 +1,6 @@
 import { Container, Grid } from "@material-ui/core";
 import axios from "axios";
 import React, { Component } from "react";
-import testProduct from "../../images/testProduct.jpg";
 import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
@@ -99,12 +98,13 @@ export default class ProductContent extends Component {
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={7} md={6}>
             <img
-              src={testProduct}
+              src={`${process.env.REACT_APP_API_URL}/getImage/${this.state.product.imageName}`}
               alt="imgProduct"
               style={{
-                paddingLeft: 15 + "%",
+                paddingLeft: 1 + "%",
                 width: "auto",
                 height: "auto",
+                maxWidth:"400px",
                 maxHeight: "400px",
               }}
             />

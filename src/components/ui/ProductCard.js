@@ -1,6 +1,5 @@
 import { Box, Container } from "@material-ui/core";
 import React, { useState } from "react";
-import testProduct from "../../images/testProduct.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
@@ -64,7 +63,9 @@ function ProductCard(props, { addToCart }) {
   };
 
   return (
-    <Container style={{ height: 325 + "px", margin: 10 + "px" ,marginBottom: 40+'px'}}>
+    <Container
+      style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
+    >
       {clickAdd && (
         <div className="colorModal">
           <div className="colorModalContent">
@@ -134,14 +135,19 @@ function ProductCard(props, { addToCart }) {
           </div>
         </div>
       )}
-      <Box display="flex" flexDirection="column" alignItems="center" style={{marginLeft:'-10px',marginRight:'-10px'}}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        style={{ marginLeft: "-10px", marginRight: "-10px" }}
+      >
         <div className="imageContainer">
           <Link
             to={`/product/${props.product.productId}`}
             style={{ textDecoration: "none" }}
           >
             <img
-              src={testProduct}
+              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
               alt="imgProduct"
               className="hoverCursor imageProduct"
             />
