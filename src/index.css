@@ -378,10 +378,13 @@ body {
   min-height: 36px;
 }
 
-.filterBox > .headerRes {
-  display: flex;
+.filterBox > label > .headerRes {
+  display:flex;
+ 
   justify-content: space-between;
+  
   font-weight: 600;
+  width:100%;
 }
 
 .radioGroup {

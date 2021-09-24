@@ -107,7 +107,9 @@ export default class ProductContent extends Component {
                 alt="imgProduct"
                 style={{
                   marginTop: "10px",
-                  height: "375px",
+                  height:'auto',
+                  width:'85%',
+                  maxHeight:'375px',
                   maxWidth: "390px",
                 }}
               />

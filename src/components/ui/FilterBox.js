@@ -90,18 +90,18 @@ export default class FilterBox extends Component {
           <Container id="filterBox" className="filterBox">
             <label htmlFor="infoFilter">
               <div
-                className="headerRes header hoverCursor infoBox"
+                className="headerRes hoverCursor infoBox" style={{paddingTop:'5px',paddingBottom:'5px'}}
                 onClick={this.handleShowType}
               >
-                <h4 style={{ fontWeight: 600 }}>ฟิลเตอร์</h4>
+                <div style={{ fontWeight: 600 }}>ฟิลเตอร์</div>
                 {!this.state.showType ? (
-                  <h3 style={{ textAlign: "right", width: 80 + "%" }}>
-                    <AddIcon style={{ fontSize: 16 + "px" }} />{" "}
-                  </h3>
+                  <div>
+                    <AddIcon style={{ fontSize: 20 + "px" }} />{" "}
+                  </div>
                 ) : (
-                  <h3 style={{ textAlign: "right", width: 80 + "%" }}>
-                    <RemoveIcon style={{ fontSize: 16 + "px" }} />
-                  </h3>
+                  <div>
+                    <RemoveIcon style={{ fontSize: 20 + "px" }} />
+                  </div>
                 )}
               </div>
             </label>
