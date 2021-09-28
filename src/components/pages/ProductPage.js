@@ -11,7 +11,13 @@ const ProductPage = ({ addToCart }) => {
     history.push("/notfound");
   };
 
-  return <ProductContent addItem={addToCart} notFound={notFound} />;
+  const goShop = () => {
+    history.push("/");
+
+  }
+
+
+  return <ProductContent addItem={addToCart} notFound={notFound} goShop={goShop} />;
 };
 const mapDispatchToProps = (dispatch) => {
   return {

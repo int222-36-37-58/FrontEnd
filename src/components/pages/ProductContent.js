@@ -5,9 +5,19 @@ import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import noImage from "../../images/noImage.jpg";
+import ResponseDialog from "../ui/ResponseDialog";
 export default class ProductContent extends Component {
   state = {
     product: {},
+    user: {
+      userId: 1,
+      userName: "testuser",
+      password: "Testpassword1",
+      address: "home bangkok 10150",
+      tel: 1234567891,
+      fullName: "testfullname",
+      role: "ROLE_USER",
+    },
     imageProduct: noImage,
     quantityAdd: 1,
     isShowInfo: false,
@@ -85,6 +95,31 @@ export default class ProductContent extends Component {
     }
   };
 
+  deleteThisProduct = () => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_API_URL}/products/${this.state.product.productId}`
+      )
+      .then((res) => {
+        this.props.goShop();
+      })
+      .catch((err) => {
+        this.setState({
+          dialogHeader: "Error",
+          dialogContent: err.response.data.message,
+          showDialog: true,
+        });
+      });
+  };
+
+  editThisProduct = () => {
+    alert("doesn't handle edit function");
+  };
+
+  handleCloseBox = () => {
+    this.setState({ dialogContent: "", showDialog: false });
+  };
+
   render() {
     const color = this.state.product.color;
 
@@ -99,6 +134,13 @@ export default class ProductContent extends Component {
           boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
         }}
       >
+        <ResponseDialog
+          showDialog={this.state.showDialog}
+          handleCloseBox={this.handleCloseBox}
+          dialogContent={this.dialogContent}
+          dialogHeader={this.dialogHeader}
+        />
+
         <Grid container alignItems="center" justifyContent="center" spacing={0}>
           <Grid item xs={12} sm={8} md={6} style={{ textAlign: "center" }}>
             {this.state.product && (
@@ -107,9 +149,9 @@ export default class ProductContent extends Component {
                 alt="imgProduct"
                 style={{
                   marginTop: "10px",
-                  height:'auto',
-                  width:'85%',
-                  maxHeight:'375px',
+                  height: "auto",
+                  width: "85%",
+                  maxHeight: "375px",
                   maxWidth: "390px",
                 }}
               />
@@ -164,13 +206,40 @@ export default class ProductContent extends Component {
               </div>
             </div>
 
-            <button
-              className="AddButton"
-              style={{ padding: 10 + "px", width: 45 + "%" }}
-              onClick={this.addToCart}
-            >
-              Add - ฿{this.state.product.price * this.state.quantityAdd}{" "}
-            </button>
+            {this.state.product.user &&
+            this.state.product.user.userId === this.state.user.userId ? (
+              <>
+                <button
+                  className="InfoButton"
+                  style={{
+                    padding: 10 + "px",
+                    width: 45 + "%",
+                  }}
+                  onClick={this.editThisProduct}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delFromCart"
+                  style={{
+                    padding: 10 + "px",
+                    width: 45 + "%",
+                    marginLeft: 10 + "px",
+                  }}
+                  onClick={this.deleteThisProduct}
+                >
+                  DELETE
+                </button>
+              </>
+            ) : (
+              <button
+                className="AddButton"
+                style={{ padding: 10 + "px", width: 45 + "%" }}
+                onClick={this.addToCart}
+              >
+                Add - ฿{this.state.product.price * this.state.quantityAdd}{" "}
+              </button>
+            )}
           </Grid>
         </Grid>
 

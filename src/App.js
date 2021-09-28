@@ -11,21 +11,23 @@ import Footer from "./components/ui/Footer";
 import UserListPage from "./components/pages/UserListPage";
 import ListBaseDataPage from "./components/pages/ListBaseDataPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import UserOrderPage from "./components/pages/UserOrderPage";
 
 const App = () => (
   <div className="pageContainer">
     <div className="pageContent " style={{ marginBottom: 250 + "px" }}>
       <NavBar />
       <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/register" exact component={RegisterPage} />
-      <Route path="/login" exact component={LoginPage} />
-      <Route path="/createproduct" exact component={CreateProductPage} />
-      <Route path="/product/:id" exact component={ProductPage} />
-      <Route path="/profile" exact component={ProfilePage} />
-      <Route path="/listusers" exact component={UserListPage} />
-      <Route path="/listbasedata" exact component={ListBaseDataPage} />
-      <Route component={NotFoundPage} />
+        <Route path="/" exact component={Home} />
+        <Route path="/register" exact component={RegisterPage} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/createproduct" exact component={CreateProductPage} />
+        <Route path="/product/:id" exact component={ProductPage} />
+        <Route path="/profile" exact component={ProfilePage} />
+        <Route path="/listusers" exact component={UserListPage} />
+        <Route path="/listbasedata" exact component={ListBaseDataPage} />
+        <Route path="/myorder" exact component={UserOrderPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </div>
     <Footer />

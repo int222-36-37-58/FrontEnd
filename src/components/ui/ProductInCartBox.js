@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import testProduct from "../../images/testProduct.jpg";
 
 const ProductInCartBox = (props) => {
   return (
     <div className="productInCart">
       <div>
         <img
-          src={testProduct}
+          src={`${process.env.REACT_APP_API_URL}/getImage/${props.orderDetails.product.imageName}`}
           alt="productInCart"
           style={{ width: 65 + "px", height: "auto" }}
         />
