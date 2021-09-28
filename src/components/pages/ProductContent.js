@@ -243,7 +243,7 @@ export default class ProductContent extends Component {
           </Grid>
         </Grid>
 
-        <Container className="productInformation">
+        <Container className="productInformation" style={{ marginTop: "40px" }}>
           <Grid container>
             <Grid item xs={12}>
               <label htmlFor="infoProduct">
@@ -294,7 +294,7 @@ export default class ProductContent extends Component {
                         fontSize: 16 + "px",
                       }}
                     >
-                      | Sales by : {this.state.product.user.userName}{" "}
+                      | Sale by : {this.state.product.user.userName}{" "}
                     </span>
                   </span>
                 )}

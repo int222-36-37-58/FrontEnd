@@ -12,7 +12,7 @@ const Cart = (props) => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-    
+
     setDialogContent("");
   };
 
@@ -68,9 +68,9 @@ const Cart = (props) => {
       >
         <List style={{ width: 333 + "px" }}>
           {props.listProduct.length === 0 ? (
-            <ListItem style={{ fontWeight: 600 }}>No product in cart</ListItem>
+            <ListItem style={{ fontWeight: 800 }}>ไม่มีสินค้าในตะกร้า</ListItem>
           ) : (
-            <ListItem style={{ fontWeight: 600 }}>Cart : </ListItem>
+            <ListItem style={{ fontWeight: 600 }}>ตะกร้าสินค้า : </ListItem>
           )}
           {props.listProduct.map((item, index) => {
             return (

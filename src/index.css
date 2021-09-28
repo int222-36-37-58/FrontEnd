@@ -185,7 +185,8 @@ body {
   border-radius: 5px;
   display: flex;
   padding: 5px;
-  width: 325px;
+  width: 330px;
+  height: 80px;
 }
 
 .productInCartInfo {
@@ -354,7 +355,7 @@ body {
 .InfoButton:hover {
   cursor: pointer;
   color: #d1eafd;
-  border-color: #d1eafd;
+  border-color: #7bcb34;
   border-style: solid;
   transition-duration: 0.5s;
   background-color: #7bcb34;
@@ -379,12 +380,12 @@ body {
 }
 
 .filterBox > label > .headerRes {
-  display:flex;
- 
+  display: flex;
+
   justify-content: space-between;
-  
+
   font-weight: 600;
-  width:100%;
+  width: 100%;
 }
 
 .radioGroup {
@@ -642,9 +643,15 @@ body {
 }
 
 .imageProduct {
-  max-width: 180px;
-  height: 180px;
+  max-width: 170px;
+  height: 170px;
   transition: 0.3s;
+}
+.imageProduct2 {
+  max-width: 135px;
+  height: auto;
+  transition: 0.3s;
+  width: 100%;
 }
 
 .homeContainer {
