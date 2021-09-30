@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 
 const ChangePasswordForm = () => {
@@ -57,13 +57,12 @@ const ChangePasswordForm = () => {
         marginTop: "20px",
         maxWidth: 680 + "px",
         width: 100 + "%",
+        borderRadius: 20 + "px",
         boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
       }}
     >
       <div className="headerRegister">
-        <Typography variant="h5" style={{ marginBottom: 15 + "px" }}>
-          Change Your Password
-        </Typography>
+        <h3 style={{ marginBottom: 15 + "px" }}>เปลี่ยนรหัสผ่าน</h3>
       </div>
 
       <Grid
@@ -73,7 +72,6 @@ const ChangePasswordForm = () => {
       >
         <Grid item xs={12} style={{ paddingTop: 30 + "px" }}>
           <TextField
-            variant="outlined"
             size="small"
             fullWidth
             required
@@ -90,7 +88,6 @@ const ChangePasswordForm = () => {
 
         <Grid item xs={12} sm={6} style={{ paddingTop: 20 + "px" }}>
           <TextField
-            variant="outlined"
             size="small"
             required
             fullWidth
@@ -107,7 +104,6 @@ const ChangePasswordForm = () => {
 
         <Grid item xs={12} sm={6} style={{ paddingTop: 20 + "px" }}>
           <TextField
-            variant="outlined"
             size="small"
             required
             fullWidth

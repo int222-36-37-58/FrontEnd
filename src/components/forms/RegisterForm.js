@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -132,10 +132,9 @@ export default class RegisterForm extends Component {
                 alignItems="center"
                 spacing={2}
               >
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   {editMode ? (
                     <TextField
-                      variant="outlined"
                       fullWidth
                       disabled
                       required
@@ -149,7 +148,6 @@ export default class RegisterForm extends Component {
                     />
                   ) : (
                     <TextField
-                      variant="outlined"
                       fullWidth
                       required
                       error={this.state.errors.userName}
@@ -164,9 +162,8 @@ export default class RegisterForm extends Component {
                     />
                   )}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
-                    variant="outlined"
                     fullWidth
                     required
                     error={this.state.errors.fullName}
@@ -182,7 +179,6 @@ export default class RegisterForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    variant="outlined"
                     fullWidth
                     multiline
                     required
@@ -198,7 +194,6 @@ export default class RegisterForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    variant="outlined"
                     required
                     type="text"
                     inputProps={{ minLength: 10, maxLength: 10 }}
@@ -230,7 +225,6 @@ export default class RegisterForm extends Component {
                 {!editMode && (
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      variant="outlined"
                       fullWidth
                       required
                       error={this.state.errors.password}
@@ -248,7 +242,6 @@ export default class RegisterForm extends Component {
                 {!editMode && (
                   <Grid item xs={12} sm={6}>
                     <TextField
-                      variant="outlined"
                       fullWidth
                       required
                       error={this.state.errors.confirmPassword}
@@ -268,7 +261,6 @@ export default class RegisterForm extends Component {
                   <Grid item xs={12}>
                     {adminMode ? (
                       <TextField
-                        variant="outlined"
                         fullWidth
                         type="password"
                         inputProps={{ minLength: 3, maxLength: 20 }}
@@ -281,7 +273,6 @@ export default class RegisterForm extends Component {
                       />
                     ) : (
                       <TextField
-                        variant="outlined"
                         fullWidth
                         required
                         error={this.state.errors.confirmPassword}
@@ -298,9 +289,8 @@ export default class RegisterForm extends Component {
                 )}
 
                 <Grid item xs={12} align="center">
-                  <Button
-                    variant="contained"
-                    color="primary"
+                  <button
+                    className="AddButton"
                     style={{
                       marginTop: 60 + "px",
                       paddingRight: 35 + "px",
@@ -309,23 +299,24 @@ export default class RegisterForm extends Component {
                     onClick={this.onSubmit}
                   >
                     Submit
-                  </Button>
-                  {adminMode && (
-                    <Button
-                      variant="contained"
-                      color="secondary"
+                  </button>
+                  {editMode && (
+                    <button
+                      className="delFromCart"
                       style={{
                         marginTop: 60 + "px",
                         paddingRight: 35 + "px",
                         paddingLeft: 35 + "px",
                         marginLeft: 20 + "px",
+                        paddingTop: 7 + "px",
+                        paddingBottom: 7 + "px",
                       }}
                       onClick={() => {
                         this.props.onIsEdit();
                       }}
                     >
                       Cancel
-                    </Button>
+                    </button>
                   )}
                 </Grid>
               </Grid>

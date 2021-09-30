@@ -29,6 +29,7 @@ export default class FilterBox extends Component {
       newCheck = newCheck.filter((f) => f !== e.target.value);
     }
     this.setState({ checkData: newCheck });
+    console.log(this.state.checkData);
   };
 
   handleShowType = () => {
@@ -90,7 +91,8 @@ export default class FilterBox extends Component {
           <Container id="filterBox" className="filterBox">
             <label htmlFor="infoFilter">
               <div
-                className="headerRes hoverCursor infoBox" style={{paddingTop:'5px',paddingBottom:'5px'}}
+                className="headerRes hoverCursor infoBox"
+                style={{ paddingTop: "5px", paddingBottom: "5px" }}
                 onClick={this.handleShowType}
               >
                 <div style={{ fontWeight: 600 }}>ฟิลเตอร์</div>
@@ -110,25 +112,36 @@ export default class FilterBox extends Component {
 
             <div className="type typeHidden">
               <div style={{ paddingTop: 10 + "px" }}>ประเภท</div>
-              <Grid>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 {this.state.filters.map((filter) => {
                   return (
-                    <FormControlLabel
-                      key={filter.typeId}
-                      control={
-                        <Checkbox
-                          color="primary"
-                          icon={<CircleUnchecked />}
-                          checkedIcon={<CircleCheckedFilled />}
-                          onChange={this.onChange}
-                          value={filter.name}
-                        />
-                      }
-                      label={filter.name}
-                    />
+                    <label className="filterItem" onClick={this.onChange}>
+                      <input
+                        type="checkbox"
+                        id={`filter${filter.typeId}`}
+                        name="filterCheckbox"
+                        value={filter.name}
+                      />
+
+                      {filter.name}
+                    </label>
+
+                    // <FormControlLabel
+                    //   key={filter.typeId}
+                    //   control={
+                    //     <Checkbox
+                    //       color="primary"
+                    //       icon={<CircleUnchecked />}
+                    //       checkedIcon={<CircleCheckedFilled />}
+                    //       onChange={this.onChange}
+                    //       value={filter.name}
+                    //     />
+                    //   }
+                    //   label={filter.name}
+                    // />
                   );
                 })}
-              </Grid>
+              </div>
             </div>
           </Container>
         </Hidden>
