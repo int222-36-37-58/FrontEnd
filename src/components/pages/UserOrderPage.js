@@ -85,7 +85,7 @@ const UserOrderPage = () => {
               </h3>
               <h4>วันที่สั่งซื้อ {order.date}</h4>
               <Grid container>
-                {order.orderDetails.map((odt) => {
+                {order.orderDetail.map((odt) => {
                   return (
                     <Grid
                       item
