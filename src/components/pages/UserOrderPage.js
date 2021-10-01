@@ -17,8 +17,7 @@ const UserOrderPage = () => {
   const getMyOrderHistory = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getuserorder/1`)
-      .then((res) => res.json())
-      .then(res => setMyOrder(res.data))
+      .then((res) => setMyOrder(res.data))
       .catch((err) => {
         setDialogHeader("Error");
         setDialogContent(err.message);
