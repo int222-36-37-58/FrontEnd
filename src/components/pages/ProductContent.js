@@ -150,7 +150,7 @@ export default class ProductContent extends Component {
                 style={{
                   marginTop: "10px",
                   height: "auto",
-                  width: "85%",
+                  width: "auto",
                   maxHeight: "375px",
                   maxWidth: "390px",
                 }}
