@@ -1,14 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap");
+@import url(https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap);
 
 body {
   background-image: url(./images/body-bg.jpg);
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
 }
 
 .pageContainer {
@@ -19,6 +16,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .pageContainer > .pageContent {
@@ -149,7 +147,7 @@ body {
 }
 
 .searchBox > .searchInput {
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   font-weight: 600;
   position: absolute;
   top: 0;
@@ -189,13 +187,24 @@ body {
 
 .productInCart {
   border-style: solid;
-  border-color: #545454;
-  border-width: 2px;
-  border-radius: 5px;
+  border-color: #e4e4e4;
+  border-width: 0 0 2px 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   display: flex;
-  padding: 5px;
-  width: 340px;
+  padding: 10px;
+  margin-top: -10px;
+  width: 100%;
   height: 95px;
+}
+
+.productInCart > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: auto;
 }
 
 .productInCartInfo {
@@ -221,7 +230,7 @@ body {
   border-color: #d83c2d;
   border-style: solid;
   border-radius: 5px;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   border-width: 2px;
   font-weight: 600;
 }
@@ -284,7 +293,7 @@ body {
   color: #3595f6;
   border-color: #3595f6;
   border-style: solid;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   font-weight: 900;
   background-color: #d1eafd;
   border-radius: 5px;
@@ -306,7 +315,7 @@ body {
   color: #333435;
   border-color: #333435;
   border-style: solid;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   font-weight: 900;
   background-color: white;
   border-radius: 5px;
@@ -352,7 +361,7 @@ body {
   border-style: solid;
 
   font-weight: 900;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   background-color: #d1eafd;
   border-radius: 5px;
   padding-top: 7px;
@@ -414,7 +423,7 @@ body {
 
   margin-right: 3px;
   margin-top: 5px;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
   font-size: 12px;
   font-weight: 600;
   border: 1px solid #545454;
@@ -565,7 +574,7 @@ body {
 
 .notFoundPage {
   color: #181818;
-  font-family: "Prompt", sans-serif;
+  font-family: Prompt, sans-serif;
 }
 
 .goHomeButton {
@@ -796,7 +805,7 @@ body {
   transition: 0.2s;
   color: white;
   background-color: #1895f5;
-  border-color: white;
+  border-color: #1895f5;
 }
 
 .MemberCard {
@@ -814,4 +823,61 @@ body {
 .MemberCard > div {
   flex: 1;
   font-weight: 600;
+}
+
+.menuProfile {
+  padding: 20px;
+  font-size: 13px;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 30px rgb(0 0 0 / 8%);
+  border-radius: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 0;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderTable {
+  width: 100%;
+  border-style: solid;
+  border-color: #e4e4e4;
+  border-width: 2px;
+  border-radius: 10px;
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.orderTableHeader {
+  background-color: #fafafa;
+  width: 100%;
+}
+.orderTableHeader > tr > th , td {
+  border-style: solid;
+  border-color: #e4e4e4;
+  border-width: 0 0 1px 0;
+  padding: 20px;
+  outline: none;
+}
+
+.orderDetailContainer {
+
+border-style: solid;
+border-color: #e4e4e4;
+border-radius: 10px;
+border-width: 2px ;
+width: 100%;
+}
+
+.roundContainer {
+
+  border-style: solid;
+  border-color: #e4e4e4;
+  border-radius: 10px;
+
+
 }

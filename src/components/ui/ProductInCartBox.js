@@ -6,25 +6,34 @@ const ProductInCartBox = (props) => {
     <div className="productInCart">
       <div>
         <img
-          src={`${process.env.REACT_APP_API_URL}/getImage/${props.orderDetails.product.imageName}`}
+          src={`${process.env.REACT_APP_API_URL}/getImage/${props.orderDetail.product.imageName}`}
           alt="productInCart"
-          style={{ width: 65 + "px", height: "auto" }}
+          style={{ width: 75 + "px", height: "auto", maxHeight: "100px" }}
         />
       </div>
 
-      <div className="productInCartInfo">
-        <h5 className="InCartTitle">{props.orderDetails.product.name}</h5>
-        <h5>{props.orderDetails.product.price} Baht</h5>
-        <h5>
-          color : {props.orderDetails.color.colorName} | quantity :{" "}
-          {props.orderDetails.quantity}
-        </h5>
-      </div>
       <div>
+        <div
+          className="InCartTitle"
+          style={{ fontWeight: 900, marginTop: "-30px" }}
+        >
+          {props.orderDetail.product.name}
+        </div>
+
+        <div>
+          color : {props.orderDetail.color.colorName} / quantity :{" "}
+          {props.orderDetail.quantity}
+        </div>
+      </div>
+
+      <div>
+        <h5 style={{ fontWeight: 900, color: "#1895f5", marginTop: "-3px" }}>
+          ฿{props.orderDetail.totalPrice}
+        </h5>
         <button
           className="delFromCart"
-          style={{ height: 30 + "%", position: "absolute", right: 30 }}
-          onClick={() => props.remove(props.orderDetails)}
+          style={{ height: 30 + "%" }}
+          onClick={() => props.remove(props.orderDetail)}
         >
           remove
         </button>

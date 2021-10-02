@@ -104,18 +104,8 @@ const ProfilePage = () => {
           justifyContent="center"
           style={{ marginTop: 3 + "rem" }}
         >
-          <Grid item xs={12} md={3}>
-            <div
-              style={{
-                padding: "20px",
-                fontSize: 13 + "px",
-                marginRight: "50px",
-                marginTop: "20px",
-                backgroundColor: "white",
-                boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
-                borderRadius: "20px",
-              }}
-            >
+          <Grid item xs={12} md={4}>
+            <div className="menuProfile">
               <Hidden smDown>
                 <h2
                   style={{

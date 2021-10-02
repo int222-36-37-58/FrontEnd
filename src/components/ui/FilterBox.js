@@ -59,9 +59,9 @@ export default class FilterBox extends Component {
               <Grid container>
                 {this.state.filters.map((filter) => {
                   return (
-                    <Grid item xs={12}>
+                    <Grid item xs={12}  key={filter.typeId}>
                       <FormControlLabel
-                        key={filter.typeId}
+                       
                         control={
                           <Checkbox
                             color="primary"
@@ -115,7 +115,7 @@ export default class FilterBox extends Component {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {this.state.filters.map((filter) => {
                   return (
-                    <label className="filterItem" onClick={this.onChange}>
+                    <label className="filterItem" onClick={this.onChange}  key={filter.typeId}>
                       <input
                         type="checkbox"
                         id={`filter${filter.typeId}`}
@@ -125,20 +125,6 @@ export default class FilterBox extends Component {
 
                       {filter.name}
                     </label>
-
-                    // <FormControlLabel
-                    //   key={filter.typeId}
-                    //   control={
-                    //     <Checkbox
-                    //       color="primary"
-                    //       icon={<CircleUnchecked />}
-                    //       checkedIcon={<CircleCheckedFilled />}
-                    //       onChange={this.onChange}
-                    //       value={filter.name}
-                    //     />
-                    //   }
-                    //   label={filter.name}
-                    // />
                   );
                 })}
               </div>

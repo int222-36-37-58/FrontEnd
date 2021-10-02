@@ -1,8 +1,9 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Hidden } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import ResponseDialog from "../ui/ResponseDialog";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import OrderDetail from "../ui/OrderDetail";
 
 const UserOrderPage = () => {
   useEffect(() => {
@@ -13,7 +14,7 @@ const UserOrderPage = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
-
+  const [currentViewOrder, setCurrentViewOrder] = useState({});
   const getMyOrderHistory = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getuserorder/1`)
@@ -25,13 +26,23 @@ const UserOrderPage = () => {
       });
   };
 
-  const handleComment = () => {
-    alert("didnot handle this function");
-  };
-
   const handleCloseBox = () => {
     setShowDialog(false);
     setDialogContent("");
+  };
+
+  const showOrderDetail = (order) => {
+    setCurrentViewOrder(order);
+  };
+
+  const computedPrice = (order) => {
+    let total = 0;
+
+    for (let i = 0; i < order.orderDetail.length; i++) {
+      total += order.orderDetail[i].totalPrice;
+      console.log('imwork')
+    }
+    return total;
   };
 
   return (
@@ -45,117 +56,97 @@ const UserOrderPage = () => {
       <Container
         maxWidth="lg"
         style={{
-          padding: 40 + "px",
+          padding: 25 + "px",
+          paddingTop: "50px",
           marginTop: 2 + "rem",
           backgroundColor: "white",
           borderRadius: 10 + "px",
           boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
+          textAlign: "center",
         }}
       >
-        <h2>ประวัติการสั่งซื้อ </h2>
-        {myOrder.map((order) => {
-          return (
-            <div
-              className="orderCard"
-              key={order.userOrderId}
-              style={{
-                paddingLeft: 35 + "px",
-                paddingRight: 35 + "px",
-                paddingBottom: 35 + "px",
-                paddingTop: 10 + "px",
-                color: "#181818",
-                marginBottom: 30 + "px",
-                backgroundColor: "white",
-                borderRadius: 10 + "px",
-                borderWidth: "1px",
-                borderStyle: "solid",
-                borderColor: "#d1eafd",
-                boxShadow: " 7px 4px #d1eafd",
-              }}
-            >
-              <h3
-                style={{
-                  borderStyle: "solid",
-                  borderWidth: "0 0 1px 0",
-                  marginRight: "20px",
-                  borderColor: "#181818",
-                }}
-              >
-                หมายเลขคำสั่งซื้อ #{order.userOrderId}
-              </h3>
-              <h4>วันที่สั่งซื้อ {order.date}</h4>
-              <Grid container>
-                {order.orderDetail.map((odt) => {
-                  return (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={6}
-                      md={5}
-                      key={odt.orderDetailId}
-                      style={{
-                        margin: 10 + "px",
-                        borderRadius: "8px",
-                        borderStyle: "solid",
-                        borderWidth: "0.5px",
-                        borderColor: "#d1eafd",
-                        boxShadow: " 5px 5px #d1eafd",
-                      }}
-                    >
-                      <Grid container justifyContent="center">
-                        <Grid item xs={8} sm={7} md={5}>
-                          <img
-                            src={`${process.env.REACT_APP_API_URL}/getImage/${odt.product.imageName}`}
-                            alt="productInOrder"
-                            className="imageProduct2"
-                            style={{ paddingTop: "35px", paddingLeft: "3px" }}
-                          />
-                        </Grid>
-                        <Grid item xs={10} md={8} lg={6}>
-                          <h3
-                            style={{
-                              borderStyle: "solid",
-                              borderWidth: "0 0 1px 0",
-                              marginRight: "20px",
-                              borderColor: "#181818",
-                            }}
-                          >
-                            <Link
-                              to={`/product/${odt.product.productId}`}
-                              className="hoverChangeToNavBarColor"
-                              style={{
-                                marginRight: 30 + "px",
-                                textDecoration: "none",
-                                fontWeight: 600,
-                              }}
-                            >
-                              {odt.product.name}
-                            </Link>
-                          </h3>
-
-                          <span>จำนวน : {odt.quantity} ชิ้น /</span>
-                          <span> สี : {odt.color.colorName}</span>
-                          <h4> รวม : {odt.totalPrice} บาท</h4>
-                          <button
-                            className="AddButton"
-                            style={{
-                              marginTop: -5 + "px",
-                              marginBottom: 20 + "px",
-                              paddingBottom: "5px",
-                            }}
-                            onClick={handleComment}
-                          >
-                            แสดงความคิดเห็น
-                          </button>
-                        </Grid>
+        {Object.keys(currentViewOrder).length <= 0 ? (
+          <>
+            {" "}
+            <h2>ประวัติการสั่งซื้อ </h2>
+            <Hidden smDown>
+              <table className="orderTable">
+                <thead className="orderTableHeader">
+                  <tr>
+                    <th>หมายเลขคำสั่งซื้อ</th>
+                    <th>วัน เวลา</th>
+                    <th>ยอดซื้อ</th>
+                    <th>สถานะ</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {myOrder.map((order) => {
+                    return (
+                      <tr key={order.userOrderId}>
+                        <td style={{ padding: "5px" }}>#{order.userOrderId}</td>
+                        <td>{order.date}</td>
+                        <td>{computedPrice(order)}</td>
+                        <td>Success!</td>
+                        <td>
+                          {" "}
+                          <MoreHorizIcon
+                            className="hoverCursor"
+                            onClick={() => showOrderDetail(order)}
+                          />{" "}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </Hidden>
+            <Hidden mdUp>
+              {myOrder.map((order) => {
+                return (
+                  <div key={order.userOrderId}
+                    className="roundContainer"
+                    style={{
+                      padding: " 50px",
+                      marginBottom: "20px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <Grid container spacing={3}>
+                      {" "}
+                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                        หมายเลขคำสั่งซื้อ
+                      </Grid>
+                      <Grid item xs={6}>
+                        #{order.userOrderId}
+                      </Grid>
+                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                        วันและเวลา
+                      </Grid>
+                      <Grid item xs={6}>
+                        {order.date}
+                      </Grid>
+                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                        สถานะ
+                      </Grid>
+                      <Grid item xs={6}>
+                        Success!
+                      </Grid>
+                      <Grid item xs={12}>
+                        <button className="AddButton">รายละเอียด</button>
                       </Grid>
                     </Grid>
-                  );
-                })}
-              </Grid>
-            </div>
-          );
-        })}
+                  </div>
+                );
+              })}
+            </Hidden>
+          </>
+        ) : (
+          <OrderDetail
+            order={currentViewOrder}
+            backOrderList={() => setCurrentViewOrder({})}
+          />
+        )}
       </Container>
     </>
   );

@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 
 const ChangePasswordForm = () => {
@@ -118,10 +118,13 @@ const ChangePasswordForm = () => {
           />
         </Grid>
 
-        <Grid item xs={12} style={{ paddingTop: 20 + "px" }}>
-          <Button
-            variant="contained"
-            color="primary"
+        <Grid
+          item
+          xs={12}
+          style={{ paddingTop: 20 + "px", textAlign: "center" }}
+        >
+          <button
+            className="AddButton"
             onClick={submit}
             style={{
               marginTop: 60 + "px",
@@ -130,7 +133,7 @@ const ChangePasswordForm = () => {
             }}
           >
             Confirm password
-          </Button>
+          </button>
         </Grid>
       </Grid>
     </div>

@@ -15,8 +15,8 @@ import UserOrderPage from "./components/pages/UserOrderPage";
 
 const App = () => (
   <div className="pageContainer">
+    <NavBar />
     <div className="pageContent ">
-      <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/register" exact component={RegisterPage} />

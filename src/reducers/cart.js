@@ -12,14 +12,14 @@ const cart = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.ADD_TO_CART:
       axios
         .get(
-          `${process.env.REACT_APP_API_URL}/products/${action.payload.orderDetails.product.productId}`
+          `${process.env.REACT_APP_API_URL}/products/${action.payload.orderDetail.product.productId}`
         )
         .then((res) => {
           if (
             proCount.length === 0 ||
             proCount.find(
               (pro) =>
-                pro.productId !== action.payload.orderDetails.product.productId
+                pro.productId !== action.payload.orderDetail.product.productId
             )
           ) {
             proCount.push(res.data);
@@ -28,8 +28,8 @@ const cart = (state = INITIAL_STATE, action = {}) => {
       const isAlready = state.cart.find(
         (it) =>
           it.product.productId ===
-            action.payload.orderDetails.product.productId &&
-          it.color.colorId === action.payload.orderDetails.color.colorId
+            action.payload.orderDetail.product.productId &&
+          it.color.colorId === action.payload.orderDetail.color.colorId
       )
         ? true
         : false;
@@ -39,16 +39,16 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         cart: isAlready
           ? state.cart.map((item) =>
               item.product.productId ===
-                action.payload.orderDetails.product.productId &&
-              item.color.colorId === action.payload.orderDetails.color.colorId
+                action.payload.orderDetail.product.productId &&
+              item.color.colorId === action.payload.orderDetail.color.colorId
                 ? {
                     ...item,
                     quantity:
-                      item.quantity + action.payload.orderDetails.quantity,
+                      item.quantity + action.payload.orderDetail.quantity,
                   }
                 : item
             )
-          : [...state.cart, action.payload.orderDetails],
+          : [...state.cart, action.payload.orderDetail],
       };
 
     case actionTypes.REMOVE_FROM_CART:
@@ -56,7 +56,7 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         ...state,
         cart: state.cart.filter(
           (item) =>
-            JSON.stringify(item) !== JSON.stringify(action.payload.orderDetails)
+            JSON.stringify(item) !== JSON.stringify(action.payload.orderDetail)
         ),
       };
     case actionTypes.CHECK_OUT:

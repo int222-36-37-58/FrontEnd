@@ -47,7 +47,7 @@ const ContactFooter = () => {
           <Grid container spacing={2}>
             {members.map((mem) => {
               return (
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={4} key={mem.id}>
                   <div className="MemberCard">
                     <img
                       src={`${mem.image}`}

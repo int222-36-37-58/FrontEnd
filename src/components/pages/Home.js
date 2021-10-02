@@ -40,6 +40,7 @@ const Home = () => {
         dialogContent={dialogContent}
         dialogHeader={dialogHeader}
       />
+      <Container maxWidth="xl">
       <div
         style={{
           marginLeft: "auto",
@@ -85,6 +86,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </div>
+      </Container>
     </>
   );
 };
