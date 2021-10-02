@@ -7,7 +7,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div style={{paddingBottom: 200+'px'}}>
       <LoginForm submit={submit} />
     </div>
   );

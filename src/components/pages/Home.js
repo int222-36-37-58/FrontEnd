@@ -47,7 +47,7 @@ const Home = () => {
           maxWidth: 78 + "%",
           marginTop: 1 + "rem",
 
-          paddingBottom: 100 + "px",
+        
         }}
       >
         <Grid

@@ -15,7 +15,7 @@ import UserOrderPage from "./components/pages/UserOrderPage";
 
 const App = () => (
   <div className="pageContainer">
-    <div className="pageContent " style={{ marginBottom: 250 + "px" }}>
+    <div className="pageContent ">
       <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
