@@ -138,7 +138,12 @@ const UserOrderPage = () => {
                         Success!
                       </Grid>
                       <Grid item xs={12}>
-                        <button className="AddButton">รายละเอียด</button>
+                        <button
+                          className="AddButton"
+                          onClick={() => showOrderDetail(order)}
+                        >
+                          รายละเอียด
+                        </button>
                       </Grid>
                     </Grid>
                   </div>

@@ -684,10 +684,19 @@ body {
   padding: 10px;
   font-size: 14px;
   font-weight: 600;
+  text-decoration: none;
+  color: black;
 }
 
 .hoverChangeBackground:hover {
   cursor: pointer;
+  color: #1895f5;
+  background-color: #f0f8f9;
+}
+
+.hoverChangeBackground:focus,
+.hoverChangeBackground:active,
+.hoverChangeBackground:target {
   color: #1895f5;
   background-color: #f0f8f9;
 }
@@ -856,7 +865,8 @@ body {
   background-color: #fafafa;
   width: 100%;
 }
-.orderTableHeader > tr > th , td {
+.orderTableHeader > tr > th,
+td {
   border-style: solid;
   border-color: #e4e4e4;
   border-width: 0 0 1px 0;
@@ -865,19 +875,15 @@ body {
 }
 
 .orderDetailContainer {
-
-border-style: solid;
-border-color: #e4e4e4;
-border-radius: 10px;
-border-width: 2px ;
-width: 100%;
-}
-
-.roundContainer {
-
   border-style: solid;
   border-color: #e4e4e4;
   border-radius: 10px;
+  border-width: 2px;
+  width: 100%;
+}
 
-
+.roundContainer {
+  border-style: solid;
+  border-color: #e4e4e4;
+  border-radius: 10px;
 }

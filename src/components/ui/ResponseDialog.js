@@ -11,7 +11,8 @@ const ResponseDialog = (props) => {
       fullWidth
       maxWidth="xs"
     >
-      <h3 className="dialogHeader">{props.dialogHeader}</h3>
+      { props.dialogHeader ?  <h3 className="dialogHeader">{props.dialogHeader}</h3> : <h3 className="dialogHeader">Loading...</h3> }
+     
       <DialogContent>
         {props.dialogHeader !== "Error" ? (
           <CheckCircleOutlineOutlinedIcon

@@ -8,6 +8,8 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import ProfileInfoPage from "./ProfileInfoPage";
 import UserOrderPage from "./UserOrderPage";
+import { Route, Switch } from "react-router";
+import { Link } from "react-router-dom";
 const ProfilePage = () => {
   const [userData] = useState({
     id: "1",
@@ -19,7 +21,6 @@ const ProfilePage = () => {
     role: "ROLE_USER",
   });
 
-  const [selectedMenu, setSelectedMenu] = useState(1);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
@@ -46,47 +47,6 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     alert("did not handle log out function ");
-  };
-
-  const switchRender = () => {
-    switch (selectedMenu) {
-      case 1:
-        return (
-          <div
-            className={{
-              padding: "20px",
-              fontSize: 13 + "px",
-              marginRight: "50px",
-              marginTop: "20px",
-              backgroundColor: "white",
-              boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
-              borderRadius: "20px",
-            }}
-          >
-            <ProfileInfoPage userData={userData} submit={update} />
-          </div>
-        );
-      case 2:
-        return <ChangePasswordForm />;
-      case 3:
-        return <UserOrderPage />;
-      default:
-        return (
-          <div
-            className={{
-              padding: "20px",
-              fontSize: 13 + "px",
-              marginRight: "50px",
-              marginTop: "20px",
-              backgroundColor: "white",
-              boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
-              borderRadius: "20px",
-            }}
-          >
-            <ProfileInfoPage userData={userData} submit={update} />
-          </div>
-        );
-    }
   };
 
   return (
@@ -116,24 +76,18 @@ const ProfilePage = () => {
                 >
                   Menu
                 </h2>
-                <div
+                <Link to="/profile/info" className="hoverChangeBackground">
+                  <div>ข้อมูลของฉัน</div>
+                </Link>
+                <Link
+                  to="/profile/changepassword"
                   className="hoverChangeBackground"
-                  onClick={() => setSelectedMenu(1)}
                 >
-                  ข้อมูลของฉัน
-                </div>
-                <div
-                  className="hoverChangeBackground"
-                  onClick={() => setSelectedMenu(2)}
-                >
-                  เปลี่ยนรหัสผ่าน
-                </div>
-                <div
-                  className="hoverChangeBackground"
-                  onClick={() => setSelectedMenu(3)}
-                >
-                  คำสั่งซื้อ
-                </div>
+                  <div>เปลี่ยนรหัสผ่าน</div>
+                </Link>
+                <Link to="/profile/order" className="hoverChangeBackground">
+                  <div>คำสั่งซื้อ</div>
+                </Link>
                 <div
                   className="hoverChangeBackground"
                   onClick={() => handleLogout()}
@@ -176,38 +130,39 @@ const ProfilePage = () => {
                 <input type="checkbox" id="showProfileMenu" hidden />
 
                 <p className="menuShow">
-                  <h4
-                    className="hoverChangeToNavBarColor"
-                    onClick={() => setSelectedMenu(1)}
+                  <Link to="/profile/info" className="hoverChangeBackground">
+                    <h4>ข้อมูลของฉัน</h4>
+                  </Link>
+                  <Link
+                    to="/profile/changepassword"
+                    className="hoverChangeBackground"
                   >
-                    ข้อมูลของฉัน
-                  </h4>
-                  <h4
-                    className="hoverChangeToNavBarColor"
-                    onClick={() => setSelectedMenu(2)}
-                  >
-                    เปลี่ยนรหัสผ่าน
-                  </h4>
-                  <h4
-                    className="hoverChangeToNavBarColor"
-                    onClick={() => setSelectedMenu(3)}
-                  >
-                    คำสั่งซื้อ
-                  </h4>
-
-                  <h4
-                    className="hoverChangeToNavBarColor"
-                    onClick={() => handleLogout()}
-                  >
-                    log out
-                  </h4>
+                    <h4>เปลี่ยนรหัสผ่าน</h4>
+                  </Link>
+                  <Link to="/profile/order" className="hoverChangeBackground">
+                    <h4>คำสั่งซื้อ</h4>
+                  </Link>
+                  <h4>log out</h4>
                 </p>
               </Hidden>
             </div>
           </Grid>
 
           <Grid item xs={12} md={8}>
-            {switchRender()}
+            {/* {switchRender()} */}
+            <Switch>
+              <Route path={"/profile/info"}>
+                <ProfileInfoPage userData={userData} submit={update} />
+              </Route>
+              <Route path={"/profile/changepassword"}>
+                {" "}
+                <ChangePasswordForm />
+              </Route>
+              <Route path={"/profile/order"}>
+                {" "}
+                <UserOrderPage />
+              </Route>
+            </Switch>
           </Grid>
         </Grid>
       </Container>

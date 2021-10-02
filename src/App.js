@@ -19,14 +19,15 @@ const App = () => (
     <div className="pageContent ">
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/register" exact component={RegisterPage} />
-        <Route path="/login" exact component={LoginPage} />
-        <Route path="/createproduct" exact component={CreateProductPage} />
-        <Route path="/product/:id" exact component={ProductPage} />
-        <Route path="/profile" exact component={ProfilePage} />
-        <Route path="/listusers" exact component={UserListPage} />
-        <Route path="/listbasedata" exact component={ListBaseDataPage} />
-        <Route path="/myorder" exact component={UserOrderPage} />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/createproduct" component={CreateProductPage} />
+        <Route path="/product/:id" component={ProductPage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/listusers" component={UserListPage} />
+        <Route path="/listbasedata" component={ListBaseDataPage} />
+        <Route path="/myorder" component={UserOrderPage} />
+
         <Route component={NotFoundPage} />
       </Switch>
     </div>

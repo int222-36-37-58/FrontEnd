@@ -15,6 +15,10 @@ const OrderDetail = (props) => {
     setTotalPrice(total);
   }, [props.order]);
 
+  const handleComment = () => {
+    alert("did not handle this function ");
+  };
+
   return (
     <div className="orderDetailContainer">
       <div
@@ -79,6 +83,7 @@ const OrderDetail = (props) => {
               <th>จำนวน</th>
               <th>สี</th>
               <th>รวม</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -101,6 +106,11 @@ const OrderDetail = (props) => {
                   <td>{odt.quantity}</td>
                   <td>{odt.color.colorName}</td>
                   <td>{odt.totalPrice}</td>
+                  <td>
+                    <button className="AddButton" onClick={handleComment}>
+                      comment
+                    </button>
+                  </td>
                 </tr>
               );
             })}
@@ -165,7 +175,7 @@ const OrderDetail = (props) => {
 
             {props.order.orderDetail.map((odt) => {
               return (
-                <div style={{ paddingBottom: "20px" }}  key={odt.orderDetailId}>
+                <div style={{ paddingBottom: "20px" }} key={odt.orderDetailId}>
                   <Link
                     to={`/product/${odt.product.productId}`}
                     style={{ textDecoration: "none" }}
@@ -231,8 +241,14 @@ const OrderDetail = (props) => {
                     <Grid item xs={6} style={{ padding: "3px" }}>
                       รวม
                     </Grid>
+
                     <Grid item xs={6} style={{ padding: "3px" }}>
                       ฿{odt.totalPrice}
+                    </Grid>
+                    <Grid item xs={6} style={{ padding: "3px" }}>
+                      <button className="AddButton" onClick={handleComment}>
+                        comment
+                      </button>
                     </Grid>
                   </Grid>
                 </div>
