@@ -37,10 +37,8 @@ const UserOrderPage = () => {
 
   const computedPrice = (order) => {
     let total = 0;
-
     for (let i = 0; i < order.orderDetail.length; i++) {
       total += order.orderDetail[i].totalPrice;
-      console.log('imwork')
     }
     return total;
   };
@@ -86,7 +84,7 @@ const UserOrderPage = () => {
                       <tr key={order.userOrderId}>
                         <td style={{ padding: "5px" }}>#{order.userOrderId}</td>
                         <td>{order.date}</td>
-                        <td>{computedPrice(order)}</td>
+                        <td>฿{computedPrice(order)}</td>
                         <td>Success!</td>
                         <td>
                           {" "}
@@ -104,7 +102,8 @@ const UserOrderPage = () => {
             <Hidden mdUp>
               {myOrder.map((order) => {
                 return (
-                  <div key={order.userOrderId}
+                  <div
+                    key={order.userOrderId}
                     className="roundContainer"
                     style={{
                       padding: " 50px",
@@ -125,6 +124,12 @@ const UserOrderPage = () => {
                       </Grid>
                       <Grid item xs={6}>
                         {order.date}
+                      </Grid>
+                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                        ราคาสุทธิ
+                      </Grid>
+                      <Grid item xs={6}>
+                        ฿{computedPrice(order)}
                       </Grid>
                       <Grid item xs={6} style={{ fontWeight: 600 }}>
                         สถานะ

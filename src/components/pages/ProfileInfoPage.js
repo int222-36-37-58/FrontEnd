@@ -10,7 +10,7 @@ const ProfileInfoPage = (props) => {
         <RegisterForm
           userData={props.userData}
           editMode={true}
-          submit={props.update}
+          submit={props.submit}
           onIsEdit={() => setIsEdit(false)}
         ></RegisterForm>
       ) : (
