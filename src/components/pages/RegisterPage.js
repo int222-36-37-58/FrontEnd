@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-
+    setDialogHeader("");
     setDialogContent("");
   };
 

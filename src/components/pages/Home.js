@@ -29,7 +29,7 @@ const Home = () => {
   };
 
   const handleCloseBox = () => {
-    setDialogContent("");
+    setDialogHeader("");
     setShowDialog(false);
     setDialogContent("");
   };

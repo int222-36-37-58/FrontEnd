@@ -44,6 +44,18 @@ const UserOrderPage = () => {
     return total;
   };
 
+  const formatDate = (orderDate) => {
+    const buyDate = new Date(orderDate);
+
+    let year = buyDate.getFullYear();
+    let month = buyDate.getMonth();
+    let date = buyDate.getDate();
+    let hours = buyDate.getHours();
+    let mins = buyDate.getMinutes();
+    let dateformat = date + "/" + month + "/" + year + " " + hours + ":" + mins;
+    return dateformat;
+  };
+
   return (
     <>
       <ResponseDialog
@@ -84,7 +96,7 @@ const UserOrderPage = () => {
                     return (
                       <tr key={order.userOrderId}>
                         <td style={{ padding: "5px" }}>#{order.userOrderId}</td>
-                        <td>{order.date}</td>
+                        <td> {formatDate(order.date)}</td>
                         <td>฿{computedPrice(order)}</td>
                         <td>Success!</td>
                         <td>
@@ -114,25 +126,25 @@ const UserOrderPage = () => {
                   >
                     <Grid container spacing={3}>
                       {" "}
-                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                      <Grid item xs={6} style={{ fontWeight: "600" }}>
                         หมายเลขคำสั่งซื้อ
                       </Grid>
                       <Grid item xs={6}>
                         #{order.userOrderId}
                       </Grid>
-                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                      <Grid item xs={6} style={{ fontWeight: "600" }}>
                         วันและเวลา
                       </Grid>
                       <Grid item xs={6}>
-                        {order.date}
+                        {formatDate(order.date)}
                       </Grid>
-                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                      <Grid item xs={6} style={{ fontWeight: "600" }}>
                         ราคาสุทธิ
                       </Grid>
                       <Grid item xs={6}>
                         ฿{computedPrice(order)}
                       </Grid>
-                      <Grid item xs={6} style={{ fontWeight: 600 }}>
+                      <Grid item xs={6} style={{ fontWeight: "600" }}>
                         สถานะ
                       </Grid>
                       <Grid item xs={6}>

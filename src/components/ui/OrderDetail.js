@@ -19,6 +19,40 @@ const OrderDetail = (props) => {
     alert("did not handle this function ");
   };
 
+  const formatDate = () => {
+    const buyDate = new Date(props.order.date);
+    const monthNames = [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
+    ];
+    let year = buyDate.getFullYear();
+    let month = buyDate.getMonth();
+    let date = buyDate.getDate();
+    let hours = buyDate.getHours();
+    let mins = buyDate.getMinutes();
+    let dateformat =
+      date +
+      " " +
+      monthNames[month - 1] +
+      " " +
+      year +
+      " เวลา " +
+      hours +
+      ":" +
+      mins;
+    return dateformat;
+  };
+
   return (
     <div className="orderDetailContainer">
       <div
@@ -49,12 +83,14 @@ const OrderDetail = (props) => {
           style={{
             padding: "20px",
             paddingBottom: "5px",
-            fontSize: "18px",
+            fontSize: "16px",
             textAlign: "left",
+            fontWeight: "900",
           }}
         >
-          {props.order.date}
+          {formatDate()}
         </div>
+
         <div
           style={{
             padding: "20px",
@@ -100,7 +136,9 @@ const OrderDetail = (props) => {
                         alt={odt.product.imageName}
                         style={{ maxWidth: "110px", height: "auto" }}
                       />
-                      <p style={{textDecoration:'none' , color:'black'}}>{odt.product.name}</p>
+                      <p style={{ textDecoration: "none", color: "black" }}>
+                        {odt.product.name}
+                      </p>
                     </Link>
                   </td>
                   <td>฿{odt.product.price}</td>
@@ -171,7 +209,7 @@ const OrderDetail = (props) => {
                 textAlign: "left",
               }}
             >
-              {props.order.date}
+              {formatDate()}
             </div>
 
             {props.order.orderDetail.map((odt) => {
