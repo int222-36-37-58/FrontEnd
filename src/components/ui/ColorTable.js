@@ -139,9 +139,8 @@ const ColorTable = () => {
       />
 
       <div
+        className="f20 b"
         style={{
-          fontWeight: 600,
-          fontSize: 20 + "px",
           paddingLeft: 35 + "px",
         }}
       >

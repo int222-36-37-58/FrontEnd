@@ -144,9 +144,8 @@ const UserListPage = () => {
           }}
         >
           <div
+            className="f24 b"
             style={{
-              fontWeight: 600,
-              fontSize: 24 + "px",
               marginBottom: 50 + "px",
             }}
           >

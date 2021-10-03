@@ -52,35 +52,22 @@ const ContactFooter = () => {
                     <img
                       src={`${mem.image}`}
                       alt={`member${mem.id}`}
+                      className="pt-21 pb-20"
                       style={{
                         width: "150px",
                         height: "150px",
                         borderRadius: "100px",
-                        paddingTop: "20px",
-                        paddingBottom: "20px",
                       }}
                     />
-                    <div style={{ fontWeight: "900", fontSize: "17px" }}>
-                      {mem.id}{" "}
-                    </div>
-                    <div style={{ fontWeight: "900", fontSize: "24px" }}>
-                      {" "}
-                      {mem.name}
-                    </div>
-                    <div style={{ fontWeight: "900", fontSize: "18px" }}>
-                      {" "}
-                      {mem.role}
-                    </div>
+                    <div className="b f17">{mem.id} </div>
+                    <div className="b f24"> {mem.name}</div>
+                    <div className="b f18"> {mem.role}</div>
                   </div>
                 </Grid>
               );
             })}
           </Grid>
-          <button
-            className="AddButton"
-            style={{ width: "100%" }}
-            onClick={handleCloseBox}
-          >
+          <button className="AddButton w100" onClick={handleCloseBox}>
             close
           </button>
         </DialogContent>
@@ -117,7 +104,8 @@ const ContactFooter = () => {
             item
             xs={12}
             sm={6}
-            style={{ fontWeight: 600, fontSize: "17px", paddingLeft: "40px" }}
+            className="b f17"
+            style={{ paddingLeft: "40px" }}
           >
             <div>
               <h4>
@@ -140,10 +128,10 @@ const ContactFooter = () => {
           style={{ maxWidth: 130 + "px", paddingTop: "85px" }}
         />
 
-        <div style={{ fontWeight: 900, fontSize: "25px", paddingTop: "50px" }}>
+        <div className="b" style={{ fontSize: "25px", paddingTop: "50px" }}>
           School of Information Technology{" "}
         </div>
-        <div style={{ fontSize: "20px", color: "#666666" }}>
+        <div className="f20" style={{ color: "#666666" }}>
           126 Pracha Uthit Rd, Khwaeng Bang Mot, Khet Thung Khru, Krung Thep
           Maha Nakhon 10140
         </div>

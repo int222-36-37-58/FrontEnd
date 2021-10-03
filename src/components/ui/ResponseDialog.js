@@ -9,22 +9,23 @@ const ResponseDialog = (props) => {
       case "Success!!":
         return (
           <CheckCircleOutlineOutlinedIcon
+            className="w100"
             style={{
               fontSize: 96,
               color: "#7bcb34",
-              width: "100%",
-              marginTop: "-10px",
+
+              marginLeft: "37%",
             }}
           />
         );
       case "Error":
         return (
           <CancelOutlined
+            className="w100"
             style={{
               fontSize: 96,
               color: "#d83c2d",
-              marginLeft: "auto",
-              width: "100%",
+              marginLeft: "37%",
             }}
           />
         );
@@ -32,9 +33,8 @@ const ResponseDialog = (props) => {
         return (
           <CircularProgress
             style={{
-              fontSize: 100,
               padding: "40px",
-              marginLeft: "35%",
+              marginLeft: "33%",
             }}
           />
         );

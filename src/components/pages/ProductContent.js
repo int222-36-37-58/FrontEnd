@@ -24,6 +24,9 @@ export default class ProductContent extends Component {
     isShowComments: false,
     selectedColor: 0,
     noColor: false,
+    dialogHeader: "",
+    dialogContent: "",
+    showDialog: false,
   };
 
   componentDidMount() {
@@ -104,9 +107,10 @@ export default class ProductContent extends Component {
         this.props.goShop();
       })
       .catch((err) => {
+        let errtext = err.response.data.error;
         this.setState({
           dialogHeader: "Error",
-          dialogContent: err.response.data.message,
+          dialogContent: errtext,
           showDialog: true,
         });
       });
@@ -137,8 +141,8 @@ export default class ProductContent extends Component {
         <ResponseDialog
           showDialog={this.state.showDialog}
           handleCloseBox={this.handleCloseBox}
-          dialogContent={this.dialogContent}
-          dialogHeader={this.dialogHeader}
+          dialogContent={this.state.dialogContent}
+          dialogHeader={this.state.dialogHeader}
         />
 
         <Grid container alignItems="center" justifyContent="center" spacing={0}>
@@ -147,10 +151,11 @@ export default class ProductContent extends Component {
               <img
                 src={`${this.state.imageProduct}`}
                 alt="imgProduct"
+                className="w100"
                 style={{
                   marginTop: "10px",
                   height: "auto",
-                  width: "100%",
+
                   maxHeight: "375px",
                   maxWidth: "300px",
                 }}
@@ -247,11 +252,7 @@ export default class ProductContent extends Component {
           <Grid container>
             <Grid item xs={12}>
               <label htmlFor="infoProduct">
-                <div
-                  className="infoBox"
-                  style={{ fontSize: 15 + "px" }}
-                  onClick={this.clickedInfo}
-                >
+                <div className="infoBox f15" onClick={this.clickedInfo}>
                   <h2 className="infoText">Information</h2>
                   {!this.state.isShowInfo ? (
                     <h5 className="plusIcon">
@@ -268,10 +269,9 @@ export default class ProductContent extends Component {
 
               <div className="infoShow">
                 <h3
+                  className="b f20"
                   style={{
                     color: "black",
-                    fontWeight: "bold",
-                    fontSize: 20 + "px",
                   }}
                 >
                   {this.state.product.name}
@@ -279,19 +279,17 @@ export default class ProductContent extends Component {
                 {this.state.product.type && (
                   <span>
                     <span
+                      className="f16 b"
                       style={{
                         color: "black",
-                        fontWeight: "bold",
-                        fontSize: 16 + "px",
                       }}
                     >
                       Type : {this.state.product.type.name}{" "}
                     </span>
                     <span
+                      className="f16 b"
                       style={{
                         color: "black",
-                        fontWeight: "bold",
-                        fontSize: 16 + "px",
                       }}
                     >
                       | Sale by : {this.state.product.user.userName}{" "}
@@ -304,11 +302,7 @@ export default class ProductContent extends Component {
             </Grid>
             <Grid item xs={12}>
               <label htmlFor="commentsProduct">
-                <div
-                  className="infoBox"
-                  style={{ fontSize: 15 + "px" }}
-                  onClick={this.clickedComments}
-                >
+                <div className="infoBox f15" onClick={this.clickedComments}>
                   <h2 className="infoText">comments</h2>
                   {!this.state.isShowComments ? (
                     <h5 className="plusIcon">

@@ -36,48 +36,77 @@ export default class FilterBox extends Component {
     this.setState({ showType: !this.state.showType });
   };
 
+  clearCheck = () => {
+    this.setState({ checkData: [] });
+  };
+
   render() {
     return (
       <>
         <Hidden smDown>
           <Container id="filterBox" className="filterBox">
             <div
-              className="header"
+              className="header f18 b pt-20"
               style={{
-                fontSize: "18px",
-                paddingTop: 20 + "px",
-                fontWeight: 600,
+                display: "flex",
+                flexDirection: "row",
+                justifyItems: "center",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              ฟิลเตอร์
+              <div>ฟิลเตอร์</div>
+              <div>
+                <button
+                  className="AddButton"
+                  style={{ padding: "3px" }}
+                  onClick={() => this.clearCheck()}
+                >
+                  ล้างการกรอง
+                </button>
+              </div>
             </div>
 
-            <div className="type">
-              <div style={{ paddingTop: 10 + "px", paddingBottom: 10 + "px" }}>
-                ประเภท
-              </div>
-              <Grid container>
+            <div>
+              <div className="pt-5 pb-5">ประเภท</div>
+              <Grid container justifyContent="center">
                 {this.state.filters.map((filter) => {
                   return (
-                    <Grid item xs={12}  key={filter.typeId}>
+                    <Grid item xs={12} key={filter.typeId}>
                       <FormControlLabel
-                       
+                        className="w100"
                         control={
                           <Checkbox
+                            className="mw100 w100"
+                            disableRipple={true}
+                            checked={this.state.checkData.includes(filter.name)}
                             color="primary"
+                            style={{
+                              backgroundColor: "transparent",
+                            }}
                             icon={
-                              <CircleUnchecked style={{ fontSize: "22px" }} />
+                              <div className="filterFullItem w100">
+                                <CircleUnchecked className="f22 pl-5" />
+                                <div className="f18 b pl-5"> {filter.name}</div>
+                              </div>
                             }
                             checkedIcon={
-                              <CircleCheckedFilled
-                                style={{ fontSize: "22px" }}
-                              />
+                              <div
+                                className="filterFullItem w100"
+                                style={{
+                                  transition: "0.25s",
+
+                                  backgroundColor: "#f0f8f9",
+                                }}
+                              >
+                                <CircleCheckedFilled className="f22 pl-5" />
+                                <div className="f18 b pl-5"> {filter.name}</div>
+                              </div>
                             }
                             onChange={this.onChange}
                             value={filter.name}
                           />
                         }
-                        label={filter.name}
                       />
                     </Grid>
                   );
@@ -91,18 +120,17 @@ export default class FilterBox extends Component {
           <Container id="filterBox" className="filterBox">
             <label htmlFor="infoFilter">
               <div
-                className="headerRes hoverCursor infoBox"
-                style={{ paddingTop: "5px", paddingBottom: "5px" }}
+                className="headerRes hoverCursor infoBox pt-5 pb-5"
                 onClick={this.handleShowType}
               >
-                <div style={{ fontWeight: 600 }}>ฟิลเตอร์</div>
+                <div className="b">ฟิลเตอร์</div>
                 {!this.state.showType ? (
                   <div>
-                    <AddIcon style={{ fontSize: 20 + "px" }} />{" "}
+                    <AddIcon className="f20" />{" "}
                   </div>
                 ) : (
                   <div>
-                    <RemoveIcon style={{ fontSize: 20 + "px" }} />
+                    <RemoveIcon className="f20" />
                   </div>
                 )}
               </div>
@@ -111,22 +139,79 @@ export default class FilterBox extends Component {
             <input type="checkbox" id="infoFilter" hidden />
 
             <div className="type typeHidden">
-              <div style={{ paddingTop: 10 + "px" }}>ประเภท</div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                {this.state.filters.map((filter) => {
-                  return (
-                    <label className="filterItem" onClick={this.onChange}  key={filter.typeId}>
-                      <input
-                        type="checkbox"
-                        id={`filter${filter.typeId}`}
-                        name="filterCheckbox"
-                        value={filter.name}
-                      />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyItems: "center",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div className="pt-10">ประเภท </div>
+                <div>
+                  {" "}
+                  <button
+                    className="AddButton"
+                    style={{ padding: "2px", marginTop: "10px" }}
+                    onClick={() => this.clearCheck()}
+                  >
+                    ล้างการกรอง
+                  </button>
+                </div>{" "}
+              </div>
 
-                      {filter.name}
-                    </label>
-                  );
-                })}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Grid container justifyContent="center">
+                  {this.state.filters.map((filter) => {
+                    return (
+                      <Grid item xs={12} key={filter.typeId}>
+                        <FormControlLabel
+                          className="w100"
+                          control={
+                            <Checkbox
+                              disableRipple={true}
+                              color="primary"
+                              className="w100 mw100"
+                              checked={this.state.checkData.includes(
+                                filter.name
+                              )}
+                              style={{
+                                backgroundColor: "transparent",
+                              }}
+                              icon={
+                                <div className="filterFullItem w100">
+                                  <CircleUnchecked className="f20 pl-5" />
+                                  <div className="f16 b pl-5">
+                                    {" "}
+                                    {filter.name}
+                                  </div>
+                                </div>
+                              }
+                              checkedIcon={
+                                <div
+                                  className="filterFullItem w100"
+                                  style={{
+                                    transition: "0.25s",
+                                    backgroundColor: "#f0f8f9",
+                                  }}
+                                >
+                                  <CircleCheckedFilled className="f20 pl-5" />
+                                  <div className="f16 b pl-5">
+                                    {" "}
+                                    {filter.name}
+                                  </div>
+                                </div>
+                              }
+                              onChange={this.onChange}
+                              value={filter.name}
+                            />
+                          }
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
               </div>
             </div>
           </Container>
