@@ -43,7 +43,7 @@ const OrderDetail = (props) => {
     let dateformat =
       date +
       " " +
-      monthNames[month - 1] +
+      monthNames[month] +
       " " +
       year +
       " เวลา " +

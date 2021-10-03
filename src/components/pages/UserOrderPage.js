@@ -52,7 +52,7 @@ const UserOrderPage = () => {
     let date = buyDate.getDate();
     let hours = buyDate.getHours();
     let mins = buyDate.getMinutes();
-    let dateformat = date + "/" + month + "/" + year + " " + hours + ":" + mins;
+    let dateformat = date + "/" + month+1 + "/" + year + " " + hours + ":" + mins;
     return dateformat;
   };
 
