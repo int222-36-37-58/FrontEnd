@@ -56,7 +56,7 @@ const Cart = (props) => {
         setDialogHeader("Success!!");
         setDialogContent("Check out success!!");
       })
-      .then(() => props.checkout())
+      .then(() => props.clearCart())
       .catch((err) => {
         setDialogHeader("Error");
         setDialogContent(err.response.data.message);
@@ -84,7 +84,24 @@ const Cart = (props) => {
                 ไม่มีสินค้าในตะกร้า
               </ListItem>
             ) : (
-              <ListItem style={{ fontWeight: 600 }}>ตะกร้าสินค้า : </ListItem>
+              <div
+                className="cartHead"
+                style={{
+                  paddingTop: "15px",
+                  paddingBottom: "10px",
+                }}
+              >
+                <div>ตะกร้าสินค้า : </div>
+                <div>
+                  <button
+                    className="delFromCart"
+                    style={{ textAlign: "right", marginRight: 25 + "px" }}
+                    onClick={() => props.clearCart()}
+                  >
+                    ล้างตะกร้า
+                  </button>{" "}
+                </div>
+              </div>
             )}
             {props.listProduct.map((item, index) => {
               return (
@@ -149,18 +166,26 @@ const Cart = (props) => {
                 ไม่มีสินค้าในตะกร้า
               </ListItem>
             ) : (
-              <ListItem
-                style={{
-                  fontWeight: 600,
-                  borderStyle: "solid",
-                  borderWidth: "0 0 1px 0",
-                  borderColor: "#e4e4e4",
-                  maxWidth: "90%",
-                  marginLeft: "20px",
-                }}
-              >
-                ตะกร้าสินค้า :{" "}
-              </ListItem>
+              <>
+                <div
+                  className="cartHead"
+                  style={{
+                    maxWidth: "90%",
+                    padding: "15px",
+                    marginLeft: "20px",
+                  }}
+                >
+                  <div>ตะกร้าสินค้า :</div>
+                  <div style={{ textAlign: "right", marginRight: 25 + "px" }}>
+                    <button
+                      className="delFromCart"
+                      onClick={() => props.clearCart()}
+                    >
+                      ล้างตะกร้า
+                    </button>
+                  </div>
+                </div>
+              </>
             )}
             {props.listProduct.map((item, index) => {
               return (

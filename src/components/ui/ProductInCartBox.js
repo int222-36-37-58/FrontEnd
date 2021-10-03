@@ -35,7 +35,7 @@ const ProductInCartBox = (props) => {
           style={{ height: 30 + "%" }}
           onClick={() => props.remove(props.orderDetail)}
         >
-          remove
+          นำออก
         </button>
       </div>
     </div>

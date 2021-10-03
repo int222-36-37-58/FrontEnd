@@ -59,9 +59,8 @@ const cart = (state = INITIAL_STATE, action = {}) => {
             JSON.stringify(item) !== JSON.stringify(action.payload.orderDetail)
         ),
       };
-    case actionTypes.CHECK_OUT:
-      return {...state,
-      cart: []};
+    case actionTypes.CLEAR_CART:
+      return { ...state, cart: [] };
     default:
       return state;
   }

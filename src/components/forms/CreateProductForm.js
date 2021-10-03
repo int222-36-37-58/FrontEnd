@@ -49,7 +49,8 @@ export default class CreateProductForm extends Component {
   chooseColor = (e) => {
     let colorList = [...this.state.data.color, e.target.value];
     if (
-      this.state.data.color.findIndex((f) => f.colorId === e.target.value) !== -1
+      this.state.data.color.findIndex((f) => f.colorId === e.target.value) !==
+      -1
     ) {
       colorList = colorList.filter((f) => f !== e.target.value);
     }
@@ -57,7 +58,7 @@ export default class CreateProductForm extends Component {
       data: { ...this.state.data, color: colorList },
     });
   };
- 
+
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
       const types = res.data;
@@ -73,7 +74,7 @@ export default class CreateProductForm extends Component {
   onSubmit = () => {
     let data = Object.assign({}, this.state.data);
     const invalid = this.validate(this.state.data);
-    if (invalid !== "err") {  
+    if (invalid !== "err") {
       var today = new Date().toISOString();
       var intColor = this.state.data.color.map((a) => parseInt(a));
       var colorObj = intColor.map((cl) =>

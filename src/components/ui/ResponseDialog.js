@@ -9,12 +9,9 @@ const ResponseDialog = (props) => {
       case "Success!!":
         return (
           <CheckCircleOutlineOutlinedIcon
-            className="w100"
             style={{
               fontSize: 96,
               color: "#7bcb34",
-
-              marginLeft: "37%",
             }}
           />
         );
@@ -25,7 +22,6 @@ const ResponseDialog = (props) => {
             style={{
               fontSize: 96,
               color: "#d83c2d",
-              marginLeft: "37%",
             }}
           />
         );
@@ -34,7 +30,6 @@ const ResponseDialog = (props) => {
           <CircularProgress
             style={{
               padding: "40px",
-              marginLeft: "33%",
             }}
           />
         );
@@ -48,25 +43,26 @@ const ResponseDialog = (props) => {
       fullWidth
       maxWidth="xs"
     >
-      {props.dialogHeader ? (
-        <h3 className="dialogHeader">{props.dialogHeader}</h3>
-      ) : (
-        <h3 className="dialogHeader">Loading...</h3>
-      )}
+      <div>
+        {props.dialogHeader ? (
+          <h3 className="dialogHeader">{props.dialogHeader}</h3>
+        ) : (
+          <h3 className="dialogHeader">Loading...</h3>
+        )}
 
-      <DialogContent>
-        {switchRender()}
+        <DialogContent>
+          <div style={{ textAlign: "center" }}>{switchRender()}</div>
+          <h3 style={{ fontWeight: 500 }}>{props.dialogContent}</h3>
 
-        <h3 style={{ fontWeight: 500 }}>{props.dialogContent}</h3>
-
-        <button
-          className="AddButton"
-          style={{ width: "100%" }}
-          onClick={props.handleCloseBox}
-        >
-          close
-        </button>
-      </DialogContent>
+          <button
+            className="AddButton"
+            style={{ width: "100%" }}
+            onClick={props.handleCloseBox}
+          >
+            close
+          </button>
+        </DialogContent>
+      </div>
     </Dialog>
   );
 };

@@ -164,14 +164,12 @@ export default class ProductContent extends Component {
           </Grid>
 
           <Grid item xs={12} sm={7} md={6}>
-            <h3 style={{ fontSize: 23 + "px" }}>{this.state.product.name}</h3>
+            <h3 className="f23">{this.state.product.name}</h3>
             <h5 style={{ marginTop: -5 + "px" }}>
               sale date : {this.state.product.saleDate}{" "}
             </h5>
 
-            <h3 style={{ fontSize: 23 + "px" }}>
-              ฿{this.state.product.price}{" "}
-            </h3>
+            <h3 className="f23">฿{this.state.product.price} </h3>
 
             {this.state.product.color && (
               <div className="radioGroup">
@@ -320,9 +318,7 @@ export default class ProductContent extends Component {
               <div className="commentShow">
                 <div className="commentBox">
                   <h3>testuser </h3>
-                  <h3>testuser </h3>
-                  {/* <h3>{this.state.product.comment[0].userName}</h3>
-            <h3>{this.state.product.comment[0].content}</h3> */}
+                  <h3>testcontent </h3>
                 </div>
               </div>
             </Grid>

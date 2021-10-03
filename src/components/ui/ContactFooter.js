@@ -52,7 +52,7 @@ const ContactFooter = () => {
                     <img
                       src={`${mem.image}`}
                       alt={`member${mem.id}`}
-                      className="pt-21 pb-20"
+                      className="pt-20 pb-20"
                       style={{
                         width: "150px",
                         height: "150px",

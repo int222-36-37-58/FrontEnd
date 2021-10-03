@@ -17,7 +17,7 @@ function ProductCard(props, { addToCart }) {
 
   const showColor = () => {
     setClickAdd(!clickAdd);
-
+    setQuantity(1);
     return;
   };
 
@@ -69,6 +69,12 @@ function ProductCard(props, { addToCart }) {
       {clickAdd && (
         <div className="colorModal">
           <div className="colorModalContent">
+            <img
+              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+              alt="imgProduct"
+              className="hoverCursor imageProduct"
+              style={{ borderRadius: "20px", marginTop: "20px" }}
+            />
             <div
               style={{ marginTop: 5 + "px", marginLeft: 10 + "px" }}
               className="radioGroup"
@@ -123,7 +129,7 @@ function ProductCard(props, { addToCart }) {
               style={{ width: 90 + "%", marginTop: -10 + "px" }}
               onClick={AddToCart}
             >
-              Add
+              Add - ฿{props.product.price * quantity}
             </button>
             <button
               className="delFromCart"

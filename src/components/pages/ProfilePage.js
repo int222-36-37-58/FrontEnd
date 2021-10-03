@@ -77,30 +77,23 @@ const ProfilePage = () => {
                 >
                   Menu
                 </h2>
-                <Link
-                  to="/profile/info"
-                  className="hoverChangeBackground"
-                  style={{ padding: "10px" }}
-                >
+                <Link to="/profile/info" className="hoverChangeBackground p-10">
                   <div>ข้อมูลของฉัน</div>
                 </Link>
                 <Link
                   to="/profile/changepassword"
-                  className="hoverChangeBackground"
-                  style={{ padding: "10px" }}
+                  className="hoverChangeBackground p-10"
                 >
                   <div>เปลี่ยนรหัสผ่าน</div>
                 </Link>
                 <Link
                   to="/profile/order"
-                  className="hoverChangeBackground"
-                  style={{ padding: "10px" }}
+                  className="hoverChangeBackground p-10"
                 >
                   <div>คำสั่งซื้อ</div>
                 </Link>
                 <div
-                  className="hoverChangeBackground"
-                  style={{ padding: "10px" }}
+                  className="hoverChangeBackground p-10"
                   onClick={() => handleLogout()}
                 >
                   log out
@@ -160,7 +153,6 @@ const ProfilePage = () => {
           </Grid>
 
           <Grid item xs={12} md={8}>
-            {/* {switchRender()} */}
             <Switch>
               <Route path={"/profile/info"}>
                 <ProfileInfoPage userData={userData} submit={update} />

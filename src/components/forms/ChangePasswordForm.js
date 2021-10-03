@@ -52,11 +52,12 @@ const ChangePasswordForm = () => {
 
   return (
     <div
+      className="w100"
       style={{
         backgroundColor: "white",
         marginTop: "20px",
         maxWidth: 680 + "px",
-        width: 100 + "%",
+
         borderRadius: 20 + "px",
         boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
       }}
@@ -86,7 +87,7 @@ const ChangePasswordForm = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6} style={{ paddingTop: 20 + "px" }}>
+        <Grid item xs={12} sm={6} className="pt-20">
           <TextField
             size="small"
             required
@@ -102,7 +103,7 @@ const ChangePasswordForm = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6} style={{ paddingTop: 20 + "px" }}>
+        <Grid item xs={12} sm={6} className="pt-20">
           <TextField
             size="small"
             required
@@ -118,11 +119,7 @@ const ChangePasswordForm = () => {
           />
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          style={{ paddingTop: 20 + "px", textAlign: "center" }}
-        >
+        <Grid item xs={12} className="pt-20" style={{ textAlign: "center" }}>
           <button
             className="AddButton"
             onClick={submit}
