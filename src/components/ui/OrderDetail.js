@@ -103,13 +103,14 @@ const OrderDetail = (props) => {
           สินค้าที่สั่งซื้อ
         </div>
         <table
-          className="orderTable"
+          className="orderTable "
           style={{
             paddingBottom: "10px",
             position: "relative",
-            marginLeft: 20 + "px",
-            marginRight: 20 + "px",
-            width: "95%",
+            textAlign: "center",
+            margin: "auto",
+            width: "90%",
+            marginBottom: "30px",
           }}
         >
           <thead className="orderTableHeader">
@@ -134,7 +135,11 @@ const OrderDetail = (props) => {
                       <img
                         src={`${process.env.REACT_APP_API_URL}/getImage/${odt.product.imageName}`}
                         alt={odt.product.imageName}
-                        style={{ maxWidth: "110px", height: "auto" }}
+                        style={{
+                          maxWidth: "100px",
+                          height: "auto",
+                          paddingTop: "5px",
+                        }}
                       />
                       <p style={{ textDecoration: "none", color: "black" }}>
                         {odt.product.name}
@@ -146,7 +151,11 @@ const OrderDetail = (props) => {
                   <td>{odt.color.colorName}</td>
                   <td>฿{odt.totalPrice}</td>
                   <td>
-                    <button className="AddButton" onClick={handleComment}>
+                    <button
+                      className="AddButton"
+                      style={{ padding: "2px" }}
+                      onClick={handleComment}
+                    >
                       comment
                     </button>
                   </td>
@@ -223,9 +232,11 @@ const OrderDetail = (props) => {
                       src={`${process.env.REACT_APP_API_URL}/getImage/${odt.product.imageName}`}
                       alt={odt.product.imageName}
                       style={{
-                        maxWidth: "300px",
-                        width: "auto",
-                        height: "auto",
+                        maxWidth: "200px",
+                        width: "95%",
+                        maxHeight: "300px",
+                        height: "100%",
+                        padding: "5px",
                       }}
                     />
                   </Link>

@@ -965,6 +965,9 @@ td {
   padding-left: 20px;
 }
 
+.pr-0 {
+  padding-right: 0;
+}
 .w100 {
   width: 100%;
 }

@@ -106,29 +106,37 @@ const ProfilePage = () => {
                     style={{
                       borderStyle: "solid",
                       borderWidth: " 0 0 1px 0 ",
-                      paddingBottom: "60px",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    <h2 style={{ float: "left", marginLeft: "20px" }}> Menu</h2>
-                    {!isShowMenu ? (
-                      <h2
-                        className="hoverChangeToNavBarColor IconInMenu"
-                        onClick={() => {
-                          setIsShowMenu(true);
-                        }}
-                      >
-                        <AddIcon />
-                      </h2>
-                    ) : (
-                      <h2
-                        className="hoverChangeToNavBarColor IconInMenu"
-                        onClick={() => {
-                          setIsShowMenu(false);
-                        }}
-                      >
-                        <RemoveIcon />
-                      </h2>
-                    )}
+                    <div className="f16 b" style={{ marginLeft: "20px" }}>
+                      {" "}
+                      Menu
+                    </div>
+                    <div>
+                      {!isShowMenu ? (
+                        <div
+                          className="hoverChangeToNavBarColor IconInMenu pr-0"
+                          onClick={() => {
+                            setIsShowMenu(true);
+                          }}
+                        >
+                          <AddIcon />
+                        </div>
+                      ) : (
+                        <div
+                          className="hoverChangeToNavBarColor IconInMenu pr-0"
+                          onClick={() => {
+                            setIsShowMenu(false);
+                          }}
+                        >
+                          <RemoveIcon />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </label>
                 <input type="checkbox" id="showProfileMenu" hidden />
