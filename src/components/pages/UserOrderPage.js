@@ -46,13 +46,12 @@ const UserOrderPage = () => {
 
   const formatDate = (orderDate) => {
     const buyDate = new Date(orderDate);
-
     let year = buyDate.getFullYear();
-    let month = buyDate.getMonth();
+    let month = parseInt(buyDate.getMonth()) + 1;
     let date = buyDate.getDate();
     let hours = buyDate.getHours();
     let mins = buyDate.getMinutes();
-    let dateformat = date + "/" + month+1 + "/" + year + " " + hours + ":" + mins;
+    let dateformat = date + "/" + month + "/" + year + " " + hours + ":" + mins;
     return dateformat;
   };
 
