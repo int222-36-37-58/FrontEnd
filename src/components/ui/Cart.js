@@ -19,9 +19,10 @@ const Cart = (props) => {
       }
     }
     setTotalPrice(total);
-  },[props.listProduct]);
+  }, [props.listProduct]);
 
   const handleCloseBox = () => {
+    setDialogHeader("");
     setShowDialog(false);
     setDialogContent("");
   };
@@ -76,9 +77,8 @@ const Cart = (props) => {
           open={props.isShowCart}
           anchor={"right"}
           onClose={props.onHandleCart(false)}
-         
         >
-          <List style={{ width: "90%",paddingLeft:'25px' }}>
+          <List style={{ width: "90%", paddingLeft: "25px" }}>
             {props.listProduct.length === 0 ? (
               <ListItem style={{ fontWeight: 800 }}>
                 ไม่มีสินค้าในตะกร้า
@@ -154,7 +154,7 @@ const Cart = (props) => {
                   fontWeight: 600,
                   borderStyle: "solid",
                   borderWidth: "0 0 1px 0",
-                  borderColor:"#e4e4e4",
+                  borderColor: "#e4e4e4",
                   maxWidth: "90%",
                   marginLeft: "20px",
                 }}

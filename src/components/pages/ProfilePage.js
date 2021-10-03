@@ -41,6 +41,7 @@ const ProfilePage = () => {
   };
 
   const handleCloseBox = () => {
+    setDialogContent("");
     setShowDialog(false);
     setDialogContent("");
   };
@@ -76,20 +77,30 @@ const ProfilePage = () => {
                 >
                   Menu
                 </h2>
-                <Link to="/profile/info" className="hoverChangeBackground">
+                <Link
+                  to="/profile/info"
+                  className="hoverChangeBackground"
+                  style={{ padding: "10px" }}
+                >
                   <div>ข้อมูลของฉัน</div>
                 </Link>
                 <Link
                   to="/profile/changepassword"
                   className="hoverChangeBackground"
+                  style={{ padding: "10px" }}
                 >
                   <div>เปลี่ยนรหัสผ่าน</div>
                 </Link>
-                <Link to="/profile/order" className="hoverChangeBackground">
+                <Link
+                  to="/profile/order"
+                  className="hoverChangeBackground"
+                  style={{ padding: "10px" }}
+                >
                   <div>คำสั่งซื้อ</div>
                 </Link>
                 <div
                   className="hoverChangeBackground"
+                  style={{ padding: "10px" }}
                   onClick={() => handleLogout()}
                 >
                   log out

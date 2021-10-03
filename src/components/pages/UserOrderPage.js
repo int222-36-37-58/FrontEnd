@@ -28,6 +28,7 @@ const UserOrderPage = () => {
 
   const handleCloseBox = () => {
     setShowDialog(false);
+    setDialogHeader("");
     setDialogContent("");
   };
 

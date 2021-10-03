@@ -86,37 +86,52 @@ const ContactFooter = () => {
         </DialogContent>
       </Dialog>
       <div className="contactFooterContainer">
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <button className="roleButton" onClick={() => setShowMember(true)}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <InfoIcon />
+        <Grid container justifyContent="center" alignItems="center" spacing={0}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            style={{ textAlign: "right", paddingRight: "10px" }}
+          >
+            <button className="roleButton" onClick={() => setShowMember(true)}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyItems: "end",
+                  alignItems: "center",
+                }}
+              >
+                <InfoIcon />
 
-              <div style={{ marginLeft: "5px", marginRight: "2px" }}>
-                {" "}
-                ข้อมูลผู้จัดทำ
+                <div style={{ marginLeft: "5px", marginRight: "2px" }}>
+                  {" "}
+                  ข้อมูลผู้จัดทำ
+                </div>
+
+                <NavigateNextIcon />
               </div>
-
-              <NavigateNextIcon />
+            </button>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            style={{ fontWeight: 600, fontSize: "17px", paddingLeft: "40px" }}
+          >
+            <div>
+              <h4>
+                <CheckIcon /> 3rd Year student from SIT KMUTT
+              </h4>
+              <h4>
+                <CheckIcon /> Our 2nd Project
+              </h4>
+              <h4>
+                <CheckIcon /> Thanks for visited
+              </h4>
             </div>
-          </button>
-        </div>
-        <div style={{ fontWeight: 600, fontSize: "17px" }}>
-          <h4>
-            <CheckIcon /> 3rd Year student from SIT KMUTT
-          </h4>
-          <h4>
-            <CheckIcon /> Our 2nd Project
-          </h4>
-          <h4>
-            <CheckIcon /> Thanks for visited
-          </h4>
-        </div>
+          </Grid>
+        </Grid>
       </div>
       <div className="sitFooter">
         <img

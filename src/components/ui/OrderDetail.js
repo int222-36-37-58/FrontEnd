@@ -78,7 +78,7 @@ const OrderDetail = (props) => {
         >
           <thead className="orderTableHeader">
             <tr>
-              <th>หมายเลขคำสั่งซื้อ</th>
+              <th>สินค้า</th>
               <th>ราคา</th>
               <th>จำนวน</th>
               <th>สี</th>
@@ -100,12 +100,13 @@ const OrderDetail = (props) => {
                         alt={odt.product.imageName}
                         style={{ maxWidth: "110px", height: "auto" }}
                       />
+                      <p style={{textDecoration:'none' , color:'black'}}>{odt.product.name}</p>
                     </Link>
                   </td>
                   <td>฿{odt.product.price}</td>
                   <td>{odt.quantity}</td>
                   <td>{odt.color.colorName}</td>
-                  <td>{odt.totalPrice}</td>
+                  <td>฿{odt.totalPrice}</td>
                   <td>
                     <button className="AddButton" onClick={handleComment}>
                       comment

@@ -18,6 +18,7 @@ const Home = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((res) => {
+        setDialogHeader("Success!!");
         setProducts(res.data);
       })
       .catch((err) => {
@@ -28,6 +29,7 @@ const Home = () => {
   };
 
   const handleCloseBox = () => {
+    setDialogContent("");
     setShowDialog(false);
     setDialogContent("");
   };
@@ -41,51 +43,49 @@ const Home = () => {
         dialogHeader={dialogHeader}
       />
       <Container maxWidth="xl">
-      <div
-        style={{
-          marginLeft: "auto",
-          marginRight: "auto",
-          maxWidth: 78 + "%",
-          marginTop: 1 + "rem",
-
-        
-        }}
-      >
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          spacing={0}
+        <div
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            maxWidth: 78 + "%",
+            marginTop: 1 + "rem",
+          }}
         >
-          <Grid item xs={12} md={3}>
-            <FilterBox></FilterBox>
-          </Grid>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            spacing={0}
+          >
+            <Grid item xs={12} md={3}>
+              <FilterBox></FilterBox>
+            </Grid>
 
-          <Grid item xs={12} md={8}>
-            <Container className="homeContainer">
-              <h4 style={{ textAlign: "right", marginTop: "-15px" }}>
-                {products.length} รายการ
-              </h4>
-              <Grid container direction="row" spacing={2}>
-                {products.map((product) => {
-                  return (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={6}
-                      md={5}
-                      lg={3}
-                      key={product.productId}
-                    >
-                      <ProductCard product={product}></ProductCard>
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </Container>
+            <Grid item xs={12} md={8}>
+              <Container className="homeContainer">
+                <h4 style={{ textAlign: "right", marginTop: "-15px" }}>
+                  {products.length} รายการ
+                </h4>
+                <Grid container direction="row" spacing={2}>
+                  {products.map((product) => {
+                    return (
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={5}
+                        lg={3}
+                        key={product.productId}
+                      >
+                        <ProductCard product={product}></ProductCard>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Container>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
       </Container>
     </>
   );

@@ -31,7 +31,7 @@ export default function CreateProductPage() {
 
   const handleCloseBox = () => {
     setShowDialog(false);
-
+    setDialogHeader("");
     setDialogContent("");
   };
 

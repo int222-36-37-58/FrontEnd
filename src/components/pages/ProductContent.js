@@ -100,7 +100,7 @@ export default class ProductContent extends Component {
       .delete(
         `${process.env.REACT_APP_API_URL}/products/${this.state.product.productId}`
       )
-      .then((res) => {
+      .then(() => {
         this.props.goShop();
       })
       .catch((err) => {
@@ -117,7 +117,7 @@ export default class ProductContent extends Component {
   };
 
   handleCloseBox = () => {
-    this.setState({ dialogContent: "", showDialog: false });
+    this.setState({ dialogContent: "", showDialog: false, dialogHeader: "" });
   };
 
   render() {

@@ -27,10 +27,6 @@ export default class RegisterForm extends Component {
     this.setState({ editMode: this.props.editMode });
   }
 
-  handleCloseBox = () => {
-    this.setState({ showUpdateComplete: false });
-  };
-
   onChange = (e) =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
@@ -114,7 +110,7 @@ export default class RegisterForm extends Component {
           height: "auto",
           backgroundColor: "white",
           borderRadius: 1 + "%",
-          marginBottom:350+'px',
+          marginBottom: 350 + "px",
         }}
       >
         <div className="headerRegister">
