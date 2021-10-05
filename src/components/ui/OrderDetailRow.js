@@ -22,16 +22,16 @@ const OrderDetailRow = (props) => {
         product: { productId: props.odt.product.productId },
         user: { userId: 1 },
       });
-
+      console.log(json);
       axios
         .post(`${process.env.REACT_APP_API_URL}/addcomment`, json, {
           headers: {
             "Content-Type": "application/json",
           },
         })
-        .then((res) => {
+        .then(() => {
           setDialogHeader("Success!!");
-          setDialogContent(res.data);
+          setDialogContent("ส่งความเห็นสำเร็จ");
         })
         .catch((err) => {
           setDialogHeader("Error");

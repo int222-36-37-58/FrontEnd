@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../index.css";
-import { InputBase, Hidden, MenuItem, Menu } from "@material-ui/core";
+import { InputBase, Hidden, Menu } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
@@ -21,7 +21,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
   const [isShowSearch, setIsShowSearch] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const [currentClick, setCurrentClick] = useState("");
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -89,7 +89,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
               {!isShowSearch ? (
                 <div
                   className="iconNav hoverCursor"
-                  style={{ borderWidth: " 0 0px 0 1px", textAlign: "center" }}
+                  style={{ borderWidth: " 0 1px 0 1px", textAlign: "center" }}
                   onClick={handleShowSearch(true)}
                 >
                   {" "}
@@ -108,7 +108,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
             </Hidden>
             <Link
               to="/profile/info"
-              style={{ textDecoration: "none", color: "white" }}
+              style={{ color: "white", textDecoration: "none" }}
             >
               <div
                 className="iconNav hoverCursor"
@@ -184,79 +184,123 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
           MenuListProps={{ onMouseLeave: () => setAnchorEl(false) }}
           PaperProps={{
             style: {
-              width: "180px",
+              width: "195px",
               display: "flex",
               textAlign: "right",
-              padding: "0",
               marginTop: "35px",
-              justifyContent: "center",
             },
           }}
         >
-          <MenuItem
-            component={Link}
-            to="/profile/info"
-            onClick={() => setAnchorEl(null)}
+          <Link to="/profile/info" className="link">
+            <div
+              onClick={() => {
+                setAnchorEl(null);
+                setCurrentClick("info");
+              }}
+              style={{
+                fontSize: "14px",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "left",
+                width: "195px",
+                fontWeight: "600",
+                maxWidth: "195px",
+              }}
+              className={
+                currentClick === "info"
+                  ? "currentClickStyle b hoverCursor"
+                  : "hoverCursor currentHoverStyle"
+              }
+            >
+              <PersonIcon className="pr-10" /> ข้อมูลของฉัน
+            </div>
+          </Link>
+          <Link to="/profile/changepassword" className="link">
+            <div
+              onClick={() => {
+                setAnchorEl(null);
+                setCurrentClick("changepassword");
+              }}
+              style={{
+                fontSize: "14px",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "left",
+                fontWeight: "600",
+                width: "100%",
+              }}
+              className={
+                currentClick === "changepassword"
+                  ? "currentClickStyle b hoverCursor"
+                  : "hoverCursor currentHoverStyle"
+              }
+            >
+              <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
+            </div>
+          </Link>
+
+          <Link to="/profile/order" className="link">
+            <div
+              onClick={() => {
+                setAnchorEl(null);
+                setCurrentClick("order");
+              }}
+              style={{
+                fontSize: "14px",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "left",
+                fontWeight: "600",
+                width: "100%",
+              }}
+              className={
+                currentClick === "order"
+                  ? "currentClickStyle b hoverCursor"
+                  : "hoverCursor currentHoverStyle"
+              }
+            >
+              <ListAltIcon className="pr-10" /> คำสั่งซื้อ
+            </div>
+          </Link>
+          <Link to="/profile/createproduct" className="link">
+            <div
+              onClick={() => {
+                setAnchorEl(null);
+                setCurrentClick("myshop");
+              }}
+              style={{
+                fontSize: "14px",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "left",
+                fontWeight: "600",
+                width: "100%",
+              }}
+              className={
+                currentClick === "myshop"
+                  ? "currentClickStyle b hoverCursor"
+                  : "hoverCursor currentHoverStyle"
+              }
+            >
+              {" "}
+              <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
+            </div>
+          </Link>
+          <div
+            onClick={() => {
+              setAnchorEl(null);
+              setCurrentClick("");
+            }}
             style={{
               fontSize: "14px",
               padding: "10px",
               display: "flex",
               justifyContent: "left",
             }}
-          >
-            <PersonIcon className="pr-10" /> ข้อมูลของฉัน
-          </MenuItem>
-          <MenuItem
-            component={Link}
-            to="/profile/changepassword"
-            onClick={() => setAnchorEl(null)}
-            style={{
-              fontSize: "14px",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "left",
-            }}
-          >
-            <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
-          </MenuItem>
-          <MenuItem
-            component={Link}
-            to="/profile/order"
-            onClick={() => setAnchorEl(null)}
-            style={{
-              fontSize: "14px",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "left",
-            }}
-          >
-            <ListAltIcon className="pr-10" /> คำสั่งซื้อ
-          </MenuItem>
-          <MenuItem
-            component={Link}
-            to="/profile/createproduct"
-            onClick={() => setAnchorEl(null)}
-            style={{
-              fontSize: "14px",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "left",
-            }}
-          >
-            {" "}
-            <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
-          </MenuItem>
-          <MenuItem
-            onClick={() => setAnchorEl(null)}
-            style={{
-              fontSize: "14px",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "left",
-            }}
+            className="hoverCursor b p-10 currentHoverStyle"
           >
             ออกจากระบบ
-          </MenuItem>
+          </div>
         </Menu>
       </Hidden>
     </>

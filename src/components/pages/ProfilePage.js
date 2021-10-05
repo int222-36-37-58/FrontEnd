@@ -27,6 +27,7 @@ const ProfilePage = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
+  const [currentClick, setCurrentClick] = useState("");
 
   const update = (data) => {
     axios
@@ -79,28 +80,62 @@ const ProfilePage = () => {
                 >
                   Menu
                 </h2>
-                <Link to="/profile/info" className="hoverChangeBackground p-10">
+                <Link
+                  to="/profile/info"
+                  onClick={() => setCurrentClick("info")}
+                  className={
+                    currentClick === "info"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
+                >
                   <div>ข้อมูลของฉัน</div>
                 </Link>
                 <Link
                   to="/profile/changepassword"
-                  className="hoverChangeBackground p-10"
+                  onClick={() => setCurrentClick("changepassword")}
+                  className={
+                    currentClick === "changepassword"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
                 >
                   <div>เปลี่ยนรหัสผ่าน</div>
                 </Link>
                 <Link
                   to="/profile/order"
-                  className="hoverChangeBackground p-10"
+                  onClick={() => setCurrentClick("order")}
+                  className={
+                    currentClick === "order"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
                 >
                   <div>คำสั่งซื้อ</div>
                 </Link>
-                <Link to="/profile/createproduct" className="hoverChangeBackground p-10">
-                    <div>เริ่มขายสินค้า</div>
-                  </Link>
-                  
-                <Link to="/profile/myshop" className="hoverChangeBackground p-10">
-                    <div>ร้านค้าของฉัน</div>
-                  </Link>
+                <Link
+                  to="/profile/createproduct"
+                  onClick={() => setCurrentClick("createproduct")}
+                  className={
+                    currentClick === "createproduct"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
+                >
+                  <div>เริ่มขายสินค้า</div>
+                </Link>
+
+                <Link
+                  to="/profile/myshop"
+                  onClick={() => setCurrentClick("myshop")}
+                  className={
+                    currentClick === "myshop"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
+                >
+                  <div>ร้านค้าของฉัน</div>
+                </Link>
 
                 <div
                   className="hoverChangeBackground p-10"
@@ -164,10 +199,16 @@ const ProfilePage = () => {
                   <Link to="/profile/order" className="hoverChangeBackground">
                     <h4>คำสั่งซื้อ</h4>
                   </Link>
-                  <Link to="/profile/createproduct" className="hoverChangeBackground">
+                  <Link
+                    to="/profile/createproduct"
+                    className="hoverChangeBackground"
+                  >
                     <h4>เริ่มขายสินค้า</h4>
                   </Link>
-                  <Link to="/profile/createproduct" className="hoverChangeBackground">
+                  <Link
+                    to="/profile/createproduct"
+                    className="hoverChangeBackground"
+                  >
                     <h4>ร้านค้าของฉัน</h4>
                   </Link>
                   <h4>ออกจากระบบ</h4>
@@ -191,11 +232,11 @@ const ProfilePage = () => {
               </Route>
               <Route path={"/profile/createproduct"}>
                 {" "}
-                <CreateProductPage/>
+                <CreateProductPage />
               </Route>
               <Route path={"/profile/myshop"}>
                 {" "}
-                <MyStorePage/>
+                <MyStorePage />
               </Route>
             </Switch>
           </Grid>

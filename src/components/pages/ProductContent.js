@@ -9,7 +9,7 @@ import ResponseDialog from "../ui/ResponseDialog";
 export default class ProductContent extends Component {
   state = {
     product: {},
-    comments : [],
+    comments: [],
     user: {
       userId: 1,
       userName: "testuser",
@@ -45,15 +45,16 @@ export default class ProductContent extends Component {
         this.props.notFound();
       });
 
-    axios.get(`${process.env.REACT_APP_API_URL}/${id}/comment`)  
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/${id}/comment`)
       .then((res) => {
-        this.setState({ comments : res.data})
-        
+        this.setState({ comments: res.data });
 
-      }).catch(() => {
-        alert("load errors")
+        console.log(res.data);
+      })
+      .catch(() => {
+        alert("load comments errors");
       });
-
   }
 
   chooseColor = (e) => {
@@ -340,11 +341,22 @@ export default class ProductContent extends Component {
 
               <div className="commentShow">
                 <div className="commentBox">
-                 { this.state.comments.map(cm => {
-                   return <div><h3>{cm.userId}</h3><h3>{cm.content}</h3></div>
-
-
-                 })}
+                  {this.state.comments.map((cm, i) => {
+                    return (
+                      <div
+                        style={{
+                          borderStyle: "solid",
+                          borderWidth: "0 0 1px 0 ",
+                          borderColor: "#e4e4e4",
+                        }}
+                      >
+                        <h3>
+                          ความเห็นที่ {i + 1} โดย : {cm.user.userName}
+                        </h3>
+                        <h3> {cm.content}</h3>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </Grid>
