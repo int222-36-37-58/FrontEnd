@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Grid, Hidden } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Hidden } from "@material-ui/core";
+import OrderDetailRow from "./OrderDetailRow";
 const OrderDetail = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -14,10 +14,6 @@ const OrderDetail = (props) => {
     }
     setTotalPrice(total);
   }, [props.order]);
-
-  const handleComment = () => {
-    alert("did not handle this function ");
-  };
 
   const formatDate = () => {
     const buyDate = new Date(props.order.date);
@@ -125,42 +121,7 @@ const OrderDetail = (props) => {
           </thead>
           <tbody>
             {props.order.orderDetail.map((odt) => {
-              return (
-                <tr key={odt.orderDetailId} style={{ fontWeight: 900 }}>
-                  <td style={{ padding: "5px" }}>
-                    <Link
-                      to={`/product/${odt.product.productId}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <img
-                        src={`${process.env.REACT_APP_API_URL}/getImage/${odt.product.imageName}`}
-                        alt={odt.product.imageName}
-                        style={{
-                          maxWidth: "100px",
-                          height: "auto",
-                          paddingTop: "5px",
-                        }}
-                      />
-                      <p style={{ textDecoration: "none", color: "black" }}>
-                        {odt.product.name}
-                      </p>
-                    </Link>
-                  </td>
-                  <td>฿{odt.product.price}</td>
-                  <td>{odt.quantity}</td>
-                  <td>{odt.color.colorName}</td>
-                  <td>฿{odt.totalPrice}</td>
-                  <td>
-                    <button
-                      className="AddButton"
-                      style={{ padding: "2px" }}
-                      onClick={handleComment}
-                    >
-                      comment
-                    </button>
-                  </td>
-                </tr>
-              );
+              return <OrderDetailRow odt={odt} />;
             })}
             <tr>
               <td
@@ -223,85 +184,9 @@ const OrderDetail = (props) => {
 
             {props.order.orderDetail.map((odt) => {
               return (
-                <div style={{ paddingBottom: "20px" }} key={odt.orderDetailId}>
-                  <Link
-                    to={`/product/${odt.product.productId}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <img
-                      src={`${process.env.REACT_APP_API_URL}/getImage/${odt.product.imageName}`}
-                      alt={odt.product.imageName}
-                      style={{
-                        maxWidth: "200px",
-                        width: "95%",
-                        maxHeight: "300px",
-                        height: "100%",
-                        padding: "5px",
-                      }}
-                    />
-                  </Link>
-                  <div
-                    style={{
-                      textAlign: "left",
-                      paddingLeft: "20px",
-                      fontWeight: 600,
-                    }}
-                  >
-                    ชื่อสินค้า
-                    <div>{odt.product.name}</div>
-                  </div>
-                  <Grid
-                    container
-                    style={{
-                      textAlign: "left",
-                      paddingLeft: "10px",
-                      fontWeight: 400,
-                      borderStyle: "solid",
-                      borderWidth: "0 0 1px 0",
-                      borderColor: "black",
-                      paddingBottom: "20px",
-                      width: "95%",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      ID
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      {odt.product.productId}
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      ราคา
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      ฿{odt.product.price}
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      สี
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      {odt.color.colorName}
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      จำนวน
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      {odt.quantity}
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      รวม
-                    </Grid>
-
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      ฿{odt.totalPrice}
-                    </Grid>
-                    <Grid item xs={6} style={{ padding: "3px" }}>
-                      <button className="AddButton" onClick={handleComment}>
-                        comment
-                      </button>
-                    </Grid>
-                  </Grid>
-                </div>
+                <>
+                  <OrderDetailRow odt={odt} />{" "}
+                </>
               );
             })}
 

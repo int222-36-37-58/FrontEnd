@@ -56,15 +56,17 @@ export default class FilterBox extends Component {
               }}
             >
               <div>ฟิลเตอร์</div>
-              <div>
-                <button
-                  className="AddButton"
-                  style={{ padding: "3px" }}
-                  onClick={() => this.clearCheck()}
-                >
-                  ล้างการกรอง
-                </button>
-              </div>
+              {this.state.checkData.length > 0 && (
+                <div>
+                  <button
+                    className="AddButton"
+                    style={{ padding: "3px" }}
+                    onClick={() => this.clearCheck()}
+                  >
+                    ล้างการกรอง
+                  </button>
+                </div>
+              )}
             </div>
 
             <div>

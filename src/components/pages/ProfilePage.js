@@ -10,6 +10,8 @@ import ProfileInfoPage from "./ProfileInfoPage";
 import UserOrderPage from "./UserOrderPage";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
+import CreateProductPage from "./CreateProductPage";
+import MyStorePage from "./MyStorePage";
 const ProfilePage = () => {
   const [userData] = useState({
     id: "1",
@@ -92,11 +94,19 @@ const ProfilePage = () => {
                 >
                   <div>คำสั่งซื้อ</div>
                 </Link>
+                <Link to="/profile/createproduct" className="hoverChangeBackground p-10">
+                    <div>เริ่มขายสินค้า</div>
+                  </Link>
+                  
+                <Link to="/profile/myshop" className="hoverChangeBackground p-10">
+                    <div>ร้านค้าของฉัน</div>
+                  </Link>
+
                 <div
                   className="hoverChangeBackground p-10"
                   onClick={() => handleLogout()}
                 >
-                  log out
+                  ออกจากระบบ
                 </div>
               </Hidden>
 
@@ -154,7 +164,13 @@ const ProfilePage = () => {
                   <Link to="/profile/order" className="hoverChangeBackground">
                     <h4>คำสั่งซื้อ</h4>
                   </Link>
-                  <h4>log out</h4>
+                  <Link to="/profile/createproduct" className="hoverChangeBackground">
+                    <h4>เริ่มขายสินค้า</h4>
+                  </Link>
+                  <Link to="/profile/createproduct" className="hoverChangeBackground">
+                    <h4>ร้านค้าของฉัน</h4>
+                  </Link>
+                  <h4>ออกจากระบบ</h4>
                 </p>
               </Hidden>
             </div>
@@ -172,6 +188,14 @@ const ProfilePage = () => {
               <Route path={"/profile/order"}>
                 {" "}
                 <UserOrderPage />
+              </Route>
+              <Route path={"/profile/createproduct"}>
+                {" "}
+                <CreateProductPage/>
+              </Route>
+              <Route path={"/profile/myshop"}>
+                {" "}
+                <MyStorePage/>
               </Route>
             </Switch>
           </Grid>

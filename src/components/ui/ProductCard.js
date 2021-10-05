@@ -169,13 +169,25 @@ function ProductCard(props, { addToCart }) {
           >
             <h5 className="titleWrap">{props.product.name}</h5>
           </Link>
-          <button
-            className="AddButton"
-            style={{ width: 90 + "%" }}
-            onClick={showColor}
-          >
-            Add - ฿{props.product.price}{" "}
-          </button>
+          {props.product.quantity < 1 ? (
+            <button
+              className="disabledButton "
+              disabled
+              style={{ width: 90 + "%" }}
+             
+            >
+              Sold out
+            </button>
+          ) : (
+            <button
+              className="AddButton"
+              style={{ width: 90 + "%" }}
+              onClick={showColor}
+            >
+              Add - ฿{props.product.price}{" "}
+            </button>
+          )}
+
           <button
             className="InfoButton"
             style={{ width: 90 + "%" }}

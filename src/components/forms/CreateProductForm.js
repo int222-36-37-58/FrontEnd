@@ -28,11 +28,9 @@ export default class CreateProductForm extends Component {
       user: {
         userId: 1,
         userName: "testuser",
-        password: "Testpassword1",
         address: "home bangkok 10150",
         tel: 1234567891,
         fullName: "testfullname",
-        role: "ROLE_USER",
       },
     },
     types: [],
@@ -116,6 +114,14 @@ export default class CreateProductForm extends Component {
     if (!e.type) {
       errors.type = true;
     }
+    if (!e.quantity || e.quantity < 1) {
+      errors.quantity = true;
+    }
+
+    if (!e.color || e.color.length < 1) {
+      errors.color = true;
+    }
+
     this.setState({ errors });
     if (Object.keys(errors).length > 0) {
       return "err";
@@ -186,9 +192,13 @@ export default class CreateProductForm extends Component {
                     id="imageFile"
                     name="imageFile"
                     onChange={this.onImageChange}
+                    accept="image/*"
                     hidden
                   />
                 </Button>
+                {this.state.errors.imageName && (
+                  <div style={{ color: "red" }}>Please insert Image!</div>
+                )}
               </Grid>
 
               <Grid item xs={12}>
@@ -238,7 +248,7 @@ export default class CreateProductForm extends Component {
                 <TextField
                   required
                   fullWidth
-                  error={this.state.errors.price}
+                  error={this.state.errors.quantity}
                   type="number"
                   inputProps={{ minLength: 1, maxLength: 10 }}
                   id="quantity"
@@ -292,18 +302,20 @@ export default class CreateProductForm extends Component {
                       );
                     })}
                   </FormGroup>
+                  {this.state.errors.color && (
+                    <div style={{ color: "red" }}>Please select color!</div>
+                  )}
                 </div>
               </Grid>
 
               <Grid item xs={12} align="center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ marginTop: 30 + "px" }}
+                <button
+                 className="AddButton"
+                  style={{ marginTop: 30 + "px",padding:'5px 20px 5px 20px' }}
                   onClick={this.onSubmit}
                 >
                   Submit
-                </Button>
+                </button>
               </Grid>
             </Grid>
           </form>

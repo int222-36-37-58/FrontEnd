@@ -1,4 +1,4 @@
-import { Container, Grid, Hidden } from "@material-ui/core";
+import { Container, Grid, Hidden, Tooltip } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ResponseDialog from "../ui/ResponseDialog";
@@ -99,11 +99,14 @@ const UserOrderPage = () => {
                         <td>฿{computedPrice(order)}</td>
                         <td>Success!</td>
                         <td>
-                          {" "}
+                         
+                          <Tooltip title="ข้อมูลเพิ่มเติม" arrow>
                           <MoreHorizIcon
                             className="hoverCursor"
                             onClick={() => showOrderDetail(order)}
-                          />{" "}
+                            
+                          />
+                          </Tooltip>
                         </td>
                       </tr>
                     );

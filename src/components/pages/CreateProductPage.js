@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import ResponseDialog from "../ui/ResponseDialog";
 import { useHistory } from "react-router";
-
-export default function CreateProductPage() {
+const CreateProductPage = () => {
   const history = useHistory();
   const submit = (data) => {
     axios
@@ -48,3 +47,7 @@ export default function CreateProductPage() {
     </>
   );
 }
+
+
+
+export default CreateProductPage;

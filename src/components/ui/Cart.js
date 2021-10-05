@@ -35,11 +35,6 @@ const Cart = (props) => {
       user: {
         userId: 1,
         userName: "testuser",
-        password: "Testpassword1",
-        address: "home bangkok 10150",
-        tel: 1234567891,
-        fullName: "testfullname",
-        role: "ROLE_USER",
       },
     };
     console.log(order);

@@ -9,6 +9,7 @@ import ResponseDialog from "../ui/ResponseDialog";
 export default class ProductContent extends Component {
   state = {
     product: {},
+    comments : [],
     user: {
       userId: 1,
       userName: "testuser",
@@ -43,6 +44,16 @@ export default class ProductContent extends Component {
       .catch(() => {
         this.props.notFound();
       });
+
+    axios.get(`${process.env.REACT_APP_API_URL}/${id}/comment`)  
+      .then((res) => {
+        this.setState({ comments : res.data})
+        
+
+      }).catch(() => {
+        alert("load errors")
+      });
+
   }
 
   chooseColor = (e) => {
@@ -235,13 +246,25 @@ export default class ProductContent extends Component {
                 </button>
               </>
             ) : (
-              <button
-                className="AddButton"
-                style={{ padding: 10 + "px", width: 45 + "%" }}
-                onClick={this.addToCart}
-              >
-                Add - ฿{this.state.product.price * this.state.quantityAdd}{" "}
-              </button>
+              [
+                this.state.product.quantity > 1 ? (
+                  <button
+                    className="AddButton"
+                    style={{ padding: 10 + "px", width: 45 + "%" }}
+                    onClick={this.addToCart}
+                  >
+                    Add - ฿{this.state.product.price * this.state.quantityAdd}{" "}
+                  </button>
+                ) : (
+                  <button
+                    className="disabledButton"
+                    disabled
+                    style={{ padding: 10 + "px", width: 45 + "%" }}
+                  >
+                    Sold out
+                  </button>
+                ),
+              ]
             )}
           </Grid>
         </Grid>
@@ -317,8 +340,11 @@ export default class ProductContent extends Component {
 
               <div className="commentShow">
                 <div className="commentBox">
-                  <h3>testuser </h3>
-                  <h3>testcontent </h3>
+                 { this.state.comments.map(cm => {
+                   return <div><h3>{cm.userId}</h3><h3>{cm.content}</h3></div>
+
+
+                 })}
                 </div>
               </div>
             </Grid>
