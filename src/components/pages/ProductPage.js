@@ -5,7 +5,7 @@ import { addToCart } from "../../actions/cart";
 import { editProduct } from "../../actions/product";
 import ProductContent from "./ProductContent";
 
-const ProductPage = ({ addToCart,editProduct }) => {
+const ProductPage = ({ addToCart, editProduct }) => {
   const history = useHistory();
 
   const notFound = () => {
@@ -14,16 +14,21 @@ const ProductPage = ({ addToCart,editProduct }) => {
 
   const goShop = () => {
     history.push("/");
+  };
 
-  }
-
-
-  return <ProductContent addItem={addToCart} editProduct={editProduct} notFound={notFound} goShop={goShop} />;
+  return (
+    <ProductContent
+      addItem={addToCart}
+      editProduct={editProduct}
+      notFound={notFound}
+      goShop={goShop}
+    />
+  );
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
-    editProduct : (product) => dispatch(editProduct(product)),
+    editProduct: (product) => dispatch(editProduct(product)),
   };
 };
 

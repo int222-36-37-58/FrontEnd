@@ -17,28 +17,32 @@ import FormGroup from "@material-ui/core/FormGroup";
 import axios from "axios";
 
 export default class CreateProductForm extends Component {
-  state = {
-    data: {
-      imageName: "",
-      name: "",
-      description: "",
-      price: "",
-      type: "",
-      color: [],
-      user: {
-        userId: 1,
-        userName: "testuser",
-        address: "home bangkok 10150",
-        tel: 1234567891,
-        fullName: "testfullname",
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {
+        imageName: "",
+        name: "",
+        description: "",
+        price: "",
+        type: "",
+        color: [],
+        user: {
+          userId: 1,
+          userName: "testuser",
+          address: "home bangkok 10150",
+          tel: 1234567891,
+          fullName: "testfullname",
+        },
       },
-    },
-    types: [],
-    color: [],
-    imageFile: null,
-    imagePreview: noImage,
-    errors: {},
-  };
+      types: [],
+      color: [],
+      imageFile: null,
+      imagePreview: noImage,
+      errors: {},
+    };
+  }
+
   onChange = (e) =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
@@ -46,10 +50,7 @@ export default class CreateProductForm extends Component {
 
   chooseColor = (e) => {
     let colorList = [...this.state.data.color, e.target.value];
-    if (
-      this.state.data.color.findIndex((f) => f.colorId === e.target.value) !==
-      -1
-    ) {
+    if (this.state.data.color.findIndex((f) => f === e.target.value) !== -1) {
       colorList = colorList.filter((f) => f !== e.target.value);
     }
     this.setState({
@@ -69,8 +70,18 @@ export default class CreateProductForm extends Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) {
+      this.setState({ data: this.props.data });
+      this.setState({
+        imagePreview: `${process.env.REACT_APP_API_URL}/getImage/${this.props.data.imageName}`,
+      });
+    }
+  }
+
   onSubmit = () => {
     let data = Object.assign({}, this.state.data);
+    console.log(data);
     const invalid = this.validate(this.state.data);
     if (invalid !== "err") {
       var today = new Date().toISOString();
@@ -78,10 +89,8 @@ export default class CreateProductForm extends Component {
       var colorObj = intColor.map((cl) =>
         this.state.color.find((c) => c.colorId === cl)
       );
-
-      var typeObj = this.state.types.find(
-        (t) => t.typeId === this.state.data.type
-      );
+      var intType = parseInt(this.state.data.type);
+      var typeObj = this.state.types.find((t) => t.typeId === intType);
 
       data.color = colorObj;
       data.type = typeObj;
@@ -211,6 +220,7 @@ export default class CreateProductForm extends Component {
                   id="name"
                   name="name"
                   label="Product Name"
+                  value={this.state.data.name}
                   onChange={this.onChange}
                   helperText="3 - 40 Character "
                 />
@@ -226,6 +236,7 @@ export default class CreateProductForm extends Component {
                   id="description"
                   name="description"
                   label="Description"
+                  value={this.state.data.description}
                   onChange={this.onChange}
                   helperText="describe your Product"
                 />
@@ -240,6 +251,7 @@ export default class CreateProductForm extends Component {
                   id="price"
                   name="price"
                   label="Price"
+                  value={this.state.data.price}
                   onChange={this.onChange}
                   helperText="enter Product Price"
                 />
@@ -254,6 +266,7 @@ export default class CreateProductForm extends Component {
                   id="quantity"
                   name="quantity"
                   label="Quantity"
+                  value={this.state.data.quantity}
                   onChange={this.onChange}
                   helperText="enter Product Quantity"
                 />
@@ -266,6 +279,7 @@ export default class CreateProductForm extends Component {
                     required
                     error={this.state.errors.type}
                     name="type"
+                    value={this.state.data.type}
                     onChange={this.onChange}
                     defaultValue="0"
                   >
@@ -294,7 +308,12 @@ export default class CreateProductForm extends Component {
                               icon={<CircleUnchecked />}
                               checkedIcon={<CircleCheckedFilled />}
                               onChange={this.chooseColor}
-                              value={color.colorId}
+                              checked={
+                                this.state.data.color.indexOf(
+                                  `${color.colorId}`
+                                ) !== -1
+                              }
+                              value={`${color.colorId}`}
                             />
                           }
                           label={color.colorName}
@@ -310,8 +329,8 @@ export default class CreateProductForm extends Component {
 
               <Grid item xs={12} align="center">
                 <button
-                 className="AddButton"
-                  style={{ marginTop: 30 + "px",padding:'5px 20px 5px 20px' }}
+                  className="AddButton"
+                  style={{ marginTop: 30 + "px", padding: "5px 20px 5px 20px" }}
                   onClick={this.onSubmit}
                 >
                   Submit
@@ -327,4 +346,30 @@ export default class CreateProductForm extends Component {
 
 CreateProductForm.propTypes = {
   submit: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    productId: PropTypes.number,
+    imageName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    color: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
+  }),
+};
+
+CreateProductForm.defaultProps = {
+  imageName: "",
+  name: "",
+  description: "",
+  price: "",
+  type: "",
+  color: [],
+  user: {
+    userId: 1,
+    userName: "testuser",
+    address: "home bangkok 10150",
+    tel: 1234567891,
+    fullName: "testfullname",
+  },
 };

@@ -54,7 +54,6 @@ const ProductContent = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/${id}/comment`)
       .then((res) => {
         setComments(res.data);
-        console.log(res.data);
       })
       .catch(() => {
         alert("load comments errors");
@@ -66,7 +65,6 @@ const ProductContent = (props) => {
   };
 
   const minusQuantity = () => {
-    console.log(product.color);
     if (quantityAdd > 1) {
       let quantity = quantityAdd - 1;
       setQuantityAdd(quantity);
@@ -371,6 +369,7 @@ const ProductContent = (props) => {
                 {comments.map((cm, i) => {
                   return (
                     <div
+                      key={i}
                       style={{
                         borderStyle: "solid",
                         borderWidth: "0 0 1px 0 ",

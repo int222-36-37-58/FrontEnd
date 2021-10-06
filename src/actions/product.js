@@ -6,3 +6,9 @@ export const editProduct = (product) => ({
     product,
   },
 });
+
+export const clearProduct = () => ({
+  type: type.CLEAR_PRODUCT,
+
+
+})

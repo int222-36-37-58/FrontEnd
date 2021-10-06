@@ -3,9 +3,8 @@ import CreateProductForm from "../forms/CreateProductForm";
 import React, { useState } from "react";
 import axios from "axios";
 import ResponseDialog from "../ui/ResponseDialog";
-import { useHistory } from "react-router";
+
 const CreateProductPage = () => {
-  const history = useHistory();
   const submit = (data) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/products/add`, data, {
@@ -15,7 +14,9 @@ const CreateProductPage = () => {
       })
       .then(() => {
         if (showDialog === false) {
-          history.push("/");
+          setDialogHeader("Success!!");
+          setDialogContent("Add Success!");
+          setShowDialog(true);
         }
       })
       .catch((err) => {
@@ -46,8 +47,6 @@ const CreateProductPage = () => {
       <CreateProductForm submit={submit} />
     </>
   );
-}
-
-
+};
 
 export default CreateProductPage;

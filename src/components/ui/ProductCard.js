@@ -88,7 +88,7 @@ function ProductCard(props, { addToCart }) {
                       id={color.colorName}
                       name="color"
                       value={`${color.colorId}`}
-                      onChange={chooseColor}
+                      onClick={chooseColor}
                     />
                     <label htmlFor={color.colorName}>{color.colorName}</label>
                   </span>
@@ -174,7 +174,6 @@ function ProductCard(props, { addToCart }) {
               className="disabledButton "
               disabled
               style={{ width: 90 + "%" }}
-             
             >
               Sold out
             </button>
