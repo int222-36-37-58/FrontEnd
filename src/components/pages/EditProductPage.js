@@ -5,6 +5,7 @@ import CreateProductForm from "../forms/CreateProductForm";
 import { clearProduct } from "../../actions/product";
 import axios from "axios";
 import ResponseDialog from "../ui/ResponseDialog";
+import ConfirmDialog from "../ui/ConfirmDialog";
 
 const EditProductPage = ({ product, clearProduct }) => {
   const [prd, setPrd] = useState({});
@@ -12,6 +13,11 @@ const EditProductPage = ({ product, clearProduct }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
+  const [editProduct, setEditProduct] = useState({});
+  const [confirmBox, setConfirmBox] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
 
   useEffect(() => {
     if (product.type) {
@@ -24,15 +30,16 @@ const EditProductPage = ({ product, clearProduct }) => {
       pro.color = col;
       setPrd(pro);
     } else {
-      history.push("/profile/createproduct");
+      history.push("/profile/info");
     }
   }, [history, product]);
 
-  const submitEditProduct = (data) => {
+  const submitEditProduct = () => {
+
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/products/put/${product.productId}`,
-        data,
+        editProduct,
         {
           headers: {
             "Content-type": "multipart/form-data",
@@ -49,14 +56,27 @@ const EditProductPage = ({ product, clearProduct }) => {
         setDialogContent(err.message);
         setShowDialog(true);
       });
-
-    clearProduct();
+     handleCloseConfirm();
   };
 
   const handleCloseBox = () => {
     setShowDialog(false);
     setDialogHeader("");
     setDialogContent("");
+    clearProduct();
+    history.push(`/product/${product.productId}`);
+  };
+
+  const handleCloseConfirm = () => {
+    setConfirmBox({ showConfirm: false, confirmContent: "" });
+  };
+
+  const receiveProduct = (data) => {
+    setEditProduct(data);
+    setConfirmBox({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่จะแก้ไขข้อมูลไหม`,
+    });
   };
 
   return (
@@ -68,7 +88,12 @@ const EditProductPage = ({ product, clearProduct }) => {
         dialogContent={dialogContent}
         dialogHeader={dialogHeader}
       />{" "}
-      <CreateProductForm data={prd} submit={submitEditProduct} />
+      <ConfirmDialog
+        confirmInfo={confirmBox}
+        handleCloseBox={handleCloseConfirm}
+        submit={submitEditProduct}
+      />
+      <CreateProductForm data={prd} submit={receiveProduct} />
     </>
   );
 };

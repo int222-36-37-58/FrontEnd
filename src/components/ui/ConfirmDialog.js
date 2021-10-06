@@ -25,7 +25,7 @@ const ConfirmDialog = (props) => {
               style={{ marginRight: "10px" }}
               onClick={confirmCondition}
             >
-              <div className="f16"> ยืนยันการลบ</div>
+              <div className="f16"> ยืนยัน</div>
             </button>
           </div>
           <div>

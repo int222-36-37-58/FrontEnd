@@ -206,7 +206,7 @@ const ProductContent = (props) => {
                       type="radio"
                       id={col.colorName}
                       name="color"
-                      value={`${col.colorId}`}
+                      defaultValue={col.colorId}
                       onChange={chooseColor}
                     />
                     <label htmlFor={col.colorName}>{col.colorName}</label>
@@ -286,7 +286,7 @@ const ProductContent = (props) => {
         <Grid container>
           <Grid item xs={12}>
             <label htmlFor="infoProduct">
-              <div className="infoBox f15" onClick={clickedInfo}>
+              <div className="infoBox f15">
                 <h2 className="infoText">Information</h2>
                 {!isShowInfo ? (
                   <h5 className="plusIcon">
@@ -299,7 +299,13 @@ const ProductContent = (props) => {
                 )}
               </div>
             </label>
-            <input type="checkbox" id="infoProduct" hidden />
+            <input
+              type="checkbox"
+              id="infoProduct"
+              hidden
+              defaultValue=""
+              onChange={clickedInfo}
+            />
 
             <div className="infoShow">
               <h3
@@ -336,7 +342,7 @@ const ProductContent = (props) => {
           </Grid>
           <Grid item xs={12}>
             <label htmlFor="commentsProduct">
-              <div className="infoBox f15" onClick={clickedComments}>
+              <div className="infoBox f15">
                 <h2 className="infoText">comments</h2>
                 {!isShowComments ? (
                   <h5 className="plusIcon">
@@ -349,7 +355,13 @@ const ProductContent = (props) => {
                 )}
               </div>
             </label>
-            <input type="checkbox" id="commentsProduct" hidden />
+            <input
+              type="checkbox"
+              id="commentsProduct"
+              hidden
+              defaultValue=""
+              onChange={clickedComments}
+            />
 
             <div className="commentShow">
               <div className="commentBox">

@@ -121,7 +121,7 @@ const OrderDetail = (props) => {
           </thead>
           <tbody>
             {props.order.orderDetail.map((odt) => {
-              return <OrderDetailRow odt={odt} />;
+              return <OrderDetailRow odt={odt} key={odt.orderDetailId} />;
             })}
             <tr>
               <td
@@ -184,9 +184,9 @@ const OrderDetail = (props) => {
 
             {props.order.orderDetail.map((odt) => {
               return (
-                <>
+                <React.Fragment key={odt.orderDetailId}>
                   <OrderDetailRow odt={odt} />{" "}
-                </>
+                </React.Fragment>
               );
             })}
 

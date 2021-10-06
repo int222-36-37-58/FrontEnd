@@ -79,9 +79,10 @@ export default class CreateProductForm extends Component {
     }
   }
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    e.preventDefault();
     let data = Object.assign({}, this.state.data);
-    console.log(data);
+
     const invalid = this.validate(this.state.data);
     if (invalid !== "err") {
       var today = new Date().toISOString();

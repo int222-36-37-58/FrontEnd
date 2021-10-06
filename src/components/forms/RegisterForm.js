@@ -329,9 +329,9 @@ RegisterForm.propTypes = {
   submit: PropTypes.func.isRequired,
   editMode: PropTypes.bool.isRequired,
   userData: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     userName: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    password: PropTypes.string,
     fullName: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     tel: PropTypes.string.isRequired,

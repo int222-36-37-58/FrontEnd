@@ -188,31 +188,32 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
                 <input type="checkbox" id="showProfileMenu" hidden />
 
                 <p className="menuShow">
-                  <Link to="/profile/info" className="hoverChangeBackground">
-                    <h4>ข้อมูลของฉัน</h4>
+                  <Link to="/profile/info"  className="hoverChangeBackground">
+                    ข้อมูลของฉัน
                   </Link>
                   <Link
                     to="/profile/changepassword"
+                    
                     className="hoverChangeBackground"
                   >
-                    <h4>เปลี่ยนรหัสผ่าน</h4>
+                    เปลี่ยนรหัสผ่าน
                   </Link>
-                  <Link to="/profile/order" className="hoverChangeBackground">
-                    <h4>คำสั่งซื้อ</h4>
+                  <Link to="/profile/order"  className="hoverChangeBackground">
+                    คำสั่งซื้อ
                   </Link>
                   <Link
-                    to="/profile/createproduct"
+                    to="/profile/createproduct" 
                     className="hoverChangeBackground"
                   >
-                    <h4>เริ่มขายสินค้า</h4>
+                    เริ่มขายสินค้า
                   </Link>
                   <Link
-                    to="/profile/createproduct"
+                    to="/profile/createproduct" 
                     className="hoverChangeBackground"
                   >
-                    <h4>ร้านค้าของฉัน</h4>
+                    ร้านค้าของฉัน
                   </Link>
-                  <h4>ออกจากระบบ</h4>
+                  <b>ออกจากระบบ</b>
                 </p>
               </Hidden>
             </div>
