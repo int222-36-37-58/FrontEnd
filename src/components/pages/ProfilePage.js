@@ -12,11 +12,13 @@ import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
 import MyStorePage from "./MyStorePage";
-const ProfilePage = () => {
+import { changeCurrentMenu } from "../../actions/uiStyle";
+import { connect } from "react-redux";
+import EditProductPage from "./EditProductPage";
+const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
   const [userData] = useState({
-    id: "1",
+    id: 1,
     userName: "userTest",
-    password: "Aa123456",
     fullName: "nametest",
     address: "Home Bangkok Thailand",
     tel: "0123456789",
@@ -27,7 +29,6 @@ const ProfilePage = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
-  const [currentClick, setCurrentClick] = useState("");
 
   const update = (data) => {
     axios
@@ -82,9 +83,9 @@ const ProfilePage = () => {
                 </h2>
                 <Link
                   to="/profile/info"
-                  onClick={() => setCurrentClick("info")}
+                  onClick={() => changeCurrentMenu("info")}
                   className={
-                    currentClick === "info"
+                    uiStyle.currentMenuClicked === "info"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -93,9 +94,9 @@ const ProfilePage = () => {
                 </Link>
                 <Link
                   to="/profile/changepassword"
-                  onClick={() => setCurrentClick("changepassword")}
+                  onClick={() => changeCurrentMenu("changepassword")}
                   className={
-                    currentClick === "changepassword"
+                    uiStyle.currentMenuClicked === "changepassword"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -104,9 +105,9 @@ const ProfilePage = () => {
                 </Link>
                 <Link
                   to="/profile/order"
-                  onClick={() => setCurrentClick("order")}
+                  onClick={() => changeCurrentMenu("order")}
                   className={
-                    currentClick === "order"
+                    uiStyle.currentMenuClicked === "order"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -115,9 +116,9 @@ const ProfilePage = () => {
                 </Link>
                 <Link
                   to="/profile/createproduct"
-                  onClick={() => setCurrentClick("createproduct")}
+                  onClick={() => changeCurrentMenu("createproduct")}
                   className={
-                    currentClick === "createproduct"
+                    uiStyle.currentMenuClicked === "createproduct"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -127,9 +128,9 @@ const ProfilePage = () => {
 
                 <Link
                   to="/profile/myshop"
-                  onClick={() => setCurrentClick("myshop")}
+                  onClick={() => changeCurrentMenu("myshop")}
                   className={
-                    currentClick === "myshop"
+                    uiStyle.currentMenuClicked === "myshop"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -238,6 +239,10 @@ const ProfilePage = () => {
                 {" "}
                 <MyStorePage />
               </Route>
+              <Route path={"/profile/editproduct"}>
+                {" "}
+                <EditProductPage />
+              </Route>
             </Switch>
           </Grid>
         </Grid>
@@ -246,4 +251,16 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+const mapStateToProps = (state) => {
+  return {
+    uiStyle: state.uiStyle,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

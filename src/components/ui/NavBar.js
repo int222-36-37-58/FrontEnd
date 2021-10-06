@@ -11,17 +11,22 @@ import CloseIcon from "@material-ui/icons/Close";
 import Cart from "./Cart";
 import sitlogo from "../../images/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
-
 import ListAltIcon from "@material-ui/icons/ListAlt";
-
 import { VpnKey } from "@material-ui/icons";
+import { changeCurrentMenu } from "../../actions/uiStyle";
 
-const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
+const NavBar = ({
+  cart,
+  uiStyle,
+  removeFromCart,
+  clearCartItem,
+  changeCurrentMenu,
+}) => {
   const [isShowCart, setIsShowCart] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const [currentClick, setCurrentClick] = useState("");
+
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -41,7 +46,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
   return (
     <>
       <Cart
-        listProduct={cart.cart}
+        listProduct={cart}
         onHandleCart={handleCart}
         isShowCart={isShowCart}
         remove={removeFromCart}
@@ -53,7 +58,10 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
           <div className="topNav ">
             <Link to="/">
               {" "}
-              <div className="hoverCursor">
+              <div
+                className="hoverCursor"
+                onClick={() => changeCurrentMenu("")}
+              >
                 <img
                   src={sitlogo}
                   alt="โฮมเพจ"
@@ -134,8 +142,8 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
                   style={{ fontSize: "30x", postion: "absolute" }}
                 />
                 <div>
-                  {cart.cart.length > 0 && (
-                    <div className="cartCount">{cart.cart.length}</div>
+                  {cart.length > 0 && (
+                    <div className="cartCount">{cart.length}</div>
                   )}
                 </div>
               </div>
@@ -195,7 +203,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
             <div
               onClick={() => {
                 setAnchorEl(null);
-                setCurrentClick("info");
+                changeCurrentMenu("info");
               }}
               style={{
                 fontSize: "14px",
@@ -207,7 +215,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
                 maxWidth: "195px",
               }}
               className={
-                currentClick === "info"
+                uiStyle.currentMenuClicked === "info"
                   ? "currentClickStyle b hoverCursor"
                   : "hoverCursor currentHoverStyle"
               }
@@ -219,7 +227,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
             <div
               onClick={() => {
                 setAnchorEl(null);
-                setCurrentClick("changepassword");
+                changeCurrentMenu("changepassword");
               }}
               style={{
                 fontSize: "14px",
@@ -230,7 +238,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
                 width: "100%",
               }}
               className={
-                currentClick === "changepassword"
+                uiStyle.currentMenuClicked === "changepassword"
                   ? "currentClickStyle b hoverCursor"
                   : "hoverCursor currentHoverStyle"
               }
@@ -243,7 +251,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
             <div
               onClick={() => {
                 setAnchorEl(null);
-                setCurrentClick("order");
+                changeCurrentMenu("order");
               }}
               style={{
                 fontSize: "14px",
@@ -254,7 +262,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
                 width: "100%",
               }}
               className={
-                currentClick === "order"
+                uiStyle.currentMenuClicked === "order"
                   ? "currentClickStyle b hoverCursor"
                   : "hoverCursor currentHoverStyle"
               }
@@ -266,7 +274,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
             <div
               onClick={() => {
                 setAnchorEl(null);
-                setCurrentClick("myshop");
+                changeCurrentMenu("createproduct");
               }}
               style={{
                 fontSize: "14px",
@@ -277,7 +285,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
                 width: "100%",
               }}
               className={
-                currentClick === "myshop"
+                uiStyle.currentMenuClicked === "createproduct"
                   ? "currentClickStyle b hoverCursor"
                   : "hoverCursor currentHoverStyle"
               }
@@ -289,7 +297,7 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
           <div
             onClick={() => {
               setAnchorEl(null);
-              setCurrentClick("");
+              changeCurrentMenu("");
             }}
             style={{
               fontSize: "14px",
@@ -309,7 +317,8 @@ const NavBar = ({ cart, removeFromCart, clearCartItem }) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.cart,
+    uiStyle: state.uiStyle,
   };
 };
 
@@ -317,6 +326,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
+    changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
   };
 };
 

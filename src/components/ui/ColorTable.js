@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 import ResponseDialog from "./ResponseDialog";
 
 const ColorTable = () => {
@@ -23,6 +24,11 @@ const ColorTable = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
+  const [colorWillDelete, setColorWillDelete] = useState({});
+  const [confirmBox, setConfirmBox] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
   useEffect(() => {
     getColor();
   }, []);
@@ -43,9 +49,11 @@ const ColorTable = () => {
     setColorEdit(color);
   };
 
-  const delColor = (id) => {
+  const delColor = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/colordelete/${id}`)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/colordelete/${colorWillDelete.colorId}`
+      )
 
       .then((res) => {
         setDialogHeader("Success!!");
@@ -56,7 +64,9 @@ const ColorTable = () => {
         setDialogHeader("Error");
         setDialogContent(`${err.response.data.message}`);
       })
-      .then(setShowDialog(true));
+      .then(setShowDialog(true))
+      .then(handleCloseConfirm)
+      .then(setColorWillDelete({}));
   };
 
   const handleColor = (e) => {
@@ -129,6 +139,18 @@ const ColorTable = () => {
     setDialogContent("");
   };
 
+  const handleCloseConfirm = () => {
+    setConfirmBox({ showConfirm: false, confirmContent: "" });
+  };
+
+  const deletingColor = (col) => {
+    setColorWillDelete(col);
+    setConfirmBox({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่จะลบสี ${col.colorName} ไหม`,
+    });
+  };
+
   return (
     <>
       <ResponseDialog
@@ -136,6 +158,12 @@ const ColorTable = () => {
         handleCloseBox={handleCloseBox}
         dialogContent={dialogContent}
         dialogHeader={dialogHeader}
+      />
+
+      <ConfirmDialog
+        confirmInfo={confirmBox}
+        handleCloseBox={handleCloseConfirm}
+        submit={delColor}
       />
 
       <div
@@ -261,7 +289,7 @@ const ColorTable = () => {
                       <button
                         style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
-                        onClick={() => delColor(col.colorId)}
+                        onClick={() => deletingColor(col)}
                       >
                         DELETE
                       </button>

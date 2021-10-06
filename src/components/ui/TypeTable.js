@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 import ResponseDialog from "./ResponseDialog";
 
 const TypeTable = () => {
@@ -23,6 +24,11 @@ const TypeTable = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
+  const [typeWillDelete, setTypeWillDelete] = useState({});
+  const [confirmBox, setConfirmBox] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
   useEffect(() => {
     getType();
   }, []);
@@ -40,7 +46,9 @@ const TypeTable = () => {
 
   const delType = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/deletetype/${id}`)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/deletetype/${typeWillDelete.typeId}`
+      )
 
       .then((res) => {
         setDialogHeader("Success!!");
@@ -52,7 +60,9 @@ const TypeTable = () => {
         setDialogHeader("Error");
         setDialogContent(err.response.data.message);
       })
-      .then(setShowDialog(true));
+      .then(setShowDialog(true))
+      .then(handleCloseConfirm)
+      .then(setTypeWillDelete({}));
   };
 
   const handleType = (e) => {
@@ -135,6 +145,18 @@ const TypeTable = () => {
     setDialogContent("");
   };
 
+  const handleCloseConfirm = () => {
+    setConfirmBox({ showConfirm: false, confirmContent: "" });
+  };
+
+  const deletingType = (tp) => {
+    setTypeWillDelete(tp);
+    setConfirmBox({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่จะลบ ${tp.name} ไหม`,
+    });
+  };
+
   return (
     <>
       <ResponseDialog
@@ -143,7 +165,11 @@ const TypeTable = () => {
         dialogContent={dialogContent}
         dialogHeader={dialogHeader}
       />
-
+      <ConfirmDialog
+        confirmInfo={confirmBox}
+        handleCloseBox={handleCloseConfirm}
+        submit={delType}
+      />
       <div
         style={{
           fontWeight: 600,
@@ -268,7 +294,7 @@ const TypeTable = () => {
                       <button
                         style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
-                        onClick={() => delType(type.typeId)}
+                        onClick={() => deletingType(type)}
                       >
                         DELETE
                       </button>
