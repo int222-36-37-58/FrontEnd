@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 
 export default class RegisterForm extends Component {
   state = {
@@ -17,7 +15,7 @@ export default class RegisterForm extends Component {
       role: "ROLE_USER",
     },
     editMode: false,
-    adminMode: false,
+
     confirmPassword: "",
     errors: {},
   };
@@ -37,18 +35,8 @@ export default class RegisterForm extends Component {
     });
   };
 
-  changeRole = (e) => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        role: e.target.value,
-      },
-    });
-  };
-
   onSubmit = () => {
     const invalid = this.validate(this.state.data);
-
     if (invalid !== "err") {
       if (this.state.editMode) {
         this.props.submit(this.state.data);
@@ -73,7 +61,7 @@ export default class RegisterForm extends Component {
       errors.password = true;
     }
     if (!e.fullName || e.fullName.length <= 3) {
-      errors.name = true;
+      errors.fullName = true;
     }
     if (!e.address || e.address.length < 10) {
       errors.address = true;
@@ -82,15 +70,12 @@ export default class RegisterForm extends Component {
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
-    if (!this.props.adminMode && !this.props.editMode) {
-      if (
-        !this.state.confirmPassword ||
-        this.state.confirmPassword !== e.password
-      ) {
-        errors.confirmPassword = true;
-      }
+    if (
+      !this.state.confirmPassword ||
+      this.state.confirmPassword !== e.password
+    ) {
+      errors.confirmPassword = true;
     }
-
     this.setState({ errors });
     if (Object.keys(errors).length > 0) {
       return "err";
@@ -99,7 +84,6 @@ export default class RegisterForm extends Component {
 
   render() {
     const { editMode } = this.props;
-    const { adminMode } = this.props;
 
     const title = editMode ? "Your Profile" : "Register Information";
     return (
@@ -193,6 +177,7 @@ export default class RegisterForm extends Component {
                   <TextField
                     required
                     type="text"
+                    error={this.state.errors.tel}
                     inputProps={{ minLength: 10, maxLength: 10 }}
                     id="tel"
                     name="tel"
@@ -202,22 +187,6 @@ export default class RegisterForm extends Component {
                     value={this.state.data.tel}
                   />
                 </Grid>
-
-                {adminMode && (
-                  <Grid item xs={12}>
-                    <FormControl>
-                      <InputLabel id="roleUser">Role</InputLabel>
-                      <Select
-                        labelId="roleUser"
-                        value={this.state.data.role}
-                        onChange={this.changeRole}
-                      >
-                        <MenuItem value={`ROLE_USER`}>USER</MenuItem>
-                        <MenuItem value={`ROLE_ADMIN`}>ADMIN</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                )}
 
                 {!editMode && (
                   <Grid item xs={12} sm={6}>
@@ -256,32 +225,18 @@ export default class RegisterForm extends Component {
 
                 {editMode && (
                   <Grid item xs={12}>
-                    {adminMode ? (
-                      <TextField
-                        fullWidth
-                        type="password"
-                        inputProps={{ minLength: 3, maxLength: 20 }}
-                        id="password"
-                        name="password"
-                        label="Password"
-                        helperText="set password"
-                        value={this.state.data.password}
-                        onChange={this.onChange}
-                      />
-                    ) : (
-                      <TextField
-                        fullWidth
-                        required
-                        error={this.state.errors.confirmPassword}
-                        type="text"
-                        inputProps={{ minLength: 3, maxLength: 20 }}
-                        id="password"
-                        name="password"
-                        label="Password"
-                        helperText="confirm with your password"
-                        onChange={this.onConfirmPassword}
-                      />
-                    )}
+                    <TextField
+                      fullWidth
+                      required
+                      error={this.state.errors.confirmPassword}
+                      type="text"
+                      inputProps={{ minLength: 3, maxLength: 20 }}
+                      id="password"
+                      name="password"
+                      label="Password"
+                      helperText="confirm with your password"
+                      onChange={this.onConfirmPassword}
+                    />
                   </Grid>
                 )}
 

@@ -7,9 +7,12 @@ import {
   TableRow,
   TableFooter,
   TablePagination,
+  Grid,
+  Hidden,
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AdminEditUserForm from "../forms/AdminEditUserForm";
 import RegisterForm from "../forms/RegisterForm";
 import ResponseDialog from "../ui/ResponseDialog";
 
@@ -97,6 +100,7 @@ const UserListPage = () => {
   };
 
   const addUser = (data) => {
+    data.role = "ROLE_ADMIN";
     const json = JSON.stringify(data);
     axios
       .post(`${process.env.REACT_APP_API_URL}/register`, json, {
@@ -107,7 +111,7 @@ const UserListPage = () => {
 
       .then(() => {
         setDialogHeader("Success!!");
-        setDialogContent(`Add user success!!`);
+        setDialogContent(`Add new Admin success!!`);
       })
       .then(() => {
         getUser();
@@ -137,7 +141,7 @@ const UserListPage = () => {
         <div
           style={{
             backgroundColor: "white",
-            padding: 40 + "px",
+            padding: 20 + "px",
             borderRadius: 10 + "px",
             boxShadow: "0px 0px 20px #e6e8eb",
           }}
@@ -150,126 +154,154 @@ const UserListPage = () => {
           >
             All Users
           </div>
-
-          {isEdit && (
-            <RegisterForm
-              editMode={true}
-              adminMode={true}
-              userData={userEdit}
-              onIsEdit={() => {
-                setIsEdit(false);
-              }}
-              submit={updateUser}
-            />
-          )}
-          <button
-            className="InfoButton"
-            style={{
-              marginLeft: "92%",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-            }}
-            onClick={() => {
-              setIsAdd(!isAdd);
-            }}
-          >
-            Add +
-          </button>
-
-          {isAdd && (
-            <RegisterForm
-              adminMode={true}
-              onIsEdit={() => {
-                setIsAdd(false);
-              }}
-              submit={addUser}
-            />
-          )}
-
-          <Table style={{ width: 95 + "%", margin: "auto" }}>
-            <TableHead>
-              <TableRow style={{ backgroundColor: "#3f51b5" }}>
-                <TableCell style={{ color: "white" }} align="right">
-                  ID
-                </TableCell>
-                <TableCell style={{ color: "white" }} align="right">
-                  Username
-                </TableCell>
-                <TableCell style={{ color: "white" }} align="right">
-                  Role
-                </TableCell>
-                <TableCell style={{ color: "white" }} align="right"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rowsPerPage > 0 ? (
-                user
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((user) => {
-                    return (
-                      <TableRow key={user.userId}>
-                        <TableCell align="right">{user.userId}</TableCell>
-                        <TableCell align="right">{user.userName}</TableCell>
-                        <TableCell align="right">{user.role}</TableCell>
-                        {user.role !== "ROLE_ADMIN" && (
-                          <TableCell align="right">
-                            {isEdit ? (
-                              <button
-                                className="disabledButton hoverCursor"
-                                onClick={() => {
-                                  alert(
-                                    "Please Click Submit or Cancel before edit other user"
-                                  );
-                                }}
-                              >
-                                Edit
-                              </button>
-                            ) : (
-                              <button
-                                className="AddButton"
-                                onClick={() => editUser(user)}
-                              >
-                                Edit
-                              </button>
-                            )}
-
-                            <button
-                              style={{
-                                padding: 5 + "px",
-                                marginLeft: 5 + "px",
-                              }}
-                              className="delFromCart"
-                              onClick={() => delUser(user.userId)}
-                            >
-                              DELETE
-                            </button>
-                          </TableCell>
-                        )}
-                      </TableRow>
-                    );
-                  })
+          <Grid container>
+            <Grid item xs={11} style={{ margin: "auto" }}>
+              {isEdit ? (
+                <>
+                  <AdminEditUserForm
+                    userData={userEdit}
+                    onIsEdit={() => {
+                      setIsEdit(false);
+                    }}
+                    submit={updateUser}
+                  />
+                  <button
+                    className="disabledButton"
+                    style={{
+                      marginLeft: "90%",
+                      paddingLeft: "10px",
+                      paddingRight: "10px",
+                    }}
+                  >
+                    New admin
+                  </button>
+                </>
               ) : (
-                <TableRow>
-                  {" "}
-                  <TableCell />
-                </TableRow>
+                [
+                  isAdd ? (
+                    <button
+                      className="delFromCart p-10"
+                      style={{
+                        marginLeft: "90%",
+                      }}
+                      onClick={() => {
+                        setIsAdd(false);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  ) : (
+                    <button
+                      className="InfoButton p-10"
+                      style={{
+                        marginLeft: "90%",
+                      }}
+                      onClick={() => {
+                        setIsAdd(!isAdd);
+                      }}
+                    >
+                      New admin
+                    </button>
+                  ),
+                ]
               )}
-            </TableBody>
 
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  colSpan={4}
-                  rowsPerPageOptions={[5, 10]}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  onPageChange={handleChangePage}
-                  count={user.length}
-                  page={page}
-                  rowsPerPage={rowsPerPage}
-                ></TablePagination>
-              </TableRow>
-            </TableFooter>
-          </Table>
+              {isAdd && <RegisterForm submit={addUser} />}
+
+              <Table>
+                <TableHead>
+                  <TableRow style={{ backgroundColor: "#3f51b5" }}>
+                    <TableCell style={{ color: "white" }} align="right">
+                      ID
+                    </TableCell>
+                    <TableCell style={{ color: "white" }} align="right">
+                      Username
+                    </TableCell>
+                    <Hidden smDown>
+                    <TableCell style={{ color: "white" }} align="right">
+                      Role
+                    </TableCell>
+                    </Hidden>
+                    <TableCell
+                      style={{ color: "white" }}
+                      align="right"
+                    ></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rowsPerPage > 0 ? (
+                    user
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((user) => {
+                        return (
+                          <TableRow key={user.userId}>
+                            <TableCell align="right">{user.userId}</TableCell>
+                            <TableCell align="right">{user.userName}</TableCell>
+                            <Hidden smDown> <TableCell align="right">{user.role}</TableCell></Hidden>
+                            {user.role !== "ROLE_ADMIN" && (
+                              <TableCell align="right">
+                                {isEdit || isAdd ? (
+                                  <button
+                                    className="disabledButton hoverCursor"
+                                    onClick={() => {
+                                      alert(
+                                        "Please Click Submit or Cancel before edit other user"
+                                      );
+                                    }}
+                                  >
+                                    Edit
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="AddButton"
+                                    onClick={() => editUser(user)}
+                                  >
+                                    Edit
+                                  </button>
+                                )}
+
+                                <button
+                                  style={{
+                                    padding: 5 + "px",
+                                    marginLeft: 5 + "px",
+                                  }}
+                                  className="delFromCart"
+                                  onClick={() => delUser(user.userId)}
+                                >
+                                  DELETE
+                                </button>
+                              </TableCell>
+                            )}
+                          </TableRow>
+                        );
+                      })
+                  ) : (
+                    <TableRow>
+                      {" "}
+                      <TableCell />
+                    </TableRow>
+                  )}
+                </TableBody>
+
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      colSpan={4}
+                      rowsPerPageOptions={[5, 10]}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                      onPageChange={handleChangePage}
+                      count={user.length}
+                      page={page}
+                      rowsPerPage={rowsPerPage}
+                    ></TablePagination>
+                  </TableRow>
+                </TableFooter>
+              </Table>
+            </Grid>
+          </Grid>
         </div>
       </Container>
     </>

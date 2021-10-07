@@ -33,6 +33,10 @@ const OrderDetailRow = (props) => {
           setDialogHeader("Success!!");
           setDialogContent("ส่งความเห็นสำเร็จ");
         })
+        .then(() => {
+          setCommentContent("");
+          setComment(false);
+        })
         .catch((err) => {
           setDialogHeader("Error");
           setDialogContent(err.response.data.message);

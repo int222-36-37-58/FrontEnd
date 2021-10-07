@@ -910,6 +910,10 @@ td {
   font-weight: 900;
 }
 
+.p-8 {
+  padding: 8px;
+}
+
 .p-10 {
   padding: 10px;
 }
@@ -963,6 +967,10 @@ td {
 
 .mw100 {
   max-width: 100%;
+}
+
+.m-5 {
+  margin: 5px;
 }
 
 .dialogButtonZone {

@@ -13,7 +13,7 @@ const ConfirmDialog = (props) => {
       fullWidth
       maxWidth="sm"
     >
-      <div style={{ padding: "50px", paddingTop: "35px" }}>
+      <div style={{ padding: "30px", paddingTop: "35px" }}>
         <div className="b f23" style={{ paddingBottom: "20px" }}>
           {props.confirmInfo.confirmContent}
         </div>
@@ -21,15 +21,15 @@ const ConfirmDialog = (props) => {
         <div className="dialogButtonZone w100">
           <div>
             <button
-              className="delFromCart p-10 "
-              style={{ marginRight: "10px" }}
+              className="delFromCart  "
+              style={{ marginRight: "10px",padding: '8px' }}
               onClick={confirmCondition}
             >
               <div className="f16"> ยืนยัน</div>
             </button>
           </div>
           <div>
-            <button className="AddButton p-10" onClick={props.handleCloseBox}>
+            <button className="AddButton " style={{padding: '8px'}} onClick={props.handleCloseBox}>
               {" "}
               <div className="f16"> ยกเลิก</div>{" "}
             </button>

@@ -66,7 +66,7 @@ const NavBar = ({
                   src={sitlogo}
                   alt="โฮมเพจ"
                   style={{
-                    maxWidth: "120px",
+                    maxWidth: "110px",
                     width: "100%",
                     marginRight: "30px",
                   }}

@@ -261,7 +261,7 @@ const TypeTable = () => {
       )}
 
       <Table style={{ width: 90 + "%", margin: "auto" }}>
-        <TableHead style={{ backgroundColor: "#3f51b5" }}>
+        <TableHead style={{ backgroundColor: "#1895f5" }}>
           <TableRow>
             <TableCell style={{ color: "white" }} align="right">
               ID
