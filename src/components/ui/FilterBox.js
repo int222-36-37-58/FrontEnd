@@ -1,52 +1,171 @@
-import { Container, Grid, Hidden } from "@material-ui/core";
-import React, { Component } from "react";
+import { Container, Grid, Hidden, InputBase } from "@material-ui/core";
+import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
-
+import SearchIcon from "@material-ui/icons/Search";
 import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import { useState } from "react";
+import { useEffect } from "react";
 
-export default class FilterBox extends Component {
-  state = {
-    filters: [],
-    checkData: [],
-    showType: false,
-  };
-
-  componentDidMount() {
+const FilterBox = () => {
+  const [types, setTypes] = useState([]);
+  const [checkedData, setCheckedData] = useState([]);
+  const [showType, setShowType] = useState(false);
+  const [searchVal, setSearchVal] = useState("");
+  useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
-      const type = res.data;
-      this.setState({ filters: type });
+      setTypes(res.data);
     });
-  }
+  }, []);
 
-  onChange = (e) => {
-    let newCheck = [...this.state.checkData, e.target.value];
-    if (this.state.checkData.includes(e.target.value)) {
+  const onChange = (e) => {
+    let newCheck = [...checkedData, e.target.value];
+    if (checkedData.includes(e.target.value)) {
       newCheck = newCheck.filter((f) => f !== e.target.value);
     }
-    this.setState({ checkData: newCheck });
-    console.log(this.state.checkData);
+    setCheckedData(newCheck);
+    console.log(checkedData);
   };
 
-  handleShowType = () => {
-    this.setState({ showType: !this.state.showType });
+  const handleShowType = () => {
+    setShowType(!showType);
   };
 
-  clearCheck = () => {
-    this.setState({ checkData: [] });
+  const clearCheck = () => {
+    setCheckedData([]);
   };
 
-  render() {
-    return (
-      <>
-        <Hidden smDown>
-          <Container id="filterBox" className="filterBox">
+  const onSearch = (e) => {
+    setSearchVal(e.target.value);
+    console.log(searchVal);
+  };
+
+  return (
+    <>
+      <Hidden smDown>
+        <Container id="filterBox" className="filterBox">
+          <div
+            className="header f18 b pt-20"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyItems: "center",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>ฟิลเตอร์</div>
+            {checkedData.length > 0 && (
+              <div>
+                <button
+                  className="AddButton"
+                  style={{ padding: "3px" }}
+                  onClick={() => clearCheck()}
+                >
+                  ล้างการกรอง
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <div className="pt-5 pb-5">ประเภท</div>
+            <Grid container justifyContent="center">
+              {types.map((filter) => {
+                return (
+                  <Grid item xs={12} key={filter.typeId}>
+                    <FormControlLabel
+                      className="w100"
+                      control={
+                        <Checkbox
+                          className="mw100 w100"
+                          disableRipple={true}
+                          checked={checkedData.includes(filter.name)}
+                          color="primary"
+                          style={{
+                            backgroundColor: "transparent",
+                          }}
+                          icon={
+                            <div className="filterFullItem w100">
+                              <CircleUnchecked className="f22 pl-5" />
+                              <div className="f18 b pl-5"> {filter.name}</div>
+                            </div>
+                          }
+                          checkedIcon={
+                            <div
+                              className="filterFullItem w100"
+                              style={{
+                                transition: "0.25s",
+
+                                backgroundColor: "#f0f8f9",
+                              }}
+                            >
+                              <CircleCheckedFilled className="f22 pl-5" />
+                              <div className="f18 b pl-5"> {filter.name}</div>
+                            </div>
+                          }
+                          onChange={onChange}
+                          value={filter.name}
+                        />
+                      }
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </div>
+        </Container>
+      </Hidden>
+
+      <Hidden mdUp>
+        <Container id="filterBox" className="filterBox">
+          <label htmlFor="infoFilter">
             <div
-              className="header f18 b pt-20"
+              className="headerRes hoverCursor infoBox pt-5 pb-5"
+              onClick={handleShowType}
+            >
+              <div className="b">ฟิลเตอร์และค้นหา</div>
+              {!showType ? (
+                <div>
+                  <AddIcon className="f20" />{" "}
+                </div>
+              ) : (
+                <div>
+                  <RemoveIcon className="f20" />
+                </div>
+              )}
+            </div>
+          </label>
+
+          <Hidden mdUp>
+            <div className="searchResField">
+              <SearchIcon
+                style={{ color: "gray", marginLeft: 10 + "px" }}
+              ></SearchIcon>
+              <InputBase
+                style={{
+                  marginLeft: 10 + "px",
+                  paddingRight: 10 + "px",
+                }}
+                placeholder="Search…"
+                variant="outlined"
+                type="text"
+                id="searchText"
+                name="searchText"
+                value={searchVal}
+                onChange={onSearch}
+              />
+            </div>
+          </Hidden>
+
+          <input type="checkbox" id="infoFilter" hidden />
+
+          <div className="type typeHidden">
+            <div
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -55,41 +174,39 @@ export default class FilterBox extends Component {
                 justifyContent: "space-between",
               }}
             >
-              <div>ฟิลเตอร์</div>
-              {this.state.checkData.length > 0 && (
-                <div>
-                  <button
-                    className="AddButton"
-                    style={{ padding: "3px" }}
-                    onClick={() => this.clearCheck()}
-                  >
-                    ล้างการกรอง
-                  </button>
-                </div>
-              )}
+              <div className="pt-10">ประเภท </div>
+              <div>
+                {" "}
+                <button
+                  className="AddButton"
+                  style={{ padding: "2px", marginTop: "10px" }}
+                  onClick={() => clearCheck()}
+                >
+                  ล้างการกรอง
+                </button>
+              </div>{" "}
             </div>
 
-            <div>
-              <div className="pt-5 pb-5">ประเภท</div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <Grid container justifyContent="center">
-                {this.state.filters.map((filter) => {
+                {types.map((filter) => {
                   return (
                     <Grid item xs={12} key={filter.typeId}>
                       <FormControlLabel
                         className="w100"
                         control={
                           <Checkbox
-                            className="mw100 w100"
                             disableRipple={true}
-                            checked={this.state.checkData.includes(filter.name)}
                             color="primary"
+                            className="w100 mw100"
+                            checked={checkedData.includes(filter.name)}
                             style={{
                               backgroundColor: "transparent",
                             }}
                             icon={
                               <div className="filterFullItem w100">
-                                <CircleUnchecked className="f22 pl-5" />
-                                <div className="f18 b pl-5"> {filter.name}</div>
+                                <CircleUnchecked className="f20 pl-5" />
+                                <div className="f16 b pl-5"> {filter.name}</div>
                               </div>
                             }
                             checkedIcon={
@@ -97,15 +214,14 @@ export default class FilterBox extends Component {
                                 className="filterFullItem w100"
                                 style={{
                                   transition: "0.25s",
-
                                   backgroundColor: "#f0f8f9",
                                 }}
                               >
-                                <CircleCheckedFilled className="f22 pl-5" />
-                                <div className="f18 b pl-5"> {filter.name}</div>
+                                <CircleCheckedFilled className="f20 pl-5" />
+                                <div className="f16 b pl-5"> {filter.name}</div>
                               </div>
                             }
-                            onChange={this.onChange}
+                            onChange={onChange}
                             value={filter.name}
                           />
                         }
@@ -115,110 +231,11 @@ export default class FilterBox extends Component {
                 })}
               </Grid>
             </div>
-          </Container>
-        </Hidden>
+          </div>
+        </Container>
+      </Hidden>
+    </>
+  );
+};
 
-        <Hidden mdUp>
-          <Container id="filterBox" className="filterBox">
-            <label htmlFor="infoFilter">
-              <div
-                className="headerRes hoverCursor infoBox pt-5 pb-5"
-                onClick={this.handleShowType}
-              >
-                <div className="b">ฟิลเตอร์</div>
-                {!this.state.showType ? (
-                  <div>
-                    <AddIcon className="f20" />{" "}
-                  </div>
-                ) : (
-                  <div>
-                    <RemoveIcon className="f20" />
-                  </div>
-                )}
-              </div>
-            </label>
-
-            <input type="checkbox" id="infoFilter" hidden />
-
-            <div className="type typeHidden">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyItems: "center",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div className="pt-10">ประเภท </div>
-                <div>
-                  {" "}
-                  <button
-                    className="AddButton"
-                    style={{ padding: "2px", marginTop: "10px" }}
-                    onClick={() => this.clearCheck()}
-                  >
-                    ล้างการกรอง
-                  </button>
-                </div>{" "}
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Grid container justifyContent="center">
-                  {this.state.filters.map((filter) => {
-                    return (
-                      <Grid item xs={12} key={filter.typeId}>
-                        <FormControlLabel
-                          className="w100"
-                          control={
-                            <Checkbox
-                              disableRipple={true}
-                              color="primary"
-                              className="w100 mw100"
-                              checked={this.state.checkData.includes(
-                                filter.name
-                              )}
-                              style={{
-                                backgroundColor: "transparent",
-                              }}
-                              icon={
-                                <div className="filterFullItem w100">
-                                  <CircleUnchecked className="f20 pl-5" />
-                                  <div className="f16 b pl-5">
-                                    {" "}
-                                    {filter.name}
-                                  </div>
-                                </div>
-                              }
-                              checkedIcon={
-                                <div
-                                  className="filterFullItem w100"
-                                  style={{
-                                    transition: "0.25s",
-                                    backgroundColor: "#f0f8f9",
-                                  }}
-                                >
-                                  <CircleCheckedFilled className="f20 pl-5" />
-                                  <div className="f16 b pl-5">
-                                    {" "}
-                                    {filter.name}
-                                  </div>
-                                </div>
-                              }
-                              onChange={this.onChange}
-                              value={filter.name}
-                            />
-                          }
-                        />
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </div>
-            </div>
-          </Container>
-        </Hidden>
-      </>
-    );
-  }
-}
+export default FilterBox;

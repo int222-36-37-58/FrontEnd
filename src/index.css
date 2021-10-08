@@ -76,7 +76,7 @@ body {
 .navBar > .topNav > div {
   border-style: solid;
   margin: 3px;
-  border-width: 0 1px 0 1px;
+  border-width: 0 1px 0 0px;
   border-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -118,10 +118,16 @@ body {
   padding-top: 5px;
   padding-bottom: 5px;
   left: 0;
-  background-color: #e4e4e4;
-  width: 100%;
+  background-color: white;
+  border-width: 2px;
   display: flex;
   align-items: center;
+  position: relative;
+  border-style: solid;
+  border-radius: 20px;
+  width: 90%;
+  margin: 10px;
+  border-color: #e4e4e4;
 }
 
 .cartCount {
