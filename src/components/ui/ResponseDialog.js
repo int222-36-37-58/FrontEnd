@@ -29,6 +29,7 @@ const ResponseDialog = (props) => {
         return (
           <CircularProgress
             style={{
+              color: "#1895f5",
               padding: "40px",
             }}
           />
