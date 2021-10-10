@@ -150,10 +150,7 @@ const SearchModal = (props) => {
                   }
                 })}
                 {products.length < 1 && (
-                  <div className="f24 p-10">
-                    {" "}
-                    ไม่มีผลลัพธ์ของการค้นหานี้ กรุณาใส่อย่างน้อย 2 ตัวอักษร
-                  </div>
+                  <div className="f24 p-10"> ไม่มีผลลัพธ์ของการค้นหานี้</div>
                 )}
 
                 {loading && (

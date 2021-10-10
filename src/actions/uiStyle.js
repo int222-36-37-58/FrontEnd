@@ -7,10 +7,10 @@ export const changeCurrentMenu = (current) => ({
   },
 });
 
-export const clickedFilter = (type) => ({
+export const clickedFilter = (val) => ({
   type: type.FILTER_CLICKED,
   payload: {
-    filterClicked: type,
+    filterClicked: val,
   },
 });
 

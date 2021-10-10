@@ -1,27 +1,41 @@
 import { CircularProgress, Container, Grid } from "@material-ui/core";
 import axios from "axios";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
 import "../../index.css";
 import useSearchHandler from "../etc/useSearchHandler";
 import FilterBox from "../ui/FilterBox";
 import ProductCard from "../ui/ProductCard";
 import ResponseDialog from "../ui/ResponseDialog";
 
-const Home = () => {
+const Home = ({ filter }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   const [page, setPage] = useState(0);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
   const [searchVal] = useState("");
-  const [type] = useState("*");
+  const [type, setType] = useState("");
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
     page,
-    pageSize
+    pageSize,
+    filter
   );
+
+  useEffect(() => {
+    if (filter.length === 0) {
+      setType("");
+
+      setPage(0);
+    }
+    if (filter.length > 0) {
+      setType(filter);
+      setPage(0);
+    }
+  }, [filter, type]);
 
   useEffect(() => {
     const getProductLength = () => {
@@ -60,7 +74,6 @@ const Home = () => {
     setShowDialog(false);
     setDialogContent("");
   };
-  console.log(products);
   return (
     <>
       <ResponseDialog
@@ -96,17 +109,19 @@ const Home = () => {
                 <Grid container direction="row" spacing={2}>
                   {products.map((product, i) => {
                     if (products.length === i + 1) {
-                      return <Grid
-                        item
-                        xs={12}
-                        sm={3}
-                        md={5}
-                        lg={3}
-                        ref={lastElementRef}
-                        key={i}
-                      >
-                        <ProductCard product={product}></ProductCard>{" "}
-                      </Grid>;
+                      return (
+                        <Grid
+                          item
+                          xs={12}
+                          sm={6}
+                          md={5}
+                          lg={3}
+                          ref={lastElementRef}
+                          key={i}
+                        >
+                          <ProductCard product={product}></ProductCard>{" "}
+                        </Grid>
+                      );
                     } else {
                       return (
                         <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
@@ -117,15 +132,15 @@ const Home = () => {
                   })}
                 </Grid>
                 {loading && (
-                <Grid item xs={12}>
-                  <div style={{ textAlign: "center", paddingTop: "20px" }}>
-                    <CircularProgress
-                      style={{ color: "#1895f5" }}
-                      disableShrink
-                    />
-                  </div>
-                </Grid>
-              )}
+                  <Grid item xs={12}>
+                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                      <CircularProgress
+                        style={{ color: "#1895f5" }}
+                        disableShrink
+                      />
+                    </div>
+                  </Grid>
+                )}
               </Container>
             </Grid>
           </Grid>
@@ -135,4 +150,10 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    filter: state.uiStyle.filterType,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

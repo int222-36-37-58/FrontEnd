@@ -9,12 +9,11 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import { useEffect } from "react";
-import { clickedFilter } from "../../actions/uiStyle";
+import { clickedFilter, clearFilter } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 
-const FilterBox = ({ clickedFilter }) => {
+const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
   const [types, setTypes] = useState([]);
-  const [checkedData, setCheckedData] = useState([]);
   const [showType, setShowType] = useState(false);
 
   useEffect(() => {
@@ -24,12 +23,8 @@ const FilterBox = ({ clickedFilter }) => {
   }, []);
 
   const onChange = (e) => {
-    let newCheck = [...checkedData, e.target.value];
-    if (checkedData.includes(e.target.value)) {
-      newCheck = newCheck.filter((f) => f !== e.target.value);
-    }
-    
-    console.log(checkedData);
+    let val = e.target.value;
+    clickedFilter(val);
   };
 
   const handleShowType = () => {
@@ -37,9 +32,8 @@ const FilterBox = ({ clickedFilter }) => {
   };
 
   const clearCheck = () => {
-    setCheckedData([]);
+    clearFilter();
   };
-
   return (
     <>
       <Hidden smDown>
@@ -55,7 +49,7 @@ const FilterBox = ({ clickedFilter }) => {
             }}
           >
             <div>ฟิลเตอร์</div>
-            {checkedData.length > 0 && (
+            {uiStyle.filterType && uiStyle.filterType.length > 0 && (
               <div>
                 <button
                   className="AddButton"
@@ -80,7 +74,7 @@ const FilterBox = ({ clickedFilter }) => {
                         <Checkbox
                           className="mw100 w100"
                           disableRipple={true}
-                          checked={checkedData.includes(filter.name)}
+                          checked={uiStyle.filterType === filter.name}
                           color="primary"
                           style={{
                             backgroundColor: "transparent",
@@ -174,7 +168,7 @@ const FilterBox = ({ clickedFilter }) => {
                             disableRipple={true}
                             color="primary"
                             className="w100 mw100"
-                            checked={checkedData.includes(filter.name)}
+                            checked={uiStyle.filterType === filter.name}
                             style={{
                               backgroundColor: "transparent",
                             }}
@@ -220,7 +214,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    clickedFilter: (type) => dispatch(clickedFilter(type)),
+    clickedFilter: (e) => dispatch(clickedFilter(e)),
+    clearFilter: () => dispatch(clearFilter()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilterBox);
