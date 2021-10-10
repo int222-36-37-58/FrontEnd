@@ -2,18 +2,22 @@ import { CircularProgress, Container, Grid } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../../index.css";
+import useSearchHandler from "../etc/useSearchHandler";
 import FilterBox from "../ui/FilterBox";
 import ProductCard from "../ui/ProductCard";
 import ResponseDialog from "../ui/ResponseDialog";
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [pageSize] = useState(10);
   const [productLength, setProductLength] = useState(0);
   const [observedEl, setObserverEl] = useState(null);
+
+  
   const observer = new IntersectionObserver(
     (t) => {
       if (t[0].isIntersecting) {
@@ -78,9 +82,6 @@ const Home = () => {
   const getMoreProducts = () => {
     setTimeout(() => {
       if (products.length < productLength) {
-        console.log(productLength);
-        console.log(products.length);
-
         let pg = page + 1;
         axios
           .get(
@@ -88,7 +89,7 @@ const Home = () => {
           )
           .then((res) => {
             setProducts([...products, ...res.data]);
-            console.log([...products, ...res.data]);
+
             setPage(pg);
           })
           .catch((err) => {
@@ -99,6 +100,10 @@ const Home = () => {
       }
     }, 450);
   };
+
+  
+
+
 
   return (
     <>

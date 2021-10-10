@@ -1,8 +1,7 @@
-import { Container, Grid, Hidden, InputBase } from "@material-ui/core";
+import { Container, Grid, Hidden } from "@material-ui/core";
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
-import SearchIcon from "@material-ui/icons/Search";
 import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
@@ -15,7 +14,7 @@ const FilterBox = () => {
   const [types, setTypes] = useState([]);
   const [checkedData, setCheckedData] = useState([]);
   const [showType, setShowType] = useState(false);
-  const [searchVal, setSearchVal] = useState("");
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
       setTypes(res.data);
@@ -37,11 +36,6 @@ const FilterBox = () => {
 
   const clearCheck = () => {
     setCheckedData([]);
-  };
-
-  const onSearch = (e) => {
-    setSearchVal(e.target.value);
-    console.log(searchVal);
   };
 
   return (
@@ -140,27 +134,6 @@ const FilterBox = () => {
               )}
             </div>
           </label>
-
-          <Hidden mdUp>
-            <div className="searchResField">
-              <SearchIcon
-                style={{ color: "gray", marginLeft: 10 + "px" }}
-              ></SearchIcon>
-              <InputBase
-                style={{
-                  marginLeft: 10 + "px",
-                  paddingRight: 10 + "px",
-                }}
-                placeholder="Search…"
-                variant="outlined"
-                type="text"
-                id="searchText"
-                name="searchText"
-                value={searchVal}
-                onChange={onSearch}
-              />
-            </div>
-          </Hidden>
 
           <input type="checkbox" id="infoFilter" hidden />
 

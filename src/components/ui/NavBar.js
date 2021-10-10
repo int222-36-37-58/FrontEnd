@@ -15,6 +15,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
 import { changeCurrentMenu } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
+import SearchModal from "./SearchModal";
 
 const NavBar = ({
   cart,
@@ -27,6 +28,7 @@ const NavBar = ({
   const [searchVal, setSearchVal] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [isShowProfileDrawer, setIsShowProfileDrawer] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
 
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -34,7 +36,10 @@ const NavBar = ({
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
-    console.log(searchVal);
+
+    if (searchVal.length > 0) {
+      setShowSearchModal(true);
+    }
   };
 
   const handleCart = (open) => (event) => {
@@ -43,6 +48,13 @@ const NavBar = ({
 
   const handleProfileDrawer = (val) => {
     setIsShowProfileDrawer(val);
+  };
+
+  const handleSearchModal = (open) => (event) => {
+    setShowSearchModal(open);
+    if (open === false) {
+      setSearchVal("");
+    }
   };
 
   return (
@@ -60,13 +72,23 @@ const NavBar = ({
         close={() => handleProfileDrawer(false)}
       />
 
+      <SearchModal
+        open={showSearchModal}
+        close={handleSearchModal(false)}
+        query={searchVal}
+      />
+
       <>
         <div className="navBar ">
           <div className="topNav ">
             <Link to="/">
               <div
                 className="hoverCursor"
-                onClick={() => changeCurrentMenu("")}
+                onClick={() => {
+                  changeCurrentMenu("");
+                  setShowSearchModal(false);
+                  setSearchVal("");
+                }}
               >
                 <img
                   src={sitlogo}
@@ -83,7 +105,13 @@ const NavBar = ({
             <Hidden smDown>
               <div
                 className="pr-50  "
-                style={{ maxWidth: "570px", width: "100%" , borderWidth:'0px' }}
+                style={{
+                  maxWidth: "570px",
+                  width: "100%",
+                  borderWidth: "0px",
+                  zIndex: "2147483647",
+                  position: "static",
+                }}
               >
                 <div className="searchBox">
                   <input
@@ -100,6 +128,13 @@ const NavBar = ({
                   </div>
                 </div>
               </div>
+            </Hidden>
+
+            <Hidden mdUp>
+              <SearchIcon
+                className="hoverCursor"
+                onClick={handleSearchModal(true)}
+              />
             </Hidden>
 
             <div
