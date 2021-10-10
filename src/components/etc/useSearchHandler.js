@@ -15,15 +15,15 @@ function useSearchHandler(searchVal, type, page, pageSize) {
     setTimeout(() => {
       let api = `${process.env.REACT_APP_API_URL}/products/search?`;
 
-      if (type.length > 0) {
-        api = api + `&&type=${type}`;
+      if (type.length > 0 && type !== "*") {
+        api = api + `&type=${type}`;
       }
       axios({
         method: "GET",
         url: api,
         params: { searchText: searchVal, pageNo: page, pageSize: pageSize },
       }).then((res) => {
-        if (searchVal.length > 1) {
+        if (searchVal.length > 1 || type === "*") {
           let arr = [
             ...[...products, ...res.data]
               .reduce((map, obj) => map.set(obj.productId, obj), new Map())
@@ -38,7 +38,7 @@ function useSearchHandler(searchVal, type, page, pageSize) {
         setLoading(false);
       });
     }, 700);
-  }, [searchVal, type, page, pageSize ]);
+  }, [searchVal, type, page, pageSize]);
 
   return { loading, products, hasMore };
 }

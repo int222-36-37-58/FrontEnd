@@ -1,10 +1,11 @@
 import { Box, Container } from "@material-ui/core";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
+import { openSearchModal } from "../../actions/uiStyle";
 
-function ProductCard(props, { addToCart }) {
+function ProductCard(props, { addToCart, openSearchModal }) {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
   const [colorChoose, setColorChoose] = useState(0);
@@ -12,6 +13,7 @@ function ProductCard(props, { addToCart }) {
   const [noColor, setNoColor] = useState(false);
 
   const seeInfo = () => {
+    props.openSearchModal(false);
     history.push(`/product/${props.product.productId}`);
   };
 
@@ -147,28 +149,20 @@ function ProductCard(props, { addToCart }) {
         alignItems="center"
         style={{ marginLeft: "-10px", marginRight: "-10px" }}
       >
-        <div className="imageContainer">
-          <Link
-            to={`/product/${props.product.productId}`}
-            style={{ textDecoration: "none" }}
-          >
-            <img
-              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-              alt="imgProduct"
-              className="hoverCursor imageProduct"
-            />
-            <div className="hoverImage">
-              <h4 className="textInHoverImage">view</h4>
-            </div>
-          </Link>
+        <div className="imageContainer hoverCursor" onClick={seeInfo}>
+          <img
+            src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+            alt="imgProduct"
+            
+            className="hoverCursor imageProduct"
+          />
+          <div className="hoverImage">
+            <h4 className="textInHoverImage">view</h4>
+          </div>
         </div>
-        <div>
-          <Link
-            to={`/product/${props.product.productId}`}
-            style={{ textDecoration: "none" }}
-          >
-            <h5 className="titleWrap">{props.product.name}</h5>
-          </Link>
+        <div className="hoverCursor">
+          <h5 className="titleWrap">{props.product.name}</h5>
+
           {props.product.quantity < 1 ? (
             <button
               className="disabledButton "
@@ -203,6 +197,7 @@ function ProductCard(props, { addToCart }) {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
+    openSearchModal: (open) => dispatch(openSearchModal(open)),
   };
 };
 

@@ -13,7 +13,7 @@ import sitlogo from "../../images/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
-import { changeCurrentMenu } from "../../actions/uiStyle";
+import { changeCurrentMenu, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 
@@ -23,12 +23,12 @@ const NavBar = ({
   removeFromCart,
   clearCartItem,
   changeCurrentMenu,
+  openSearchModal,
 }) => {
   const [isShowCart, setIsShowCart] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [isShowProfileDrawer, setIsShowProfileDrawer] = useState(false);
-  const [showSearchModal, setShowSearchModal] = useState(false);
 
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -36,9 +36,12 @@ const NavBar = ({
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
-
+    if (uiStyle.searchModalShow) {
+      return;
+    }
     if (searchVal.length > 0) {
-      setShowSearchModal(true);
+      openSearchModal(true);
+    } else {
     }
   };
 
@@ -51,11 +54,12 @@ const NavBar = ({
   };
 
   const handleSearchModal = (open) => (event) => {
-    setShowSearchModal(open);
+    openSearchModal(open);
     if (open === false) {
       setSearchVal("");
     }
   };
+ 
 
   return (
     <>
@@ -73,7 +77,7 @@ const NavBar = ({
       />
 
       <SearchModal
-        open={showSearchModal}
+        open={uiStyle.searchModalShow}
         close={handleSearchModal(false)}
         query={searchVal}
       />
@@ -86,7 +90,7 @@ const NavBar = ({
                 className="hoverCursor"
                 onClick={() => {
                   changeCurrentMenu("");
-                  setShowSearchModal(false);
+                  openSearchModal(false);
                   setSearchVal("");
                 }}
               >
@@ -122,7 +126,10 @@ const NavBar = ({
                     value={searchVal}
                     onChange={onChange}
                   />
-                  <div className="searchIcon hoverCursor">
+                  <div
+                    className="searchIcon hoverCursor"
+                    onClick={() => openSearchModal(true)}
+                  >
                     {" "}
                     <SearchIcon />
                   </div>
@@ -197,6 +204,7 @@ const NavBar = ({
               onClick={() => {
                 setAnchorEl(null);
                 changeCurrentMenu("info");
+                openSearchModal(false);
               }}
               style={{
                 fontSize: "14px",
@@ -221,6 +229,7 @@ const NavBar = ({
               onClick={() => {
                 setAnchorEl(null);
                 changeCurrentMenu("changepassword");
+                openSearchModal(false);
               }}
               style={{
                 fontSize: "14px",
@@ -245,6 +254,7 @@ const NavBar = ({
               onClick={() => {
                 setAnchorEl(null);
                 changeCurrentMenu("order");
+                openSearchModal(false);
               }}
               style={{
                 fontSize: "14px",
@@ -268,6 +278,7 @@ const NavBar = ({
               onClick={() => {
                 setAnchorEl(null);
                 changeCurrentMenu("createproduct");
+                openSearchModal(false);
               }}
               style={{
                 fontSize: "14px",
@@ -291,6 +302,7 @@ const NavBar = ({
             onClick={() => {
               setAnchorEl(null);
               changeCurrentMenu("");
+              openSearchModal(false);
             }}
             style={{
               fontSize: "14px",
@@ -320,6 +332,7 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
+    openSearchModal: (open) => dispatch(openSearchModal(open)),
   };
 };
 

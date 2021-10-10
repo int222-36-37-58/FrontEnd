@@ -9,8 +9,10 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import { useEffect } from "react";
+import { clickedFilter } from "../../actions/uiStyle";
+import { connect } from "react-redux";
 
-const FilterBox = () => {
+const FilterBox = ({ clickedFilter }) => {
   const [types, setTypes] = useState([]);
   const [checkedData, setCheckedData] = useState([]);
   const [showType, setShowType] = useState(false);
@@ -26,7 +28,7 @@ const FilterBox = () => {
     if (checkedData.includes(e.target.value)) {
       newCheck = newCheck.filter((f) => f !== e.target.value);
     }
-    setCheckedData(newCheck);
+    
     console.log(checkedData);
   };
 
@@ -122,7 +124,7 @@ const FilterBox = () => {
               className="headerRes hoverCursor infoBox pt-5 pb-5"
               onClick={handleShowType}
             >
-              <div className="b">ฟิลเตอร์และค้นหา</div>
+              <div className="b">ฟิลเตอร์</div>
               {!showType ? (
                 <div>
                   <AddIcon className="f20" />{" "}
@@ -210,5 +212,15 @@ const FilterBox = () => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    uiStyle: state.uiStyle,
+  };
+};
 
-export default FilterBox;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clickedFilter: (type) => dispatch(clickedFilter(type)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBox);

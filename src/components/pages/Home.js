@@ -1,6 +1,6 @@
 import { CircularProgress, Container, Grid } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "../../index.css";
 import useSearchHandler from "../etc/useSearchHandler";
 import FilterBox from "../ui/FilterBox";
@@ -8,42 +8,22 @@ import ProductCard from "../ui/ProductCard";
 import ResponseDialog from "../ui/ResponseDialog";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   const [page, setPage] = useState(0);
   const [pageSize] = useState(10);
   const [productLength, setProductLength] = useState(0);
-  const [observedEl, setObserverEl] = useState(null);
-
-  
-  const observer = new IntersectionObserver(
-    (t) => {
-      if (t[0].isIntersecting) {
-        if (productLength > products.length) {
-          getMoreProducts();
-        }
-      }
-    },
-    { threshold: 1 }
+  const [searchVal] = useState("");
+  const [type] = useState("*");
+  const { products, hasMore, loading } = useSearchHandler(
+    searchVal,
+    type,
+    page,
+    pageSize
   );
 
   useEffect(() => {
-    const getFirstProducts = () => {
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/products/page?pageNo=1&&pageSize=${pageSize}`
-        )
-        .then((res) => {
-          setProducts(res.data);
-        })
-        .catch((err) => {
-          setDialogHeader("Error");
-          setDialogContent(err.message);
-          setShowDialog(true);
-        });
-    };
     const getProductLength = () => {
       axios
         .get(`${process.env.REACT_APP_API_URL}/products`)
@@ -56,55 +36,31 @@ const Home = () => {
           setShowDialog(true);
         });
     };
-
     getProductLength();
-    getFirstProducts();
     window.scrollTo(0, 0);
   }, [pageSize]);
 
-  useEffect(() => {
-    if (observedEl) {
-      observer.observe(observedEl);
-    }
-    return () => {
-      if (observedEl) {
-        observer.unobserve(observedEl);
-      }
-    };
-  }, [observedEl, observer]);
+  const observer = useRef();
+  const lastElementRef = useCallback(
+    (el) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((e) => {
+        if (e[0].isIntersecting && hasMore) {
+          setPage((p) => p + 1);
+        }
+      });
+      if (el) observer.current.observe(el);
+    },
+    [loading, hasMore]
+  );
 
   const handleCloseBox = () => {
     setDialogHeader("");
     setShowDialog(false);
     setDialogContent("");
   };
-
-  const getMoreProducts = () => {
-    setTimeout(() => {
-      if (products.length < productLength) {
-        let pg = page + 1;
-        axios
-          .get(
-            `${process.env.REACT_APP_API_URL}/products/page?pageNo=${page}&&pageSize=${pageSize}`
-          )
-          .then((res) => {
-            setProducts([...products, ...res.data]);
-
-            setPage(pg);
-          })
-          .catch((err) => {
-            setDialogHeader("Error");
-            setDialogContent(err.message);
-            setShowDialog(true);
-          });
-      }
-    }, 450);
-  };
-
-  
-
-
-
+  console.log(products);
   return (
     <>
       <ResponseDialog
@@ -139,24 +95,37 @@ const Home = () => {
                 </h4>
                 <Grid container direction="row" spacing={2}>
                   {products.map((product, i) => {
-                    return (
-                      <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
-                        <ProductCard product={product}></ProductCard>
-                      </Grid>
-                    );
+                    if (products.length === i + 1) {
+                      return <Grid
+                        item
+                        xs={12}
+                        sm={3}
+                        md={5}
+                        lg={3}
+                        ref={lastElementRef}
+                        key={i}
+                      >
+                        <ProductCard product={product}></ProductCard>{" "}
+                      </Grid>;
+                    } else {
+                      return (
+                        <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
+                          <ProductCard product={product}></ProductCard>
+                        </Grid>
+                      );
+                    }
                   })}
                 </Grid>
-                {productLength > products.length && (
-                  <div
-                    ref={setObserverEl}
-                    style={{ textAlign: "center", paddingTop: "20px" }}
-                  >
+                {loading && (
+                <Grid item xs={12}>
+                  <div style={{ textAlign: "center", paddingTop: "20px" }}>
                     <CircularProgress
                       style={{ color: "#1895f5" }}
                       disableShrink
                     />
                   </div>
-                )}
+                </Grid>
+              )}
               </Container>
             </Grid>
           </Grid>

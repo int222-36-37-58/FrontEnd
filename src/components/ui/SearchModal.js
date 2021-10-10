@@ -18,7 +18,7 @@ const SearchModal = (props) => {
   const [searchVal, setSearchVal] = useState("");
   const [type] = useState("");
   const [page, setPage] = useState(0);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(8);
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
@@ -32,7 +32,7 @@ const SearchModal = (props) => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((e) => {
         if (e[0].isIntersecting && hasMore) {
-          setPage(p => p + 1);
+          setPage((p) => p + 1);
         }
       });
       if (el) observer.current.observe(el);
@@ -53,7 +53,13 @@ const SearchModal = (props) => {
   return (
     <>
       {props.open && (
-        <div className="colorModal" style={{ paddingTop: "75px" }}>
+        <div
+          className="colorModal"
+          style={{
+            paddingTop: "75px",
+            transition: "0.3s",
+          }}
+        >
           <>
             <Container
               maxWidth="lg"
@@ -123,10 +129,17 @@ const SearchModal = (props) => {
                 {products.map((product, i) => {
                   if (products.length === i + 1) {
                     return (
-                      <div ref={lastElementRef}>
-                        {" "}
+                      <Grid
+                        item
+                        xs={12}
+                        sm={3}
+                        md={5}
+                        lg={3}
+                        ref={lastElementRef}
+                        key={i}
+                      >
                         <ProductCard product={product}></ProductCard>{" "}
-                      </div>
+                      </Grid>
                     );
                   } else {
                     return (
@@ -139,7 +152,7 @@ const SearchModal = (props) => {
                 {products.length < 1 && (
                   <div className="f24 p-10">
                     {" "}
-                    ไม่มีผลลัพธ์ของการค้นหานี้ กรุณาใส่อย่างน้อย2ตัวอักษร
+                    ไม่มีผลลัพธ์ของการค้นหานี้ กรุณาใส่อย่างน้อย 2 ตัวอักษร
                   </div>
                 )}
 
