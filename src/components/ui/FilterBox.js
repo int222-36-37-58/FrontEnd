@@ -56,7 +56,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                   style={{ padding: "3px" }}
                   onClick={() => clearCheck()}
                 >
-                  ล้างการกรอง
+                  ล้างค่า
                 </button>
               </div>
             )}
@@ -151,7 +151,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                   style={{ padding: "2px", marginTop: "10px" }}
                   onClick={() => clearCheck()}
                 >
-                  ล้างการกรอง
+                  ล้างค่า
                 </button>
               </div>{" "}
             </div>

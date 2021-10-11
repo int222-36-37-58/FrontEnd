@@ -13,10 +13,12 @@ import { useEffect } from "react";
 
 import ProductCard from "./ProductCard";
 import useSearchHandler from "../etc/useSearchHandler";
+import axios from "axios";
 
 const SearchModal = (props) => {
   const [searchVal, setSearchVal] = useState("");
-  const [type] = useState("");
+  const [type, setType] = useState("");
+  const [types, setTypes] = useState([]);
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const { products, hasMore, loading } = useSearchHandler(
@@ -48,7 +50,16 @@ const SearchModal = (props) => {
   useEffect(() => {
     setSearchVal(props.query);
     setPage(0);
+
+    axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
+      setTypes(res.data);
+    });
   }, [props]);
+
+  const chooseType = (e) => {
+    setType(e.target.value);
+    setPage(0);
+  };
 
   return (
     <>
@@ -125,6 +136,29 @@ const SearchModal = (props) => {
                 </div>{" "}
               </Hidden>
 
+              {products.length > 0 ? (
+                <div className="f24">ผลลัพธ์การค้นหา</div>
+              ) : (
+                <div className="f24"> ไม่มีผลลัพธ์ของการค้นหานี้</div>
+              )}
+              <div className="radioGroup pt-20 pb-20">
+                <span className="f18  pr-20">กรองการค้นหา</span>
+                {types.map((tp) => {
+                  return (
+                    <span key={tp.typeId}>
+                      <input
+                        type="radio"
+                        id={tp.name}
+                        name="type"
+                        defaultValue={tp.name}
+                        onChange={chooseType}
+                      />
+                      <label htmlFor={tp.name}>{tp.name}</label>
+                    </span>
+                  );
+                })}
+              </div>
+
               <Grid container direction="row" spacing={2}>
                 {products.map((product, i) => {
                   if (products.length === i + 1) {
@@ -149,9 +183,6 @@ const SearchModal = (props) => {
                     );
                   }
                 })}
-                {products.length < 1 && (
-                  <div className="f24 p-10"> ไม่มีผลลัพธ์ของการค้นหานี้</div>
-                )}
 
                 {loading && (
                   <Grid item xs={12}>

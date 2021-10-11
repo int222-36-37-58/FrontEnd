@@ -199,9 +199,9 @@ const ProductContent = (props) => {
           {product.color && (
             <div className="radioGroup">
               <h4 style={{ marginBottom: 10 + "px" }}>color</h4>
-              {product.color.map((col) => {
+              {product.color.map((col, i) => {
                 return (
-                  <span key={col.colorId}>
+                  <span key={i}>
                     <input
                       type="radio"
                       id={col.colorName}

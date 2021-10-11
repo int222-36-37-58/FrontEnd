@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function useSearchHandler(searchVal, type, page, pageSize, typeArr) {
+function useSearchHandler(searchVal, type, page, pageSize) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-  const [typeFilter, setTypeFilter] = useState(null);
+
   useEffect(() => {
     setProducts([]);
-    setTypeFilter(type);
   }, [searchVal, type]);
 
   useEffect(() => {
@@ -23,16 +22,24 @@ function useSearchHandler(searchVal, type, page, pageSize, typeArr) {
       url: api,
       params: { searchText: searchVal, pageNo: page, pageSize: pageSize },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
-    }).then((res) => {
-      setProducts((prevProd) => {
-        return [...prevProd, ...res.data];
+    })
+      .then((res) => {
+        setProducts((prevProd) => {
+          return [...prevProd, ...res.data];
+        });
+        setTimeout(() => {
+          setHasMore(res.data.length > 0);
+          setLoading(false);
+        }, 600);
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) {
+          return;
+        }
       });
-      setHasMore(res.data.length > 0);
-      setLoading(false);
-    });
 
     return () => cancel();
-  }, [searchVal, type, page, pageSize, typeArr, typeFilter]);
+  }, [searchVal, type, page, pageSize]);
 
   return { loading, products, hasMore };
 }
