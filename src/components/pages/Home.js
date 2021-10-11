@@ -184,7 +184,7 @@ const Home = ({ filter }) => {
                     })}
                   </>
                 </Grid>
-                )
+
                 {loading && (
                   <Grid item xs={12}>
                     <div style={{ textAlign: "center", paddingTop: "20px" }}>

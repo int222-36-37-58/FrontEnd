@@ -64,7 +64,6 @@ function ProductCard(props, { addToCart, openSearchModal }) {
     }
   };
 
-  console.log(props.listStyle);
   return (
     <Container
       style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
