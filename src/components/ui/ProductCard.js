@@ -1,4 +1,4 @@
-import { Box, Container } from "@material-ui/core";
+import { Box, Container, Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -64,6 +64,7 @@ function ProductCard(props, { addToCart, openSearchModal }) {
     }
   };
 
+  console.log(props.listStyle);
   return (
     <Container
       style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
@@ -143,53 +144,110 @@ function ProductCard(props, { addToCart, openSearchModal }) {
           </div>
         </div>
       )}
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        style={{ marginLeft: "-10px", marginRight: "-10px" }}
-      >
-        <div className="imageContainer hoverCursor" onClick={seeInfo}>
-          <img
-            src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-            alt="imgProduct"
-            
-            className="hoverCursor imageProduct"
-          />
-          <div className="hoverImage">
-            <h4 className="textInHoverImage">view</h4>
+      {props.listStyle === 1 ? (
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          style={{ marginLeft: "-10px", marginRight: "-10px" }}
+        >
+          <div className="imageContainer hoverCursor" onClick={seeInfo}>
+            <img
+              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+              alt="imgProduct"
+              className="hoverCursor imageProduct"
+            />
+            <div className="hoverImage">
+              <h4 className="textInHoverImage">view</h4>
+            </div>
           </div>
-        </div>
-        <div className="hoverCursor">
-          <h5 className="titleWrap">{props.product.name}</h5>
+          <div className="hoverCursor">
+            <h5 className="titleWrap">{props.product.name}</h5>
 
-          {props.product.quantity < 1 ? (
-            <button
-              className="disabledButton "
-              disabled
-              style={{ width: 90 + "%" }}
-            >
-              Sold out
-            </button>
-          ) : (
-            <button
-              className="AddButton"
-              style={{ width: 90 + "%" }}
-              onClick={showColor}
-            >
-              Add - ฿{props.product.price}{" "}
-            </button>
-          )}
+            {props.product.quantity < 1 ? (
+              <button
+                className="disabledButton "
+                disabled
+                style={{ width: 90 + "%" }}
+              >
+                Sold out
+              </button>
+            ) : (
+              <button
+                className="AddButton"
+                style={{ width: 90 + "%" }}
+                onClick={showColor}
+              >
+                Add - ฿{props.product.price}{" "}
+              </button>
+            )}
 
-          <button
-            className="InfoButton"
-            style={{ width: 90 + "%" }}
-            onClick={seeInfo}
-          >
-            Information
-          </button>
-        </div>
-      </Box>
+            <button
+              className="InfoButton"
+              style={{ width: 90 + "%" }}
+              onClick={seeInfo}
+            >
+              Information
+            </button>
+          </div>
+        </Box>
+      ) : (
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={12} lg={4}>
+            <div className="imageContainer hoverCursor" onClick={seeInfo}>
+              <img
+                src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+                alt="imgProduct"
+                className=" imageProduct"
+              />
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={5} lg={4}>
+            <h3>{props.product.name}</h3>{" "}
+          </Grid>
+          <Grid item xs={12} sm={5} lg={3} style={{ textAlign: "center" }}>
+            {" "}
+            <div>
+              {" "}
+              <div
+                style={{
+                  color: "#3595f6",
+                  fontSize: "24px",
+                }}
+                className="b"
+              >
+                ฿{props.product.price}{" "}
+              </div>
+              <div>
+                {props.product.quantity < 1 ? (
+                  <button
+                    className="disabledButton "
+                    disabled
+                    style={{ width: 90 + "%" }}
+                  >
+                    Sold out
+                  </button>
+                ) : (
+                  <button
+                    className="AddButton"
+                    style={{ width: 90 + "%" }}
+                    onClick={showColor}
+                  >
+                    Add
+                  </button>
+                )}
+                <button
+                  className="InfoButton"
+                  style={{ width: 90 + "%" }}
+                  onClick={seeInfo}
+                >
+                  Information
+                </button>
+              </div>
+            </div>{" "}
+          </Grid>
+        </Grid>
+      )}
     </Container>
   );
 }

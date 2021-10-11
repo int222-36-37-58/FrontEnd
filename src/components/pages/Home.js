@@ -7,7 +7,8 @@ import useSearchHandler from "../etc/useSearchHandler";
 import FilterBox from "../ui/FilterBox";
 import ProductCard from "../ui/ProductCard";
 import ResponseDialog from "../ui/ResponseDialog";
-
+import DehazeIcon from "@material-ui/icons/Dehaze";
+import AppsIcon from "@material-ui/icons/Apps";
 const Home = ({ filter }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
@@ -17,6 +18,7 @@ const Home = ({ filter }) => {
   const [productLength, setProductLength] = useState(0);
   const [searchVal] = useState("");
   const [type, setType] = useState("");
+  const [listStyle, setListStyle] = useState(1);
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
@@ -82,7 +84,22 @@ const Home = ({ filter }) => {
         dialogContent={dialogContent}
         dialogHeader={dialogHeader}
       />
+
       <Container maxWidth="xl">
+        <div className="headerHome">
+          <div>
+            <AppsIcon
+              className="p-10 hoverCursor"
+              onClick={() => setListStyle(1)}
+              style={{ color: listStyle === 1 ? "#333435" : null }}
+            />
+            <DehazeIcon
+              className="p-10 hoverCursor"
+              onClick={() => setListStyle(2)}
+              style={{ color: listStyle === 2 ? "#333435" : null }}
+            />
+          </div>
+        </div>
         <div
           style={{
             marginLeft: "auto",
@@ -103,34 +120,71 @@ const Home = ({ filter }) => {
 
             <Grid item xs={12} md={8}>
               <Container className="homeContainer">
-                <h4 style={{ textAlign: "right", marginTop: "-15px" }}>
+                <h4
+                  style={{
+                    textAlign: "right",
+                    marginTop: "-15px",
+                    color: "#3595f6",
+                  }}
+                >
                   {productLength} รายการ
                 </h4>
                 <Grid container direction="row" spacing={2}>
-                  {products.map((product, i) => {
-                    if (products.length === i + 1) {
-                      return (
-                        <Grid
-                          item
-                          xs={12}
-                          sm={6}
-                          md={5}
-                          lg={3}
-                          ref={lastElementRef}
-                          key={i}
-                        >
-                          <ProductCard product={product}></ProductCard>{" "}
-                        </Grid>
-                      );
-                    } else {
-                      return (
-                        <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
-                          <ProductCard product={product}></ProductCard>
-                        </Grid>
-                      );
-                    }
-                  })}
+                  <>
+                    {products.map((product, i) => {
+                      if (products.length === i + 1) {
+                        if (listStyle === 1) {
+                          return (
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              md={5}
+                              lg={3}
+                              ref={lastElementRef}
+                              key={i}
+                            >
+                              <ProductCard
+                                product={product}
+                                listStyle={listStyle}
+                              ></ProductCard>{" "}
+                            </Grid>
+                          );
+                        } else {
+                          return (
+                            <Grid item xs={12} ref={lastElementRef} key={i}>
+                              <ProductCard
+                                product={product}
+                                listStyle={listStyle}
+                              ></ProductCard>{" "}
+                            </Grid>
+                          );
+                        }
+                      } else {
+                        if (listStyle === 1) {
+                          return (
+                            <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
+                              <ProductCard
+                                product={product}
+                                listStyle={listStyle}
+                              ></ProductCard>{" "}
+                            </Grid>
+                          );
+                        } else {
+                          return (
+                            <Grid item xs={12} key={i}>
+                              <ProductCard
+                                product={product}
+                                listStyle={listStyle}
+                              ></ProductCard>{" "}
+                            </Grid>
+                          );
+                        }
+                      }
+                    })}
+                  </>
                 </Grid>
+                )
                 {loading && (
                   <Grid item xs={12}>
                     <div style={{ textAlign: "center", paddingTop: "20px" }}>

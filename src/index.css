@@ -244,6 +244,26 @@ body {
   padding-left: 20px;
 }
 
+.headerHome {
+  display: flex;
+  justify-content: right;
+  padding-top: 45px;
+  margin-bottom: -40px;
+}
+.headerHome > div {
+  margin-right: 12%;
+  color: rgb(216, 216, 216);
+}
+
+.headerHome > div > * {
+  font-size: 30px;
+}
+
+.headerHome > div > *:hover {
+  color: #333435;
+  transition: 0.3s;
+}
+
 .titleWrap {
   margin-top: -1px;
   width: 180px;
