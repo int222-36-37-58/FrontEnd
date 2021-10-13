@@ -21,7 +21,11 @@ const GuestUserPage = (props) => {
               <div className="guestModalHeader">
                 <div
                   onClick={() => setFormShow("login")}
-                  className={formShow === "login" ? "guestModalClick" : "none"}
+                  className={
+                    formShow === "login"
+                      ? "guestModalClick"
+                      : "guestModalNotClick"
+                  }
                   style={{
                     marginRight: "0",
                   }}
@@ -31,7 +35,9 @@ const GuestUserPage = (props) => {
                 <div
                   onClick={() => setFormShow("register")}
                   className={
-                    formShow === "register" ? "guestModalClick" : "none"
+                    formShow === "register"
+                      ? "guestModalClick"
+                      : "guestModalNotClick"
                   }
                   style={{
                     marginLeft: "0",
