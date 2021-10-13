@@ -23,23 +23,22 @@ const Home = ({ filter }) => {
     searchVal,
     type,
     page,
-    pageSize,
-    filter
+    pageSize
   );
 
   useEffect(() => {
     if (filter.length === 0) {
       setType("");
-
       setPage(0);
     }
     if (filter.length > 0) {
       setType(filter);
       setPage(0);
     }
-  }, [filter, type]);
+  }, [filter]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getProductLength = () => {
       axios
         .get(`${process.env.REACT_APP_API_URL}/products`)
@@ -53,7 +52,7 @@ const Home = ({ filter }) => {
         });
     };
     getProductLength();
-    window.scrollTo(0, 0);
+    
   }, [pageSize]);
 
   const observer = useRef();

@@ -1,15 +1,24 @@
 import { Container, Grid, Modal } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import CloseIcon from "@material-ui/icons/Close";
 const GuestUserPage = (props) => {
   const [formShow, setFormShow] = useState("login");
+  useEffect(() => {
+    if (props.open) {
+      window.scrollTo(0, 0);
+    }
+  }, [props]);
 
+  const closeModal = () => {
+    props.close();
+    setFormShow("login");
+  };
   return (
     <Modal
       open={props.open}
-      onClose={props.close}
+      onClose={closeModal}
       style={{ overflow: "scroll" }}
     >
       <Container className="guestModal">
@@ -19,7 +28,7 @@ const GuestUserPage = (props) => {
             <div className="guestContainer">
               {" "}
               <div style={{ textAlign: "right" }}>
-                <CloseIcon className="guestCloseButton" onClick={props.close} />
+                <CloseIcon className="guestCloseButton" onClick={closeModal} />
               </div>
               <div className="guestModalHeader">
                 <div
