@@ -99,7 +99,7 @@ export default class LoginForm extends Component {
                   }}
                   onClick={this.onSubmit}
                 >
-                  Login
+                  Log in
                 </Button>
               </Grid>
             </Grid>

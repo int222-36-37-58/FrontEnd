@@ -99,7 +99,7 @@ body {
 
 .guestModal {
   outline: none;
-  margin-top: 90px;
+  margin-top: 140px;
 }
 
 .guestContainer {
@@ -291,6 +291,7 @@ body {
 .headerRegister {
   padding-top: 20px;
   padding-bottom: 5px;
+  margin-top: 25px;
   z-index: 999;
   background-color: #1895f5;
   color: white;

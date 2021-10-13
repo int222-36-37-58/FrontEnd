@@ -64,7 +64,7 @@ const NavBar = ({
 
   const handleShowGuestModal = (open) => (event) => {
     setShowGuestModal(open);
-    console.log("imwork ");
+    window.scrollTo(0, 0);
   };
 
   return (

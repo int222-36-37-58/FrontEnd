@@ -6,9 +6,12 @@ import CloseIcon from "@material-ui/icons/Close";
 const GuestUserPage = (props) => {
   const [formShow, setFormShow] = useState("login");
 
-  console.log(props.open);
   return (
-    <Modal open={props.open} onClose={props.close}>
+    <Modal
+      open={props.open}
+      onClose={props.close}
+      style={{ overflow: "scroll" }}
+    >
       <Container className="guestModal">
         <Grid container justifyContent="center" justifyItems="center">
           <Grid item xs={12}>
@@ -30,7 +33,7 @@ const GuestUserPage = (props) => {
                     marginRight: "0",
                   }}
                 >
-                  Login
+                  เข้าสู่ระบบ
                 </div>
                 <div
                   onClick={() => setFormShow("register")}
@@ -43,7 +46,7 @@ const GuestUserPage = (props) => {
                     marginLeft: "0",
                   }}
                 >
-                  Register
+                  สมัครสมาชิก
                 </div>
               </div>{" "}
             </div>

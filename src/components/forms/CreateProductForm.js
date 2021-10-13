@@ -3,7 +3,6 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Typography,
 } from "@material-ui/core";
 import { Grid, TextField, Button, Select } from "@material-ui/core";
 import React, { Component } from "react";
@@ -162,8 +161,7 @@ export default class CreateProductForm extends Component {
             boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
           }}
         >
-          <Typography
-            variant="h4"
+          <h2
             style={{
               marginBottom: 10 + "px",
               paddingTop: 25 + "px",
@@ -171,8 +169,8 @@ export default class CreateProductForm extends Component {
             }}
           >
             {" "}
-            Product Info
-          </Typography>
+            ข้อมูลสินค้า
+          </h2>
           <form>
             <Grid
               container

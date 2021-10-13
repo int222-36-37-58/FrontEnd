@@ -96,6 +96,12 @@ export default class RegisterForm extends Component {
           marginBottom: 350 + "px",
         }}
       >
+        {editMode && (
+          <div className="headerRegister">
+            <h3>แก้ไขข้อมูลส่วนตัว</h3>
+          </div>
+        )}
+
         <Grid container>
           <Grid item xs={12} style={{ padding: 40 + "px" }}>
             <form>
