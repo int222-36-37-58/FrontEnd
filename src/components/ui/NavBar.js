@@ -16,6 +16,7 @@ import { VpnKey } from "@material-ui/icons";
 import { changeCurrentMenu, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
+import GuestUserPage from "../pages/GuestUserPage";
 
 const NavBar = ({
   cart,
@@ -29,6 +30,7 @@ const NavBar = ({
   const [searchVal, setSearchVal] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [isShowProfileDrawer, setIsShowProfileDrawer] = useState(false);
+  const [showGuestModal, setShowGuestModal] = useState(false);
 
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -59,7 +61,11 @@ const NavBar = ({
       setSearchVal("");
     }
   };
- 
+
+  const handleShowGuestModal = (open) => (event) => {
+    setShowGuestModal(open);
+    console.log("imwork ");
+  };
 
   return (
     <>
@@ -69,6 +75,7 @@ const NavBar = ({
         isShowCart={isShowCart}
         remove={removeFromCart}
         clearCart={clearCartItem}
+        showLoginForm={handleSearchModal}
       />
 
       <ProfileDrawer
@@ -80,6 +87,11 @@ const NavBar = ({
         open={uiStyle.searchModalShow}
         close={handleSearchModal(false)}
         query={searchVal}
+      />
+
+      <GuestUserPage
+        open={showGuestModal}
+        close={handleShowGuestModal(false)}
       />
 
       <>
@@ -143,6 +155,9 @@ const NavBar = ({
                 onClick={handleSearchModal(true)}
               />
             </Hidden>
+            <div className="hoverCursor" onClick={handleShowGuestModal(true)}>
+              Mockup
+            </div>
 
             <div
               className="iconNav hoverCursor"

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import { Button } from "@material-ui/core";
 
 export default class RegisterForm extends Component {
   state = {
@@ -84,27 +84,20 @@ export default class RegisterForm extends Component {
 
   render() {
     const { editMode } = this.props;
-
-    const title = editMode ? "Your Profile" : "Register Information";
     return (
       <div
         className={!editMode ? "center" : null}
         style={{
           maxWidth: 680 + "px",
+          width: "100%",
           height: "auto",
           backgroundColor: "white",
-          borderRadius: 1 + "%",
+          borderRadius: "0 0 10px 10px",
           marginBottom: 350 + "px",
         }}
       >
-        <div className="headerRegister">
-          <Typography variant="h5" style={{ marginBottom: 15 + "px" }}>
-            {title}
-          </Typography>
-        </div>
-
         <Grid container>
-          <Grid item xs={12} style={{ padding: 20 + "px" }}>
+          <Grid item xs={12} style={{ padding: 40 + "px" }}>
             <form>
               <Grid
                 container
@@ -241,34 +234,34 @@ export default class RegisterForm extends Component {
                 )}
 
                 <Grid item xs={12} align="center">
-                  <button
-                    className="AddButton"
+                  <Button
+                    fullWidth
                     style={{
-                      marginTop: 60 + "px",
-                      paddingRight: 35 + "px",
-                      paddingLeft: 35 + "px",
+                      marginTop: 15 + "px",
+                      alignItems: "center",
+                      backgroundColor: "#1895f5",
+                      color: "white",
                     }}
                     onClick={this.onSubmit}
                   >
                     Submit
-                  </button>
+                  </Button>
+
                   {editMode && (
-                    <button
-                      className="delFromCart"
+                    <Button
+                      fullWidth
                       style={{
-                        marginTop: 60 + "px",
-                        paddingRight: 35 + "px",
-                        paddingLeft: 35 + "px",
-                        marginLeft: 20 + "px",
-                        paddingTop: 7 + "px",
-                        paddingBottom: 7 + "px",
+                        marginTop: 15 + "px",
+                        alignItems: "center",
+                        backgroundColor: "#d83c2d",
+                        color: "white",
                       }}
                       onClick={() => {
                         this.props.onIsEdit();
                       }}
                     >
                       Cancel
-                    </button>
+                    </Button>
                   )}
                 </Grid>
               </Grid>

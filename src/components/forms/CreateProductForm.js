@@ -329,13 +329,18 @@ export default class CreateProductForm extends Component {
               </Grid>
 
               <Grid item xs={12} align="center">
-                <button
-                  className="AddButton"
-                  style={{ marginTop: 30 + "px", padding: "5px 20px 5px 20px" }}
+                <Button
+                  fullWidth
+                  style={{
+                    marginTop: 15 + "px",
+                    alignItems: "center",
+                    backgroundColor: "#1895f5",
+                    color: "white",
+                  }}
                   onClick={this.onSubmit}
                 >
                   Submit
-                </button>
+                </Button>
               </Grid>
             </Grid>
           </form>

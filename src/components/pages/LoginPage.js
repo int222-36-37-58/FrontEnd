@@ -6,11 +6,7 @@ const LoginPage = () => {
     console.log(e);
   };
 
-  return (
-    <div style={{paddingBottom: 200+'px'}}>
-      <LoginForm submit={submit} />
-    </div>
-  );
+  return <LoginForm submit={submit} />;
 };
 
 export default LoginPage;
