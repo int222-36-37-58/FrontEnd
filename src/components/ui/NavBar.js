@@ -7,7 +7,6 @@ import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined"
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { removeFromCart, clearCartItem } from "../../actions/cart";
-
 import Cart from "./Cart";
 import sitlogo from "../../images/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
@@ -17,12 +16,13 @@ import { changeCurrentMenu, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
-
+import { logout } from "../../actions/user";
 const NavBar = ({
   isAuth,
   userInfo,
   cart,
   uiStyle,
+  logout,
   removeFromCart,
   clearCartItem,
   changeCurrentMenu,
@@ -69,11 +69,12 @@ const NavBar = ({
     window.scrollTo(0, 0);
   };
 
-  const logout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("jwtToken");
     setAnchorEl(null);
     changeCurrentMenu("");
     openSearchModal(false);
+    logout();
   };
 
   return (
@@ -330,7 +331,7 @@ const NavBar = ({
               </div>
             </Link>
             <div
-              onClick={logout}
+              onClick={handleLogout}
               style={{
                 fontSize: "14px",
                 padding: "10px",
@@ -363,6 +364,7 @@ const mapDispatchToProps = (dispatch) => {
     clearCartItem: () => dispatch(clearCartItem()),
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
+    logout: () => dispatch(logout()),
   };
 };
 

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route } from "react-router";
 
-function ProtectedRoute({ isAuth, ...rest }) {
+function ProtectedRoute({ isAuth, component: Component, ...rest }) {
   return (
     <Route
       {...rest}
