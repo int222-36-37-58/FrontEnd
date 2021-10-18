@@ -15,6 +15,9 @@ import MyStorePage from "./MyStorePage";
 import { changeCurrentMenu } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
+import UserListPage from "./UserListPage";
+import ListBaseDataPage from "./ListBaseDataPage";
+
 const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
   const [userData] = useState({
     id: 1,
@@ -138,6 +141,30 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
                   <div>ร้านค้าของฉัน</div>
                 </Link>
 
+                <Link
+                  to="/profile/admin/basedata"
+                  onClick={() => changeCurrentMenu("basedata")}
+                  className={
+                    uiStyle.currentMenuClicked === "basedata"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
+                >
+                  <div>จัดการข้อมูลพื้นฐาน</div>
+                </Link>
+
+                <Link
+                  to="/profile/admin/users"
+                  onClick={() => changeCurrentMenu("users")}
+                  className={
+                    uiStyle.currentMenuClicked === "users"
+                      ? "clickChangeBackground p-10 "
+                      : "hoverChangeBackground p-10"
+                  }
+                >
+                  <div>จัดการข้อมูลผู้ใช้</div>
+                </Link>
+
                 <div
                   className="hoverChangeBackground p-10"
                   onClick={() => handleLogout()}
@@ -238,6 +265,14 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
               <Route path={"/profile/editproduct"}>
                 {" "}
                 <EditProductPage />
+              </Route>
+              <Route path={"/profile/admin/"}>
+                <Route path={"/profile/admin/basedata"}>
+                  <ListBaseDataPage />
+                </Route>
+                <Route path={"/profile/admin/users"}>
+                  <UserListPage />
+                </Route>
               </Route>
             </Switch>
           </Grid>

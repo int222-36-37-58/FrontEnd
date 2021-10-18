@@ -22,9 +22,9 @@ const OrderDetailRow = (props) => {
         product: { productId: props.odt.product.productId },
         user: { userId: 1 },
       });
-      console.log(json);
+
       axios
-        .post(`${process.env.REACT_APP_API_URL}/addcomment`, json, {
+        .post(`${process.env.REACT_APP_API_URL}/user/addcomment`, json, {
           headers: {
             "Content-Type": "application/json",
           },

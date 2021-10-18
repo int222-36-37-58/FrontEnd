@@ -19,6 +19,8 @@ import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
 
 const NavBar = ({
+  isAuth,
+  userInfo,
   cart,
   uiStyle,
   removeFromCart,
@@ -67,6 +69,13 @@ const NavBar = ({
     window.scrollTo(0, 0);
   };
 
+  const logout = () => {
+    localStorage.removeItem("jwtToken");
+    setAnchorEl(null);
+    changeCurrentMenu("");
+    openSearchModal(false);
+  };
+
   return (
     <>
       <Cart
@@ -75,11 +84,15 @@ const NavBar = ({
         isShowCart={isShowCart}
         remove={removeFromCart}
         clearCart={clearCartItem}
-        showLoginForm={handleSearchModal}
+        isAuth={isAuth}
+        userInfo={userInfo}
+        showLoginForm={handleShowGuestModal(true)}
       />
 
       <ProfileDrawer
         open={isShowProfileDrawer}
+        isAuth={isAuth}
+        showLoginForm={handleShowGuestModal(true)}
         close={() => handleProfileDrawer(false)}
       />
 
@@ -155,14 +168,17 @@ const NavBar = ({
                 onClick={handleSearchModal(true)}
               />
             </Hidden>
-            <div className="hoverCursor" onClick={handleShowGuestModal(true)}>
-              Mockup
-            </div>
 
             <div
               className="iconNav hoverCursor"
               onMouseOver={handleOpenMenu}
-              onClick={() => handleProfileDrawer(true)}
+              onClick={() => {
+                if (isAuth) {
+                  handleProfileDrawer(true);
+                } else {
+                  setShowGuestModal(true);
+                }
+              }}
               aria-controls="menu"
               style={{ borderWidth: " 0 1px 0 1px", textAlign: "center" }}
             >
@@ -197,148 +213,147 @@ const NavBar = ({
           <div style={{ position: "absolute", paddingTop: "75px" }}></div>
         </div>
       </>
-
-      <Hidden mdDown>
-        <Menu
-          id="menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          MenuListProps={{ onMouseLeave: () => setAnchorEl(false) }}
-          PaperProps={{
-            style: {
-              width: "195px",
-              display: "flex",
-              textAlign: "right",
-              marginTop: "35px",
-            },
-          }}
-        >
-          <Link to="/profile/info" className="link">
-            <div
-              onClick={() => {
-                setAnchorEl(null);
-                changeCurrentMenu("info");
-                openSearchModal(false);
-              }}
-              style={{
-                fontSize: "14px",
-                padding: "10px",
-                display: "flex",
-                justifyContent: "left",
+      {isAuth && (
+        <Hidden mdDown>
+          <Menu
+            id="menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            MenuListProps={{ onMouseLeave: () => setAnchorEl(false) }}
+            PaperProps={{
+              style: {
                 width: "195px",
-                fontWeight: "600",
-                maxWidth: "195px",
-              }}
-              className={
-                uiStyle.currentMenuClicked === "info"
-                  ? "currentClickStyle b hoverCursor"
-                  : "hoverCursor currentHoverStyle"
-              }
-            >
-              <PersonIcon className="pr-10" /> ข้อมูลของฉัน
-            </div>
-          </Link>
-          <Link to="/profile/changepassword" className="link">
-            <div
-              onClick={() => {
-                setAnchorEl(null);
-                changeCurrentMenu("changepassword");
-                openSearchModal(false);
-              }}
-              style={{
-                fontSize: "14px",
-                padding: "10px",
                 display: "flex",
-                justifyContent: "left",
-                fontWeight: "600",
-                width: "100%",
-              }}
-              className={
-                uiStyle.currentMenuClicked === "changepassword"
-                  ? "currentClickStyle b hoverCursor"
-                  : "hoverCursor currentHoverStyle"
-              }
-            >
-              <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
-            </div>
-          </Link>
-
-          <Link to="/profile/order" className="link">
-            <div
-              onClick={() => {
-                setAnchorEl(null);
-                changeCurrentMenu("order");
-                openSearchModal(false);
-              }}
-              style={{
-                fontSize: "14px",
-                padding: "10px",
-                display: "flex",
-                justifyContent: "left",
-                fontWeight: "600",
-                width: "100%",
-              }}
-              className={
-                uiStyle.currentMenuClicked === "order"
-                  ? "currentClickStyle b hoverCursor"
-                  : "hoverCursor currentHoverStyle"
-              }
-            >
-              <ListAltIcon className="pr-10" /> คำสั่งซื้อ
-            </div>
-          </Link>
-          <Link to="/profile/createproduct" className="link">
-            <div
-              onClick={() => {
-                setAnchorEl(null);
-                changeCurrentMenu("createproduct");
-                openSearchModal(false);
-              }}
-              style={{
-                fontSize: "14px",
-                padding: "10px",
-                display: "flex",
-                justifyContent: "left",
-                fontWeight: "600",
-                width: "100%",
-              }}
-              className={
-                uiStyle.currentMenuClicked === "createproduct"
-                  ? "currentClickStyle b hoverCursor"
-                  : "hoverCursor currentHoverStyle"
-              }
-            >
-              {" "}
-              <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
-            </div>
-          </Link>
-          <div
-            onClick={() => {
-              setAnchorEl(null);
-              changeCurrentMenu("");
-              openSearchModal(false);
+                textAlign: "right",
+                marginTop: "35px",
+              },
             }}
-            style={{
-              fontSize: "14px",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "left",
-            }}
-            className="hoverCursor b p-10 currentHoverStyle"
           >
-            ออกจากระบบ
-          </div>
-        </Menu>
-      </Hidden>
+            <Link to="/profile/info" className="link">
+              <div
+                onClick={() => {
+                  setAnchorEl(null);
+                  changeCurrentMenu("info");
+                  openSearchModal(false);
+                }}
+                style={{
+                  fontSize: "14px",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "left",
+                  width: "195px",
+                  fontWeight: "600",
+                  maxWidth: "195px",
+                }}
+                className={
+                  uiStyle.currentMenuClicked === "info"
+                    ? "currentClickStyle b hoverCursor"
+                    : "hoverCursor currentHoverStyle"
+                }
+              >
+                <PersonIcon className="pr-10" /> ข้อมูลของฉัน
+              </div>
+            </Link>
+            <Link to="/profile/changepassword" className="link">
+              <div
+                onClick={() => {
+                  setAnchorEl(null);
+                  changeCurrentMenu("changepassword");
+                  openSearchModal(false);
+                }}
+                style={{
+                  fontSize: "14px",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "left",
+                  fontWeight: "600",
+                  width: "100%",
+                }}
+                className={
+                  uiStyle.currentMenuClicked === "changepassword"
+                    ? "currentClickStyle b hoverCursor"
+                    : "hoverCursor currentHoverStyle"
+                }
+              >
+                <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
+              </div>
+            </Link>
+
+            <Link to="/profile/order" className="link">
+              <div
+                onClick={() => {
+                  setAnchorEl(null);
+                  changeCurrentMenu("order");
+                  openSearchModal(false);
+                }}
+                style={{
+                  fontSize: "14px",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "left",
+                  fontWeight: "600",
+                  width: "100%",
+                }}
+                className={
+                  uiStyle.currentMenuClicked === "order"
+                    ? "currentClickStyle b hoverCursor"
+                    : "hoverCursor currentHoverStyle"
+                }
+              >
+                <ListAltIcon className="pr-10" /> คำสั่งซื้อ
+              </div>
+            </Link>
+            <Link to="/profile/createproduct" className="link">
+              <div
+                onClick={() => {
+                  setAnchorEl(null);
+                  changeCurrentMenu("createproduct");
+                  openSearchModal(false);
+                }}
+                style={{
+                  fontSize: "14px",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "left",
+                  fontWeight: "600",
+                  width: "100%",
+                }}
+                className={
+                  uiStyle.currentMenuClicked === "createproduct"
+                    ? "currentClickStyle b hoverCursor"
+                    : "hoverCursor currentHoverStyle"
+                }
+              >
+                {" "}
+                <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
+              </div>
+            </Link>
+            <div
+              onClick={logout}
+              style={{
+                fontSize: "14px",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "left",
+              }}
+              className="hoverCursor b p-10 currentHoverStyle"
+            >
+              ออกจากระบบ
+            </div>
+          </Menu>
+        </Hidden>
+      )}
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    userInfo: state.user.userInfo,
     cart: state.cart.cart,
     uiStyle: state.uiStyle,
+    isAuth: state.user.isAuth,
   };
 };
 

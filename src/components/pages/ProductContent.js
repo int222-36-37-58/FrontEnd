@@ -14,11 +14,7 @@ const ProductContent = (props) => {
   const [user] = useState({
     userId: 1,
     userName: "testuser",
-    password: "Testpassword1",
-    address: "home bangkok 10150",
-    tel: 1234567891,
-    fullName: "testfullname",
-    role: "ROLE_USER",
+    
   });
   const [imageProduct, setImageProduct] = useState(noImage);
   const [quantityAdd, setQuantityAdd] = useState(1);
@@ -51,7 +47,7 @@ const ProductContent = (props) => {
       });
 
     axios
-      .get(`${process.env.REACT_APP_API_URL}/${id}/comment`)
+      .get(`${process.env.REACT_APP_API_URL}/product/${id}/comment`)
       .then((res) => {
         setComments(res.data);
       })

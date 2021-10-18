@@ -210,7 +210,7 @@ const UserListPage = () => {
 
               <Table>
                 <TableHead>
-                  <TableRow style={{ backgroundColor: "#3f51b5" }}>
+                  <TableRow style={{ backgroundColor: "#1895f5" }}>
                     <TableCell style={{ color: "white" }} align="right">
                       ID
                     </TableCell>
@@ -218,9 +218,9 @@ const UserListPage = () => {
                       Username
                     </TableCell>
                     <Hidden smDown>
-                    <TableCell style={{ color: "white" }} align="right">
-                      Role
-                    </TableCell>
+                      <TableCell style={{ color: "white" }} align="right">
+                        Role
+                      </TableCell>
                     </Hidden>
                     <TableCell
                       style={{ color: "white" }}
@@ -240,7 +240,10 @@ const UserListPage = () => {
                           <TableRow key={user.userId}>
                             <TableCell align="right">{user.userId}</TableCell>
                             <TableCell align="right">{user.userName}</TableCell>
-                            <Hidden smDown> <TableCell align="right">{user.role}</TableCell></Hidden>
+                            <Hidden smDown>
+                              {" "}
+                              <TableCell align="right">{user.role}</TableCell>
+                            </Hidden>
                             {user.role !== "ROLE_ADMIN" && (
                               <TableCell align="right">
                                 {isEdit || isAdd ? (

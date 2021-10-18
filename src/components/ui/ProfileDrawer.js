@@ -14,49 +14,69 @@ function ProfileDrawer(props) {
           <div
             style={{ display: "flex", width: "230px", flexDirection: "column" }}
           >
-            <div className="w-100">
-              <Link to="/profile/info" onClick={props.close} className=" link">
-                <div className=" p-10  hoverChangeBackground ">
+            {props.isAuth ? (
+              <>
+                <div className="w-100">
+                  <Link
+                    to="/profile/info"
+                    onClick={props.close}
+                    className=" link"
+                  >
+                    <div className=" p-10  hoverChangeBackground ">
+                      {" "}
+                      ข้อมูลของฉัน
+                    </div>
+                  </Link>
+                </div>
+                <div className="  w-100">
                   {" "}
-                  ข้อมูลของฉัน
+                  <Link
+                    to="/profile/changepassword"
+                    onClick={props.close}
+                    className="link"
+                  >
+                    <div className=" p-10  hoverChangeBackground ">
+                      เปลี่ยนรหัสผ่าน
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-            <div className="  w-100">
-              {" "}
-              <Link
-                to="/profile/changepassword"
-                onClick={props.close}
-                className="link"
-              >
-                <div className=" p-10  hoverChangeBackground ">
-                  เปลี่ยนรหัสผ่าน
+                <div className="  w-100">
+                  {" "}
+                  <Link
+                    to="/profile/order"
+                    onClick={props.close}
+                    className="link  "
+                  >
+                    <div className=" p-10  hoverChangeBackground ">
+                      {" "}
+                      คำสั่งซื้อ
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-            <div className="  w-100">
-              {" "}
-              <Link
-                to="/profile/order"
-                onClick={props.close}
-                className="link  "
-              >
-                <div className=" p-10  hoverChangeBackground "> คำสั่งซื้อ</div>
-              </Link>
-            </div>
-            <div className=" w-100">
-              {" "}
-              <Link
-                to="/profile/createproduct"
-                onClick={props.close}
-                className="link "
-              >
-                <div className=" p-10 hoverChangeBackground">
-                  เริ่มขายสินค้า
+                <div className=" w-100">
+                  {" "}
+                  <Link
+                    to="/profile/createproduct"
+                    onClick={props.close}
+                    className="link "
+                  >
+                    <div className=" p-10 hoverChangeBackground">
+                      เริ่มขายสินค้า
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-            <div className=" p-10 hoverChangeBackground w-100">ออกจากระบบ</div>
+                <div className=" p-10 hoverChangeBackground w-100">
+                  ออกจากระบบ
+                </div>
+              </>
+            ) : (
+              <div
+                className=" p-10 hoverChangeBackground w-100"
+                onClick={props.showLoginForm}
+              >
+                ลงชื่อเข้าใช้
+              </div>
+            )}
           </div>
         </List>
       </Drawer>

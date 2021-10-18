@@ -141,12 +141,24 @@ export default class CreateProductForm extends Component {
     const imgFile = e.target.files[0];
     const imgPreview = URL.createObjectURL(e.target.files[0]);
     const imgName = e.target.files[0].name;
-
-    this.setState({
-      data: { ...this.state.data, imageName: imgName },
-      imageFile: imgFile,
-      imagePreview: imgPreview,
-    });
+    if (
+      imgName.slice(imgName.length - 3) === "jpg" ||
+      imgName.slice(imgName.length - 3) === "png" ||
+      imgName.slice(imgName.length - 4) === "jpeg"
+    ) {
+      this.setState({
+        data: { ...this.state.data, imageName: imgName },
+        imageFile: imgFile,
+        imagePreview: imgPreview,
+        errors: { ...this.state.errors, imageFormat: false },
+      });
+    } else {
+      this.setState({
+        errors: { ...this.state.errors, imageFormat: true },
+        imageFile: null,
+        imagePreview: noImage,
+      });
+    }
   };
 
   render() {
@@ -206,6 +218,11 @@ export default class CreateProductForm extends Component {
                 </Button>
                 {this.state.errors.imageName && (
                   <div style={{ color: "red" }}>Please insert Image!</div>
+                )}
+                {this.state.errors.imageFormat && (
+                  <div style={{ color: "red" }}>
+                    Please insert .jpg .jpeg .png file
+                  </div>
                 )}
               </Grid>
 

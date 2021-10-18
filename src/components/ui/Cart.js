@@ -27,35 +27,37 @@ const Cart = (props) => {
   };
 
   const handleCheckOut = () => {
-    var currentDate = new Date();
-    let order = {
-      date: currentDate.toISOString(),
-      orderDetail: props.listProduct,
-      user: {
-        userId: 1,
-        userName: "testuser",
-      },
-    };
-    console.log(order);
-
-    const json = JSON.stringify(order);
-
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/addorder`, json, {
-        headers: {
-          "Content-Type": "application/json",
+    if (props.isAuth) {
+      var currentDate = new Date();
+      let order = {
+        date: currentDate.toISOString(),
+        orderDetail: props.listProduct,
+        user: {
+          userId: props.userInfo.userId,
+          userName: props.userInfo.userName,
         },
-      })
-      .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent("Check out success!!");
-      })
-      .then(() => props.clearCart())
-      .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+      };
+      const json = JSON.stringify(order);
+
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/user/addorder`, json, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(() => {
+          setDialogHeader("Success!!");
+          setDialogContent("Check out success!!");
+        })
+        .then(() => props.clearCart())
+        .catch((err) => {
+          setDialogHeader("Error");
+          setDialogContent(err.response.data.message);
+        })
+        .then(setShowDialog(true));
+    } else {
+      props.showLoginForm();
+    }
   };
 
   return (

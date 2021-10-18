@@ -22,7 +22,7 @@ const GuestUserPage = (props) => {
       style={{ overflow: "scroll" }}
     >
       <Container className="guestModal">
-        <Grid container justifyContent="center" justifyItems="center">
+        <Grid container justifyContent="center" justifyitems="center">
           <Grid item xs={12}>
             {" "}
             <div className="guestContainer">

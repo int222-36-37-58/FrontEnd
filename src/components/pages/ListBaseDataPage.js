@@ -24,11 +24,11 @@ const ListBaseDataPage = () => {
           All Colors and Types
         </div>
         <Grid container>
-          <Grid item xs={12} md={6} style={{ paddingBottom: 50 + "px" }}>
+          <Grid item xs={12} style={{ paddingBottom: 50 + "px" }}>
             <ColorTable />
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <TypeTable />
           </Grid>
         </Grid>

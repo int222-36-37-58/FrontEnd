@@ -172,13 +172,19 @@ const SearchModal = (props) => {
                         ref={lastElementRef}
                         key={i}
                       >
-                        <ProductCard product={product}></ProductCard>{" "}
+                        <ProductCard
+                          product={product}
+                          listStyle={1}
+                        ></ProductCard>{" "}
                       </Grid>
                     );
                   } else {
                     return (
                       <Grid item xs={12} sm={3} md={5} lg={3} key={i}>
-                        <ProductCard product={product}></ProductCard>
+                        <ProductCard
+                          product={product}
+                          listStyle={1}
+                        ></ProductCard>
                       </Grid>
                     );
                   }

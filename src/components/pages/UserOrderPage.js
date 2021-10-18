@@ -17,7 +17,7 @@ const UserOrderPage = () => {
   const [currentViewOrder, setCurrentViewOrder] = useState({});
   const getMyOrderHistory = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/getuserorder/1`)
+      .get(`${process.env.REACT_APP_API_URL}/user/getuserorder/1`)
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
         setDialogHeader("Error");
