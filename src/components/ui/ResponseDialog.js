@@ -7,7 +7,7 @@ const ResponseDialog = (props) => {
   const switchRender = () => {
     if (props.dialog) {
       switch (props.dialog.status) {
-        case "Success!!":
+        case props.dialog.status === 200:
           return (
             <CheckCircleOutlineOutlinedIcon
               style={{
@@ -16,7 +16,7 @@ const ResponseDialog = (props) => {
               }}
             />
           );
-        case "Error":
+        case props.dialog.status === undefined || props.dialog.status !== 200:
           return (
             <CancelOutlined
               className="w100"
@@ -36,17 +36,9 @@ const ResponseDialog = (props) => {
             />
           );
       }
-    } else {
-      <CircularProgress
-        style={{
-          color: "#1895f5",
-          padding: "40px",
-        }}
-      />;
     }
   };
-
-  console.log(props.dialog);
+  console.log(props.dialog.status === undefined && props.dialog.status !== 200);
   return (
     <Dialog
       open={props.showDialog}
@@ -56,7 +48,9 @@ const ResponseDialog = (props) => {
     >
       <div>
         {props.dialog ? (
-          <h3 className="dialogHeader">{props.dialog.status}</h3>
+          <h3 className="dialogHeader">
+            {props.dialog.status === 200 ? <p>Success</p> : <p>Error</p>}
+          </h3>
         ) : (
           <h3 className="dialogHeader">Loading...</h3>
         )}

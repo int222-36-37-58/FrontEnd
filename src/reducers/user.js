@@ -2,7 +2,7 @@ import * as type from "../actiontype";
 
 const INITIAL_STATE = {
   userInfo: null,
-  isAuth: false,
+  isAuth: true,
 };
 
 export default function user(state = INITIAL_STATE, action = {}) {

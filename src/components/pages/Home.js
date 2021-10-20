@@ -44,10 +44,11 @@ const Home = ({ filter, addResDialog }) => {
         })
         .catch((err) => {
           const data = {
-            status: "Error",
+            status: err.status,
             dialogContent: err.message,
           };
           addResDialog(data);
+          console.log(err)
         });
     };
     getProductLength();
