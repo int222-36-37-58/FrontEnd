@@ -42,7 +42,8 @@ const Cart = (props) => {
           };
           props.addResDialog(data);
         })
-        .then(() => props.clearCart())
+        .then(props.onHandleCart(false))
+        .then(props.clearCart())
         .catch((err) => {
           const data = {
             status: err.response.status,

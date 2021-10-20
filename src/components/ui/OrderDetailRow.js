@@ -32,7 +32,7 @@ const OrderDetailRow = (props, { addResDialog }) => {
             status: res.status,
             dialogContent: "ส่งความเห็นสำเร็จ",
           };
-          addResDialog(data);
+          props.addResDialog(data);
         })
         .then(() => {
           setCommentContent("");
@@ -43,7 +43,7 @@ const OrderDetailRow = (props, { addResDialog }) => {
             status: err.response.status,
             dialogContent: err.response.data.message,
           };
-          addResDialog(data);
+          props.addResDialog(data);
         });
     }
   };

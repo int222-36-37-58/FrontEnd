@@ -71,7 +71,7 @@ const NavBar = ({
 
   const handleShowGuestModal = (open) => (event) => {
     setShowGuestModal(open);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleLogout = () => {

@@ -44,7 +44,7 @@ const Home = ({ filter, addResDialog }) => {
         })
         .catch((err) => {
           const data = {
-            status: err.response.status,
+            status: 500,
             dialogContent: err.message,
           };
           addResDialog(data);

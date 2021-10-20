@@ -14,15 +14,21 @@ import { connect } from "react-redux";
 const App = ({ dialog, removeDialog }) => (
   <div className="pageContainer">
     <NavBar />
-    <div className="pageContent ">
-      {dialog.length > 0 && dialog.map((di, i) => {
-       return <ResponseDialog key={i}
-          showDialog={true}
-          dialog={di}
-          handleCloseBox={removeDialog}
-        />;
+    <div className="dialogContainer">
+      {dialog.map((di, i) => {
+        return (
+          <div key={i}>
+            <ResponseDialog
+              showDialog={true}
+              dialog={di}
+              index={i}
+              handleCloseBox={removeDialog}
+            />
+          </div>
+        );
       })}
-      )
+    </div>
+    <div className="pageContent ">
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/product/:id" component={ProductPage} />
@@ -42,7 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeDialog: () => dispatch(removeResDialog()),
+    removeDialog: (index) => dispatch(removeResDialog(index)),
   };
 };
 

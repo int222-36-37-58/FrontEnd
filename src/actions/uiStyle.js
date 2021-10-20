@@ -35,6 +35,9 @@ export const addResDialog = (content) => ({
   },
 });
 
-export const removeResDialog = () => ({
+export const removeResDialog = (ind) => ({
   type: type.REMOVE_RES_DIALOG,
+  payload: {
+    index: ind,
+  },
 });

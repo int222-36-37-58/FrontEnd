@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
-import { openSearchModal } from "../../actions/uiStyle";
 
-function ProductCard(props, { addToCart, openSearchModal }) {
+function ProductCard(props, { addToCart }) {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
   const [colorChoose, setColorChoose] = useState(0);
@@ -254,7 +253,6 @@ function ProductCard(props, { addToCart, openSearchModal }) {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
-    openSearchModal: (open) => dispatch(openSearchModal(open)),
   };
 };
 

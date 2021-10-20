@@ -30,7 +30,12 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
         responseDialog: [...state.responseDialog, action.payload.dialogContent],
       };
     case actionTypes.REMOVE_RES_DIALOG:
-      return { ...state, responseDialog: [] };
+      return {
+        ...state,
+        responseDialog: state.responseDialog.filter(
+          (res) => res !== state.responseDialog[action.payload.index]
+        ),
+      };
     default:
       return state;
   }

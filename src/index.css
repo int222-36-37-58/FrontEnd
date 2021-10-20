@@ -391,8 +391,8 @@ body {
 
 .colorModal {
   display: hidden;
-  z-index: 999;
-  position: absolute;
+  z-index: 3;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -404,7 +404,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  padding: 10px;
+  top: 140px;
   background-color: #333435;
   color: white;
   width: 300px;
@@ -412,7 +412,6 @@ body {
   padding-bottom: 30px;
   border-radius: 10px;
   position: relative;
-  margin-top: 175px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -954,6 +953,71 @@ td {
 .filterFullItem:hover {
   background-color: #f0f8f9;
 }
+.dialogContainer {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin-top: 100px;
+  z-index: 4;
+}
+
+.fadeIn1 {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.fadeIn2 {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.responseDialog {
+  margin-top: 20px;
+  transition: 0.3s ease-in-out;
+  z-index: 5;
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 8%);
+}
+
+.rightResDialog {
+  left: 60%;
+}
+@media (max-width: 1024px) {
+  .rightResDialog {
+    left: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .rightResDialog {
+    left: 25%;
+  }
+}
+@media (max-width: 767px) {
+  .rightResDialog {
+    left: 0%;
+  }
+}
+
+.hoverBlack {
+  color: #dcdcdc;
+}
+.hoverBlack:hover {
+  color: red;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 .f13 {
   font-size: 13px;
 }
