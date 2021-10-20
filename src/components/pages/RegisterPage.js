@@ -19,7 +19,7 @@ const RegisterPage = ({ addResDialog }) => {
       .then(history.push("/login"))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);

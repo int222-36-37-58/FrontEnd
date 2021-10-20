@@ -35,9 +35,9 @@ const Cart = (props) => {
             "Content-Type": "application/json",
           },
         })
-        .then(() => {
+        .then((res) => {
           const data = {
-            status: "Success!!",
+            status: res.status,
             dialogContent: "Check out success!!",
           };
           props.addResDialog(data);
@@ -45,7 +45,7 @@ const Cart = (props) => {
         .then(() => props.clearCart())
         .catch((err) => {
           const data = {
-            status: "Error",
+            status: err.response.status,
             dialogContent: err.response.data.message,
           };
           props.addResDialog(data);

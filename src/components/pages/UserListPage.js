@@ -31,7 +31,7 @@ const UserListPage = ({ addResDialog }) => {
       .then((res) => setUser(res.data))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.message,
         };
         addResDialog(data);
@@ -56,7 +56,7 @@ const UserListPage = ({ addResDialog }) => {
       .then(() => getUser())
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -103,7 +103,7 @@ const UserListPage = ({ addResDialog }) => {
       .then(setIsEdit(false))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -133,7 +133,7 @@ const UserListPage = ({ addResDialog }) => {
       .then(setIsAdd(false))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);

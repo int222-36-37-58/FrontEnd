@@ -21,7 +21,7 @@ const CreateProductPage = ({ addResDialog }) => {
       })
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.message,
         };
         addResDialog(data);

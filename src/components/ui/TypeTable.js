@@ -34,7 +34,7 @@ const TypeTable = ({ addResDialog }) => {
       .then((res) => setType(res.data))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.message,
         };
         addResDialog(data);
@@ -62,7 +62,7 @@ const TypeTable = ({ addResDialog }) => {
 
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -104,7 +104,7 @@ const TypeTable = ({ addResDialog }) => {
       .then(setTypeToAdd(""))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -139,7 +139,7 @@ const TypeTable = ({ addResDialog }) => {
       .then(setIsEdit(false))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);

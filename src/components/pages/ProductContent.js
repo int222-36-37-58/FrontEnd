@@ -48,7 +48,7 @@ const ProductContent = (props) => {
       })
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.message,
         };
         props.addResDialog(data);
@@ -117,7 +117,7 @@ const ProductContent = (props) => {
       })
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.error,
         };
         props.addResDialog(data);

@@ -34,7 +34,7 @@ const ColorTable = ({ addResDialog }) => {
       .then((res) => setColor(res.data))
       .catch((err) => {
         const data = {
-          status: "Error",
+          status: err.response.status,
           dialogContent: err.message,
         };
         addResDialog(data);
@@ -66,7 +66,7 @@ const ColorTable = ({ addResDialog }) => {
       .then(() => getColor())
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -103,7 +103,7 @@ const ColorTable = ({ addResDialog }) => {
       .then(setColorToAdd(""))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -133,7 +133,7 @@ const ColorTable = ({ addResDialog }) => {
       .then(setIsEdit(false))
       .catch((err) => {
         const data = {
-          status: err.status,
+          status: err.response.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);

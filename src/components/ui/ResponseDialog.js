@@ -5,9 +5,16 @@ import CancelOutlined from "@material-ui/icons/CancelOutlined";
 
 const ResponseDialog = (props) => {
   const switchRender = () => {
+    let stat = "";
     if (props.dialog) {
-      switch (props.dialog.status) {
-        case props.dialog.status === 200:
+      if (props.dialog.status === 200) {
+        stat = "Success";
+      }
+      if (props.dialog.status > 200) {
+        stat = "Error";
+      }
+      switch (stat) {
+        case "Success":
           return (
             <CheckCircleOutlineOutlinedIcon
               style={{
@@ -16,7 +23,7 @@ const ResponseDialog = (props) => {
               }}
             />
           );
-        case props.dialog.status === undefined || props.dialog.status !== 200:
+        case "Error":
           return (
             <CancelOutlined
               className="w100"
@@ -38,7 +45,7 @@ const ResponseDialog = (props) => {
       }
     }
   };
-  console.log(props.dialog.status === undefined && props.dialog.status !== 200);
+
   return (
     <Dialog
       open={props.showDialog}
@@ -47,12 +54,12 @@ const ResponseDialog = (props) => {
       maxWidth="xs"
     >
       <div>
-        {props.dialog ? (
+        {props.dialog && (
           <h3 className="dialogHeader">
-            {props.dialog.status === 200 ? <p>Success</p> : <p>Error</p>}
+            {props.dialog.status === 200 && <p>Success</p>}
+            {props.dialog.status > 200 && <p>Error</p>}
+            {!props.dialog.status && <p>Loading...</p>}
           </h3>
-        ) : (
-          <h3 className="dialogHeader">Loading...</h3>
         )}
 
         <DialogContent>
