@@ -3,7 +3,7 @@ import { Grid, Container, Hidden } from "@material-ui/core";
 import React, { useState } from "react";
 import axios from "axios";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
-import ResponseDialog from "../ui/ResponseDialog";
+
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import ProfileInfoPage from "./ProfileInfoPage";
@@ -12,13 +12,13 @@ import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
 import MyStorePage from "./MyStorePage";
-import { changeCurrentMenu } from "../../actions/uiStyle";
+import { addResDialog, changeCurrentMenu } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
 
-const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
+const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
   const [userData] = useState({
     id: 1,
     userName: "userTest",
@@ -29,28 +29,24 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
   });
 
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
 
   const update = (data) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/edituser`, data)
       .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent("Update Success");
+        const data = {
+          status: "Success!!",
+          dialogContent: "Update Success",
+        };
+        addResDialog(data);
       })
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
-  };
-
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
+        const data = {
+          status: "Error",
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const handleLogout = () => {
@@ -59,13 +55,6 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle }) => {
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <Container maxWidth="lg">
         <Grid
           container
@@ -291,6 +280,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

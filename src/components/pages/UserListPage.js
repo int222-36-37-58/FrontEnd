@@ -11,50 +11,56 @@ import {
   Hidden,
 } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { addResDialog } from "../../actions/uiStyle";
 import AdminEditUserForm from "../forms/AdminEditUserForm";
 import RegisterForm from "../forms/RegisterForm";
-import ResponseDialog from "../ui/ResponseDialog";
 
-const UserListPage = () => {
+const UserListPage = ({ addResDialog }) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [userEdit, setUserEdit] = useState({});
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
-  useEffect(() => {
-    getUser();
-  }, []);
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`)
       .then((res) => setUser(res.data))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-  };
+  }, [addResDialog]);
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
 
   const delUser = (id) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
 
       .then((res) => {
-        setDialogHeader("Success!!");
-        setDialogContent(res.data);
+        const data = {
+          status: res.status,
+          dialogContent: res.data,
+        };
+        addResDialog(data);
       })
       .then(() => getUser())
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const handleChangePage = (e, newPage) => {
@@ -84,19 +90,24 @@ const UserListPage = () => {
         },
       })
 
-      .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Update User at userid : ${data.userId} success!!`);
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: `Update User at userid : ${res.data.userId} success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => {
         getUser();
       })
       .then(setIsEdit(false))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const addUser = (data) => {
@@ -109,34 +120,28 @@ const UserListPage = () => {
         },
       })
 
-      .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Add new Admin success!!`);
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: `Add new Admin success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => {
         getUser();
       })
       .then(setIsAdd(false))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
-  };
+
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
         <div
           style={{
@@ -310,5 +315,10 @@ const UserListPage = () => {
     </>
   );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
 
-export default UserListPage;
+export default connect(null, mapDispatchToProps)(UserListPage);

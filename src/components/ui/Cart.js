@@ -2,12 +2,8 @@ import { Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
-import ResponseDialog from "./ResponseDialog";
 
 const Cart = (props) => {
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -20,12 +16,6 @@ const Cart = (props) => {
     setTotalPrice(total);
   }, [props.listProduct]);
 
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
-  };
-
   const handleCheckOut = () => {
     if (props.isAuth) {
       var currentDate = new Date();
@@ -33,8 +23,8 @@ const Cart = (props) => {
         date: currentDate.toISOString(),
         orderDetail: props.listProduct,
         user: {
-          userId: props.userInfo.userId,
-          userName: props.userInfo.userName,
+          userId: 1,
+          userName: "testuser",
         },
       };
       const json = JSON.stringify(order);
@@ -46,15 +36,20 @@ const Cart = (props) => {
           },
         })
         .then(() => {
-          setDialogHeader("Success!!");
-          setDialogContent("Check out success!!");
+          const data = {
+            status: "Success!!",
+            dialogContent: "Check out success!!",
+          };
+          props.addResDialog(data);
         })
         .then(() => props.clearCart())
         .catch((err) => {
-          setDialogHeader("Error");
-          setDialogContent(err.response.data.message);
-        })
-        .then(setShowDialog(true));
+          const data = {
+            status: "Error",
+            dialogContent: err.response.data.message,
+          };
+          props.addResDialog(data);
+        });
     } else {
       props.showLoginForm();
     }
@@ -62,12 +57,6 @@ const Cart = (props) => {
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
       <Hidden mdUp>
         <Drawer
           open={props.isShowCart}

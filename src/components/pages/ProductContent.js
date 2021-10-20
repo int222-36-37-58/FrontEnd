@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import noImage from "../../images/noImage.jpg";
-import ResponseDialog from "../ui/ResponseDialog";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import { useHistory } from "react-router";
 const ProductContent = (props) => {
@@ -14,7 +13,6 @@ const ProductContent = (props) => {
   const [user] = useState({
     userId: 1,
     userName: "testuser",
-    
   });
   const [imageProduct, setImageProduct] = useState(noImage);
   const [quantityAdd, setQuantityAdd] = useState(1);
@@ -22,9 +20,6 @@ const ProductContent = (props) => {
   const [isShowComments, setIsShowComments] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
   const [noColor, setNoColor] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
-  const [showDialog, setShowDialog] = useState(false);
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
@@ -51,8 +46,12 @@ const ProductContent = (props) => {
       .then((res) => {
         setComments(res.data);
       })
-      .catch(() => {
-        alert("load comments errors");
+      .catch((err) => {
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        props.addResDialog(data);
       });
   }, [props]);
 
@@ -117,18 +116,13 @@ const ProductContent = (props) => {
         props.goShop();
       })
       .catch((err) => {
-        let errtext = err.response.data.error;
-        setDialogContent(errtext);
-        setDialogHeader("Error");
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.error,
+        };
+        props.addResDialog(data);
       })
       .then(handleCloseConfirm);
-  };
-
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
   };
 
   const handleCloseConfirm = () => {
@@ -153,13 +147,6 @@ const ProductContent = (props) => {
         boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
       }}
     >
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <ConfirmDialog
         confirmInfo={confirmBox}
         handleCloseBox={handleCloseConfirm}

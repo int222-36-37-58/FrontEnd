@@ -9,11 +9,12 @@ import {
   TextField,
 } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { addResDialog } from "../../actions/uiStyle";
 import ConfirmDialog from "./ConfirmDialog";
-import ResponseDialog from "./ResponseDialog";
 
-const ColorTable = () => {
+const ColorTable = ({ addResDialog }) => {
   const [color, setColor] = useState([]);
   const [addColor, setAddColor] = useState(false);
   const [colorToAdd, setColorToAdd] = useState("");
@@ -21,28 +22,28 @@ const ColorTable = () => {
   const [rowsPerColorPage, setRowsPerColorPage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
   const [colorEdit, setColorEdit] = useState({});
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
   const [colorWillDelete, setColorWillDelete] = useState({});
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
   });
-  useEffect(() => {
-    getColor();
-  }, []);
 
-  function getColor() {
+  const getColor = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/colors`)
       .then((res) => setColor(res.data))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: "Error",
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-  }
+  }, [addResDialog]);
+
+  useEffect(() => {
+    getColor();
+  }, [getColor]);
 
   const editColor = (color) => {
     setIsEdit(true);
@@ -56,15 +57,20 @@ const ColorTable = () => {
       )
 
       .then((res) => {
-        setDialogHeader("Success!!");
-        setDialogContent(res.data);
+        const data = {
+          status: res.status,
+          dialogContent: res.data,
+        };
+        addResDialog(data);
       })
       .then(() => getColor())
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(`${err.response.data.message}`);
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
       })
-      .then(setShowDialog(true))
       .then(handleCloseConfirm)
       .then(setColorWillDelete({}));
   };
@@ -87,16 +93,21 @@ const ColorTable = () => {
       })
 
       .then((res) => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Add color ${res.data.colorName} success!!`);
+        const data = {
+          status: res.status,
+          dialogContent: `Add color ${res.data.colorName} success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => getColor())
       .then(setColorToAdd(""))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const submitEdit = () => {
@@ -111,17 +122,22 @@ const ColorTable = () => {
         },
       })
 
-      .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Update color success!!`);
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: `Update color success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => getColor())
       .then(setIsEdit(false))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const handleChangeColorPage = (e, newPage) => {
@@ -131,12 +147,6 @@ const ColorTable = () => {
   const handleChangeRowsPerColorPage = (event) => {
     setRowsPerColorPage(parseInt(event.target.value, 10));
     setColorPage(0);
-  };
-
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
   };
 
   const handleCloseConfirm = () => {
@@ -153,13 +163,6 @@ const ColorTable = () => {
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <ConfirmDialog
         confirmInfo={confirmBox}
         handleCloseBox={handleCloseConfirm}
@@ -256,7 +259,7 @@ const ColorTable = () => {
       )}
 
       <Table style={{ width: 90 + "%", margin: "auto" }}>
-        <TableHead style={{ backgroundColor: "#1895f5"}}>
+        <TableHead style={{ backgroundColor: "#1895f5" }}>
           <TableRow>
             <TableCell style={{ color: "white" }} align="right">
               ID
@@ -321,4 +324,10 @@ const ColorTable = () => {
   );
 };
 
-export default ColorTable;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ColorTable);

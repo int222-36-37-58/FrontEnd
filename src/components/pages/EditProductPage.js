@@ -4,15 +4,12 @@ import { useHistory } from "react-router";
 import CreateProductForm from "../forms/CreateProductForm";
 import { clearProduct } from "../../actions/product";
 import axios from "axios";
-import ResponseDialog from "../ui/ResponseDialog";
 import ConfirmDialog from "../ui/ConfirmDialog";
+import { addResDialog } from "../../actions/uiStyle";
 
-const EditProductPage = ({ product, clearProduct }) => {
+const EditProductPage = ({ product, clearProduct, addResDialog }) => {
   const [prd, setPrd] = useState({});
   const history = useHistory();
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
   const [editProduct, setEditProduct] = useState({});
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
@@ -35,7 +32,6 @@ const EditProductPage = ({ product, clearProduct }) => {
   }, [history, product]);
 
   const submitEditProduct = () => {
-
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/products/put/${product.productId}`,
@@ -46,25 +42,24 @@ const EditProductPage = ({ product, clearProduct }) => {
           },
         }
       )
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: "แก้ไขข้อมูลสำเร็จ",
+        };
+        addResDialog(data);
+      })
       .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent("แก้ไขข้อมูลสำเร็จ");
-        setShowDialog(true);
+        clearProduct();
+        history.push(`/product/${product.productId}`);
       })
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-     handleCloseConfirm();
-  };
-
-  const handleCloseBox = () => {
-    setShowDialog(false);
-    setDialogHeader("");
-    setDialogContent("");
-    clearProduct();
-    history.push(`/product/${product.productId}`);
   };
 
   const handleCloseConfirm = () => {
@@ -82,12 +77,6 @@ const EditProductPage = ({ product, clearProduct }) => {
   return (
     <>
       {" "}
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />{" "}
       <ConfirmDialog
         confirmInfo={confirmBox}
         handleCloseBox={handleCloseConfirm}
@@ -106,6 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clearProduct: () => dispatch(clearProduct()),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

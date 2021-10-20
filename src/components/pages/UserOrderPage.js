@@ -1,36 +1,31 @@
 import { Container, Grid, Hidden, Tooltip } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import ResponseDialog from "../ui/ResponseDialog";
+import React, { useCallback, useEffect, useState } from "react";
+
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import OrderDetail from "../ui/OrderDetail";
+import { addResDialog } from "../../actions/uiStyle";
+import { connect } from "react-redux";
 
-const UserOrderPage = () => {
-  useEffect(() => {
-    getMyOrderHistory();
-  }, []);
-
+const UserOrderPage = ({ addResDialog }) => {
   const [myOrder, setMyOrder] = useState([]);
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
   const [currentViewOrder, setCurrentViewOrder] = useState({});
-  const getMyOrderHistory = () => {
+  const getMyOrderHistory = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/user/getuserorder/1`)
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-  };
+  }, [addResDialog]);
 
-  const handleCloseBox = () => {
-    setShowDialog(false);
-    setDialogHeader("");
-    setDialogContent("");
-  };
+  useEffect(() => {
+    getMyOrderHistory();
+  }, [getMyOrderHistory]);
 
   const showOrderDetail = (order) => {
     setCurrentViewOrder(order);
@@ -57,12 +52,6 @@ const UserOrderPage = () => {
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
       <Container
         maxWidth="lg"
         style={{
@@ -99,13 +88,11 @@ const UserOrderPage = () => {
                         <td>฿{computedPrice(order)}</td>
                         <td>Success!</td>
                         <td>
-                         
                           <Tooltip title="ข้อมูลเพิ่มเติม" arrow>
-                          <MoreHorizIcon
-                            className="hoverCursor"
-                            onClick={() => showOrderDetail(order)}
-                            
-                          />
+                            <MoreHorizIcon
+                              className="hoverCursor"
+                              onClick={() => showOrderDetail(order)}
+                            />
                           </Tooltip>
                         </td>
                       </tr>
@@ -177,4 +164,10 @@ const UserOrderPage = () => {
   );
 };
 
-export default UserOrderPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(UserOrderPage);

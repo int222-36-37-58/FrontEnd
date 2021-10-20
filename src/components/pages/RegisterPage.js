@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import RegisterForm from "../forms/RegisterForm";
 import axios from "axios";
 import { useHistory } from "react-router";
-import ResponseDialog from "../ui/ResponseDialog";
+import { addResDialog } from "../../actions/uiStyle";
+import { connect } from "react-redux";
 
-const RegisterPage = () => {
+const RegisterPage = ({ addResDialog }) => {
   const history = useHistory();
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
 
   const submit = (data) => {
     const json = JSON.stringify(data);
@@ -20,28 +18,25 @@ const RegisterPage = () => {
       })
       .then(history.push("/login"))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
       });
-  };
-
-  const handleCloseBox = () => {
-    setShowDialog(false);
-    setDialogHeader("");
-    setDialogContent("");
   };
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
       <RegisterForm submit={submit} />
     </>
   );
 };
-export default RegisterPage;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(RegisterPage);

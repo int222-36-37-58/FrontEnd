@@ -12,7 +12,11 @@ import sitlogo from "../../images/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
-import { changeCurrentMenu, openSearchModal } from "../../actions/uiStyle";
+import {
+  addResDialog,
+  changeCurrentMenu,
+  openSearchModal,
+} from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
@@ -27,6 +31,7 @@ const NavBar = ({
   clearCartItem,
   changeCurrentMenu,
   openSearchModal,
+  addResDialog,
 }) => {
   const [isShowCart, setIsShowCart] = useState(false);
   const [searchVal, setSearchVal] = useState("");
@@ -88,6 +93,7 @@ const NavBar = ({
         isAuth={isAuth}
         userInfo={userInfo}
         showLoginForm={handleShowGuestModal(true)}
+        addResDialog={addResDialog}
       />
 
       <ProfileDrawer
@@ -365,6 +371,7 @@ const mapDispatchToProps = (dispatch) => {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
     logout: () => dispatch(logout()),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

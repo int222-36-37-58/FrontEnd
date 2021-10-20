@@ -9,11 +9,12 @@ import {
   TablePagination,
 } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { addResDialog } from "../../actions/uiStyle";
 import ConfirmDialog from "./ConfirmDialog";
-import ResponseDialog from "./ResponseDialog";
 
-const TypeTable = () => {
+const TypeTable = ({ addResDialog }) => {
   const [type, setType] = useState([]);
   const [addType, setAddType] = useState(false);
   const [typeToAdd, setTypeToAdd] = useState("");
@@ -21,46 +22,51 @@ const TypeTable = () => {
   const [rowsPerTypePage, setRowsPerTypePage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
   const [typeEdit, setTypeEdit] = useState({});
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
   const [typeWillDelete, setTypeWillDelete] = useState({});
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
   });
-  useEffect(() => {
-    getType();
-  }, []);
 
-  function getType() {
+  const getType = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/types`)
       .then((res) => setType(res.data))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-  }
+  }, [addResDialog]);
 
-  const delType = (id) => {
+  useEffect(() => {
+    getType();
+  }, [getType]);
+
+  const delType = () => {
     axios
       .delete(
         `${process.env.REACT_APP_API_URL}/deletetype/${typeWillDelete.typeId}`
       )
 
       .then((res) => {
-        setDialogHeader("Success!!");
-        setDialogContent(res.data);
+        const data = {
+          status: res.status,
+          dialogContent: res.data,
+        };
+        addResDialog(data);
       })
       .then(() => getType())
 
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
       })
-      .then(setShowDialog(true))
       .then(handleCloseConfirm)
       .then(setTypeWillDelete({}));
   };
@@ -88,16 +94,21 @@ const TypeTable = () => {
       })
 
       .then((res) => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Add type ${res.data.name} success!!`);
+        const data = {
+          status: res.status,
+          dialogContent: `Add type ${res.data.name} success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => getType())
       .then(setTypeToAdd(""))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const submitEdit = () => {
@@ -117,17 +128,22 @@ const TypeTable = () => {
         }
       )
 
-      .then(() => {
-        setDialogHeader("Success!!");
-        setDialogContent(`Update type success!!`);
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: `Update type success!!`,
+        };
+        addResDialog(data);
       })
       .then(() => getType())
       .then(setIsEdit(false))
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.response.data.message);
-      })
-      .then(setShowDialog(true));
+        const data = {
+          status: err.status,
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
   };
 
   const handleChangeTypePage = (e, newPage) => {
@@ -137,12 +153,6 @@ const TypeTable = () => {
   const handleChangeRowsPerTypePage = (event) => {
     setRowsPerTypePage(parseInt(event.target.value, 10));
     setTypePage(0);
-  };
-
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
   };
 
   const handleCloseConfirm = () => {
@@ -159,12 +169,6 @@ const TypeTable = () => {
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
       <ConfirmDialog
         confirmInfo={confirmBox}
         handleCloseBox={handleCloseConfirm}
@@ -326,4 +330,10 @@ const TypeTable = () => {
   );
 };
 
-export default TypeTable;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TypeTable);

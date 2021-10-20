@@ -9,3 +9,5 @@ export const FILTER_CLICKED = "FILTER_CLICKED";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 export const GET_USER_INFO = "GET_USER_INFO";
 export const LOGGED_OUT = "LOGGED_OUT";
+export const ADD_RES_DIALOG = "ADD_RES_DIALOG";
+export const REMOVE_RES_DIALOG = "REMOVE_RES_DIALOG";

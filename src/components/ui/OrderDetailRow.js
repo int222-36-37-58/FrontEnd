@@ -1,16 +1,14 @@
 import { Grid, Hidden, TextField } from "@material-ui/core";
 import axios from "axios";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import ResponseDialog from "./ResponseDialog";
+import { addResDialog } from "../../actions/uiStyle";
 
-const OrderDetailRow = (props) => {
+const OrderDetailRow = (props, { addResDialog }) => {
   const [comment, setComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [errs, setErrs] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
 
   const sendComment = () => {
     setErrs(false);
@@ -29,37 +27,29 @@ const OrderDetailRow = (props) => {
             "Content-Type": "application/json",
           },
         })
-        .then(() => {
-          setDialogHeader("Success!!");
-          setDialogContent("ส่งความเห็นสำเร็จ");
+        .then((res) => {
+          const data = {
+            status: res.status,
+            dialogContent: "ส่งความเห็นสำเร็จ",
+          };
+          addResDialog(data);
         })
         .then(() => {
           setCommentContent("");
           setComment(false);
         })
         .catch((err) => {
-          setDialogHeader("Error");
-          setDialogContent(err.response.data.message);
-        })
-        .then(setShowDialog(true));
+          const data = {
+            status: err.status,
+            dialogContent: err.response.data.message,
+          };
+          addResDialog(data);
+        });
     }
-  };
-
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
   };
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <Hidden smDown>
         <>
           <tr key={props.odt.orderDetailId} style={{ fontWeight: 900 }}>
@@ -274,4 +264,10 @@ const OrderDetailRow = (props) => {
   );
 };
 
-export default OrderDetailRow;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(OrderDetailRow);

@@ -6,13 +6,10 @@ import "../../index.css";
 import useSearchHandler from "../etc/useSearchHandler";
 import FilterBox from "../ui/FilterBox";
 import ProductCard from "../ui/ProductCard";
-import ResponseDialog from "../ui/ResponseDialog";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
-const Home = ({ filter }) => {
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
+import { addResDialog } from "../../actions/uiStyle";
+const Home = ({ filter, addResDialog }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
@@ -46,14 +43,15 @@ const Home = ({ filter }) => {
           setProductLength(res.data.length);
         })
         .catch((err) => {
-          setDialogHeader("Error");
-          setDialogContent(err.message);
-          setShowDialog(true);
+          const data = {
+            status: "Error",
+            dialogContent: err.message,
+          };
+          addResDialog(data);
         });
     };
     getProductLength();
-    
-  }, [pageSize]);
+  }, [addResDialog]);
 
   const observer = useRef();
   const lastElementRef = useCallback(
@@ -70,20 +68,8 @@ const Home = ({ filter }) => {
     [loading, hasMore]
   );
 
-  const handleCloseBox = () => {
-    setDialogHeader("");
-    setShowDialog(false);
-    setDialogContent("");
-  };
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <Container maxWidth="xl">
         <div className="headerHome">
           <div>
@@ -209,4 +195,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

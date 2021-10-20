@@ -1,10 +1,10 @@
 import CreateProductForm from "../forms/CreateProductForm";
-
-import React, { useState } from "react";
+import { addResDialog } from "../../actions/uiStyle";
+import React from "react";
 import axios from "axios";
-import ResponseDialog from "../ui/ResponseDialog";
+import { connect } from "react-redux";
 
-const CreateProductPage = () => {
+const CreateProductPage = ({ addResDialog }) => {
   const submit = (data) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/products/add`, data, {
@@ -12,41 +12,32 @@ const CreateProductPage = () => {
           "Content-type": "multipart/form-data",
         },
       })
-      .then(() => {
-        if (showDialog === false) {
-          setDialogHeader("Success!!");
-          setDialogContent("Add Success!");
-          setShowDialog(true);
-        }
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: "Add Success!",
+        };
+        addResDialog(data);
       })
       .catch((err) => {
-        setDialogHeader("Error");
-        setDialogContent(err.message);
-        setShowDialog(true);
+        const data = {
+          status: err.status,
+          dialogContent: err.message,
+        };
+        addResDialog(data);
       });
-  };
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogHeader, setDialogHeader] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
-
-  const handleCloseBox = () => {
-    setShowDialog(false);
-    setDialogHeader("");
-    setDialogContent("");
   };
 
   return (
     <>
-      <ResponseDialog
-        showDialog={showDialog}
-        handleCloseBox={handleCloseBox}
-        dialogContent={dialogContent}
-        dialogHeader={dialogHeader}
-      />
-
       <CreateProductForm submit={submit} />
     </>
   );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
 
-export default CreateProductPage;
+export default connect(null, mapDispatchToProps)(CreateProductPage);
