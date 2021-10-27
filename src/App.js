@@ -9,36 +9,47 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import ProtectedRoute from "./components/etc/ProtectedRoute";
 import ResponseDialog from "./components/ui/ResponseDialog";
 import { removeResDialog } from "./actions/uiStyle";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { connect } from "react-redux";
 
-const App = ({ dialog, removeDialog }) => (
-  <div className="pageContainer">
-    <NavBar />
-    <div className="dialogContainer">
-      {dialog.map((di, i) => {
-        return (
-          <div key={i}>
-            <ResponseDialog
-              showDialog={true}
-              dialog={di}
-              index={i}
-              handleCloseBox={removeDialog}
-            />
-          </div>
-        );
-      })}
+const App = ({ dialog, removeDialog }) => {
+  return (
+    <div className="pageContainer">
+      <NavBar />
+
+      <div className="dialogContainer">
+        {dialog.map((di, i) => {
+          return (
+            <div key={i}>
+              <ResponseDialog
+                showDialog={true}
+                dialog={di}
+                index={i}
+                handleCloseBox={removeDialog}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div className="pageContent ">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/product/:id" component={ProductPage} />
+          <ProtectedRoute path="/profile" component={ProfilePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
+
+      <KeyboardArrowUpIcon
+        className="arrowIcon hoverCursor"
+        style={{ fontSize: "40px" }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      />
+
+      <Footer />
     </div>
-    <div className="pageContent ">
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/product/:id" component={ProductPage} />
-        <ProtectedRoute path="/profile" component={ProfilePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
-    <Footer />
-  </div>
-);
+  );
+};
 
 const mapStateToProps = (state) => {
   return {

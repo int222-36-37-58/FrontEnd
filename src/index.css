@@ -979,7 +979,7 @@ td {
 }
 
 .responseDialog {
-  margin-top: 20px;
+  margin-top: 10px;
   z-index: 5;
   position: relative;
   background-color: white;
@@ -992,7 +992,7 @@ td {
   border-color: #ebebeb;
   border-radius: 15px;
   border-width: 2px;
-  max-width: 500px;
+  max-width: 425px;
   width: auto;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 8%);
   animation: fadeinout 6s linear forwards;
@@ -1003,23 +1003,38 @@ td {
 }
 
 .rightResDialog {
-  left: 60%;
+  left: 63%;
 }
 @media (max-width: 1024px) {
   .rightResDialog {
-    left: 45%;
+    left: 40%;
   }
 }
 
 @media (max-width: 768px) {
   .rightResDialog {
-    left: 25%;
+    left: 22%;
   }
 }
 @media (max-width: 767px) {
   .rightResDialog {
+    margin: 0 auto;
     left: 0%;
   }
+}
+
+.arrowIcon {
+  color: white;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #1895f5;
+  background-color: #1895f5;
+  border-width: 3px;
+  font-size: 30px;
+  position: fixed;
+  right: 1%;
+  bottom: 2%;
+  z-index: 5;
 }
 
 .hoverBlack {
