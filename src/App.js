@@ -13,14 +13,12 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { connect } from "react-redux";
 
 const App = ({ dialog, removeDialog }) => {
-  const [current, setCurrent] = useState(window.scrollY);
-
+  const [current, setCurrent] = useState(0);
   const handlePosition = useCallback(() => {
     setCurrent(window.scrollY);
   }, []);
 
   useEffect(() => {
-    setCurrent(window.scrollY);
     window.addEventListener("scroll", handlePosition);
   }, [handlePosition]);
 
