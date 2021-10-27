@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 import Home from "./components/pages/Home";
 import NavBar from "./components/ui/NavBar";
@@ -13,6 +13,17 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { connect } from "react-redux";
 
 const App = ({ dialog, removeDialog }) => {
+  const [current, setCurrent] = useState(window.scrollY);
+
+  const handlePosition = useCallback(() => {
+    setCurrent(window.scrollY);
+  }, []);
+
+  useEffect(() => {
+    setCurrent(window.scrollY);
+    window.addEventListener("scroll", handlePosition);
+  }, [handlePosition]);
+
   return (
     <div className="pageContainer">
       <NavBar />
@@ -40,11 +51,13 @@ const App = ({ dialog, removeDialog }) => {
         </Switch>
       </div>
 
-      <KeyboardArrowUpIcon
-        className="arrowIcon hoverCursor"
-        style={{ fontSize: "40px" }}
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      />
+      {current > 0 && (
+        <KeyboardArrowUpIcon
+          className="arrowIcon hoverCursor"
+          style={{ fontSize: "40px" }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        />
+      )}
 
       <Footer />
     </div>
