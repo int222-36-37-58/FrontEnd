@@ -12,7 +12,9 @@ function ProductCard(props, { addToCart }) {
   const [noColor, setNoColor] = useState(false);
 
   const seeInfo = () => {
-    props.openSearchModal(false);
+    if (props.openSearchModal) {
+      props.openSearchModal(false);
+    }
     history.push(`/product/${props.product.productId}`);
   };
 
