@@ -1,4 +1,6 @@
 import * as type from "../actiontype";
+import axios from "axios";
+import SetDefaultHeader from "../components/etc/SetDefaultHeader.js";
 
 export const getUserInfo = (data) => ({
   type: type.GET_USER_INFO,
@@ -6,7 +8,31 @@ export const getUserInfo = (data) => ({
     userInfo: data,
   },
 });
-
-export const logout = () => ({
+export const userLogout = () => ({
   type: type.LOGGED_OUT,
 });
+
+export const login = (data) => {
+  axios
+    .post(`${process.env.REACT_APP_API_URL}/authorize`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      localStorage.setItem("token", `${res.data.token}`);
+      SetDefaultHeader(`Bearer ${res.data.token}`);
+    });
+};
+
+export const getUser = () => (dispatch) => {
+  axios.get(`${process.env.REACT_APP_API_URL}/user/thisuser`).then((res) => {
+    dispatch(getUserInfo(res.data));
+  });
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch(userLogout());
+  SetDefaultHeader();
+};

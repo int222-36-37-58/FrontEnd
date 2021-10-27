@@ -17,16 +17,16 @@ import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
+import { logout } from "../../actions/user";
 
-const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
-  const [userData] = useState({
-    id: 1,
-    userName: "userTest",
-    fullName: "nametest",
-    address: "Home Bangkok Thailand",
-    tel: "0123456789",
-    role: "ROLE_USER",
-  });
+const ProfilePage = ({
+  userInfo,
+  changeCurrentMenu,
+  uiStyle,
+  addResDialog,
+  logout,
+}) => {
+  const [userData] = useState(userInfo);
 
   const [isShowMenu, setIsShowMenu] = useState(false);
 
@@ -47,10 +47,6 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
         };
         addResDialog(data);
       });
-  };
-
-  const handleLogout = () => {
-    alert("did not handle log out function ");
   };
 
   return (
@@ -154,10 +150,7 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
                   <div>จัดการข้อมูลผู้ใช้</div>
                 </Link>
 
-                <div
-                  className="hoverChangeBackground p-10"
-                  onClick={() => handleLogout()}
-                >
+                <div className="hoverChangeBackground p-10" onClick={logout}>
                   ออกจากระบบ
                 </div>
               </Hidden>
@@ -224,7 +217,7 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
                   >
                     ร้านค้าของฉัน
                   </Link>
-                  <b>ออกจากระบบ</b>
+                  <b onClick={logout}>ออกจากระบบ</b>
                 </p>
               </Hidden>
             </div>
@@ -274,6 +267,7 @@ const ProfilePage = ({ changeCurrentMenu, uiStyle, addResDialog }) => {
 const mapStateToProps = (state) => {
   return {
     uiStyle: state.uiStyle,
+    userInfo: state.user.userInfo,
   };
 };
 
@@ -281,6 +275,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     addResDialog: (content) => dispatch(addResDialog(content)),
+    logout: () => dispatch(logout()),
   };
 };
 
