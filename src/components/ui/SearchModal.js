@@ -175,6 +175,7 @@ const SearchModal = (props) => {
                         <ProductCard
                           product={product}
                           listStyle={1}
+                          closeSearchModal={props.close}
                         ></ProductCard>{" "}
                       </Grid>
                     );
@@ -184,6 +185,7 @@ const SearchModal = (props) => {
                         <ProductCard
                           product={product}
                           listStyle={1}
+                          closeSearchModal={props.close}
                         ></ProductCard>
                       </Grid>
                     );
