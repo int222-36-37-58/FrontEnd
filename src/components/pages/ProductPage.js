@@ -5,7 +5,7 @@ import { addToCart } from "../../actions/cart";
 import { editProduct } from "../../actions/product";
 import ProductContent from "./ProductContent";
 import { addResDialog } from "../../actions/uiStyle";
-const ProductPage = ({ addToCart, editProduct, addResDialog }) => {
+const ProductPage = ({ addToCart, editProduct, addResDialog,userInfo }) => {
   const history = useHistory();
   const notFound = () => {
     history.push("/notfound");
@@ -22,9 +22,18 @@ const ProductPage = ({ addToCart, editProduct, addResDialog }) => {
       notFound={notFound}
       goShop={goShop}
       addResDialog={addResDialog}
+      userInfo={userInfo}
     />
   );
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
@@ -33,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

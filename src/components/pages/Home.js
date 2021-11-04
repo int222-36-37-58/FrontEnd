@@ -9,7 +9,7 @@ import ProductCard from "../ui/ProductCard";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
-const Home = ({ filter, addResDialog }) => {
+const Home = ({ filter, addResDialog,userInfo }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
@@ -192,6 +192,7 @@ const Home = ({ filter, addResDialog }) => {
 const mapStateToProps = (state) => {
   return {
     filter: state.uiStyle.filterType,
+    userInfo : state.user.userInfo,
   };
 };
 

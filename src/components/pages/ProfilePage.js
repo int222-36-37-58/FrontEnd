@@ -1,9 +1,6 @@
 import { Grid, Container, Hidden } from "@material-ui/core";
-
 import React, { useState } from "react";
-import axios from "axios";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
-
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import ProfileInfoPage from "./ProfileInfoPage";
@@ -11,44 +8,22 @@ import UserOrderPage from "./UserOrderPage";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
-import MyStorePage from "./MyStorePage";
 import { addResDialog, changeCurrentMenu } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
-import { logout, userLogout } from "../../actions/user";
+import { logout, userLogout, getUser } from "../../actions/user";
+import MyShopPage from "./MyShopPage";
 
 const ProfilePage = ({
   userInfo,
   changeCurrentMenu,
   uiStyle,
-  addResDialog,
   logout,
   userLogout,
 }) => {
-  const [userData] = useState(userInfo);
-
   const [isShowMenu, setIsShowMenu] = useState(false);
-
-  const update = (data) => {
-    axios
-      .put(`${process.env.REACT_APP_API_URL}/edituser`, data)
-      .then(() => {
-        const data = {
-          status: "Success!!",
-          dialogContent: "Update Success",
-        };
-        addResDialog(data);
-      })
-      .catch((err) => {
-        const data = {
-          status: "Error",
-          dialogContent: err.response.data.message,
-        };
-        addResDialog(data);
-      });
-  };
 
   const handleLogOut = () => {
     logout();
@@ -131,31 +106,33 @@ const ProfilePage = ({
                 >
                   <div>ร้านค้าของฉัน</div>
                 </Link>
+                {userInfo.role === "ROLE_ADMIN" && (
+                  <>
+                    <Link
+                      to="/profile/admin/basedata"
+                      onClick={() => changeCurrentMenu("basedata")}
+                      className={
+                        uiStyle.currentMenuClicked === "basedata"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>จัดการข้อมูลพื้นฐาน</div>
+                    </Link>
 
-                <Link
-                  to="/profile/admin/basedata"
-                  onClick={() => changeCurrentMenu("basedata")}
-                  className={
-                    uiStyle.currentMenuClicked === "basedata"
-                      ? "clickChangeBackground p-10 "
-                      : "hoverChangeBackground p-10"
-                  }
-                >
-                  <div>จัดการข้อมูลพื้นฐาน</div>
-                </Link>
-
-                <Link
-                  to="/profile/admin/users"
-                  onClick={() => changeCurrentMenu("users")}
-                  className={
-                    uiStyle.currentMenuClicked === "users"
-                      ? "clickChangeBackground p-10 "
-                      : "hoverChangeBackground p-10"
-                  }
-                >
-                  <div>จัดการข้อมูลผู้ใช้</div>
-                </Link>
-
+                    <Link
+                      to="/profile/admin/users"
+                      onClick={() => changeCurrentMenu("users")}
+                      className={
+                        uiStyle.currentMenuClicked === "users"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>จัดการข้อมูลผู้ใช้</div>
+                    </Link>
+                  </>
+                )}
                 <div
                   className="hoverChangeBackground p-10"
                   onClick={() => handleLogOut()}
@@ -221,7 +198,7 @@ const ProfilePage = ({
                     เริ่มขายสินค้า
                   </Link>
                   <Link
-                    to="/profile/createproduct"
+                    to="/profile/myshop"
                     className="hoverChangeBackground"
                   >
                     ร้านค้าของฉัน
@@ -235,7 +212,7 @@ const ProfilePage = ({
           <Grid item xs={12} md={8}>
             <Switch>
               <Route path={"/profile/info"}>
-                <ProfileInfoPage userData={userData} submit={update} />
+                <ProfileInfoPage />
               </Route>
               <Route path={"/profile/changepassword"}>
                 {" "}
@@ -251,20 +228,24 @@ const ProfilePage = ({
               </Route>
               <Route path={"/profile/myshop"}>
                 {" "}
-                <MyStorePage />
+                <MyShopPage />
               </Route>
               <Route path={"/profile/editproduct"}>
                 {" "}
                 <EditProductPage />
               </Route>
-              <Route path={"/profile/admin/"}>
-                <Route path={"/profile/admin/basedata"}>
-                  <ListBaseDataPage />
-                </Route>
-                <Route path={"/profile/admin/users"}>
-                  <UserListPage />
-                </Route>
-              </Route>
+              {userInfo.role === "ROLE_ADMIN" && (
+                <>
+                  <Route path={"/profile/admin/"}>
+                    <Route path={"/profile/admin/basedata"}>
+                      <ListBaseDataPage />
+                    </Route>
+                    <Route path={"/profile/admin/users"}>
+                      <UserListPage />
+                    </Route>
+                  </Route>{" "}
+                </>
+              )}
             </Switch>
           </Grid>
         </Grid>
@@ -284,6 +265,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     addResDialog: (content) => dispatch(addResDialog(content)),
+    getUser: () => dispatch(getUser()),
     logout: () => logout(),
     userLogout: () => dispatch(userLogout()),
   };

@@ -7,22 +7,24 @@ import OrderDetail from "../ui/OrderDetail";
 import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 
-const UserOrderPage = ({ addResDialog }) => {
+const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);
   const [currentViewOrder, setCurrentViewOrder] = useState({});
   const getMyOrderHistory = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/getuserorder/1`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/user/getuserorder/${userInfo.userId}`
+      )
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
         const data = {
           status: err.response.status,
           dialogContent: err.message,
         };
-        console.log(err.response.status)
+        console.log(err.response.status);
         addResDialog(data);
       });
-  }, [addResDialog]);
+  }, [addResDialog, userInfo.userId]);
 
   useEffect(() => {
     getMyOrderHistory();
@@ -164,6 +166,11 @@ const UserOrderPage = ({ addResDialog }) => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -171,4 +178,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserOrderPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserOrderPage);

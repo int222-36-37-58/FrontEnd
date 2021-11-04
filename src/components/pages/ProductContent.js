@@ -10,10 +10,6 @@ import { useHistory } from "react-router";
 const ProductContent = (props) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);
-  const [user] = useState({
-    userId: 1,
-    userName: "testuser",
-  });
   const [imageProduct, setImageProduct] = useState(noImage);
   const [quantityAdd, setQuantityAdd] = useState(1);
   const [isShowInfo, setIsShowInfo] = useState(false);
@@ -184,7 +180,7 @@ const ProductContent = (props) => {
               <h4 style={{ marginBottom: 10 + "px" }}>color</h4>
               {product.color.map((col, i) => {
                 return (
-                  <span key={i}>
+                  <span key={col.colorId}>
                     <input
                       type="radio"
                       id={col.colorName}
@@ -217,7 +213,7 @@ const ProductContent = (props) => {
             </div>
           </div>
 
-          {product.user && product.user.userId === user.userId ? (
+          {product.user && product.user.userId === props.userInfo.userId ? (
             <>
               <button
                 className="InfoButton"

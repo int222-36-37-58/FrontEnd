@@ -4,10 +4,10 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-const CreateProductPage = ({ addResDialog }) => {
+const CreateProductPage = ({ addResDialog, userInfo }) => {
   const submit = (data) => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/products/add`, data, {
+      .post(`${process.env.REACT_APP_API_URL}/user/products/add`, data, {
         headers: {
           "Content-type": "multipart/form-data",
         },
@@ -30,14 +30,21 @@ const CreateProductPage = ({ addResDialog }) => {
 
   return (
     <>
-      <CreateProductForm submit={submit} />
+      <CreateProductForm submit={submit} user={userInfo} />
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CreateProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProductPage);

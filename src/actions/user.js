@@ -12,6 +12,12 @@ export const userLogout = () => ({
   type: type.LOGGED_OUT,
 });
 
+export const getUser = () => (dispatch) => {
+  axios.get(`${process.env.REACT_APP_API_URL}/user/getbyname`).then((res) => {
+    dispatch(getUserInfo(res.data));
+  });
+};
+
 export const login = (data) => {
   axios
     .post(`${process.env.REACT_APP_API_URL}/authenticate`, data, {
@@ -20,18 +26,18 @@ export const login = (data) => {
       },
     })
     .then((res) => {
-      localStorage.setItem("token", `${res.data.token}`);
       SetDefaultHeader(`${res.data.token}`);
+      localStorage.setItem("token", `${res.data.token}`);
+      
     });
-};
-
-export const getUser = () => (dispatch) => {
-  axios.get(`${process.env.REACT_APP_API_URL}/user/getbyname`).then((res) => {
-    dispatch(getUserInfo(res.data));
-  });
 };
 
 export const logout = () => {
   localStorage.removeItem("token");
   SetDefaultHeader("");
+};
+
+export const handleLogOut = () => (dispatch) => {
+  logout();
+  dispatch(userLogout);
 };

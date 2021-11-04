@@ -1,16 +1,38 @@
 import React, { useState } from "react";
 import RegisterForm from "../forms/RegisterForm";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-const ProfileInfoPage = (props) => {
+import { connect } from "react-redux";
+import axios from "axios";
+import { addResDialog } from "../../actions/uiStyle";
+import { getUser } from "../../actions/user";
+const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
   const [isEdit, setIsEdit] = useState(false);
-
+  const submit = (data) => {
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/user/edituser`, data)
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: "Update Success",
+        };
+        addResDialog(data);
+      })
+      .then(getUser())
+      .catch((err) => {
+        const data = {
+          status: "Error",
+          dialogContent: err.response.data.message,
+        };
+        addResDialog(data);
+      });
+  };
   return (
     <div>
       {isEdit ? (
         <RegisterForm
-          userData={props.userData}
+          userData={userInfo}
           editMode={true}
-          submit={props.submit}
+          submit={submit}
           onIsEdit={() => setIsEdit(false)}
         ></RegisterForm>
       ) : (
@@ -24,22 +46,22 @@ const ProfileInfoPage = (props) => {
           <div className="profileContent">
             <div>
               <label>
-                ชื่อบัญชี : <span>{props.userData.userName}</span>
+                ชื่อบัญชี : <span>{userInfo.userName}</span>
               </label>
             </div>
             <div>
               <label>
-                ชื่อ : <span>{props.userData.fullName}</span>
+                ชื่อ : <span>{userInfo.fullName}</span>
               </label>
             </div>
             <div>
               <label>
-                ที่อยู่ : <span>{props.userData.address}</span>
+                ที่อยู่ : <span>{userInfo.address}</span>
               </label>
             </div>
             <div>
               <label>
-                เบอร์โทร : <span>{props.userData.tel}</span>
+                เบอร์โทร : <span>{userInfo.tel}</span>
               </label>
             </div>
           </div>
@@ -57,4 +79,17 @@ const ProfileInfoPage = (props) => {
   );
 };
 
-export default ProfileInfoPage;
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+    getUser: () => dispatch(getUser()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfoPage);

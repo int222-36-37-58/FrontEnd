@@ -67,6 +67,10 @@ export default class CreateProductForm extends Component {
       const color = res.data;
       this.setState({ color: color });
     });
+
+    this.setState({
+      data: { ...this.state.data, user: this.props.user },
+    });
   }
 
   componentDidUpdate(prevProps) {

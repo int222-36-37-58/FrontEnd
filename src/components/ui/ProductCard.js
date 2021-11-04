@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
 
-function ProductCard(props, { addToCart }) {
+function ProductCard(props, { addToCart,userInfo }) {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
   const [colorChoose, setColorChoose] = useState(0);
@@ -173,13 +173,25 @@ function ProductCard(props, { addToCart }) {
                 Sold out
               </button>
             ) : (
-              <button
-                className="AddButton"
-                style={{ width: 90 + "%" }}
-                onClick={showColor}
-              >
-                Add - ฿{props.product.price}{" "}
-              </button>
+              [
+                props.userInfo.userId && props.product.user.userId === props.userInfo.userId? (
+                  <button
+                    className="disabledButton"
+                    style={{ width: 90 + "%" }}
+                    disabled
+                  >
+                    Add
+                  </button>
+                ) : (
+                  <button
+                    className="AddButton"
+                    style={{ width: 90 + "%" }}
+                    onClick={showColor}
+                  >
+                    Add - ฿{props.product.price}{" "}
+                  </button>
+                ),
+              ]
             )}
 
             <button
@@ -228,13 +240,26 @@ function ProductCard(props, { addToCart }) {
                     Sold out
                   </button>
                 ) : (
-                  <button
-                    className="AddButton"
-                    style={{ width: 90 + "%" }}
-                    onClick={showColor}
-                  >
-                    Add
-                  </button>
+                  [
+                    props.userInfo.userId &&
+                    props.product.user.userId === props.userInfo.userId ? (
+                      <button
+                        className="disabledButton"
+                        style={{ width: 90 + "%" }}
+                        disabled
+                      >
+                        Add
+                      </button>
+                    ) : (
+                      <button
+                        className="AddButton"
+                        style={{ width: 90 + "%" }}
+                        onClick={showColor}
+                      >
+                        Add
+                      </button>
+                    ),
+                  ]
                 )}
                 <button
                   className="InfoButton"
@@ -252,10 +277,20 @@ function ProductCard(props, { addToCart }) {
   );
 }
 
+
+const mapStateToProps = (state) => {
+  return {
+   
+    userInfo : state.user.userInfo,
+  };
+};
+
+
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

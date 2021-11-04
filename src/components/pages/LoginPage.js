@@ -9,7 +9,11 @@ const LoginPage = (props, { getUser, login }) => {
     const goLogin = new Promise(() => {
       props.login(data);
     });
-    goLogin.then(props.getUser()).then(props.closeModal());
+    goLogin
+      .then((res) => {
+        props.getUser(res);
+      })
+      .then(props.closeModal());
   };
 
   return <LoginForm submit={submit} />;

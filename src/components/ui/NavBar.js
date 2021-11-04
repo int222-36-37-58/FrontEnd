@@ -76,12 +76,8 @@ const NavBar = ({
   };
 
   const handleLogout = () => {
-    console.log("imwork")
-   //logout();
-     //userLogout();
-  // setAnchorEl(null);
- // changeCurrentMenu("");
- //  openSearchModal(false);
+    logout();
+    userLogout();
   };
 
   return (
@@ -103,7 +99,7 @@ const NavBar = ({
         isAuth={isAuth}
         showLoginForm={handleShowGuestModal(true)}
         close={() => handleProfileDrawer(false)}
-        handleLogout={() =>handleLogout()}
+        handleLogout={() => handleLogout()}
       />
 
       <SearchModal
@@ -374,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
     logout: () => logout(),
-    userLogout : () => dispatch(userLogout()),
+    userLogout: () => dispatch(userLogout()),
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };

@@ -5,12 +5,13 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { addResDialog } from "../../actions/uiStyle";
 
-const OrderDetailRow = (props, { addResDialog }) => {
+const OrderDetailRow = (props, { addResDialog, userInfo }) => {
   const [comment, setComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [errs, setErrs] = useState(false);
 
   const sendComment = () => {
+    console.log(props.userInfo.userId);
     setErrs(false);
     if (commentContent.length < 1 || commentContent.length > 90) {
       setErrs(true);
@@ -18,7 +19,7 @@ const OrderDetailRow = (props, { addResDialog }) => {
       const json = JSON.stringify({
         content: commentContent,
         product: { productId: props.odt.product.productId },
-        user: { userId: 1 },
+        user: { userId: props.userInfo.userId, userName : props.userInfo.userName },
       });
 
       axios
@@ -41,7 +42,7 @@ const OrderDetailRow = (props, { addResDialog }) => {
         .catch((err) => {
           const data = {
             status: err.response.status,
-            dialogContent: err.response.data.message,
+            dialogContent: "เกิดข้อผิดพลาด",
           };
           props.addResDialog(data);
         });
@@ -101,7 +102,7 @@ const OrderDetailRow = (props, { addResDialog }) => {
           </tr>
           {comment && (
             <>
-              <td colspan="6">
+              <td colSpan="6">
                 <div
                   style={{
                     display: "flex",
@@ -264,10 +265,16 @@ const OrderDetailRow = (props, { addResDialog }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(OrderDetailRow);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetailRow);

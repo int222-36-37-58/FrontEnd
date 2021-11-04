@@ -590,7 +590,8 @@ body {
 }
 
 #commentsProduct:checked ~ .commentShow {
-  max-height: 100vh;
+  max-height: 100%;
+  height: auto;
 }
 
 .commentBox {
