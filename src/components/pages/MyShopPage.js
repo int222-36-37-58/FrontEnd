@@ -18,6 +18,8 @@ const MyShopPage = ({ userInfo }) => {
 
   return (
     <div className="profileBox">
+      <div className="headerWithUnderline">สินค้าทั้งหมดของคุณ</div>
+
       <Grid container>
         {myProduct.map((mp) => {
           return (

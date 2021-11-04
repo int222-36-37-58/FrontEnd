@@ -1061,6 +1061,19 @@ td {
   cursor: pointer;
 }
 
+.headerWithUnderline {
+  font-size: 24px;
+  font-weight: 600;
+  width: 100%;
+  border-color: #545454;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  padding-bottom: 20px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+
 .f13 {
   font-size: 13px;
 }

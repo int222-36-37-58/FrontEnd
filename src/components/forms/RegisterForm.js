@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 export default class RegisterForm extends Component {
   state = {
     data: {
-      userName: "",
+      username: "",
       fullName: "",
       address: "",
       tel: "",
@@ -48,8 +48,8 @@ export default class RegisterForm extends Component {
 
   validate = (e) => {
     const errors = {};
-    if (!e.userName || e.userName.length <= 5 || !e.userName.match(/^[a-z]/)) {
-      errors.userName = true;
+    if (!e.username || e.username.length <= 5 || !e.username.match(/^[a-z0-9]/)) {
+      errors.username = true;
     }
     if (
       !e.password ||
@@ -120,25 +120,25 @@ export default class RegisterForm extends Component {
                       required
                       type="text"
                       inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="userName"
-                      name="userName"
+                      id="username"
+                      name="username"
                       label="Username"
-                      value={this.state.data.userName}
-                      helperText="cant change userName"
+                      value={this.state.data.username}
+                      helperText="cant change username"
                     />
                   ) : (
                     <TextField
                       fullWidth
                       required
-                      error={this.state.errors.userName}
+                      error={this.state.errors.username}
                       type="text"
                       inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="userName"
-                      name="userName"
+                      id="username"
+                      name="username"
                       label="Username"
                       helperText="contain 3-20 character"
                       onChange={this.onChange}
-                      value={this.state.data.userName}
+                      value={this.state.data.username}
                     />
                   )}
                 </Grid>
@@ -284,7 +284,7 @@ RegisterForm.propTypes = {
   editMode: PropTypes.bool.isRequired,
   userData: PropTypes.shape({
     id: PropTypes.number,
-    userName: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     password: PropTypes.string,
     fullName: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
@@ -296,7 +296,7 @@ RegisterForm.propTypes = {
 RegisterForm.defaultProps = {
   editMode: false,
   userData: {
-    userName: "",
+    username: "",
     password: "",
     fullName: "",
     address: "",

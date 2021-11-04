@@ -23,8 +23,8 @@ const Cart = (props) => {
         date: currentDate.toISOString(),
         orderDetail: props.listProduct,
         user: {
-          userId: 1,
-          userName: "testuser",
+          userId: props.userInfo.userId,
+          userName: props.userInfo.userName,
         },
       };
       const json = JSON.stringify(order);

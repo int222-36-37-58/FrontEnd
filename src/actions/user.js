@@ -18,7 +18,7 @@ export const getUser = () => (dispatch) => {
   });
 };
 
-export const login = (data) => {
+export const login = (data) => (dispatch) => {
   axios
     .post(`${process.env.REACT_APP_API_URL}/authenticate`, data, {
       headers: {
@@ -28,7 +28,13 @@ export const login = (data) => {
     .then((res) => {
       SetDefaultHeader(`${res.data.token}`);
       localStorage.setItem("token", `${res.data.token}`);
-      
+    })
+    .then(() => {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/user/getbyname`)
+        .then((res) => {
+          dispatch(getUserInfo(res.data));
+        });
     });
 };
 

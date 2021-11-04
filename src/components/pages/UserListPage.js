@@ -27,7 +27,7 @@ const UserListPage = ({ addResDialog }) => {
 
   const getUser = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/users`)
+      .get(`${process.env.REACT_APP_API_URL}/admin/users`)
       .then((res) => setUser(res.data))
       .catch((err) => {
         const data = {
@@ -44,7 +44,7 @@ const UserListPage = ({ addResDialog }) => {
 
   const delUser = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/use/delete/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/delete/${id}`)
 
       .then((res) => {
         const data = {
@@ -84,7 +84,7 @@ const UserListPage = ({ addResDialog }) => {
     const json = JSON.stringify(data);
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/edituser`, json, {
+      .put(`${process.env.REACT_APP_API_URL}/user/edituser`, json, {
         headers: {
           "Content-Type": "application/json",
         },

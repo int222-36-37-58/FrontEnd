@@ -7,6 +7,7 @@ import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
 const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
   const [isEdit, setIsEdit] = useState(false);
+
   const submit = (data) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/user/edituser`, data)
@@ -26,6 +27,7 @@ const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
         addResDialog(data);
       });
   };
+
   return (
     <div>
       {isEdit ? (

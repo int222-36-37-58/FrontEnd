@@ -9,7 +9,7 @@ import ProductCard from "../ui/ProductCard";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
-const Home = ({ filter, addResDialog,userInfo }) => {
+const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
@@ -127,41 +127,53 @@ const Home = ({ filter, addResDialog,userInfo }) => {
                               md={5}
                               lg={3}
                               ref={lastElementRef}
-                              key={i}
+                              key={`product${i}`}
                             >
                               <ProductCard
                                 product={product}
                                 listStyle={listStyle}
-                              ></ProductCard>{" "}
+                              />
                             </Grid>
                           );
                         } else {
                           return (
-                            <Grid item xs={12} ref={lastElementRef} key={i}>
+                            <Grid
+                              item
+                              xs={12}
+                              ref={lastElementRef}
+                              key={`product${i}`}
+                            >
                               <ProductCard
                                 product={product}
                                 listStyle={listStyle}
-                              ></ProductCard>{" "}
+                              />
                             </Grid>
                           );
                         }
                       } else {
                         if (listStyle === 1) {
                           return (
-                            <Grid item xs={12} sm={6} md={5} lg={3} key={i}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              md={5}
+                              lg={3}
+                              key={`product${i}`}
+                            >
                               <ProductCard
                                 product={product}
                                 listStyle={listStyle}
-                              ></ProductCard>{" "}
+                              />
                             </Grid>
                           );
                         } else {
                           return (
-                            <Grid item xs={12} key={i}>
+                            <Grid item xs={12} key={`product${i}`}>
                               <ProductCard
                                 product={product}
                                 listStyle={listStyle}
-                              ></ProductCard>{" "}
+                              />
                             </Grid>
                           );
                         }
@@ -192,7 +204,7 @@ const Home = ({ filter, addResDialog,userInfo }) => {
 const mapStateToProps = (state) => {
   return {
     filter: state.uiStyle.filterType,
-    userInfo : state.user.userInfo,
+    userInfo: state.user.userInfo,
   };
 };
 

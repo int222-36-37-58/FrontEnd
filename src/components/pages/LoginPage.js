@@ -6,14 +6,15 @@ import LoginForm from "../forms/LoginForm";
 
 const LoginPage = (props, { getUser, login }) => {
   const submit = (data) => {
-    const goLogin = new Promise(() => {
-      props.login(data);
-    });
-    goLogin
-      .then((res) => {
-        props.getUser(res);
-      })
-      .then(props.closeModal());
+    // const goLogin = new Promise(() => {
+    //   props.login(data);
+    // });
+    // goLogin
+    //   .then((res) => {
+    //     props.getUser(res);
+    //   })
+    //   .then(props.closeModal());
+    props.login(data);
   };
 
   return <LoginForm submit={submit} />;
@@ -21,7 +22,7 @@ const LoginPage = (props, { getUser, login }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (data) => login(data),
+    login: (data) => dispatch(login(data)),
     getUser: () => dispatch(getUser()),
   };
 };

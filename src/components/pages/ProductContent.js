@@ -178,9 +178,9 @@ const ProductContent = (props) => {
           {product.color && (
             <div className="radioGroup">
               <h4 style={{ marginBottom: 10 + "px" }}>color</h4>
-              {product.color.map((col, i) => {
+              {product.color.map((col) => {
                 return (
-                  <span key={col.colorId}>
+                  <span key={`color#${col.colorId}`}>
                     <input
                       type="radio"
                       id={col.colorName}
@@ -360,7 +360,7 @@ const ProductContent = (props) => {
                 {comments.map((cm, i) => {
                   return (
                     <div
-                      key={i}
+                      key={`comment#${cm.commentId}`}
                       style={{
                         borderStyle: "solid",
                         borderWidth: "0 0 1px 0 ",

@@ -85,7 +85,7 @@ function ProductCard(props, { addToCart,userInfo }) {
               <span style={{ fontWeight: 900 }}> Color : </span>
               {props.product.color.map((color) => {
                 return (
-                  <span key={color.colorId}>
+                  <span key={`color${color.colorId}`}>
                     <input
                       type="radio"
                       id={color.colorName}

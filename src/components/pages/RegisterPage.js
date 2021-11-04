@@ -1,13 +1,11 @@
 import React from "react";
 import RegisterForm from "../forms/RegisterForm";
 import axios from "axios";
-import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
+import { login, getUser } from "../../actions/user";
 
-const RegisterPage = ({ addResDialog }) => {
-  const history = useHistory();
-
+const RegisterPage = ({ addResDialog, login, getUser }) => {
   const submit = (data) => {
     const json = JSON.stringify(data);
     axios
@@ -16,10 +14,16 @@ const RegisterPage = ({ addResDialog }) => {
           "Content-Type": "application/json",
         },
       })
-      .then(history.push("/login"))
+      .then(() => {
+        let credential = {
+          username: data.userName,
+          password: data.password,
+        };
+        login(credential);
+      })
       .catch((err) => {
         const data = {
-          status: err.response.status,
+          status: err.status,
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
@@ -36,6 +40,8 @@ const RegisterPage = ({ addResDialog }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addResDialog: (content) => dispatch(addResDialog(content)),
+    login: (content) => dispatch(login(content)),
+    getUser: () => dispatch(getUser()),
   };
 };
 
