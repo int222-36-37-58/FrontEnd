@@ -14,25 +14,24 @@ export const userLogout = () => ({
 
 export const login = (data) => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/authorize`, data, {
+    .post(`${process.env.REACT_APP_API_URL}/authenticate`, data, {
       headers: {
         "Content-Type": "application/json",
       },
     })
     .then((res) => {
       localStorage.setItem("token", `${res.data.token}`);
-      SetDefaultHeader(`Bearer ${res.data.token}`);
+      SetDefaultHeader(`${res.data.token}`);
     });
 };
 
 export const getUser = () => (dispatch) => {
-  axios.get(`${process.env.REACT_APP_API_URL}/user/thisuser`).then((res) => {
+  axios.get(`${process.env.REACT_APP_API_URL}/user/getbyname`).then((res) => {
     dispatch(getUserInfo(res.data));
   });
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => {
   localStorage.removeItem("token");
-  dispatch(userLogout());
-  SetDefaultHeader();
+  SetDefaultHeader("");
 };

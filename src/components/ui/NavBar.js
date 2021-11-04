@@ -20,13 +20,14 @@ import {
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
-import { logout } from "../../actions/user";
+import { logout, userLogout } from "../../actions/user";
 const NavBar = ({
   isAuth,
   userInfo,
   cart,
   uiStyle,
   logout,
+  userLogout,
   removeFromCart,
   clearCartItem,
   changeCurrentMenu,
@@ -75,11 +76,12 @@ const NavBar = ({
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwtToken");
-    setAnchorEl(null);
-    changeCurrentMenu("");
-    openSearchModal(false);
-    logout();
+    console.log("imwork")
+   //logout();
+     //userLogout();
+  // setAnchorEl(null);
+ // changeCurrentMenu("");
+ //  openSearchModal(false);
   };
 
   return (
@@ -101,6 +103,7 @@ const NavBar = ({
         isAuth={isAuth}
         showLoginForm={handleShowGuestModal(true)}
         close={() => handleProfileDrawer(false)}
+        handleLogout={() =>handleLogout()}
       />
 
       <SearchModal
@@ -337,7 +340,7 @@ const NavBar = ({
               </div>
             </Link>
             <div
-              onClick={handleLogout}
+              onClick={() => handleLogout()}
               style={{
                 fontSize: "14px",
                 padding: "10px",
@@ -370,7 +373,8 @@ const mapDispatchToProps = (dispatch) => {
     clearCartItem: () => dispatch(clearCartItem()),
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
-    logout: () => dispatch(logout()),
+    logout: () => logout(),
+    userLogout : () => dispatch(userLogout()),
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };

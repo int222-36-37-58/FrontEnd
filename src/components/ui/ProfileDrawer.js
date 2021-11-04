@@ -65,7 +65,10 @@ function ProfileDrawer(props) {
                     </div>
                   </Link>
                 </div>
-                <div className=" p-10 hoverChangeBackground w-100">
+                <div
+                  className=" p-10 hoverChangeBackground w-100"
+                  onClick={props.handleLogout}
+                >
                   ออกจากระบบ
                 </div>
               </>

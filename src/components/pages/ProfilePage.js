@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
-import { logout } from "../../actions/user";
+import { logout, userLogout } from "../../actions/user";
 
 const ProfilePage = ({
   userInfo,
@@ -25,6 +25,7 @@ const ProfilePage = ({
   uiStyle,
   addResDialog,
   logout,
+  userLogout,
 }) => {
   const [userData] = useState(userInfo);
 
@@ -47,6 +48,11 @@ const ProfilePage = ({
         };
         addResDialog(data);
       });
+  };
+
+  const handleLogOut = () => {
+    logout();
+    userLogout();
   };
 
   return (
@@ -150,7 +156,10 @@ const ProfilePage = ({
                   <div>จัดการข้อมูลผู้ใช้</div>
                 </Link>
 
-                <div className="hoverChangeBackground p-10" onClick={logout}>
+                <div
+                  className="hoverChangeBackground p-10"
+                  onClick={() => handleLogOut()}
+                >
                   ออกจากระบบ
                 </div>
               </Hidden>
@@ -217,7 +226,7 @@ const ProfilePage = ({
                   >
                     ร้านค้าของฉัน
                   </Link>
-                  <b onClick={logout}>ออกจากระบบ</b>
+                  <b onClick={() => handleLogOut()}>ออกจากระบบ</b>
                 </p>
               </Hidden>
             </div>
@@ -275,7 +284,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     addResDialog: (content) => dispatch(addResDialog(content)),
-    logout: () => dispatch(logout()),
+    logout: () => logout(),
+    userLogout: () => dispatch(userLogout()),
   };
 };
 
