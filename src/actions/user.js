@@ -34,7 +34,11 @@ export const login = (data) => (dispatch) => {
         .get(`${process.env.REACT_APP_API_URL}/user/getbyname`)
         .then((res) => {
           dispatch(getUserInfo(res.data));
+          return 200;
         });
+    })
+    .catch((err) => {
+      return err.response.status;
     });
 };
 

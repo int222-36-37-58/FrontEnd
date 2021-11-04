@@ -1,4 +1,5 @@
 import { Grid, TextField } from "@material-ui/core";
+
 import React, { useState } from "react";
 
 const ChangePasswordForm = () => {
@@ -129,7 +130,7 @@ const ChangePasswordForm = () => {
               paddingLeft: 35 + "px",
             }}
           >
-            Confirm password
+            Confirm Change Password
           </button>
         </Grid>
       </Grid>

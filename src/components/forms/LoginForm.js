@@ -59,6 +59,7 @@ export default class LoginForm extends Component {
               alignItems="center"
               spacing={2}
             >
+              <div>{this.props.err}</div>
               <Grid item xs={12}>
                 <TextField
                   required

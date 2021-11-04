@@ -1,20 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUser, login } from "../../actions/user";
+import { login } from "../../actions/user";
 
 import LoginForm from "../forms/LoginForm";
 
-const LoginPage = (props, { getUser, login }) => {
+const LoginPage = (props, { login }) => {
   const submit = (data) => {
-    // const goLogin = new Promise(() => {
+    let gg = new Promise(() => {
+      props.login(data);
+    });
+    async function ggReturn() {
+      return gg;
+    }
+
+    console.log(ggReturn());
+    // if (props.login(data) === "success") {
     //   props.login(data);
-    // });
-    // goLogin
-    //   .then((res) => {
-    //     props.getUser(res);
-    //   })
-    //   .then(props.closeModal());
-    props.login(data);
+    //   props.closeModal();
+    // } else {
+    //   setErrors("login failed");
+    // }
   };
 
   return <LoginForm submit={submit} />;
@@ -23,7 +28,6 @@ const LoginPage = (props, { getUser, login }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (data) => dispatch(login(data)),
-    getUser: () => dispatch(getUser()),
   };
 };
 
