@@ -5,15 +5,16 @@ import { login } from "../../actions/user";
 import LoginForm from "../forms/LoginForm";
 
 const LoginPage = (props, { login }) => {
-  const submit = (data) => {
-    let gg = new Promise(() => {
-      props.login(data);
-    });
-    async function ggReturn() {
-      return gg;
-    }
+  props.login(data);
+  // const submit = (data) => {
+  //   let gg = new Promise(() => {
+  //     props.login(data);
+  //   });
+  //   async function ggReturn() {
+  //     return gg;
+  //   }
 
-    console.log(ggReturn());
+  //   console.log(ggReturn());
     // if (props.login(data) === "success") {
     //   props.login(data);
     //   props.closeModal();
