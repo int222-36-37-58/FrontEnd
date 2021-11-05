@@ -74,7 +74,6 @@ function AdminEditUserForm(props) {
       props.submit(userData);
     }
   };
-  console.log(userData.role);
 
   return (
     <div

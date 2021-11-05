@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
 
-function ProductCard(props, { addToCart,userInfo }) {
+function ProductCard(props, { addToCart, userInfo }) {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
   const [colorChoose, setColorChoose] = useState(0);
@@ -165,20 +165,16 @@ function ProductCard(props, { addToCart,userInfo }) {
             <h5 className="titleWrap">{props.product.name}</h5>
 
             {props.product.quantity < 1 ? (
-              <button
-                className="disabledButton "
-                disabled
-                style={{ width: 90 + "%" }}
-              >
+              <button className="disabledButton " style={{ width: 90 + "%" }}>
                 Sold out
               </button>
             ) : (
               [
-                props.userInfo.userId && props.product.user.userId === props.userInfo.userId? (
+                props.userInfo.userId &&
+                props.product.user.userId === props.userInfo.userId ? (
                   <button
                     className="disabledButton"
                     style={{ width: 90 + "%" }}
-                    disabled
                   >
                     Add
                   </button>
@@ -234,7 +230,6 @@ function ProductCard(props, { addToCart,userInfo }) {
                 {props.product.quantity < 1 ? (
                   <button
                     className="disabledButton "
-                    disabled
                     style={{ width: 90 + "%" }}
                   >
                     Sold out
@@ -246,7 +241,6 @@ function ProductCard(props, { addToCart,userInfo }) {
                       <button
                         className="disabledButton"
                         style={{ width: 90 + "%" }}
-                        disabled
                       >
                         Add
                       </button>
@@ -277,15 +271,11 @@ function ProductCard(props, { addToCart,userInfo }) {
   );
 }
 
-
 const mapStateToProps = (state) => {
   return {
-   
-    userInfo : state.user.userInfo,
+    userInfo: state.user.userInfo,
   };
 };
-
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
