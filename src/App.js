@@ -33,6 +33,7 @@ const App = ({ dialog, removeDialog }) => {
               <ResponseDialog
                 showDialog={true}
                 dialog={di}
+                len={dialog.length}
                 index={i}
                 handleCloseBox={removeDialog}
               />

@@ -7,7 +7,9 @@ import AddIcon from "@material-ui/icons/Add";
 import noImage from "../../images/noImage.jpg";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import { useHistory } from "react-router";
-const ProductContent = (props) => {
+import { addResDialog } from "../../actions/uiStyle";
+import { connect } from "react-redux";
+const ProductContent = (props, { addResDialog }) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);
   const [imageProduct, setImageProduct] = useState(noImage);
@@ -107,14 +109,21 @@ const ProductContent = (props) => {
 
   const deleteThisProduct = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/products/${product.productId}`)
-      .then(() => {
-        props.goShop();
+      .delete(
+        `${process.env.REACT_APP_API_URL}/user/products/${product.productId}`
+      )
+      .then((res) => {
+        const data = {
+          status: res.status,
+          dialogContent: "Delete Success",
+        };
+        props.goMyShop();
+        props.addResDialog(data);
       })
       .catch((err) => {
         const data = {
-          status: err.response.status,
-          dialogContent: err.response.data.error,
+          status: err.status,
+          dialogContent: err.response.message,
         };
         props.addResDialog(data);
       })
@@ -389,4 +398,10 @@ ProductContent.propTypes = {
   editProduct: PropTypes.func,
 };
 
-export default ProductContent;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProductContent);

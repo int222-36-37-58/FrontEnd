@@ -4,7 +4,9 @@ import CancelOutlined from "@material-ui/icons/CancelOutlined";
 
 const ResponseDialog = (props) => {
   useEffect(() => {
-    setTimeout(() => props.handleCloseBox(props.index), 6500);
+    if (props.len > 0) {
+      setTimeout(() => props.handleCloseBox(props.index), 10000);
+    }
   }, [props]);
 
   const switchRender = () => {
@@ -12,8 +14,7 @@ const ResponseDialog = (props) => {
     if (props.dialog) {
       if (props.dialog.status === 200) {
         stat = "Success";
-      }
-      if (props.dialog.status > 200) {
+      } else {
         stat = "Error";
       }
     } else {

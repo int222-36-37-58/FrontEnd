@@ -99,8 +99,21 @@ export default class CreateProductForm extends Component {
       });
       bodyFormData.append("imageFile", this.state.imageFile);
       bodyFormData.append("product", blob);
-
       this.props.submit(bodyFormData);
+      this.setState({
+        data: {
+          imageName: "",
+          name: "",
+          description: "",
+          price: "",
+          type: "",
+          color: [],
+          user: {},
+        },
+        imageFile: null,
+        imagePreview: noImage,
+        errors: {},
+      });
     }
   };
 

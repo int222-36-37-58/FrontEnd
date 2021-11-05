@@ -12,7 +12,7 @@ const ProductPage = ({ addToCart, editProduct, addResDialog,userInfo }) => {
   };
 
   const goShop = () => {
-    history.push("/");
+    history.push("/profile/myshop");
   };
 
   return (
@@ -20,7 +20,7 @@ const ProductPage = ({ addToCart, editProduct, addResDialog,userInfo }) => {
       addItem={addToCart}
       editProduct={editProduct}
       notFound={notFound}
-      goShop={goShop}
+      goMyShop={goShop}
       addResDialog={addResDialog}
       userInfo={userInfo}
     />
