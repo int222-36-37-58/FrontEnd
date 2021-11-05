@@ -5,7 +5,7 @@ import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import { login, getUser } from "../../actions/user";
 
-const RegisterPage = ({ addResDialog, login, getUser }) => {
+const RegisterPage = (props,{ addResDialog, login, getUser }) => {
   const submit = (data) => {
     const json = JSON.stringify(data);
     axios
@@ -14,19 +14,28 @@ const RegisterPage = ({ addResDialog, login, getUser }) => {
           "Content-Type": "application/json",
         },
       })
-      .then(() => {
+      .then(async () => {
         let credential = {
           username: data.userName,
           password: data.password,
         };
-        login(credential);
+        const loggedIn = await props.login(credential);
+        if(loggedIn === 200){
+          const data = {
+            status: 200,
+            dialogContent: "คุณเข้าสู่ระบบแล้ว",
+          };
+          props.closeModal();
+          props.addResDialog(data);
+        }
+       
       })
       .catch((err) => {
         const data = {
           status: err.status,
           dialogContent: err.response.data.message,
         };
-        addResDialog(data);
+        props.addResDialog(data);
       });
   };
 

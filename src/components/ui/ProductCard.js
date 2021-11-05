@@ -65,6 +65,21 @@ function ProductCard(props, { addToCart, userInfo }) {
     }
   };
 
+  const productColor = props.product.color.map((color) => {
+    return (
+      <span key={`colorInCard${color.colorId}`}>
+        <input
+          type="radio"
+          id={color.colorName}
+          name="color"
+          value={`${color.colorId}`}
+          onClick={chooseColor}
+        />
+        <label htmlFor={color.colorName}>{color.colorName}</label>
+      </span>
+    );
+  });
+
   return (
     <Container
       style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
@@ -83,20 +98,7 @@ function ProductCard(props, { addToCart, userInfo }) {
               className="radioGroup"
             >
               <span style={{ fontWeight: 900 }}> Color : </span>
-              {props.product.color.map((color) => {
-                return (
-                  <span key={`color${color.colorId}`}>
-                    <input
-                      type="radio"
-                      id={color.colorName}
-                      name="color"
-                      value={`${color.colorId}`}
-                      onClick={chooseColor}
-                    />
-                    <label htmlFor={color.colorName}>{color.colorName}</label>
-                  </span>
-                );
-              })}
+              {productColor}
             </div>
             <div
               className="plusMinus"

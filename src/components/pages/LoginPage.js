@@ -1,26 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
+import { addResDialog } from "../../actions/uiStyle";
 import { login } from "../../actions/user";
 
 import LoginForm from "../forms/LoginForm";
 
-const LoginPage = (props, { login }) => {
-  const submit = (data) => {
-    props.login(data);
-    //   let gg = new Promise(() => {
-    //     props.login(data);
-    //   });
-    //   async function ggReturn() {
-    //     return gg;
-    //   }
-
-    //   console.log(ggReturn());
-    // if (props.login(data) === "success") {
-    //   props.login(data);
-    //   props.closeModal();
-    // } else {
-    //   setErrors("login failed");
-    // }
+const LoginPage = (props, { login, addResDialog }) => {
+  const submit = async (data) => {
+    const loggedIn = await props.login(data);
+    if (loggedIn === 200) {
+      const data = {
+        status: 200,
+        dialogContent: "คุณเข้าสู่ระบบแล้ว",
+      };
+      props.closeModal();
+      props.addResDialog(data);
+      props.closeModal();
+    }
   };
 
   return <LoginForm submit={submit} />;
@@ -29,6 +25,7 @@ const LoginPage = (props, { login }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (data) => dispatch(login(data)),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

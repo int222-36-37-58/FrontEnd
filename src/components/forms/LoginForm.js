@@ -79,7 +79,7 @@ export default class LoginForm extends Component {
                   required
                   fullWidth
                   error={this.state.errors.password}
-                  type="password"
+                  type="text"
                   inputProps={{ minLength: 3, maxLength: 20 }}
                   id="password"
                   name="password"

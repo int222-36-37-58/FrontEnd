@@ -9,6 +9,17 @@ body {
   outline: none;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 5px #d4d4d4;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000a3;
+}
+
 .pageContainer {
   position: relative;
   width: 100%;
@@ -1072,7 +1083,6 @@ td {
   margin-top: -10px;
   margin-bottom: 20px;
 }
-
 
 .f13 {
   font-size: 13px;

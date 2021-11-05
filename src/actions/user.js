@@ -18,8 +18,8 @@ export const getUser = () => (dispatch) => {
   });
 };
 
-export const login = (data) => (dispatch) => {
-  axios
+export const login = (data) => async (dispatch) => {
+  const response = await axios
     .post(`${process.env.REACT_APP_API_URL}/authenticate`, data, {
       headers: {
         "Content-Type": "application/json",
@@ -29,17 +29,19 @@ export const login = (data) => (dispatch) => {
       SetDefaultHeader(`${res.data.token}`);
       localStorage.setItem("token", `${res.data.token}`);
     })
-    .then(() => {
-      axios
+    .then(async() => {
+     const resp = await axios
         .get(`${process.env.REACT_APP_API_URL}/user/getbyname`)
         .then((res) => {
           dispatch(getUserInfo(res.data));
-          return 200;
+          return res.status
         });
+      return resp;
     })
     .catch((err) => {
-      return err.response.status;
+      return err.status;
     });
+  return response;
 };
 
 export const logout = () => {

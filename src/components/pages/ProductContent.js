@@ -189,7 +189,7 @@ const ProductContent = (props, { addResDialog }) => {
               <h4 style={{ marginBottom: 10 + "px" }}>color</h4>
               {product.color.map((col) => {
                 return (
-                  <span key={`color#${col.colorId}`}>
+                  <span key={`colorInContent#${col.colorId}`}>
                     <input
                       type="radio"
                       id={col.colorName}
@@ -369,7 +369,7 @@ const ProductContent = (props, { addResDialog }) => {
                 {comments.map((cm, i) => {
                   return (
                     <div
-                      key={`comment#${cm.commentId}`}
+                      key={`commentInContent${cm.commentId}`}
                       style={{
                         borderStyle: "solid",
                         borderWidth: "0 0 1px 0 ",

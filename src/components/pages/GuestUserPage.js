@@ -63,7 +63,7 @@ const GuestUserPage = (props) => {
           <Grid item xs={12}>
             <div>
               {formShow === "login" && <LoginPage closeModal={closeModal}/>}
-              {formShow === "register" && <RegisterPage />}
+              {formShow === "register" && <RegisterPage closeModal={closeModal}/>}
             </div>
           </Grid>
         </Grid>

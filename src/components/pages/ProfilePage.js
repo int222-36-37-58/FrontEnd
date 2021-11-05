@@ -22,12 +22,15 @@ const ProfilePage = ({
   uiStyle,
   logout,
   userLogout,
+  addResDialog,
 }) => {
   const [isShowMenu, setIsShowMenu] = useState(false);
 
   const handleLogOut = () => {
     logout();
     userLogout();
+    let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
+    addResDialog(data);
   };
 
   return (
@@ -197,10 +200,7 @@ const ProfilePage = ({
                   >
                     เริ่มขายสินค้า
                   </Link>
-                  <Link
-                    to="/profile/myshop"
-                    className="hoverChangeBackground"
-                  >
+                  <Link to="/profile/myshop" className="hoverChangeBackground">
                     ร้านค้าของฉัน
                   </Link>
                   <b onClick={() => handleLogOut()}>ออกจากระบบ</b>
@@ -268,6 +268,7 @@ const mapDispatchToProps = (dispatch) => {
     getUser: () => dispatch(getUser()),
     logout: () => logout(),
     userLogout: () => dispatch(userLogout()),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

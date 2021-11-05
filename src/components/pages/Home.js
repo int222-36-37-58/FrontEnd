@@ -68,6 +68,58 @@ const Home = ({ filter, addResDialog, userInfo }) => {
     [loading, hasMore]
   );
 
+  const productList = products.map((product, i) => {
+    if (products.length === i + 1) {
+      if (listStyle === 1) {
+        return (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={5}
+            lg={3}
+            ref={lastElementRef}
+            key={`productCardNo${product.productId}`}
+          >
+            <ProductCard product={product} listStyle={listStyle} />
+          </Grid>
+        );
+      } else {
+        return (
+          <Grid
+            item
+            xs={12}
+            ref={lastElementRef}
+            key={`productCardNo${product.productId}`}
+          >
+            <ProductCard product={product} listStyle={listStyle} />
+          </Grid>
+        );
+      }
+    } else {
+      if (listStyle === 1) {
+        return (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={5}
+            lg={3}
+            key={`productCardNo${product.productId}`}
+          >
+            <ProductCard product={product} listStyle={listStyle} />
+          </Grid>
+        );
+      } else {
+        return (
+          <Grid item xs={12} key={`productCardNo${product.productId}`}>
+            <ProductCard product={product} listStyle={listStyle} />
+          </Grid>
+        );
+      }
+    }
+  });
+
   return (
     <>
       <Container maxWidth="xl">
@@ -115,71 +167,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
                   {productLength} รายการ
                 </h4>
                 <Grid container direction="row" spacing={2}>
-                  <>
-                    {products.map((product, i) => {
-                      if (products.length === i + 1) {
-                        if (listStyle === 1) {
-                          return (
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              md={5}
-                              lg={3}
-                              ref={lastElementRef}
-                              key={`product${i}`}
-                            >
-                              <ProductCard
-                                product={product}
-                                listStyle={listStyle}
-                              />
-                            </Grid>
-                          );
-                        } else {
-                          return (
-                            <Grid
-                              item
-                              xs={12}
-                              ref={lastElementRef}
-                              key={`product${i}`}
-                            >
-                              <ProductCard
-                                product={product}
-                                listStyle={listStyle}
-                              />
-                            </Grid>
-                          );
-                        }
-                      } else {
-                        if (listStyle === 1) {
-                          return (
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              md={5}
-                              lg={3}
-                              key={`product${i}`}
-                            >
-                              <ProductCard
-                                product={product}
-                                listStyle={listStyle}
-                              />
-                            </Grid>
-                          );
-                        } else {
-                          return (
-                            <Grid item xs={12} key={`product${i}`}>
-                              <ProductCard
-                                product={product}
-                                listStyle={listStyle}
-                              />
-                            </Grid>
-                          );
-                        }
-                      }
-                    })}
-                  </>
+                  {productList}
                 </Grid>
 
                 {loading && (
