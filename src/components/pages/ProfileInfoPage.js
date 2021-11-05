@@ -17,8 +17,9 @@ const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
           dialogContent: "Update Success",
         };
         addResDialog(data);
+        getUser();
       })
-      .then(getUser())
+      .then(setIsEdit(false))
       .catch((err) => {
         const data = {
           status: "Error",
