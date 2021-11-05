@@ -1,54 +1,55 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 
-export default class RegisterForm extends Component {
-  state = {
-    data: {
-      userName: "",
-      fullName: "",
-      address: "",
-      tel: "",
-      password: "",
-      role: "ROLE_USER",
-    },
-    editMode: false,
+const RegisterForm = (props) => {
+  const [data, setData] = useState({
+    userName: "",
+    fullName: "",
+    address: "",
+    tel: "",
+    password: "",
+    role: "ROLE_USER",
+  });
 
-    confirmPassword: "",
-    errors: {},
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (props.userData) {
+      setData(props.userData);
+    }
+  }, [props]);
+
+  const onChange = (e) =>
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  const onConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
-  componentDidMount() {
-    this.setState({ data: this.props.userData });
-    this.setState({ editMode: this.props.editMode });
-  }
-
-  onChange = (e) =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
-    });
-  onConfirmPassword = (e) => {
-    this.setState({
-      confirmPassword: e.target.value,
-    });
-  };
-
-  onSubmit = () => {
-    const invalid = this.validate(this.state.data);
+  const onSubmit = () => {
+    const invalid = validate(data);
     if (invalid !== "err") {
-      if (this.state.editMode) {
-        this.props.submit(this.state.data);
+      if (props.editMode) {
+        props.submit(data);
       } else {
-        this.props.submit(this.state.data);
+        props.submit(data);
       }
     }
   };
 
-  validate = (e) => {
+  const validate = (e) => {
     const errors = {};
-    if (!e.userName || e.userName.length <= 5 || !e.userName.match(/^[a-z0-9]/)) {
+    if (
+      !e.userName ||
+      e.userName.length <= 5 ||
+      !e.userName.match(/^[a-z0-9]/)
+    ) {
       errors.userName = true;
     }
     if (
@@ -70,214 +71,209 @@ export default class RegisterForm extends Component {
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
-    if (
-      !this.state.confirmPassword ||
-      this.state.confirmPassword !== e.password
-    ) {
+    if (!confirmPassword || confirmPassword !== e.password) {
       errors.confirmPassword = true;
     }
-    this.setState({ errors });
+    setErrors(errors);
     if (Object.keys(errors).length > 0) {
       return "err";
     }
   };
 
-  render() {
-    const { editMode } = this.props;
-    return (
-      <div
-        className={!editMode ? "center" : null}
-        style={{
-          maxWidth: 680 + "px",
-          width: "100%",
-          height: "auto",
-          backgroundColor: "white",
-          borderRadius: "0 0 10px 10px",
-          marginBottom: 350 + "px",
-        }}
-      >
-        {editMode && (
-          <div className="headerRegister">
-            <h3>แก้ไขข้อมูลส่วนตัว</h3>
-          </div>
-        )}
+  return (
+    <div
+      className={!props.editMode ? "center" : null}
+      style={{
+        maxWidth: 680 + "px",
+        width: "100%",
+        height: "auto",
+        backgroundColor: "white",
+        borderRadius: "0 0 10px 10px",
+        marginBottom: 350 + "px",
+      }}
+    >
+      {props.editMode && (
+        <div className="headerRegister">
+          <h3>แก้ไขข้อมูลส่วนตัว</h3>
+        </div>
+      )}
 
-        <Grid container>
-          <Grid item xs={12} style={{ padding: 40 + "px" }}>
-            <form>
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                spacing={2}
-              >
-                <Grid item xs={12} sm={6}>
-                  {editMode ? (
-                    <TextField
-                      fullWidth
-                      disabled
-                      required
-                      type="text"
-                      inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="userName"
-                      name="userName"
-                      label="Username"
-                      value={this.state.data.userName}
-                      helperText="cant change userName"
-                    />
-                  ) : (
-                    <TextField
-                      fullWidth
-                      required
-                      error={this.state.errors.userName}
-                      type="text"
-                      inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="userName"
-                      name="userName"
-                      label="Username"
-                      helperText="contain 3-20 character"
-                      onChange={this.onChange}
-                      value={this.state.data.userName}
-                    />
-                  )}
-                </Grid>
+      <Grid container>
+        <Grid item xs={12} style={{ padding: 40 + "px" }}>
+          <p className="redb">{props.regisErr}</p>
+          <form>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid item xs={12} sm={6}>
+                {props.editMode ? (
+                  <TextField
+                    fullWidth
+                    disabled
+                    required
+                    type="text"
+                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    id="userName"
+                    name="userName"
+                    label="Username"
+                    value={data.userName}
+                    helperText="cant change userName"
+                  />
+                ) : (
+                  <TextField
+                    fullWidth
+                    required
+                    error={errors.userName}
+                    type="text"
+                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    id="userName"
+                    name="userName"
+                    label="Username"
+                    helperText="contain 3-20 character"
+                    onChange={onChange}
+                    value={data.userName}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  required
+                  error={errors.fullName}
+                  type="text"
+                  inputProps={{ minLength: 2, maxLength: 30 }}
+                  id="fullName"
+                  name="fullName"
+                  label="fullName"
+                  helperText="Enter your name"
+                  onChange={onChange}
+                  value={data.fullName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  required
+                  error={errors.address}
+                  type="textarea"
+                  inputProps={{ minLength: 5, maxLength: 90 }}
+                  id="address"
+                  name="address"
+                  label="Address"
+                  onChange={onChange}
+                  value={data.address}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  type="text"
+                  error={errors.tel}
+                  inputProps={{ minLength: 10, maxLength: 10 }}
+                  id="tel"
+                  name="tel"
+                  label="Telephone"
+                  helperText="contain 10 number"
+                  onChange={onChange}
+                  value={data.tel}
+                />
+              </Grid>
+
+              {!props.editMode && (
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
                     required
-                    error={this.state.errors.fullName}
-                    type="text"
-                    inputProps={{ minLength: 2, maxLength: 30 }}
-                    id="fullName"
-                    name="fullName"
-                    label="fullName"
-                    helperText="Enter your name"
-                    onChange={this.onChange}
-                    value={this.state.data.fullName}
+                    error={errors.password}
+                    type="password"
+                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    id="password"
+                    name="password"
+                    label="Password"
+                    helperText="contain A-Z a-z 0-9"
+                    onChange={onChange}
+                    value={data.password}
                   />
                 </Grid>
+              )}
+              {!props.editMode && (
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    required
+                    error={errors.confirmPassword}
+                    type="password"
+                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    helperText="Confirm your password"
+                    onChange={onConfirmPassword}
+                    value={confirmPassword}
+                  />
+                </Grid>
+              )}
+
+              {props.editMode && (
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    multiline
                     required
-                    error={this.state.errors.address}
-                    type="textarea"
-                    inputProps={{ minLength: 5, maxLength: 90 }}
-                    id="address"
-                    name="address"
-                    label="Address"
-                    onChange={this.onChange}
-                    value={this.state.data.address}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
+                    error={errors.confirmPassword}
                     type="text"
-                    error={this.state.errors.tel}
-                    inputProps={{ minLength: 10, maxLength: 10 }}
-                    id="tel"
-                    name="tel"
-                    label="Telephone"
-                    helperText="contain 10 number"
-                    onChange={this.onChange}
-                    value={this.state.data.tel}
+                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    id="password"
+                    name="password"
+                    label="Password"
+                    helperText="confirm with your password"
+                    onChange={onConfirmPassword}
                   />
                 </Grid>
+              )}
 
-                {!editMode && (
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      required
-                      error={this.state.errors.password}
-                      type="password"
-                      inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="password"
-                      name="password"
-                      label="Password"
-                      helperText="contain A-Z a-z 0-9"
-                      onChange={this.onChange}
-                      value={this.state.data.password}
-                    />
-                  </Grid>
-                )}
-                {!editMode && (
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      required
-                      error={this.state.errors.confirmPassword}
-                      type="password"
-                      inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      label="Confirm Password"
-                      helperText="Confirm your password"
-                      onChange={this.onConfirmPassword}
-                      value={this.state.confirmPassword}
-                    />
-                  </Grid>
-                )}
+              <Grid item xs={12} align="center">
+                <Button
+                  fullWidth
+                  style={{
+                    marginTop: 15 + "px",
+                    alignItems: "center",
+                    backgroundColor: "#1895f5",
+                    color: "white",
+                  }}
+                  onClick={onSubmit}
+                >
+                  Submit
+                </Button>
 
-                {editMode && (
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      required
-                      error={this.state.errors.confirmPassword}
-                      type="text"
-                      inputProps={{ minLength: 3, maxLength: 20 }}
-                      id="password"
-                      name="password"
-                      label="Password"
-                      helperText="confirm with your password"
-                      onChange={this.onConfirmPassword}
-                    />
-                  </Grid>
-                )}
-
-                <Grid item xs={12} align="center">
+                {props.editMode && (
                   <Button
                     fullWidth
                     style={{
                       marginTop: 15 + "px",
                       alignItems: "center",
-                      backgroundColor: "#1895f5",
+                      backgroundColor: "#d83c2d",
                       color: "white",
                     }}
-                    onClick={this.onSubmit}
+                    onClick={() => {
+                      props.onIsEdit();
+                    }}
                   >
-                    Submit
+                    Cancel
                   </Button>
-
-                  {editMode && (
-                    <Button
-                      fullWidth
-                      style={{
-                        marginTop: 15 + "px",
-                        alignItems: "center",
-                        backgroundColor: "#d83c2d",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        this.props.onIsEdit();
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  )}
-                </Grid>
+                )}
               </Grid>
-            </form>
-          </Grid>
+            </Grid>
+          </form>
         </Grid>
-      </div>
-    );
-  }
-}
+      </Grid>
+    </div>
+  );
+};
 
 RegisterForm.propTypes = {
   submit: PropTypes.func.isRequired,
@@ -293,14 +289,4 @@ RegisterForm.propTypes = {
   }).isRequired,
 };
 
-RegisterForm.defaultProps = {
-  editMode: false,
-  userData: {
-    userName: "",
-    password: "",
-    fullName: "",
-    address: "",
-    tel: "",
-    role: "ROLE_USER",
-  },
-};
+export default RegisterForm;

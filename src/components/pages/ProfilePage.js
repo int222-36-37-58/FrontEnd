@@ -268,7 +268,6 @@ const mapDispatchToProps = (dispatch) => {
     getUser: () => dispatch(getUser()),
     logout: () => logout(),
     userLogout: () => dispatch(userLogout()),
-    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

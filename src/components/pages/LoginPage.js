@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
 import { login } from "../../actions/user";
@@ -6,6 +6,8 @@ import { login } from "../../actions/user";
 import LoginForm from "../forms/LoginForm";
 
 const LoginPage = (props, { login, addResDialog }) => {
+  const [err, setErr] = useState("");
+
   const submit = async (data) => {
     const loggedIn = await props.login(data);
     if (loggedIn === 200) {
@@ -16,10 +18,12 @@ const LoginPage = (props, { login, addResDialog }) => {
       props.closeModal();
       props.addResDialog(data);
       props.closeModal();
+    } else {
+      setErr(loggedIn);
     }
   };
 
-  return <LoginForm submit={submit} />;
+  return <LoginForm submit={submit} loginErr={err} />;
 };
 
 const mapDispatchToProps = (dispatch) => {

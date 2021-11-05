@@ -11,6 +11,7 @@ import ResponseDialog from "./components/ui/ResponseDialog";
 import { removeResDialog } from "./actions/uiStyle";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { connect } from "react-redux";
+import "./App.css";
 
 const App = ({ dialog, removeDialog }) => {
   const [current, setCurrent] = useState(0);

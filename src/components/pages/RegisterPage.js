@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import RegisterForm from "../forms/RegisterForm";
 import axios from "axios";
 import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import { login, getUser } from "../../actions/user";
 
-const RegisterPage = (props,{ addResDialog, login, getUser }) => {
+const RegisterPage = (props, { addResDialog, login, getUser }) => {
+  const [regisErr, setRegisErr] = useState("");
+
   const submit = (data) => {
     const json = JSON.stringify(data);
     axios
@@ -20,7 +22,7 @@ const RegisterPage = (props,{ addResDialog, login, getUser }) => {
           password: data.password,
         };
         const loggedIn = await props.login(credential);
-        if(loggedIn === 200){
+        if (loggedIn === 200) {
           const data = {
             status: 200,
             dialogContent: "คุณเข้าสู่ระบบแล้ว",
@@ -28,20 +30,15 @@ const RegisterPage = (props,{ addResDialog, login, getUser }) => {
           props.closeModal();
           props.addResDialog(data);
         }
-       
       })
       .catch((err) => {
-        const data = {
-          status: err.status,
-          dialogContent: err.response.data.message,
-        };
-        props.addResDialog(data);
+        setRegisErr(err.message);
       });
   };
 
   return (
     <>
-      <RegisterForm submit={submit} />
+      <RegisterForm submit={submit} regisErr={regisErr} editMode={false} />
     </>
   );
 };

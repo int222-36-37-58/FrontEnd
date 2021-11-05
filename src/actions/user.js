@@ -39,7 +39,7 @@ export const login = (data) => async (dispatch) => {
       return resp;
     })
     .catch((err) => {
-      return err.status;
+      return err.message;
     });
   return response;
 };
