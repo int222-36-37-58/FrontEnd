@@ -73,7 +73,7 @@ const LoginForm = (props) => {
                 required
                 fullWidth
                 error={errors.password}
-                type="text"
+                type="password"
                 inputProps={{ minLength: 3, maxLength: 20 }}
                 id="password"
                 name="password"

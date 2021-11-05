@@ -1,8 +1,12 @@
 import { Grid, TextField } from "@material-ui/core";
+import axios from "axios";
 
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { addResDialog } from "../../actions/uiStyle";
+import { getUser } from "../../actions/user";
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -48,6 +52,26 @@ const ChangePasswordForm = () => {
   const submit = () => {
     const invalid = validate();
     if (invalid !== "err") {
+      let putData = userInfo;
+      putData.password = newPassword;
+
+      axios
+        .put(`${process.env.REACT_APP_API_URL}/user/edituser`, putData)
+        .then((res) => {
+          const data = {
+            status: res.status,
+            dialogContent: "Update Success",
+          };
+          addResDialog(data);
+          getUser();
+        })
+        .catch((err) => {
+          const data = {
+            status: "Error",
+            dialogContent: err.response.data.message,
+          };
+          addResDialog(data);
+        });
     }
   };
 
@@ -138,4 +162,17 @@ const ChangePasswordForm = () => {
   );
 };
 
-export default ChangePasswordForm;
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user.userInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResDialog: (content) => dispatch(addResDialog(content)),
+    getUser: () => dispatch(getUser()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePasswordForm);

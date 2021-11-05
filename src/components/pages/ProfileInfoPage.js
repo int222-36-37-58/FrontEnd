@@ -6,6 +6,7 @@ import axios from "axios";
 import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
 const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
+  console.log(userInfo)
   const [isEdit, setIsEdit] = useState(false);
 
   const submit = (data) => {

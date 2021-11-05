@@ -225,7 +225,7 @@ const RegisterForm = (props) => {
                     fullWidth
                     required
                     error={errors.confirmPassword}
-                    type="text"
+                    type="password"
                     inputProps={{ minLength: 3, maxLength: 20 }}
                     id="password"
                     name="password"
