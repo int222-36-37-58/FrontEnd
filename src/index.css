@@ -171,6 +171,10 @@ body {
   margin: 5px;
 }
 
+.mt-20 {
+  margin-top: 20px;
+}
+
 .dialogButtonZone {
   display: flex;
   flex-direction: row;

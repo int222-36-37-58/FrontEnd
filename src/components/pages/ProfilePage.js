@@ -15,6 +15,7 @@ import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
 import { logout, userLogout, getUser } from "../../actions/user";
 import MyShopPage from "./MyShopPage";
+import StartSellPage from "./StartSellPage";
 
 const ProfilePage = ({
   userInfo,
@@ -86,29 +87,48 @@ const ProfilePage = ({
                 >
                   <div>คำสั่งซื้อ</div>
                 </Link>
-                <Link
-                  to="/profile/createproduct"
-                  onClick={() => changeCurrentMenu("createproduct")}
-                  className={
-                    uiStyle.currentMenuClicked === "createproduct"
-                      ? "clickChangeBackground p-10 "
-                      : "hoverChangeBackground p-10"
-                  }
-                >
-                  <div>เริ่มขายสินค้า</div>
-                </Link>
+                {userInfo.role === "ROLE_USER" && (
+                  <Link
+                    to="/profile/startseller"
+                    onClick={() => changeCurrentMenu("startseller")}
+                    className={
+                      uiStyle.currentMenuClicked === "startseller"
+                        ? "clickChangeBackground p-10 "
+                        : "hoverChangeBackground p-10"
+                    }
+                  >
+                    <div>เริ่มขายสินค้า</div>
+                  </Link>
+                )}
 
-                <Link
-                  to="/profile/myshop"
-                  onClick={() => changeCurrentMenu("myshop")}
-                  className={
-                    uiStyle.currentMenuClicked === "myshop"
-                      ? "clickChangeBackground p-10 "
-                      : "hoverChangeBackground p-10"
-                  }
-                >
-                  <div>ร้านค้าของฉัน</div>
-                </Link>
+                {userInfo.role === "ROLE_SELLER" ||
+                  (userInfo.role === "ROLE_ADMIN" && (
+                    <>
+                      <Link
+                        to="/profile/createproduct"
+                        onClick={() => changeCurrentMenu("createproduct")}
+                        className={
+                          uiStyle.currentMenuClicked === "createproduct"
+                            ? "clickChangeBackground p-10 "
+                            : "hoverChangeBackground p-10"
+                        }
+                      >
+                        <div>ลงขายสินค้า</div>
+                      </Link>
+
+                      <Link
+                        to="/profile/myshop"
+                        onClick={() => changeCurrentMenu("myshop")}
+                        className={
+                          uiStyle.currentMenuClicked === "myshop"
+                            ? "clickChangeBackground p-10 "
+                            : "hoverChangeBackground p-10"
+                        }
+                      >
+                        <div>ร้านค้าของฉัน</div>
+                      </Link>
+                    </>
+                  ))}
                 {userInfo.role === "ROLE_ADMIN" && (
                   <>
                     <Link
@@ -222,18 +242,31 @@ const ProfilePage = ({
                 {" "}
                 <UserOrderPage />
               </Route>
-              <Route path={"/profile/createproduct"}>
-                {" "}
-                <CreateProductPage />
-              </Route>
-              <Route path={"/profile/myshop"}>
-                {" "}
-                <MyShopPage />
-              </Route>
-              <Route path={"/profile/editproduct"}>
-                {" "}
-                <EditProductPage />
-              </Route>
+
+              {userInfo.role === "ROLE_USER" && (
+                <Route path={"/profile/startseller"}>
+                  {" "}
+                  <StartSellPage />
+                </Route>
+              )}
+
+              {userInfo.role === "ROLE_ADMIN" ||
+                (userInfo.role === "ROLE_SELLER" && (
+                  <>
+                    <Route path={"/profile/createproduct"}>
+                      {" "}
+                      <CreateProductPage />
+                    </Route>
+                    <Route path={"/profile/myshop"}>
+                      {" "}
+                      <MyShopPage />
+                    </Route>
+                    <Route path={"/profile/editproduct"}>
+                      {" "}
+                      <EditProductPage />
+                    </Route>
+                  </>
+                ))}
               {userInfo.role === "ROLE_ADMIN" && (
                 <>
                   <Route path={"/profile/admin/"}>

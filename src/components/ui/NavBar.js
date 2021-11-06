@@ -317,31 +317,64 @@ const NavBar = ({
                 <ListAltIcon className="pr-10" /> คำสั่งซื้อ
               </div>
             </Link>
-            <Link to="/profile/createproduct" className="link">
-              <div
-                onClick={() => {
-                  setAnchorEl(null);
-                  changeCurrentMenu("createproduct");
-                  openSearchModal(false);
-                }}
-                style={{
-                  fontSize: "14px",
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "left",
-                  fontWeight: "600",
-                  width: "100%",
-                }}
-                className={
-                  uiStyle.currentMenuClicked === "createproduct"
-                    ? "currentClickStyle b hoverCursor"
-                    : "hoverCursor currentHoverStyle"
-                }
-              >
-                {" "}
-                <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
-              </div>
-            </Link>
+
+            {userInfo.role === "ROLE_USER" && (
+              <Link to="/profile/startseller" className="link">
+                <div
+                  onClick={() => {
+                    setAnchorEl(null);
+                    changeCurrentMenu("startseller");
+                    openSearchModal(false);
+                  }}
+                  style={{
+                    fontSize: "14px",
+                    padding: "10px",
+                    display: "flex",
+                    justifyContent: "left",
+                    fontWeight: "600",
+                    width: "100%",
+                  }}
+                  className={
+                    uiStyle.currentMenuClicked === "createproduct"
+                      ? "currentClickStyle b hoverCursor"
+                      : "hoverCursor currentHoverStyle"
+                  }
+                >
+                  {" "}
+                  <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
+                </div>
+              </Link>
+            )}
+
+            {userInfo.role === "ROLE_SELLER" ||
+              (userInfo.role === "ROLE_ADMIN" && (
+                <Link to="/profile/createproduct" className="link">
+                  <div
+                    onClick={() => {
+                      setAnchorEl(null);
+                      changeCurrentMenu("createproduct");
+                      openSearchModal(false);
+                    }}
+                    style={{
+                      fontSize: "14px",
+                      padding: "10px",
+                      display: "flex",
+                      justifyContent: "left",
+                      fontWeight: "600",
+                      width: "100%",
+                    }}
+                    className={
+                      uiStyle.currentMenuClicked === "createproduct"
+                        ? "currentClickStyle b hoverCursor"
+                        : "hoverCursor currentHoverStyle"
+                    }
+                  >
+                    {" "}
+                    <ShoppingCartOutlinedIcon className="pr-10" /> ลงขายสินค้า
+                  </div>
+                </Link>
+              ))}
+
             <div
               onClick={() => handleLogout()}
               style={{
