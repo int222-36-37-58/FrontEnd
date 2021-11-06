@@ -61,6 +61,11 @@ const SearchModal = (props) => {
     setPage(0);
   };
 
+  const closeModal = () => {
+    setType("");
+    props.close();
+  };
+
   return (
     <>
       {props.open && (
@@ -97,7 +102,7 @@ const SearchModal = (props) => {
                 <CloseIcon
                   className="hoverCursor "
                   style={{ fontSize: "24px" }}
-                  onClick={props.close}
+                  onClick={closeModal}
                 />
               </div>
               <Hidden mdUp>
@@ -175,7 +180,7 @@ const SearchModal = (props) => {
                         <ProductCard
                           product={product}
                           listStyle={1}
-                          closeSearchModal={props.close}
+                          closeSearchModal={closeModal}
                         ></ProductCard>{" "}
                       </Grid>
                     );
@@ -185,7 +190,7 @@ const SearchModal = (props) => {
                         <ProductCard
                           product={product}
                           listStyle={1}
-                          closeSearchModal={props.close}
+                          closeSearchModal={closeModal}
                         ></ProductCard>
                       </Grid>
                     );
