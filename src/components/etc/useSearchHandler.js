@@ -25,12 +25,12 @@ function useSearchHandler(searchVal, type, page, pageSize) {
     })
       .then((res) => {
         setProducts((prevProd) => {
-          return [...prevProd, ...res.data];
+          return [...new Set([...prevProd, ...res.data])];
         });
         setTimeout(() => {
-          setHasMore(res.data.length > 0);
+          setHasMore(res.data.length > 1);
           setLoading(false);
-        }, 600);
+        }, 700);
       })
       .catch((e) => {
         if (axios.isCancel(e)) {
