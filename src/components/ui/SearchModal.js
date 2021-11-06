@@ -72,7 +72,7 @@ const SearchModal = (props) => {
         <div
           className="colorModal"
           style={{
-            paddingTop: "75px",
+            paddingTop: "70px",
             transition: "0.3s",
           }}
         >
