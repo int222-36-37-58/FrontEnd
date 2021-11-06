@@ -65,6 +65,23 @@ export default class CreateProductForm extends Component {
     this.setState({
       data: { ...this.state.data, user: this.props.user },
     });
+
+    if (this.props.clearForm) {
+      this.setState({
+        data: {
+          imageName: "",
+          name: "",
+          description: "",
+          price: "",
+          type: "",
+          color: [],
+          user: {},
+        },
+        imageFile: null,
+        imagePreview: noImage,
+        errors: {},
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -100,20 +117,6 @@ export default class CreateProductForm extends Component {
       bodyFormData.append("imageFile", this.state.imageFile);
       bodyFormData.append("product", blob);
       this.props.submit(bodyFormData);
-      this.setState({
-        data: {
-          imageName: "",
-          name: "",
-          description: "",
-          price: "",
-          type: "",
-          color: [],
-          user: {},
-        },
-        imageFile: null,
-        imagePreview: noImage,
-        errors: {},
-      });
     }
   };
 
@@ -365,7 +368,7 @@ export default class CreateProductForm extends Component {
                   }}
                   onClick={this.onSubmit}
                 >
-                  Submit
+                  ลงขาย
                 </Button>
               </Grid>
             </Grid>

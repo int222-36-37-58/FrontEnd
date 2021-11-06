@@ -1,13 +1,20 @@
 import CreateProductForm from "../forms/CreateProductForm";
 import { addResDialog } from "../../actions/uiStyle";
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import ConfirmDialog from "../ui/ConfirmDialog";
 
 const CreateProductPage = ({ addResDialog, userInfo }) => {
-  const submit = (data) => {
+  const [productData, setProductData] = useState({});
+  const [confirmBox, setConfirmBox] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
+  const [clearForm, setClearForm] = useState(false);
+  const submit = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/user/products/add`, data, {
+      .post(`${process.env.REACT_APP_API_URL}/user/products/add`, productData, {
         headers: {
           "Content-type": "multipart/form-data",
         },
@@ -19,6 +26,8 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
         };
         addResDialog(data);
       })
+      .then(handleCloseConfirm())
+      .then(setClearForm(true))
       .catch((err) => {
         const data = {
           status: err.response.status,
@@ -28,9 +37,31 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
       });
   };
 
+  const handleCloseConfirm = () => {
+    setConfirmBox({ showConfirm: false, confirmContent: "" });
+  };
+
+  const openConfirmBox = (data) => {
+    setConfirmBox({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่ลงขายสินค้าไหม?`,
+    });
+    setProductData(data);
+  };
+
   return (
     <>
-      <CreateProductForm submit={submit} user={userInfo} />
+      <ConfirmDialog
+        confirmInfo={confirmBox}
+        handleCloseBox={handleCloseConfirm}
+        submit={submit}
+      />
+
+      <CreateProductForm
+        submit={openConfirmBox}
+        user={userInfo}
+        clearForm={clearForm}
+      />
     </>
   );
 };

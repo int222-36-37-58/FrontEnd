@@ -94,7 +94,7 @@ const LoginForm = (props) => {
                 }}
                 onClick={onSubmit}
               >
-                Log in
+                เข้าสู่ระบบ
               </Button>
             </Grid>
           </Grid>

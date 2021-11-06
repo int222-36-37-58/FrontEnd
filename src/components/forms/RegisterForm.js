@@ -247,7 +247,7 @@ const RegisterForm = (props) => {
                   }}
                   onClick={onSubmit}
                 >
-                  Submit
+                  ยืนยัน
                 </Button>
 
                 {props.editMode && (
@@ -263,7 +263,7 @@ const RegisterForm = (props) => {
                       props.onIsEdit();
                     }}
                   >
-                    Cancel
+                    ยกเลิก
                   </Button>
                 )}
               </Grid>

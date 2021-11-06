@@ -242,7 +242,6 @@ const NavBar = ({
                 marginTop: "35px",
               },
             }}
-            style={{ zIndex: "6" }}
           >
             <Link to="/profile/info" className="link">
               <div

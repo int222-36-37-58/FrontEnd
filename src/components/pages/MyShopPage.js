@@ -28,6 +28,7 @@ const MyShopPage = ({ userInfo }) => {
             </Grid>
           );
         })}
+        {myProduct.length < 1 && <div>ไม่มีสินค้าที่คุณวางขาย</div>}
       </Grid>
     </div>
   );
