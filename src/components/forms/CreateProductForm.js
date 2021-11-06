@@ -5,7 +5,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Grid, TextField, Button, Select } from "@material-ui/core";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import noImage from "../../images/noImage.jpg";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -15,112 +15,109 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import axios from "axios";
 
-export default class CreateProductForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: {
+const CreateProductForm = (props) => {
+  const [data, setData] = useState({
+    imageName: "",
+    name: "",
+    description: "",
+    price: "",
+    type: "",
+    color: [],
+    quantity: 0,
+    user: {},
+  });
+  const [types, setTypes] = useState([]);
+  const [color, setColor] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(noImage);
+  const [errors, setErrors] = useState({});
+
+  const onChange = (e) =>
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+
+  const chooseColor = (e) => {
+    let colorList = [...data.color, e.target.value];
+    if (data.color.findIndex((f) => f === e.target.value) !== -1) {
+      colorList = colorList.filter((f) => f !== e.target.value);
+    }
+    setData({ ...data, color: colorList });
+  };
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
+      setTypes(res.data);
+    });
+
+    axios.get(`${process.env.REACT_APP_API_URL}/colors`).then((res) => {
+      setColor(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    setData((d) => {
+      return { ...d, user: props.user };
+    });
+  }, [props.user]);
+
+  useEffect(() => {
+    if (props.clearForm === true) {
+      setData({
         imageName: "",
         name: "",
         description: "",
         price: "",
         type: "",
+        quantity: 0,
         color: [],
-        user: {},
-      },
-      types: [],
-      color: [],
-      imageFile: null,
-      imagePreview: noImage,
-      errors: {},
-    };
-  }
-
-  onChange = (e) =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
-    });
-
-  chooseColor = (e) => {
-    let colorList = [...this.state.data.color, e.target.value];
-    if (this.state.data.color.findIndex((f) => f === e.target.value) !== -1) {
-      colorList = colorList.filter((f) => f !== e.target.value);
-    }
-    this.setState({
-      data: { ...this.state.data, color: colorList },
-    });
-  };
-
-  componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
-      const types = res.data;
-      this.setState({ types: types });
-    });
-
-    axios.get(`${process.env.REACT_APP_API_URL}/colors`).then((res) => {
-      const color = res.data;
-      this.setState({ color: color });
-    });
-
-    this.setState({
-      data: { ...this.state.data, user: this.props.user },
-    });
-
-    if (this.props.clearForm) {
-      this.setState({
-        data: {
-          imageName: "",
-          name: "",
-          description: "",
-          price: "",
-          type: "",
-          color: [],
-          user: {},
-        },
-        imageFile: null,
-        imagePreview: noImage,
-        errors: {},
+        user: props.user,
       });
+      setImageFile(null);
+      setImagePreview(noImage);
+      props.alreadyClear();
     }
-  }
+  }, [props]);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.data !== prevProps.data) {
-      this.setState({ data: this.props.data });
-      this.setState({
-        imagePreview: `${process.env.REACT_APP_API_URL}/getImage/${this.props.data.imageName}`,
-      });
+  useEffect(() => {
+    if (props.productToEdit) {
+      setData(props.productToEdit);
+      setImagePreview(
+        `${process.env.REACT_APP_API_URL}/getImage/${props.productToEdit.imageName}`
+      );
     }
-  }
+  }, [props.productToEdit]);
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    let data = Object.assign({}, this.state.data);
+    let productData = Object.assign({}, data);
 
-    const invalid = this.validate(this.state.data);
+    const invalid = validate(productData);
     if (invalid !== "err") {
       var today = new Date().toISOString();
-      var intColor = this.state.data.color.map((a) => parseInt(a));
-      var colorObj = intColor.map((cl) =>
-        this.state.color.find((c) => c.colorId === cl)
-      );
-      var intType = parseInt(this.state.data.type);
-      var typeObj = this.state.types.find((t) => t.typeId === intType);
+      var intColor = productData.color.map((a) => parseInt(a));
 
-      data.color = colorObj;
-      data.type = typeObj;
-      data.saleDate = today;
+      var colorObj = intColor.map((cl) => color.find((c) => c.colorId === cl));
+
+      var intType = parseInt(productData.type);
+      var typeObj = types.find((t) => t.typeId === intType);
+
+      productData.color = colorObj;
+      productData.type = typeObj;
+      productData.saleDate = today;
+      console.log(productData);
       var bodyFormData = new FormData();
-      var blob = new Blob([JSON.stringify(data)], {
+      var blob = new Blob([JSON.stringify(productData)], {
         type: "application/json",
       });
-      bodyFormData.append("imageFile", this.state.imageFile);
+      bodyFormData.append("imageFile", imageFile);
       bodyFormData.append("product", blob);
-      this.props.submit(bodyFormData);
+      props.submit(bodyFormData);
     }
   };
 
-  validate = (e) => {
+  const validate = (e) => {
     const errors = {};
     if (!e.imageName) {
       errors.imageName = true;
@@ -145,251 +142,243 @@ export default class CreateProductForm extends Component {
       errors.color = true;
     }
 
-    this.setState({ errors });
+    setErrors(errors);
     if (Object.keys(errors).length > 0) {
       return "err";
     }
   };
 
-  onImageChange = (e) => {
+  const onImageChange = (e) => {
     const imgFile = e.target.files[0];
     const imgPreview = URL.createObjectURL(e.target.files[0]);
     const imgName = e.target.files[0].name;
+    // console.log(imgFile);
+    console.log(imgName);
     if (
       imgName.slice(imgName.length - 3) === "jpg" ||
       imgName.slice(imgName.length - 3) === "png" ||
       imgName.slice(imgName.length - 4) === "jpeg"
     ) {
-      this.setState({
-        data: { ...this.state.data, imageName: imgName },
-        imageFile: imgFile,
-        imagePreview: imgPreview,
-        errors: { ...this.state.errors, imageFormat: false },
-      });
+      setData({ ...data, imageName: imgName });
+      setImageFile(imgFile);
+      setImagePreview(imgPreview);
+
+      setErrors({ ...errors, imageFormat: false });
     } else {
-      this.setState({
-        errors: { ...this.state.errors, imageFormat: true },
-        imageFile: null,
-        imagePreview: noImage,
-      });
+      setErrors({ ...errors, imageFormat: true });
+      setImageFile(null);
+      setImagePreview(noImage);
     }
   };
 
-  render() {
-    return (
-      <div>
-        <Container
-          maxWidth="md"
+  return (
+    <div>
+      <Container
+        maxWidth="md"
+        style={{
+          marginTop: 2 + "rem",
+          backgroundColor: "white",
+          borderRadius: 10 + "px",
+          boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
+        }}
+      >
+        <h2
           style={{
-            marginTop: 2 + "rem",
-            backgroundColor: "white",
-            borderRadius: 10 + "px",
-            boxShadow: "0px 0px 30px rgb(0 0 0 / 8%)",
+            marginBottom: 10 + "px",
+            paddingTop: 25 + "px",
+            marginLeft: 20 + "px",
           }}
         >
-          <h2
+          {" "}
+          ข้อมูลสินค้า
+        </h2>
+
+        <Grid
+          container
+          style={{ padding: 25 + "px" }}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+        >
+          <img
+            src={imagePreview}
+            alt="imagePreview"
             style={{
-              marginBottom: 10 + "px",
-              paddingTop: 25 + "px",
-              marginLeft: 20 + "px",
+              width: "auto",
+              height: "auto",
+              maxWidth: 100 + "%",
+              maxHeight: 350 + "px",
+              borderRadius: 5 + "px",
             }}
-          >
-            {" "}
-            ข้อมูลสินค้า
-          </h2>
-          <form>
-            <Grid
-              container
-              style={{ padding: 25 + "px" }}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-            >
-              <img
-                src={this.state.imagePreview}
-                alt="imagePreview"
-                style={{
-                  width: "auto",
-                  height: "auto",
-                  maxWidth: 100 + "%",
-                  maxHeight: 350 + "px",
-                  borderRadius: 5 + "px",
-                }}
+          />
+
+          <Grid item xs={12}>
+            <Button variant="contained" component="label">
+              Upload File
+              <input
+                type="file"
+                id="imageFile"
+                name="imageFile"
+                onChange={onImageChange}
+                accept="image/*"
+                hidden
               />
+            </Button>
+            {errors.imageName && (
+              <div style={{ color: "red" }}>Please insert Image!</div>
+            )}
+            {errors.imageFormat && (
+              <div style={{ color: "red" }}>
+                Please insert .jpg .jpeg .png file
+              </div>
+            )}
+          </Grid>
 
-              <Grid item xs={12}>
-                <Button variant="contained" component="label">
-                  Upload File
-                  <input
-                    type="file"
-                    id="imageFile"
-                    name="imageFile"
-                    onChange={this.onImageChange}
-                    accept="image/*"
-                    hidden
-                  />
-                </Button>
-                {this.state.errors.imageName && (
-                  <div style={{ color: "red" }}>Please insert Image!</div>
-                )}
-                {this.state.errors.imageFormat && (
-                  <div style={{ color: "red" }}>
-                    Please insert .jpg .jpeg .png file
-                  </div>
-                )}
-              </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              error={errors.name}
+              type="text"
+              inputProps={{ minLength: 3, maxLength: 40 }}
+              id="name"
+              name="name"
+              label="Product Name"
+              value={data.name}
+              onChange={onChange}
+              helperText="3 - 40 Character "
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              multiline
+              error={errors.description}
+              type="textarea"
+              inputProps={{ minLength: 5, maxLength: 200 }}
+              id="description"
+              name="description"
+              label="Description"
+              value={data.description}
+              onChange={onChange}
+              helperText="describe your Product"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              error={errors.price}
+              type="number"
+              inputProps={{ minLength: 1, maxLength: 10 }}
+              id="price"
+              name="price"
+              label="Price"
+              value={data.price}
+              onChange={onChange}
+              helperText="enter Product Price"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              error={errors.quantity}
+              type="number"
+              inputProps={{ minLength: 1, maxLength: 10 }}
+              id="quantity"
+              name="quantity"
+              label="Quantity"
+              value={data.quantity}
+              onChange={onChange}
+              helperText="enter Product Quantity"
+            />
+          </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  error={this.state.errors.name}
-                  type="text"
-                  inputProps={{ minLength: 3, maxLength: 40 }}
-                  id="name"
-                  name="name"
-                  label="Product Name"
-                  value={this.state.data.name}
-                  onChange={this.onChange}
-                  helperText="3 - 40 Character "
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  multiline
-                  error={this.state.errors.description}
-                  type="textarea"
-                  inputProps={{ minLength: 5, maxLength: 200 }}
-                  id="description"
-                  name="description"
-                  label="Description"
-                  value={this.state.data.description}
-                  onChange={this.onChange}
-                  helperText="describe your Product"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  error={this.state.errors.price}
-                  type="number"
-                  inputProps={{ minLength: 1, maxLength: 10 }}
-                  id="price"
-                  name="price"
-                  label="Price"
-                  value={this.state.data.price}
-                  onChange={this.onChange}
-                  helperText="enter Product Price"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  error={this.state.errors.quantity}
-                  type="number"
-                  inputProps={{ minLength: 1, maxLength: 10 }}
-                  id="quantity"
-                  name="quantity"
-                  label="Quantity"
-                  value={this.state.data.quantity}
-                  onChange={this.onChange}
-                  helperText="enter Product Quantity"
-                />
-              </Grid>
+          <Grid item xs={12}>
+            <FormControl style={{ minWidth: 100 }}>
+              <InputLabel htmlFor="type">type</InputLabel>
+              <Select
+                required
+                error={errors.type}
+                name="type"
+                value={data.type}
+                onChange={onChange}
+                defaultValue="0"
+              >
+                {types.map((typeRow) => {
+                  return (
+                    <MenuItem value={typeRow.typeId} key={typeRow.typeId}>
+                      {typeRow.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
 
-              <Grid item xs={12}>
-                <FormControl style={{ minWidth: 100 }}>
-                  <InputLabel htmlFor="type">type</InputLabel>
-                  <Select
-                    required
-                    error={this.state.errors.type}
-                    name="type"
-                    value={this.state.data.type}
-                    onChange={this.onChange}
-                    defaultValue="0"
-                  >
-                    {this.state.types.map((typeRow) => {
-                      return (
-                        <MenuItem value={typeRow.typeId} key={typeRow.typeId}>
-                          {typeRow.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </Grid>
+          <Grid item xs={12}>
+            <div className="type">
+              <div>color</div>
+              <FormGroup row className="checkBoxContent">
+                {color.map((cl) => {
+                  return (
+                    <FormControlLabel
+                      key={cl.colorId}
+                      control={
+                        <Checkbox
+                          color="primary"
+                          icon={<CircleUnchecked />}
+                          checkedIcon={<CircleCheckedFilled />}
+                          onChange={chooseColor}
+                          checked={data.color.indexOf(`${cl.colorId}`) !== -1}
+                          value={`${cl.colorId}`}
+                        />
+                      }
+                      label={cl.colorName}
+                    ></FormControlLabel>
+                  );
+                })}
+              </FormGroup>
+              {errors.color && (
+                <div style={{ color: "red" }}>Please select color!</div>
+              )}
+            </div>
+          </Grid>
 
-              <Grid item xs={12}>
-                <div className="type">
-                  <div>colors</div>
-                  <FormGroup row className="checkBoxContent">
-                    {this.state.color.map((color) => {
-                      return (
-                        <FormControlLabel
-                          key={color.colorId}
-                          control={
-                            <Checkbox
-                              color="primary"
-                              icon={<CircleUnchecked />}
-                              checkedIcon={<CircleCheckedFilled />}
-                              onChange={this.chooseColor}
-                              checked={
-                                this.state.data.color.indexOf(
-                                  `${color.colorId}`
-                                ) !== -1
-                              }
-                              value={`${color.colorId}`}
-                            />
-                          }
-                          label={color.colorName}
-                        ></FormControlLabel>
-                      );
-                    })}
-                  </FormGroup>
-                  {this.state.errors.color && (
-                    <div style={{ color: "red" }}>Please select color!</div>
-                  )}
-                </div>
-              </Grid>
-
-              <Grid item xs={12} align="center">
-                <Button
-                  fullWidth
-                  style={{
-                    marginTop: 15 + "px",
-                    alignItems: "center",
-                    backgroundColor: "#1895f5",
-                    color: "white",
-                  }}
-                  onClick={this.onSubmit}
-                >
-                  ลงขาย
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </Container>
-      </div>
-    );
-  }
-}
+          <Grid item xs={12} align="center">
+            <Button
+              fullWidth
+              style={{
+                marginTop: 15 + "px",
+                alignItems: "center",
+                backgroundColor: "#1895f5",
+                color: "white",
+              }}
+              onClick={onSubmit}
+            >
+              ลงขาย
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
+  );
+};
 
 CreateProductForm.propTypes = {
   submit: PropTypes.func.isRequired,
   data: PropTypes.shape({
     productId: PropTypes.number,
-    imageName: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    tel: PropTypes.string.isRequired,
-    color: PropTypes.array.isRequired,
+    imageName: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.string,
+    type: PropTypes.string,
+    tel: PropTypes.string,
+    color: PropTypes.array,
     user: PropTypes.object.isRequired,
   }),
 };
@@ -401,6 +390,7 @@ CreateProductForm.defaultProps = {
   price: "",
   type: "",
   color: [],
+  quantity: 0,
   user: {
     userId: 0,
     userName: "",
@@ -409,3 +399,5 @@ CreateProductForm.defaultProps = {
     fullName: "",
   },
 };
+
+export default CreateProductForm;

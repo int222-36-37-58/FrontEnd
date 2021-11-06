@@ -27,7 +27,7 @@ const EditProductPage = ({ product, clearProduct, addResDialog }) => {
       pro.color = col;
       setPrd(pro);
     } else {
-      history.push("/profile/info");
+      history.push("/profile/myshop");
     }
   }, [history, product]);
 
@@ -82,7 +82,7 @@ const EditProductPage = ({ product, clearProduct, addResDialog }) => {
         handleCloseBox={handleCloseConfirm}
         submit={submitEditProduct}
       />
-      <CreateProductForm data={prd} submit={receiveProduct} />
+      <CreateProductForm productToEdit={prd} submit={receiveProduct} />
     </>
   );
 };

@@ -61,6 +61,9 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
         submit={openConfirmBox}
         user={userInfo}
         clearForm={clearForm}
+        alreadyClear={() => {
+          setClearForm(false);
+        }}
       />
     </>
   );
