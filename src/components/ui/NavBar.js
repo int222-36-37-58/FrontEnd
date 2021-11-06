@@ -21,6 +21,7 @@ import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
 import { logout, userLogout } from "../../actions/user";
+import { useEffect } from "react";
 const NavBar = ({
   isAuth,
   userInfo,
@@ -81,6 +82,10 @@ const NavBar = ({
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };
+
+  useEffect(() => {
+    setAnchorEl(null);
+  }, [isAuth]);
 
   return (
     <>
@@ -237,6 +242,7 @@ const NavBar = ({
                 marginTop: "35px",
               },
             }}
+            style={{ zIndex: "6" }}
           >
             <Link to="/profile/info" className="link">
               <div
