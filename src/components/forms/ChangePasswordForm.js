@@ -13,6 +13,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [responseError, setResponseError] = useState("");
   const handleCurrentPassword = (e) => {
     setCurrentPassword(e.target.value);
   };
@@ -46,7 +47,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
       errs.confirmNewPassword = true;
     }
     setErrors(errs);
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errs).length > 0) {
       return "err";
     }
   };
@@ -65,14 +66,10 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
           };
           addResDialog(data);
           getUser();
+          history.push("/profile/info");
         })
-        .then(history.push("/profile/info"))
         .catch((err) => {
-          const data = {
-            status: "Error",
-            dialogContent: err.response.data.message,
-          };
-          addResDialog(data);
+          setResponseError(err.response.data.message);
         });
     }
   };
@@ -92,7 +89,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
       <div className="headerRegister">
         <h3 style={{ marginBottom: 15 + "px" }}>เปลี่ยนรหัสผ่าน</h3>
       </div>
-
+     <div className="redb pt-20 pl-20"> {responseError}</div>
       <Grid
         container
         style={{ padding: 20 + "px", paddingBottom: 50 + "px" }}
@@ -108,9 +105,9 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             inputProps={{ minLength: 3, maxLength: 20 }}
             id="currentPassword"
             name="currentPassword"
-            label="currentPassword"
-            helperText="your current password"
+            label="รหัสผ่านปัจจุบัน"
             onChange={handleCurrentPassword}
+            style={{ fontFamily: "Prompt, sans-serif" }}
           />
         </Grid>
 
@@ -124,9 +121,9 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             inputProps={{ minLength: 3, maxLength: 20 }}
             id="newPassword"
             name="newPassword"
-            label="new Password"
-            helperText="your new password"
+            label="รหัสผ่านใหม่"
             onChange={handleNewPassword}
+            style={{ fontFamily: "Prompt, sans-serif" }}
           />
         </Grid>
 
@@ -140,8 +137,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             inputProps={{ minLength: 3, maxLength: 20 }}
             id="confirmNewPassword"
             name="confirmNewPassword"
-            label="confirmNewPassword"
-            helperText="Confirm new password"
+            label="ยืนยันรหัสผ่านใหม่"
             onChange={handleConfirmNewPassword}
           />
         </Grid>
@@ -156,7 +152,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
               paddingLeft: 35 + "px",
             }}
           >
-            Confirm Change Password
+            ยืนยันการเปลี่ยนรหัสผ่าน
           </button>
         </Grid>
       </Grid>

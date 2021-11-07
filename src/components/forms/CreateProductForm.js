@@ -106,7 +106,6 @@ const CreateProductForm = (props) => {
       productData.color = colorObj;
       productData.type = typeObj;
       productData.saleDate = today;
-      console.log(productData);
       var bodyFormData = new FormData();
       var blob = new Blob([JSON.stringify(productData)], {
         type: "application/json",
@@ -152,8 +151,6 @@ const CreateProductForm = (props) => {
     const imgFile = e.target.files[0];
     const imgPreview = URL.createObjectURL(e.target.files[0]);
     const imgName = e.target.files[0].name;
-    // console.log(imgFile);
-    console.log(imgName);
     if (
       imgName.slice(imgName.length - 3) === "jpg" ||
       imgName.slice(imgName.length - 3) === "png" ||
@@ -226,11 +223,11 @@ const CreateProductForm = (props) => {
               />
             </Button>
             {errors.imageName && (
-              <div style={{ color: "red" }}>Please insert Image!</div>
+              <div style={{ color: "red" }} className="b">กรุณาใส่ภาพของสินค้า!</div>
             )}
             {errors.imageFormat && (
-              <div style={{ color: "red" }}>
-                Please insert .jpg .jpeg .png file
+              <div style={{ color: "red" }} className="b">
+                กรุณาใส่ไฟล์ประเภท .jpg .jpeg .png 
               </div>
             )}
           </Grid>
@@ -244,10 +241,10 @@ const CreateProductForm = (props) => {
               inputProps={{ minLength: 3, maxLength: 40 }}
               id="name"
               name="name"
-              label="Product Name"
+              label="product name"
               value={data.name}
               onChange={onChange}
-              helperText="3 - 40 Character "
+              helperText="ชื่อสินค้าตั้งแต่ 3 - 40 ตัวอักษร"
             />
           </Grid>
           <Grid item xs={12}>
@@ -260,10 +257,10 @@ const CreateProductForm = (props) => {
               inputProps={{ minLength: 5, maxLength: 200 }}
               id="description"
               name="description"
-              label="Description"
+              label="description"
               value={data.description}
               onChange={onChange}
-              helperText="describe your Product"
+              helperText="รายละเอียดของสินค้า ตั้งแต่ 5 - 200 ตัวอักษร"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -275,10 +272,10 @@ const CreateProductForm = (props) => {
               inputProps={{ minLength: 1, maxLength: 10 }}
               id="price"
               name="price"
-              label="Price"
+              label="price"
               value={data.price}
               onChange={onChange}
-              helperText="enter Product Price"
+              helperText="ราคาของสินค้า"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -290,10 +287,10 @@ const CreateProductForm = (props) => {
               inputProps={{ minLength: 1, maxLength: 10 }}
               id="quantity"
               name="quantity"
-              label="Quantity"
+              label="quantity"
               value={data.quantity}
               onChange={onChange}
-              helperText="enter Product Quantity"
+              helperText="จำนวนของสินค้าที่มี"
             />
           </Grid>
 
@@ -321,7 +318,7 @@ const CreateProductForm = (props) => {
 
           <Grid item xs={12}>
             <div className="type">
-              <div>color</div>
+              <div>colors</div>
               <FormGroup row className="checkBoxContent">
                 {color.map((cl) => {
                   return (
@@ -343,7 +340,7 @@ const CreateProductForm = (props) => {
                 })}
               </FormGroup>
               {errors.color && (
-                <div style={{ color: "red" }}>Please select color!</div>
+                <div style={{ color: "red" }} className="b">กรุณาเลือกสีของสินค้า!</div>
               )}
             </div>
           </Grid>

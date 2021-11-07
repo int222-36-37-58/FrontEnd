@@ -89,7 +89,7 @@ function ProductCard(props, { addToCart, userInfo }) {
           <div className="colorModalContent">
             <img
               src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-              alt="imgProduct"
+              alt={`${props.product.imageName}`}
               className="hoverCursor imageProduct"
               style={{ borderRadius: "20px", marginTop: "20px" }}
             />
@@ -156,7 +156,7 @@ function ProductCard(props, { addToCart, userInfo }) {
           <div className="imageContainer hoverCursor" onClick={seeInfo}>
             <img
               src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-              alt="imgProduct"
+              alt={`${props.product.imageName}`}
               className="hoverCursor imageProduct"
             />
             <div className="hoverImage">
@@ -209,7 +209,7 @@ function ProductCard(props, { addToCart, userInfo }) {
             <div className="imageContainer hoverCursor" onClick={seeInfo}>
               <img
                 src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-                alt="imgProduct"
+                alt={`${props.product.imageName}`}
                 className=" imageProduct"
               />
             </div>

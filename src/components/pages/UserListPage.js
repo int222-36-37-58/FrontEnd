@@ -157,7 +157,7 @@ const UserListPage = ({ addResDialog }) => {
           }}
         >
           <div
-            className="f24 b"
+            className="f24 b text-center pt-20"
             style={{
               marginBottom: 50 + "px",
             }}

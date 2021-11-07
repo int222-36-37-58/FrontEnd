@@ -176,7 +176,7 @@ const ColorTable = ({ addResDialog }) => {
         }}
       >
         {" "}
-        Colors{" "}
+        สีในระบบ{" "}
         <button
           className="AddButton"
           style={{ float: "right", marginRight: 30 + "px" }}
@@ -204,7 +204,7 @@ const ColorTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleColor}
-            label="colorName"
+            label="color name"
             value={colorToAdd}
           />{" "}
           <button
@@ -212,7 +212,7 @@ const ColorTable = ({ addResDialog }) => {
             style={{ float: "right" }}
             onClick={submitColor}
           >
-            Submit Color
+            เพิ่มสี
           </button>
         </div>
       )}
@@ -265,7 +265,7 @@ const ColorTable = ({ addResDialog }) => {
               ID
             </TableCell>
             <TableCell style={{ color: "white" }} align="right">
-              color name
+              ชื่อสี
             </TableCell>
             <TableCell style={{ color: "white" }} align="right"></TableCell>
           </TableRow>

@@ -182,7 +182,7 @@ const TypeTable = ({ addResDialog }) => {
         }}
       >
         {" "}
-        Types{" "}
+        ประเภทของสินค้าในระบบ{" "}
         <button
           className="AddButton"
           style={{ float: "right", marginRight: 30 + "px" }}
@@ -210,7 +210,7 @@ const TypeTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleType}
-            label="TypeName"
+            label="type name"
             value={typeToAdd}
           />{" "}
           <button
@@ -218,7 +218,7 @@ const TypeTable = ({ addResDialog }) => {
             style={{ float: "right" }}
             onClick={submitType}
           >
-            Submit Type
+            เพิ่ม type
           </button>
         </div>
       )}
@@ -242,7 +242,7 @@ const TypeTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleEditType}
-            label="typeName"
+            label="type name"
             value={typeEdit.name}
           />{" "}
           <button
@@ -271,7 +271,7 @@ const TypeTable = ({ addResDialog }) => {
               ID
             </TableCell>
             <TableCell style={{ color: "white" }} align="right">
-              Type name
+              ชื่อประเภท
             </TableCell>
             <TableCell style={{ color: "white" }} align="right"></TableCell>
           </TableRow>

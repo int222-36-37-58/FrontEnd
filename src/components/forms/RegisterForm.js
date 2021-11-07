@@ -121,7 +121,7 @@ const RegisterForm = (props) => {
                     name="userName"
                     label="Username"
                     value={data.userName}
-                    helperText="cant change userName"
+                    helperText="คุณไม่สามารถเปลี่ยน username"
                   />
                 ) : (
                   <TextField
@@ -132,8 +132,8 @@ const RegisterForm = (props) => {
                     inputProps={{ minLength: 3, maxLength: 20 }}
                     id="userName"
                     name="userName"
-                    label="Username"
-                    helperText="contain 3-20 character"
+                    label="username"
+                    helperText="ตัวอักษรตั้งแต่ 3 - 20 ตัวอักษร"
                     onChange={onChange}
                     value={data.userName}
                   />
@@ -148,8 +148,8 @@ const RegisterForm = (props) => {
                   inputProps={{ minLength: 2, maxLength: 30 }}
                   id="fullName"
                   name="fullName"
-                  label="fullName"
-                  helperText="Enter your name"
+                  label="full name"
+                  helperText="กรอกชื่อจริงของคุณ"
                   onChange={onChange}
                   value={data.fullName}
                 />
@@ -164,8 +164,9 @@ const RegisterForm = (props) => {
                   inputProps={{ minLength: 5, maxLength: 90 }}
                   id="address"
                   name="address"
-                  label="Address"
+                  label="address"
                   onChange={onChange}
+                  helperText="ที่อยู่ของคุณ"
                   value={data.address}
                 />
               </Grid>
@@ -177,8 +178,8 @@ const RegisterForm = (props) => {
                   inputProps={{ minLength: 10, maxLength: 10 }}
                   id="tel"
                   name="tel"
-                  label="Telephone"
-                  helperText="contain 10 number"
+                  label="telephone"
+                  helperText="ตัวเลข 10 ตัว"
                   onChange={onChange}
                   value={data.tel}
                 />
@@ -194,8 +195,8 @@ const RegisterForm = (props) => {
                     inputProps={{ minLength: 3, maxLength: 20 }}
                     id="password"
                     name="password"
-                    label="Password"
-                    helperText="contain A-Z a-z 0-9"
+                    label="password"
+                    helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 4 ตัวขึ้นไป"
                     onChange={onChange}
                     value={data.password}
                   />
@@ -211,8 +212,8 @@ const RegisterForm = (props) => {
                     inputProps={{ minLength: 3, maxLength: 20 }}
                     id="confirmPassword"
                     name="confirmPassword"
-                    label="Confirm Password"
-                    helperText="Confirm your password"
+                    label="confirm password"
+                    helperText="ยืนยันรหัสผ่านของคุณอีกครั้ง"
                     onChange={onConfirmPassword}
                     value={confirmPassword}
                   />
@@ -230,7 +231,7 @@ const RegisterForm = (props) => {
                     id="password"
                     name="password"
                     label="Password"
-                    helperText="confirm with your password"
+                    helperText="ยืนยันด้วยรหัสผ่านของคุณ"
                     onChange={onConfirmPassword}
                   />
                 </Grid>
@@ -247,7 +248,7 @@ const RegisterForm = (props) => {
                   }}
                   onClick={onSubmit}
                 >
-                  ยืนยัน
+                  สมัครสมาชิก
                 </Button>
 
                 {props.editMode && (

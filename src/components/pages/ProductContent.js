@@ -163,7 +163,7 @@ const ProductContent = (props, { addResDialog }) => {
           {product && (
             <img
               src={`${imageProduct}`}
-              alt="imgProduct"
+              alt={`${product.imageName}`}
               className="w100"
               style={{
                 marginTop: "10px",
@@ -179,7 +179,7 @@ const ProductContent = (props, { addResDialog }) => {
         <Grid item xs={12} sm={7} md={6}>
           <h3 className="f23">{product.name}</h3>
           <h5 style={{ marginTop: -5 + "px" }}>
-            sale date : {product.saleDate}{" "}
+            วันที่ลงขาย : {product.saleDate}{" "}
           </h5>
 
           <h3 className="f23">฿{product.price} </h3>
@@ -203,7 +203,7 @@ const ProductContent = (props, { addResDialog }) => {
               })}
               {noColor && (
                 <h5 style={{ color: "red", marginTop: 5 + "px" }}>
-                  please select color!
+                  กรุณาเลือกสีที่ต้องการ!
                 </h5>
               )}
             </div>
@@ -312,7 +312,7 @@ const ProductContent = (props, { addResDialog }) => {
                       color: "black",
                     }}
                   >
-                    Type : {product.type.name}{" "}
+                    ประเภท : {product.type.name}{" "}
                   </span>
                   <span
                     className="f16 b"
@@ -320,7 +320,7 @@ const ProductContent = (props, { addResDialog }) => {
                       color: "black",
                     }}
                   >
-                    | Sale by : {product.user.userName}{" "}
+                    | ขายโดย : {product.user.userName}{" "}
                   </span>
                 </span>
               )}

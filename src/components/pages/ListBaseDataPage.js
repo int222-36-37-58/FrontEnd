@@ -16,12 +16,12 @@ const ListBaseDataPage = () => {
         }}
       >
         <div
-          className="f24 b"
+          className="f24 text-center b pt-20"
           style={{
             marginBottom: 50 + "px",
           }}
         >
-          All Colors and Types
+          ข้อมูลพื้นฐานในระบบ
         </div>
         <Grid container>
           <Grid item xs={12} style={{ paddingBottom: 50 + "px" }}>

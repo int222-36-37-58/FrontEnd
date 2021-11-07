@@ -63,9 +63,9 @@ const LoginForm = (props) => {
                 inputProps={{ minLength: 3, maxLength: 20 }}
                 id="username"
                 name="username"
-                label="Username"
+                label="username"
                 onChange={onChange}
-                helperText="3 - 20 Character "
+                helperText="ตัวอักษรตั้งแต่ 3 - 20 ตัวอักษร"
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,9 +77,9 @@ const LoginForm = (props) => {
                 inputProps={{ minLength: 3, maxLength: 20 }}
                 id="password"
                 name="password"
-                label="Password"
+                label="password"
                 onChange={onChange}
-                helperText="contain A-Z a-z 0-9"
+                helperText="ประกอบด้วย ตัวอักษรภาษาอังกฤษ พิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข"
               />
             </Grid>
 

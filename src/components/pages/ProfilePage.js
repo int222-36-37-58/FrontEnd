@@ -44,8 +44,9 @@ const ProfilePage = ({
           style={{ marginTop: 3 + "rem" }}
         >
           <Grid item xs={12} md={4}>
-            <div className="menuProfile">
-              <Hidden smDown>
+            {" "}
+            <Hidden smDown>
+              <div className="menuProfile">
                 <h2
                   style={{
                     borderStyle: "solid",
@@ -208,71 +209,8 @@ const ProfilePage = ({
                 >
                   ออกจากระบบ
                 </div>
-              </Hidden>
-
-              <Hidden mdUp>
-                <label htmlFor="showProfileMenu">
-                  <div
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: " 0 0 1px 0 ",
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      className="f16 b"
-                      style={{ marginLeft: "20px" }}
-                      onClick={() => {
-                        setIsShowMenu(!isShowMenu);
-                      }}
-                    >
-                      {" "}
-                      Menu
-                    </div>
-                    <div>
-                      {!isShowMenu ? (
-                        <div className="hoverChangeToNavBarColor IconInMenu pr-0">
-                          <AddIcon />
-                        </div>
-                      ) : (
-                        <div className="hoverChangeToNavBarColor IconInMenu pr-0">
-                          <RemoveIcon />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </label>
-                <input type="checkbox" id="showProfileMenu" hidden />
-
-                <p className="menuShow">
-                  <Link to="/profile/info" className="hoverChangeBackground">
-                    ข้อมูลของฉัน
-                  </Link>
-                  <Link
-                    to="/profile/changepassword"
-                    className="hoverChangeBackground"
-                  >
-                    เปลี่ยนรหัสผ่าน
-                  </Link>
-                  <Link to="/profile/order" className="hoverChangeBackground">
-                    คำสั่งซื้อ
-                  </Link>
-                  <Link
-                    to="/profile/createproduct"
-                    className="hoverChangeBackground"
-                  >
-                    เริ่มขายสินค้า
-                  </Link>
-                  <Link to="/profile/myshop" className="hoverChangeBackground">
-                    ร้านค้าของฉัน
-                  </Link>
-                  <b onClick={() => handleLogOut()}>ออกจากระบบ</b>
-                </p>
-              </Hidden>
-            </div>
+              </div>{" "}
+            </Hidden>
           </Grid>
 
           <Grid item xs={12} md={8}>
