@@ -62,6 +62,18 @@ body {
   color: #1895f5;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.alignCenter {
+  align-content: center;
+}
+
+.h-30 {
+  height: 30px;
+}
+
 .f13 {
   font-size: 13px;
 }
@@ -98,6 +110,9 @@ body {
 
 .b {
   font-weight: 900;
+}
+.p-6 {
+  padding: 6px;
 }
 
 .p-8 {
@@ -159,6 +174,14 @@ body {
 .pr-50 {
   padding-right: 50px;
 }
+.w40 {
+  width: 40%;
+}
+
+.w50 {
+  width: 50%;
+}
+
 .w100 {
   width: 100%;
 }
@@ -175,8 +198,89 @@ body {
   margin-top: 20px;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 .dialogButtonZone {
   display: flex;
   flex-direction: row;
   justify-content: right;
+}
+
+.InfoButton {
+  color: #7bcb34;
+  border-color: #7bcb34;
+  border-style: solid;
+  border-width: 2px;
+  font-weight: 900;
+  font-family: Prompt, sans-serif;
+  background-color: #d1eafd;
+  border-radius: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+}
+
+.InfoButton:hover {
+  cursor: pointer;
+  color: #d1eafd;
+  border-color: #7bcb34;
+  border-style: solid;
+  transition-duration: 0.5s;
+  background-color: #7bcb34;
+}
+
+.delFromCart {
+  width: auto;
+  color: #d83c2d;
+  background-color: #ffccbb;
+  border-color: #d83c2d;
+  border-style: solid;
+  border-radius: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+  font-family: Prompt, sans-serif;
+  border-width: 2px;
+  font-weight: 600;
+}
+
+.delFromCart:hover {
+  color: #ffccbb;
+  background-color: #d83c2d;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.AddButton {
+  border-width: 2px;
+  color: #3595f6;
+  border-color: #3595f6;
+  border-style: solid;
+  font-family: Prompt, sans-serif;
+  font-weight: 900;
+  background-color: #d1eafd;
+  border-radius: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+}
+
+.AddButton:hover {
+  cursor: pointer;
+  color: #d1eafd;
+  border-color: #3595f6;
+  border-style: solid;
+  transition-duration: 0.5s;
+  background-color: #3595f6;
+}
+
+.roundBorder {
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #ebebeb;
+  border-width: 2px;
+  padding: 20px;
+  margin: 20px;
 }

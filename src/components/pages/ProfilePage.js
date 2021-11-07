@@ -16,6 +16,7 @@ import ListBaseDataPage from "./ListBaseDataPage";
 import { logout, userLogout, getUser } from "../../actions/user";
 import MyShopPage from "./MyShopPage";
 import StartSellPage from "./StartSellPage";
+import MySellHistoryPage from "./MySellHistoryPage";
 
 const ProfilePage = ({
   userInfo,
@@ -101,36 +102,81 @@ const ProfilePage = ({
                   </Link>
                 )}
 
-                {userInfo.role === "ROLE_SELLER" ||
-                  (userInfo.role === "ROLE_ADMIN" && (
-                    <>
-                      <Link
-                        to="/profile/createproduct"
-                        onClick={() => changeCurrentMenu("createproduct")}
-                        className={
-                          uiStyle.currentMenuClicked === "createproduct"
-                            ? "clickChangeBackground p-10 "
-                            : "hoverChangeBackground p-10"
-                        }
-                      >
-                        <div>ลงขายสินค้า</div>
-                      </Link>
+                {userInfo.role === "ROLE_SELLER" && (
+                  <>
+                    <Link
+                      to="/profile/createproduct"
+                      onClick={() => changeCurrentMenu("createproduct")}
+                      className={
+                        uiStyle.currentMenuClicked === "createproduct"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ลงขายสินค้า</div>
+                    </Link>
 
-                      <Link
-                        to="/profile/myshop"
-                        onClick={() => changeCurrentMenu("myshop")}
-                        className={
-                          uiStyle.currentMenuClicked === "myshop"
-                            ? "clickChangeBackground p-10 "
-                            : "hoverChangeBackground p-10"
-                        }
-                      >
-                        <div>ร้านค้าของฉัน</div>
-                      </Link>
-                    </>
-                  ))}
+                    <Link
+                      to="/profile/myshop"
+                      onClick={() => changeCurrentMenu("myshop")}
+                      className={
+                        uiStyle.currentMenuClicked === "myshop"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ร้านค้าของฉัน</div>
+                    </Link>
+
+                    <Link
+                      to="/profile/mysellhistory"
+                      onClick={() => changeCurrentMenu("mysellhistory")}
+                      className={
+                        uiStyle.currentMenuClicked === "mysellhistory"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ประวัติการขาย</div>
+                    </Link>
+                  </>
+                )}
                 {userInfo.role === "ROLE_ADMIN" && (
                   <>
+                    <Link
+                      to="/profile/createproduct"
+                      onClick={() => changeCurrentMenu("createproduct")}
+                      className={
+                        uiStyle.currentMenuClicked === "createproduct"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ลงขายสินค้า</div>
+                    </Link>
+
+                    <Link
+                      to="/profile/myshop"
+                      onClick={() => changeCurrentMenu("myshop")}
+                      className={
+                        uiStyle.currentMenuClicked === "myshop"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ร้านค้าของฉัน</div>
+                    </Link>
+                    <Link
+                      to="/profile/mysellhistory"
+                      onClick={() => changeCurrentMenu("mysellhistory")}
+                      className={
+                        uiStyle.currentMenuClicked === "mysellhistory"
+                          ? "clickChangeBackground p-10 "
+                          : "hoverChangeBackground p-10"
+                      }
+                    >
+                      <div>ประวัติการขาย</div>
+                    </Link>
                     <Link
                       to="/profile/admin/basedata"
                       onClick={() => changeCurrentMenu("basedata")}
@@ -250,25 +296,44 @@ const ProfilePage = ({
                 </Route>
               )}
 
-              {userInfo.role === "ROLE_ADMIN" ||
-                (userInfo.role === "ROLE_SELLER" && (
-                  <>
-                    <Route path={"/profile/createproduct"}>
-                      {" "}
-                      <CreateProductPage />
-                    </Route>
-                    <Route path={"/profile/myshop"}>
-                      {" "}
-                      <MyShopPage />
-                    </Route>
-                    <Route path={"/profile/editproduct"}>
-                      {" "}
-                      <EditProductPage />
-                    </Route>
-                  </>
-                ))}
+              {userInfo.role === "ROLE_SELLER" && (
+                <>
+                  <Route path={"/profile/createproduct"}>
+                    {" "}
+                    <CreateProductPage />
+                  </Route>
+                  <Route path={"/profile/myshop"}>
+                    {" "}
+                    <MyShopPage />
+                  </Route>
+                  <Route path={"/profile/mysellhistory"}>
+                    {" "}
+                    <MySellHistoryPage />
+                  </Route>
+                  <Route path={"/profile/editproduct"}>
+                    {" "}
+                    <EditProductPage />
+                  </Route>
+                </>
+              )}
               {userInfo.role === "ROLE_ADMIN" && (
                 <>
+                  <Route path={"/profile/createproduct"}>
+                    {" "}
+                    <CreateProductPage />
+                  </Route>
+                  <Route path={"/profile/myshop"}>
+                    {" "}
+                    <MyShopPage />
+                  </Route>
+                  <Route path={"/profile/mysellhistory"}>
+                    {" "}
+                    <MySellHistoryPage />
+                  </Route>
+                  <Route path={"/profile/editproduct"}>
+                    {" "}
+                    <EditProductPage />
+                  </Route>
                   <Route path={"/profile/admin/"}>
                     <Route path={"/profile/admin/basedata"}>
                       <ListBaseDataPage />

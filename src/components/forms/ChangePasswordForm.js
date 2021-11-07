@@ -3,10 +3,12 @@ import axios from "axios";
 
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
 
 const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
+  const history = useHistory();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -52,11 +54,10 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
   const submit = () => {
     const invalid = validate();
     if (invalid !== "err") {
-      let putData = userInfo;
-      putData.password = newPassword;
-
       axios
-        .put(`${process.env.REACT_APP_API_URL}/user/edituser`, putData)
+        .put(
+          `${process.env.REACT_APP_API_URL}/user/changepassword?oldPassword=${currentPassword}&newPassword=${newPassword}`
+        )
         .then((res) => {
           const data = {
             status: res.status,
@@ -65,6 +66,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
           addResDialog(data);
           getUser();
         })
+        .then(history.push("/profile/info"))
         .catch((err) => {
           const data = {
             status: "Error",

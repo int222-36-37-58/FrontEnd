@@ -85,7 +85,7 @@ function ProductCard(props, { addToCart, userInfo }) {
       style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
     >
       {clickAdd && (
-        <div className="colorModal">
+        <div className="modal">
           <div className="colorModalContent">
             <img
               src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}

@@ -35,6 +35,17 @@
   display: flex;
   flex-direction: column;
 }
+.iconHoverRed {
+  padding: 3px;
+}
+
+.iconHoverRed:hover {
+  border-color: tomato;
+  background-color: tomato;
+  color: white;
+
+  border-radius: 50%;
+}
 
 .topNav .searchNav {
   width: 95%;
@@ -204,25 +215,6 @@
   margin-bottom: -15px;
 }
 
-.delFromCart {
-  width: auto;
-  color: #d83c2d;
-  background-color: #ffccbb;
-  border-color: #d83c2d;
-  border-style: solid;
-  border-radius: 5px;
-  font-family: Prompt, sans-serif;
-  border-width: 2px;
-  font-weight: 600;
-}
-
-.delFromCart:hover {
-  color: #ffccbb;
-  background-color: #d83c2d;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
 .loginBack {
   background-color: black;
   color: white;
@@ -302,28 +294,6 @@
   font-size: 60px;
 }
 
-.AddButton {
-  color: #3595f6;
-  border-color: #3595f6;
-  border-style: solid;
-  font-family: Prompt, sans-serif;
-  font-weight: 900;
-  background-color: #d1eafd;
-  border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-}
-
-.AddButton:hover {
-  cursor: pointer;
-  color: #d1eafd;
-  border-color: #3595f6;
-  border-style: solid;
-  transition-duration: 0.5s;
-  background-color: #3595f6;
-}
-
 .disabledButton {
   color: #333435;
   border-color: #333435;
@@ -338,7 +308,7 @@
   opacity: 50%;
 }
 
-.colorModal {
+.modal {
   display: hidden;
   z-index: 1;
   position: fixed;
@@ -351,8 +321,7 @@
 }
 
 .colorModalContent {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   display: block;
   top: 140px;
   background-color: #333435;
@@ -365,29 +334,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.InfoButton {
-  color: #7bcb34;
-  border-color: #7bcb34;
-  border-style: solid;
-
-  font-weight: 900;
-  font-family: Prompt, sans-serif;
-  background-color: #d1eafd;
-  border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-}
-
-.InfoButton:hover {
-  cursor: pointer;
-  color: #d1eafd;
-  border-color: #7bcb34;
-  border-style: solid;
-  transition-duration: 0.5s;
-  background-color: #7bcb34;
 }
 
 .filterBox {
@@ -954,11 +900,11 @@ td {
   max-width: 425px;
   width: auto;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 8%);
-  animation: fadeinout 6s linear forwards;
-  -webkit-animation: fadeinout 6s linear forwards;
-  -moz-animation: fadeinout 6s linear forwards;
-  -o-animation: fadeinout 6s linear forwards;
-  -ms-animation: fadeinout 6s linear forwards;
+  animation: fadeinout 8s linear forwards;
+  -webkit-animation: fadeinout 8s linear forwards;
+  -moz-animation: fadeinout 8s linear forwards;
+  -o-animation: fadeinout 8s linear forwards;
+  -ms-animation: fadeinout 8s linear forwards;
 }
 
 .rightResDialog {

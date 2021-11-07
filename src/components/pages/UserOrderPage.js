@@ -12,19 +12,16 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [currentViewOrder, setCurrentViewOrder] = useState({});
   const getMyOrderHistory = useCallback(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/user/getuserorder/${userInfo.userId}`
-      )
+      .get(`${process.env.REACT_APP_API_URL}/user/getuserorder`)
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
         const data = {
           status: err.response.status,
           dialogContent: err.message,
         };
-        console.log(err.response.status);
         addResDialog(data);
       });
-  }, [addResDialog, userInfo.userId]);
+  }, [addResDialog]);
 
   useEffect(() => {
     getMyOrderHistory();

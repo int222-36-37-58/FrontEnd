@@ -182,7 +182,7 @@ const ColorTable = ({ addResDialog }) => {
           style={{ float: "right", marginRight: 30 + "px" }}
           onClick={() => setAddColor(!addColor)}
         >
-          ADD COLOR! +
+          เพิ่มสีใหม่ +
         </button>{" "}
       </div>
       {addColor && (
@@ -246,14 +246,14 @@ const ColorTable = ({ addResDialog }) => {
               setIsEdit(false);
             }}
           >
-            Cancel
+            ยกเลิก
           </button>
           <button
             className="InfoButton"
             style={{ float: "right" }}
             onClick={submitEdit}
           >
-            Update Color
+            ยืนยัน
           </button>
         </div>
       )}
@@ -287,14 +287,14 @@ const ColorTable = ({ addResDialog }) => {
                         className="InfoButton"
                         onClick={() => editColor(col)}
                       >
-                        EDIT
+                        แก้ไข
                       </button>
                       <button
                         style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
                         onClick={() => deletingColor(col)}
                       >
-                        DELETE
+                        ลบ
                       </button>
                     </TableCell>
                   </TableRow>

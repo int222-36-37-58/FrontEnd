@@ -1,11 +1,4 @@
-import {
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import ConfirmDialog from "../ui/ConfirmDialog";
 
@@ -149,21 +142,6 @@ function AdminEditUserForm(props) {
             name="tel"
             label="tel"
           />
-        </Grid>
-        <Grid item xs={12} sm={6} className="p-10">
-          <FormControl>
-            <InputLabel id="roleUser">Role</InputLabel>
-            <Select
-              labelId="role"
-              defaultValue="ROLE_USER"
-              value={userData.role}
-              onChange={onChange}
-              name="role"
-            >
-              <MenuItem value="ROLE_USER">USER</MenuItem>
-              <MenuItem value="ROLE_ADMIN">ADMIN</MenuItem>
-            </Select>
-          </FormControl>
         </Grid>
         <Grid
           item

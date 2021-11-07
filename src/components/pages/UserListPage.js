@@ -15,6 +15,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
 import AdminEditUserForm from "../forms/AdminEditUserForm";
+import HandlePermission from "../forms/HandlePermission";
 import RegisterForm from "../forms/RegisterForm";
 
 const UserListPage = ({ addResDialog }) => {
@@ -22,6 +23,7 @@ const UserListPage = ({ addResDialog }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isEdit, setIsEdit] = useState(false);
+  const [isHandleRole, setIsHandleRole] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [userEdit, setUserEdit] = useState({});
 
@@ -73,14 +75,16 @@ const UserListPage = ({ addResDialog }) => {
   };
 
   const editUser = (user) => {
-    setUserEdit({});
     setIsEdit(true);
     setUserEdit(user);
   };
 
-  const updateUser = (data) => {
-    console.log(data);
+  const openHandleRole = (user) => {
+    setIsHandleRole(true);
+    setUserEdit(user);
+  };
 
+  const updateUser = (data) => {
     const json = JSON.stringify(data);
 
     axios
@@ -140,6 +144,7 @@ const UserListPage = ({ addResDialog }) => {
       });
   };
 
+
   return (
     <>
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
@@ -157,7 +162,7 @@ const UserListPage = ({ addResDialog }) => {
               marginBottom: 50 + "px",
             }}
           >
-            All Users
+            ผู้ใช้งานทั้งหมดในระบบ
           </div>
           <Grid container>
             <Grid item xs={11} style={{ margin: "auto" }}>
@@ -168,6 +173,7 @@ const UserListPage = ({ addResDialog }) => {
                     onIsEdit={() => {
                       setIsEdit(false);
                     }}
+                    onDelete={() => delUser(user.userId)}
                     submit={updateUser}
                   />
                   <button
@@ -178,12 +184,12 @@ const UserListPage = ({ addResDialog }) => {
                       paddingRight: "10px",
                     }}
                   >
-                    New admin
+                    เพิ่ม admin
                   </button>
                 </>
               ) : (
                 [
-                  isAdd ? (
+                  isAdd || isHandleRole ? (
                     <button
                       className="delFromCart p-10"
                       style={{
@@ -191,26 +197,29 @@ const UserListPage = ({ addResDialog }) => {
                       }}
                       onClick={() => {
                         setIsAdd(false);
+                        setIsHandleRole(false);
                       }}
                     >
-                      Cancel
+                      ยกเลิก
                     </button>
                   ) : (
                     <button
                       className="InfoButton p-10"
                       style={{
-                        marginLeft: "90%",
+                        marginLeft: "85%",
                       }}
                       onClick={() => {
                         setIsAdd(!isAdd);
                       }}
                     >
-                      New admin
+                      เพิ่ม admin
                     </button>
                   ),
                 ]
               )}
-
+              {isHandleRole && (
+                <HandlePermission user={userEdit} close={() => {setIsHandleRole(false)}} refreshUser={getUser}/>
+              )}
               {isAdd && <RegisterForm submit={addUser} />}
 
               <Table>
@@ -247,11 +256,13 @@ const UserListPage = ({ addResDialog }) => {
                             <TableCell align="right">{user.userName}</TableCell>
                             <Hidden smDown>
                               {" "}
-                              <TableCell align="right">{user.role}</TableCell>
+                              <TableCell align="right">
+                                {user.role.replace("ROLE_", "").toLowerCase()}
+                              </TableCell>
                             </Hidden>
                             {user.role !== "ROLE_ADMIN" && (
                               <TableCell align="right">
-                                {isEdit || isAdd ? (
+                                {isEdit || isAdd || isHandleRole ? (
                                   <button
                                     className="disabledButton hoverCursor"
                                     onClick={() => {
@@ -260,14 +271,14 @@ const UserListPage = ({ addResDialog }) => {
                                       );
                                     }}
                                   >
-                                    Edit
+                                    แก้ไข
                                   </button>
                                 ) : (
                                   <button
                                     className="AddButton"
                                     onClick={() => editUser(user)}
                                   >
-                                    Edit
+                                    แก้ไข
                                   </button>
                                 )}
 
@@ -277,9 +288,9 @@ const UserListPage = ({ addResDialog }) => {
                                     marginLeft: 5 + "px",
                                   }}
                                   className="delFromCart"
-                                  onClick={() => delUser(user.userId)}
+                                  onClick={() => openHandleRole(user)}
                                 >
-                                  DELETE
+                                  จัดการบัญชี
                                 </button>
                               </TableCell>
                             )}

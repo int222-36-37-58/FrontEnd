@@ -188,7 +188,7 @@ const TypeTable = ({ addResDialog }) => {
           style={{ float: "right", marginRight: 30 + "px" }}
           onClick={() => setAddType(!addType)}
         >
-          ADD TYPE! +
+          เพิ่ม Type +
         </button>
       </div>
       {addType && (
@@ -252,14 +252,14 @@ const TypeTable = ({ addResDialog }) => {
               setIsEdit(false);
             }}
           >
-            Cancel
+            ยกเลิก
           </button>
           <button
             className="InfoButton"
             style={{ float: "right" }}
             onClick={submitEdit}
           >
-            Update Type
+            ยืนยัน
           </button>
         </div>
       )}
@@ -293,14 +293,14 @@ const TypeTable = ({ addResDialog }) => {
                         className="InfoButton"
                         onClick={() => editType(type)}
                       >
-                        EDIT
+                        แก้ไข
                       </button>
                       <button
                         style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
                         className="delFromCart"
                         onClick={() => deletingType(type)}
                       >
-                        DELETE
+                        ลบ
                       </button>
                     </TableCell>
                   </TableRow>

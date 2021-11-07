@@ -89,7 +89,7 @@ const RegisterForm = (props) => {
         height: "auto",
         backgroundColor: "white",
         borderRadius: "0 0 10px 10px",
-        marginBottom: 350 + "px",
+        marginBottom: 30 + "px",
       }}
     >
       {props.editMode && (

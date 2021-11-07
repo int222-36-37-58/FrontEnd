@@ -70,7 +70,7 @@ const SearchModal = (props) => {
     <>
       {props.open && (
         <div
-          className="colorModal"
+          className="modal"
           style={{
             paddingTop: "70px",
             transition: "0.3s",
