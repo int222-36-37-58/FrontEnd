@@ -7,7 +7,6 @@ const MySellHistoryPage = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/seller/order`).then((res) => {
       setMySell(res.data);
     });
-    console.log(mySell);
   }, []);
 
   return (

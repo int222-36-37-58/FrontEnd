@@ -164,7 +164,9 @@ function ProductCard(props, { addToCart, userInfo }) {
             </div>
           </div>
           <div className="hoverCursor">
-            <h5 className="titleWrap">{props.product.name}</h5>
+            <h5 className="titleWrap" onClick={seeInfo}>
+              {props.product.name}
+            </h5>
 
             {props.product.quantity < 1 ? (
               <button className="disabledButton " style={{ width: 90 + "%" }}>
@@ -213,7 +215,7 @@ function ProductCard(props, { addToCart, userInfo }) {
             </div>
           </Grid>
           <Grid item xs={12} sm={5} lg={4}>
-            <h3>{props.product.name}</h3>{" "}
+            <h3 onClick={seeInfo}>{props.product.name}</h3>{" "}
           </Grid>
           <Grid item xs={12} sm={5} lg={3} style={{ textAlign: "center" }}>
             {" "}
