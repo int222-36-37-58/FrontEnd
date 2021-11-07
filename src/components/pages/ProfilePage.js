@@ -1,8 +1,6 @@
 import { Grid, Container, Hidden } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
 import ProfileInfoPage from "./ProfileInfoPage";
 import UserOrderPage from "./UserOrderPage";
 import { Route, Switch } from "react-router";
@@ -26,8 +24,6 @@ const ProfilePage = ({
   userLogout,
   addResDialog,
 }) => {
-  const [isShowMenu, setIsShowMenu] = useState(false);
-
   const handleLogOut = () => {
     logout();
     userLogout();
