@@ -32,7 +32,11 @@ const RegisterPage = (props, { addResDialog, login, getUser }) => {
         }
       })
       .catch((err) => {
-        setRegisErr(err.message);
+        if (err.response.data.message) {
+          setRegisErr(err.response.data.message);
+        } else {
+          setRegisErr(err.message);
+        }
       });
   };
 

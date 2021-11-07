@@ -29,17 +29,21 @@ export const login = (data) => async (dispatch) => {
       SetDefaultHeader(`${res.data.token}`);
       localStorage.setItem("token", `${res.data.token}`);
     })
-    .then(async() => {
-     const resp = await axios
+    .then(async () => {
+      const resp = await axios
         .get(`${process.env.REACT_APP_API_URL}/user/getbyname`)
         .then((res) => {
           dispatch(getUserInfo(res.data));
-          return res.status
+          return res.status;
         });
       return resp;
     })
     .catch((err) => {
-      return err.message;
+      if (err.response.data.message) {
+        return err.response.data.message;
+      } else {
+        return err.message;
+      }
     });
   return response;
 };
