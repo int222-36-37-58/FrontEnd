@@ -144,7 +144,6 @@ const UserListPage = ({ addResDialog }) => {
       });
   };
 
-
   return (
     <>
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
@@ -218,7 +217,13 @@ const UserListPage = ({ addResDialog }) => {
                 ]
               )}
               {isHandleRole && (
-                <HandlePermission user={userEdit} close={() => {setIsHandleRole(false)}} refreshUser={getUser}/>
+                <HandlePermission
+                  user={userEdit}
+                  close={() => {
+                    setIsHandleRole(false);
+                  }}
+                  refreshUser={getUser}
+                />
               )}
               {isAdd && <RegisterForm submit={addUser} />}
 
@@ -260,7 +265,7 @@ const UserListPage = ({ addResDialog }) => {
                                 {user.role.replace("ROLE_", "").toLowerCase()}
                               </TableCell>
                             </Hidden>
-                            {user.role !== "ROLE_ADMIN" && (
+                            {user.role !== "ROLE_ADMIN" ? (
                               <TableCell align="right">
                                 {isEdit || isAdd || isHandleRole ? (
                                   <button
@@ -293,6 +298,8 @@ const UserListPage = ({ addResDialog }) => {
                                   จัดการบัญชี
                                 </button>
                               </TableCell>
+                            ) : (
+                              <TableCell />
                             )}
                           </TableRow>
                         );

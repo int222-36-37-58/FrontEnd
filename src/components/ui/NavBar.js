@@ -104,6 +104,7 @@ const NavBar = ({
       <ProfileDrawer
         open={isShowProfileDrawer}
         isAuth={isAuth}
+        role={userInfo.role}
         showLoginForm={handleShowGuestModal(true)}
         close={() => handleProfileDrawer(false)}
         handleLogout={() => handleLogout()}

@@ -248,7 +248,7 @@ const RegisterForm = (props) => {
                   }}
                   onClick={onSubmit}
                 >
-                  สมัครสมาชิก
+                  ยืนยันข้อมูล
                 </Button>
 
                 {props.editMode && (
