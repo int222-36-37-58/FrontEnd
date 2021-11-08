@@ -55,6 +55,7 @@ const NavBar = ({
       openSearchModal(true);
       body.style.overflow = "hidden";
     } else {
+      openSearchModal(false);
       body.style.overflow = "auto";
     }
   };
@@ -68,8 +69,10 @@ const NavBar = ({
   };
 
   const handleSearchModal = (open) => (event) => {
+    const body = document.querySelector("body");
     openSearchModal(open);
     if (open === false) {
+      body.style.overflow = "auto";
       setSearchVal("");
     }
   };

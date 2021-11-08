@@ -43,20 +43,19 @@ const SearchModal = (props) => {
   );
 
   const onSearch = (e) => {
-    const body = document.querySelector("body");
     setSearchVal(e.target.value);
     setPage(0);
-    if (e.target.value.length >= 2) {
-      body.style.overflow = "hidden";
-    } else {
-      body.style.overflow = "auto";
-    }
   };
 
   useEffect(() => {
     setSearchVal(props.query);
     setPage(0);
-
+    const body = document.querySelector("body");
+    if (props.open) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
     axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
       setTypes(res.data);
     });
