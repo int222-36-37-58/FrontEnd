@@ -112,7 +112,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         );
       } else {
         return (
-          <Grid item xs={12} key={`productCardNo${product.productId}`}>
+          <Grid item xs={12} key={`productCardNo${product.productId}`} >
             <ProductCard product={product} listStyle={listStyle} />
           </Grid>
         );
@@ -174,7 +174,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
 
                 {loading && (
                   <Grid item xs={12}>
-                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                    <div className="text-center pt-20">
                       <CircularProgress
                         style={{ color: "#1895f5" }}
                         disableShrink

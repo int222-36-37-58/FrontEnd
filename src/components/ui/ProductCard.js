@@ -65,9 +65,9 @@ function ProductCard(props, { addToCart, userInfo }) {
     }
   };
 
-  const productColor = props.product.color.map((color) => {
+  const productColor = props.product.color.map((color, i) => {
     return (
-      <span key={`colorInCard${color.colorId}`}>
+      <React.Fragment key={`colorInCard${color.colorId}`}>
         <input
           type="radio"
           id={color.colorName}
@@ -76,7 +76,7 @@ function ProductCard(props, { addToCart, userInfo }) {
           onClick={chooseColor}
         />
         <label htmlFor={color.colorName}>{color.colorName}</label>
-      </span>
+      </React.Fragment>
     );
   });
 
@@ -87,62 +87,78 @@ function ProductCard(props, { addToCart, userInfo }) {
       {clickAdd && (
         <div className="modal">
           <div className="colorModalContent">
-            <img
-              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-              alt={`${props.product.imageName}`}
-              className="hoverCursor imageProduct"
-              style={{ borderRadius: "20px", marginTop: "20px" }}
-            />
-            <div
-              style={{ marginTop: 5 + "px", marginLeft: 10 + "px" }}
-              className="radioGroup"
-            >
-              <span style={{ fontWeight: 900 }}> Color : </span>
-              {productColor}
-            </div>
-            <div
-              className="plusMinus"
-              style={{ color: "white", width: 90 + "%" }}
-            >
-              <h4>quantity</h4>
-              <div className="plusMinusQuantity">
-                <div
-                  className="minusButton"
-                  style={{ paddingRight: 5 + "px" }}
-                  onClick={minusQuantity}
-                >
-                  -
+            <Grid container justifyItems="center" alignItems="center" className="pt-20 pl-20">
+              <Grid item xs={12} sm={12} md={6} className="text-center">
+                <img
+                  src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+                  alt={`${props.product.imageName}`}
+                  style={{
+                    borderRadius: "10px 10px 10px 10px",
+                    width: "290px",
+                    maxHeight: "375px",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <div className="productNameInModal  ">{props.product.name}</div>
+                <div className="f16 ">{props.product.saleDate}</div>
+                
+
+                <div className="f16 ">
+                  Sale by {props.product.user.userName}
+                </div>
+
+                <div className="radioGroup w100 text-left pt-20 pb-20">
+                  <div className="b"> Select color </div>
+                  {productColor}
                 </div>
                 <div
-                  className="currentQuantity"
-                  style={{ paddingRight: 5 + "px" }}
+                  className="plusMinus"
+                  style={{ color: "#333435" }}
                 >
-                  {quantity}
+                  <h4>quantity</h4>
+                  <div className="plusMinusQuantity">
+                    <div
+                      className="minusButton"
+                      style={{ paddingRight: 5 + "px" }}
+                      onClick={minusQuantity}
+                    >
+                      -
+                    </div>
+                    <div
+                      className="currentQuantity"
+                      style={{ paddingRight: 5 + "px" }}
+                    >
+                      {quantity}
+                    </div>
+                    <div className="plusButton" onClick={plusQuantity}>
+                      +
+                    </div>
+                  </div>
+                  {noColor && (
+                    <h5 style={{ color: "#D83C2D", marginTop: 5 + "px" }}>
+                      please select color!
+                    </h5>
+                  )}
                 </div>
-                <div className="plusButton" onClick={plusQuantity}>
-                  +
-                </div>
-              </div>
-              {noColor && (
-                <h5 style={{ color: "#D83C2D", marginTop: 5 + "px" }}>
-                  please select color!
-                </h5>
-              )}
-            </div>
-            <button
-              className="AddButton"
-              style={{ width: 90 + "%", marginTop: -10 + "px" }}
-              onClick={AddToCart}
-            >
-              Add - ฿{props.product.price * quantity}
-            </button>
-            <button
-              className="delFromCart"
-              style={{ width: 90 + "%", padding: 5 + "px" }}
-              onClick={showColor}
-            >
-              Cancel
-            </button>
+              </Grid>
+              <Grid item xs={12} className="text-center">
+                <button
+                  className="AddButton"
+                  style={{ width: 90 + "%", marginTop: -10 + "px" }}
+                  onClick={AddToCart}
+                >
+                  Add - ฿{props.product.price * quantity}
+                </button>
+                <button
+                  className="delFromCart"
+                  style={{ width: 90 + "%", padding: 5 + "px" }}
+                  onClick={showColor}
+                >
+                  Cancel
+                </button>
+              </Grid>
+            </Grid>
           </div>
         </div>
       )}

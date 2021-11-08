@@ -23,7 +23,7 @@ const MyShopPage = ({ userInfo }) => {
       <Grid container>
         {myProduct.map((mp) => {
           return (
-            <Grid item xs={12} sm={6} md={5} lg={3} key={mp.productId}>
+            <Grid item xs={12} sm={6} md={5} lg={3} key={`myProductNo${mp.productId}`}>
               <ProductCard product={mp} listStyle={1}></ProductCard>
             </Grid>
           );
