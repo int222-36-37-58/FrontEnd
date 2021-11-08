@@ -47,12 +47,15 @@ const NavBar = ({
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
+    const body = document.querySelector("body");
     if (uiStyle.searchModalShow) {
       return;
     }
     if (searchVal.length > 0) {
       openSearchModal(true);
+      body.style.overflow = "hidden";
     } else {
+      body.style.overflow = "auto";
     }
   };
 
