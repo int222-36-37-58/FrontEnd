@@ -169,21 +169,22 @@ const ColorTable = ({ addResDialog }) => {
         submit={delColor}
       />
 
-      <div
-        className="f20 b"
-        style={{
-          paddingLeft: 35 + "px",
-        }}
-      >
+      <div className="f20 b pl-35">
         {" "}
         สีในระบบ{" "}
-        <button
-          className="AddButton"
-          style={{ float: "right", marginRight: 30 + "px" }}
-          onClick={() => setAddColor(!addColor)}
-        >
-          เพิ่มสีใหม่ +
-        </button>{" "}
+        {!isEdit ? (
+          <button
+            className="AddButton mr-30 p-5-10"
+            style={{ float: "right" }}
+            onClick={() => setAddColor(!addColor)}
+          >
+            เพิ่มสีใหม่ +
+          </button>
+        ) : (
+          <button className="disabledButton mr-30 p-5-10" style={{ float: "right" }}>
+            เพิ่มสีใหม่ +
+          </button>
+        )}{" "}
       </div>
       {addColor && (
         <div
@@ -240,8 +241,8 @@ const ColorTable = ({ addResDialog }) => {
             value={colorEdit.colorName}
           />{" "}
           <button
-            className="delFromCart"
-            style={{ float: "right", padding: 5 + "px", marginLeft: 5 + "px" }}
+            className="delFromCart p-5-10 ml-5"
+            style={{ float: "right" }}
             onClick={() => {
               setIsEdit(false);
             }}
@@ -249,7 +250,7 @@ const ColorTable = ({ addResDialog }) => {
             ยกเลิก
           </button>
           <button
-            className="InfoButton"
+            className="InfoButton p-5-10"
             style={{ float: "right" }}
             onClick={submitEdit}
           >
@@ -284,14 +285,13 @@ const ColorTable = ({ addResDialog }) => {
                     <TableCell align="right">{col.colorName}</TableCell>
                     <TableCell align="right">
                       <button
-                        className="InfoButton"
+                        className="InfoButton p-5-10"
                         onClick={() => editColor(col)}
                       >
                         แก้ไข
                       </button>
                       <button
-                        style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
-                        className="delFromCart"
+                        className="delFromCart p-5-10 ml-5"
                         onClick={() => deletingColor(col)}
                       >
                         ลบ

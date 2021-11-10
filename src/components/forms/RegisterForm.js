@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 
 const RegisterForm = (props) => {
   const [data, setData] = useState({
@@ -237,6 +243,25 @@ const RegisterForm = (props) => {
                 </Grid>
               )}
 
+              {props.adminMode && (
+                <Grid item xs={12}>
+                  <FormControl>
+                    <InputLabel id="select-label-role">Role</InputLabel>
+                    <Select
+                      labelId="select-label-role"
+                      name="role"
+                      value={data.role}
+                      label="role"
+                      onChange={onChange}
+                    >
+                      <MenuItem value={"ROLE_USER"}>user</MenuItem>
+                      <MenuItem value={"ROLE_SELLER"}>seller</MenuItem>
+                      <MenuItem value={"ROLE_ADMIN"}>admin</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              )}
+
               <Grid item xs={12} align="center">
                 <Button
                   fullWidth
@@ -287,7 +312,7 @@ RegisterForm.propTypes = {
     address: PropTypes.string.isRequired,
     tel: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default RegisterForm;

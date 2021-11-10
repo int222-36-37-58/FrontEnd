@@ -36,7 +36,7 @@ const MySellHistoryPage = () => {
         <tbody>
           {mySell.map((sell) => {
             return (
-              <tr>
+              <tr key={`sellerproduct${sell.orderDetailId}`}>
                 <td>{sell.product.name}</td>
                 <td>{sell.color.colorName}</td>
                 <td>{sell.quantity}</td>

@@ -174,22 +174,25 @@ const TypeTable = ({ addResDialog }) => {
         handleCloseBox={handleCloseConfirm}
         submit={delType}
       />
-      <div
-        style={{
-          fontWeight: 600,
-          fontSize: 20 + "px",
-          paddingLeft: 35 + "px",
-        }}
-      >
+      <div className="b f20 pl-35">
         {" "}
         ประเภทของสินค้าในระบบ{" "}
-        <button
-          className="AddButton"
-          style={{ float: "right", marginRight: 30 + "px" }}
-          onClick={() => setAddType(!addType)}
-        >
-          เพิ่ม Type +
-        </button>
+        {!isEdit ? (
+          <button
+            className="AddButton mr-30 p-5-10"
+            style={{ float: "right" }}
+            onClick={() => setAddType(!addType)}
+          >
+            เพิ่ม Type +
+          </button>
+        ) : (
+          <button
+            className="disabledButton mr-30 p-5-10"
+            style={{ float: "right" }}
+          >
+            เพิ่ม Type +
+          </button>
+        )}
       </div>
       {addType && (
         <div
@@ -246,8 +249,8 @@ const TypeTable = ({ addResDialog }) => {
             value={typeEdit.name}
           />{" "}
           <button
-            className="delFromCart"
-            style={{ float: "right", padding: 5 + "px", marginLeft: 5 + "px" }}
+            className="delFromCart p-5-10 ml-5"
+            style={{ float: "right" }}
             onClick={() => {
               setIsEdit(false);
             }}
@@ -255,7 +258,7 @@ const TypeTable = ({ addResDialog }) => {
             ยกเลิก
           </button>
           <button
-            className="InfoButton"
+            className="InfoButton p-5-10"
             style={{ float: "right" }}
             onClick={submitEdit}
           >
@@ -290,14 +293,13 @@ const TypeTable = ({ addResDialog }) => {
                     <TableCell align="right">{type.name}</TableCell>
                     <TableCell align="right">
                       <button
-                        className="InfoButton"
+                        className="InfoButton p-5-10"
                         onClick={() => editType(type)}
                       >
                         แก้ไข
                       </button>
                       <button
-                        style={{ padding: 5 + "px", marginLeft: 5 + "px" }}
-                        className="delFromCart"
+                        className="delFromCart p-5-10 ml-5"
                         onClick={() => deletingType(type)}
                       >
                         ลบ

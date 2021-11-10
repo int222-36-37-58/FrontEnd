@@ -231,7 +231,7 @@ const ProfilePage = ({
               )}
 
               {userInfo.role === "ROLE_SELLER" && (
-                <>
+                <Switch>
                   <Route path={"/profile/createproduct"}>
                     {" "}
                     <CreateProductPage />
@@ -248,10 +248,10 @@ const ProfilePage = ({
                     {" "}
                     <EditProductPage />
                   </Route>
-                </>
+                </Switch>
               )}
               {userInfo.role === "ROLE_ADMIN" && (
-                <>
+                <Switch>
                   <Route path={"/profile/createproduct"}>
                     {" "}
                     <CreateProductPage />
@@ -276,7 +276,7 @@ const ProfilePage = ({
                       <UserListPage />
                     </Route>
                   </Route>{" "}
-                </>
+                </Switch>
               )}
             </Switch>
           </Grid>

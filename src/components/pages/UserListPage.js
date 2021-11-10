@@ -17,6 +17,7 @@ import { addResDialog } from "../../actions/uiStyle";
 import AdminEditUserForm from "../forms/AdminEditUserForm";
 import HandlePermission from "../forms/HandlePermission";
 import RegisterForm from "../forms/RegisterForm";
+import ConfirmDialog from "../ui/ConfirmDialog";
 
 const UserListPage = ({ addResDialog }) => {
   const [user, setUser] = useState([]);
@@ -26,6 +27,10 @@ const UserListPage = ({ addResDialog }) => {
   const [isHandleRole, setIsHandleRole] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [userEdit, setUserEdit] = useState({});
+  const [confirmBox, setConfirmBox] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
 
   const getUser = useCallback(() => {
     axios
@@ -88,7 +93,7 @@ const UserListPage = ({ addResDialog }) => {
     const json = JSON.stringify(data);
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/user/edituser`, json, {
+      .put(`${process.env.REACT_APP_API_URL}/admin/edituser`, json, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,9 +119,8 @@ const UserListPage = ({ addResDialog }) => {
       });
   };
 
-  const addUser = (data) => {
-    data.role = "ROLE_ADMIN";
-    const json = JSON.stringify(data);
+  const addUser = () => {
+    const json = JSON.stringify(userEdit);
     axios
       .post(`${process.env.REACT_APP_API_URL}/register`, json, {
         headers: {
@@ -127,14 +131,16 @@ const UserListPage = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Add new Admin success!!`,
+          dialogContent: `Add new account success!!`,
         };
         addResDialog(data);
       })
       .then(() => {
         getUser();
+        setUserEdit({});
+        setIsAdd(false);
+        handleCloseConfirm();
       })
-      .then(setIsAdd(false))
       .catch((err) => {
         const data = {
           status: err.response.status,
@@ -144,8 +150,26 @@ const UserListPage = ({ addResDialog }) => {
       });
   };
 
+  const handleCloseConfirm = () => {
+    setConfirmBox({ showConfirm: false, confirmContent: "" });
+  };
+
+  const openConfirmAdd = (data) => {
+    setUserEdit(data);
+    setConfirmBox({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่เพิ่ม ${data.userName} เป็น ${data.role} ไหม`,
+    });
+  };
+
   return (
     <>
+      <ConfirmDialog
+        confirmInfo={confirmBox}
+        handleCloseBox={handleCloseConfirm}
+        submit={addUser}
+      />
+
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
         <div
           style={{
@@ -190,7 +214,7 @@ const UserListPage = ({ addResDialog }) => {
                 [
                   isAdd || isHandleRole ? (
                     <button
-                      className="delFromCart p-10"
+                      className="delFromCart p-5-10"
                       style={{
                         marginLeft: "90%",
                       }}
@@ -203,7 +227,7 @@ const UserListPage = ({ addResDialog }) => {
                     </button>
                   ) : (
                     <button
-                      className="InfoButton p-10"
+                      className="InfoButton p-5-10"
                       style={{
                         marginLeft: "85%",
                       }}
@@ -211,7 +235,7 @@ const UserListPage = ({ addResDialog }) => {
                         setIsAdd(!isAdd);
                       }}
                     >
-                      เพิ่ม admin
+                      เพิ่มผู้ใช้งาน
                     </button>
                   ),
                 ]
@@ -225,7 +249,9 @@ const UserListPage = ({ addResDialog }) => {
                   refreshUser={getUser}
                 />
               )}
-              {isAdd && <RegisterForm submit={addUser} />}
+              {isAdd && (
+                <RegisterForm submit={openConfirmAdd} adminMode={true} />
+              )}
 
               <Table>
                 <TableHead>
@@ -248,68 +274,53 @@ const UserListPage = ({ addResDialog }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rowsPerPage > 0 ? (
-                    user
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((user) => {
-                        return (
-                          <TableRow key={user.userId}>
-                            <TableCell align="right">{user.userId}</TableCell>
-                            <TableCell align="right">{user.userName}</TableCell>
-                            <Hidden smDown>
-                              {" "}
-                              <TableCell align="right">
-                                {user.role.replace("ROLE_", "").toLowerCase()}
-                              </TableCell>
-                            </Hidden>
-                            {user.role !== "ROLE_ADMIN" ? (
-                              <TableCell align="right">
-                                {isEdit || isAdd || isHandleRole ? (
-                                  <button
-                                    className="disabledButton hoverCursor"
-                                    onClick={() => {
-                                      alert(
-                                        "Please Click Submit or Cancel before edit other user"
-                                      );
-                                    }}
-                                  >
-                                    แก้ไข
-                                  </button>
-                                ) : (
-                                  <button
-                                    className="AddButton"
-                                    onClick={() => editUser(user)}
-                                  >
-                                    แก้ไข
-                                  </button>
-                                )}
-
+                  {user
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((user) => {
+                      return (
+                        <TableRow key={user.userName}>
+                          <TableCell align="right">{user.userId}</TableCell>
+                          <TableCell align="right">{user.userName}</TableCell>
+                          <Hidden smDown>
+                            <TableCell align="right">
+                              {user.role.replace("ROLE_", "").toLowerCase()}
+                            </TableCell>
+                          </Hidden>
+                          {user.role !== "ROLE_ADMIN" ? (
+                            <TableCell align="right">
+                              {isEdit || isAdd || isHandleRole ? (
                                 <button
-                                  style={{
-                                    padding: 5 + "px",
-                                    marginLeft: 5 + "px",
+                                  className="disabledButton hoverCursor"
+                                  onClick={() => {
+                                    alert(
+                                      "Please Click Submit or Cancel before edit other user"
+                                    );
                                   }}
-                                  className="delFromCart"
-                                  onClick={() => openHandleRole(user)}
                                 >
-                                  จัดการบัญชี
+                                  แก้ไข
                                 </button>
-                              </TableCell>
-                            ) : (
-                              <TableCell />
-                            )}
-                          </TableRow>
-                        );
-                      })
-                  ) : (
-                    <TableRow>
-                      {" "}
-                      <TableCell />
-                    </TableRow>
-                  )}
+                              ) : (
+                                <button
+                                  className="AddButton p-5-10"
+                                  onClick={() => editUser(user)}
+                                >
+                                  แก้ไข
+                                </button>
+                              )}
+
+                              <button
+                                className="delFromCart p-5-10 ml-5"
+                                onClick={() => openHandleRole(user)}
+                              >
+                                จัดการบัญชี
+                              </button>
+                            </TableCell>
+                          ) : (
+                            <TableCell />
+                          )}
+                        </TableRow>
+                      );
+                    })}
                 </TableBody>
 
                 <TableFooter>
