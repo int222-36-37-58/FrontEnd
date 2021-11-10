@@ -3,6 +3,19 @@
   font-weight: 600;
 }
 
+.navigateIcon {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.navigateIcon:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  color: #d1eafd;
+  background-color: #1895f5;
+  border-radius: 50%;
+}
+
 .navBar {
   position: fixed;
   z-index: 3;

@@ -6,13 +6,28 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import OrderDetail from "../ui/OrderDetail";
 import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
-
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import FirstPageIcon from "@material-ui/icons/FirstPage";
 const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);
   const [currentViewOrder, setCurrentViewOrder] = useState({});
+  const [page, setPage] = useState(0);
+  const [pageSize] = useState(10);
+
+  const movePage = (n) => {
+    if ((page === 0) & (n === -1)) {
+      return;
+    } else {
+      setPage(page + n);
+    }
+  };
+
   const getMyOrderHistory = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/getuserorder`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/user/getuserorder?pageNo=${page}&pageSize=${pageSize}`
+      )
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
         const data = {
@@ -21,7 +36,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
         };
         addResDialog(data);
       });
-  }, [addResDialog]);
+  }, [addResDialog, page, pageSize]);
 
   useEffect(() => {
     getMyOrderHistory();
@@ -100,57 +115,136 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   })}
                 </tbody>
               </table>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "end",
+                }}
+              >
+                <div>
+                  {page > 0 && (
+                    <>
+                      <FirstPageIcon
+                        className="navigateIcon mt-5 "
+                        onClick={() => setPage(0)}
+                      />
+                      <NavigateBeforeIcon
+                        className="navigateIcon mt-5 mlr-5"
+                        onClick={() => movePage(-1)}
+                      />
+                    </>
+                  )}
+                </div>
+                <div className="b"> {page + 1}</div>
+                <div>
+                  {myOrder.length >= pageSize && (
+                    <NavigateNextIcon
+                      className="navigateIcon mt-5 mlr-5"
+                      onClick={() => movePage(1)}
+                    />
+                  )}
+                </div>
+              </div>
             </Hidden>
             <Hidden mdUp>
-              {myOrder.map((order) => {
-                return (
-                  <div
-                    key={order.userOrderId}
-                    className="roundContainer"
-                    style={{
-                      padding: " 50px",
-                      marginBottom: "20px",
-                      textAlign: "left",
-                    }}
-                  >
-                    <Grid container spacing={3}>
-                      {" "}
-                      <Grid item xs={6} style={{ fontWeight: "600" }}>
-                        หมายเลขคำสั่งซื้อ
+              <>
+                {myOrder.map((order) => {
+                  return (
+                    <div
+                      key={order.userOrderId}
+                      className="roundContainer"
+                      style={{
+                        padding: " 50px",
+                        marginBottom: "20px",
+                        textAlign: "left",
+                      }}
+                    >
+                      <Grid container spacing={3}>
+                        {" "}
+                        <Grid item xs={6} style={{ fontWeight: "600" }}>
+                          หมายเลขคำสั่งซื้อ
+                        </Grid>
+                        <Grid item xs={6}>
+                          #{order.userOrderId}
+                        </Grid>
+                        <Grid item xs={6} style={{ fontWeight: "600" }}>
+                          วันและเวลา
+                        </Grid>
+                        <Grid item xs={6}>
+                          {formatDate(order.date)}
+                        </Grid>
+                        <Grid item xs={6} style={{ fontWeight: "600" }}>
+                          ราคาสุทธิ
+                        </Grid>
+                        <Grid item xs={6}>
+                          ฿{computedPrice(order)}
+                        </Grid>
+                        <Grid item xs={6} style={{ fontWeight: "600" }}>
+                          สถานะ
+                        </Grid>
+                        <Grid item xs={6}>
+                          Success!
+                        </Grid>
+                        <Grid item xs={12}>
+                          <button
+                            className="AddButton"
+                            onClick={() => showOrderDetail(order)}
+                          >
+                            รายละเอียด
+                          </button>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={6}>
-                        #{order.userOrderId}
-                      </Grid>
-                      <Grid item xs={6} style={{ fontWeight: "600" }}>
-                        วันและเวลา
-                      </Grid>
-                      <Grid item xs={6}>
-                        {formatDate(order.date)}
-                      </Grid>
-                      <Grid item xs={6} style={{ fontWeight: "600" }}>
-                        ราคาสุทธิ
-                      </Grid>
-                      <Grid item xs={6}>
-                        ฿{computedPrice(order)}
-                      </Grid>
-                      <Grid item xs={6} style={{ fontWeight: "600" }}>
-                        สถานะ
-                      </Grid>
-                      <Grid item xs={6}>
-                        Success!
-                      </Grid>
-                      <Grid item xs={12}>
-                        <button
-                          className="AddButton"
-                          onClick={() => showOrderDetail(order)}
-                        >
-                          รายละเอียด
-                        </button>
-                      </Grid>
-                    </Grid>
+                    </div>
+                  );
+                })}
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    alignContent: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div>
+                    {page > 0 ? (
+                      <>
+                        <FirstPageIcon
+                          className="navigateIcon mt-5 mlr-5"
+                          onClick={() => setPage(0)}
+                        />
+                        <NavigateBeforeIcon
+                          className="navigateIcon mt-5 mlr-5"
+                          onClick={() => movePage(-1)}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <FirstPageIcon
+                          className="navigateIcon mt-5 mlr-5"
+                          onClick={() => setPage(0)}
+                        />
+                        <NavigateBeforeIcon
+                          className="navigateIcon mt-5 mlr-5"
+                          onClick={() => movePage(-1)}
+                        />
+                      </>
+                    )}
                   </div>
-                );
-              })}
+                  <div className="b f16"> {page + 1}</div>
+                  <div>
+                    {myOrder.length >= pageSize && (
+                      <NavigateNextIcon
+                        className="navigateIcon mt-5 mlr-5"
+                        onClick={() => movePage(1)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
             </Hidden>
           </>
         ) : (
