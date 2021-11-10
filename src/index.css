@@ -218,6 +218,14 @@ body {
   margin: 5px;
 }
 
+.mr-5 {
+  margin-right: 5px;
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
 .mlr-5 {
   margin-left: 5px;
   margin-right: 5px;
@@ -225,6 +233,14 @@ body {
 
 .mt-5 {
   margin-top: 5px;
+}
+
+.mt-6 {
+  margin-top: 6px;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }
 
 .mt-20 {

@@ -121,20 +121,25 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   display: "flex",
                   alignItems: "center",
                   alignContent: "center",
-                  justifyContent: "end",
+                  justifyContent: "center",
                 }}
               >
                 <div>
-                  {page > 0 && (
+                  {page > 0 ? (
                     <>
                       <FirstPageIcon
-                        className="navigateIcon mt-5 "
+                        className="navigateIcon mt-6"
                         onClick={() => setPage(0)}
                       />
                       <NavigateBeforeIcon
-                        className="navigateIcon mt-5 mlr-5"
+                        className="navigateIcon mt-6 mlr-5"
                         onClick={() => movePage(-1)}
                       />
+                    </>
+                  ) : (
+                    <>
+                      <FirstPageIcon className="navigateIcon mt-6 " />
+                      <NavigateBeforeIcon className="navigateIcon mt-6 mr-5" />
                     </>
                   )}
                 </div>
@@ -142,7 +147,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                 <div>
                   {myOrder.length >= pageSize && (
                     <NavigateNextIcon
-                      className="navigateIcon mt-5 mlr-5"
+                      className="navigateIcon mt-6 ml-5"
                       onClick={() => movePage(1)}
                     />
                   )}
@@ -213,22 +218,22 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                     {page > 0 ? (
                       <>
                         <FirstPageIcon
-                          className="navigateIcon mt-5 mlr-5"
+                          className="navigateIcon mt-6"
                           onClick={() => setPage(0)}
                         />
                         <NavigateBeforeIcon
-                          className="navigateIcon mt-5 mlr-5"
+                          className="navigateIcon mt-6 "
                           onClick={() => movePage(-1)}
                         />
                       </>
                     ) : (
                       <>
                         <FirstPageIcon
-                          className="navigateIcon mt-5 mlr-5"
+                          className="navigateIcon mt-6"
                           onClick={() => setPage(0)}
                         />
                         <NavigateBeforeIcon
-                          className="navigateIcon mt-5 mlr-5"
+                          className="navigateIcon mt-6 mr-5"
                           onClick={() => movePage(-1)}
                         />
                       </>
@@ -238,7 +243,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   <div>
                     {myOrder.length >= pageSize && (
                       <NavigateNextIcon
-                        className="navigateIcon mt-5 mlr-5"
+                        className="navigateIcon mt-6 ml-5"
                         onClick={() => movePage(1)}
                       />
                     )}
