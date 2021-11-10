@@ -103,6 +103,11 @@ const RegisterForm = (props) => {
           <h3>แก้ไขข้อมูลส่วนตัว</h3>
         </div>
       )}
+      {props.adminMode && (
+        <div style={{ marginBottom: "-40px" }}>
+          <h3>กำลังเพิ่มบัญชีใหม่</h3>
+        </div>
+      )}
 
       <Grid container>
         <Grid item xs={12} style={{ padding: 40 + "px" }}>

@@ -49,27 +49,6 @@ const UserListPage = ({ addResDialog }) => {
     getUser();
   }, [getUser]);
 
-  const delUser = (id) => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/delete/${id}`)
-
-      .then((res) => {
-        const data = {
-          status: res.status,
-          dialogContent: res.data,
-        };
-        addResDialog(data);
-      })
-      .then(() => getUser())
-      .catch((err) => {
-        const data = {
-          status: err.response.status,
-          dialogContent: err.response.data.message,
-        };
-        addResDialog(data);
-      });
-  };
-
   const handleChangePage = (e, newPage) => {
     setPage(newPage);
   };
@@ -139,7 +118,6 @@ const UserListPage = ({ addResDialog }) => {
         getUser();
         setUserEdit({});
         setIsAdd(false);
-        handleCloseConfirm();
       })
       .catch((err) => {
         const data = {
@@ -147,7 +125,8 @@ const UserListPage = ({ addResDialog }) => {
           dialogContent: err.response.data.message,
         };
         addResDialog(data);
-      });
+      })
+      .then(handleCloseConfirm());
   };
 
   const handleCloseConfirm = () => {
@@ -158,7 +137,10 @@ const UserListPage = ({ addResDialog }) => {
     setUserEdit(data);
     setConfirmBox({
       showConfirm: true,
-      confirmContent: `ยืนยันที่เพิ่ม ${data.userName} เป็น ${data.role} ไหม`,
+      confirmContent: `ยืนยันที่เพิ่ม ${data.userName} เป็น ${data.role.replace(
+        "ROLE_",
+        ""
+      )} ไหม`,
     });
   };
 
@@ -196,7 +178,6 @@ const UserListPage = ({ addResDialog }) => {
                     onIsEdit={() => {
                       setIsEdit(false);
                     }}
-                    onDelete={() => delUser(user.userId)}
                     submit={updateUser}
                   />
                   <button

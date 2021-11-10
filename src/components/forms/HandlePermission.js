@@ -44,7 +44,9 @@ const HandlePermission = (props, { addResdialog }) => {
 
   const deleteAccount = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/delete/${props.user.userId}`)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/admin/delete/${props.user.userId}`
+      )
 
       .then((res) => {
         const data = {
