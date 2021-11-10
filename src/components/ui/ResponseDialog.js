@@ -5,7 +5,7 @@ import CancelOutlined from "@material-ui/icons/CancelOutlined";
 const ResponseDialog = (props) => {
   useEffect(() => {
     if (props.len > 0) {
-      setTimeout(() => props.handleCloseBox(props.index), 10000);
+      setTimeout(() => props.handleCloseBox(props.index), 9000);
     }
   }, [props]);
 
