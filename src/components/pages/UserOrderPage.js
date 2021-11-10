@@ -16,7 +16,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [pageSize] = useState(10);
 
   const movePage = (n) => {
-    if ((page === 0) & (n === -1)) {
+    if ((page === 0 && n === -1) || (myOrder.length < pageSize && n === 1)) {
       return;
     } else {
       setPage(page + n);
@@ -124,34 +124,28 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   justifyContent: "center",
                 }}
               >
-                <div>
-                  {page > 0 ? (
-                    <>
-                      <FirstPageIcon
-                        className="navigateIcon mt-6"
-                        onClick={() => setPage(0)}
-                      />
-                      <NavigateBeforeIcon
-                        className="navigateIcon mt-6 mlr-5"
-                        onClick={() => movePage(-1)}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <FirstPageIcon className="navigateIcon mt-6 " />
-                      <NavigateBeforeIcon className="navigateIcon mt-6 mr-5" />
-                    </>
-                  )}
+                <FirstPageIcon
+                  className={page > 0 ? "navigateIcon" : "disabledNavigateIcon"}
+                  onClick={() => setPage(0)}
+                />
+                <NavigateBeforeIcon
+                  className={page > 0 ? "navigateIcon" : "disabledNavigateIcon"}
+                  onClick={() => movePage(-1)}
+                />
+
+                <div className="b" style={{ width: "15px" }}>
+                  {" "}
+                  {page + 1}
                 </div>
-                <div className="b"> {page + 1}</div>
-                <div>
-                  {myOrder.length >= pageSize && (
-                    <NavigateNextIcon
-                      className="navigateIcon mt-6 ml-5"
-                      onClick={() => movePage(1)}
-                    />
-                  )}
-                </div>
+
+                <NavigateNextIcon
+                  className={
+                    myOrder.length >= pageSize
+                      ? "navigateIcon"
+                      : "disabledNavigateIcon"
+                  }
+                  onClick={() => movePage(1)}
+                />
               </div>
             </Hidden>
             <Hidden mdUp>
@@ -205,7 +199,6 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                     </div>
                   );
                 })}
-
                 <div
                   style={{
                     display: "flex",
@@ -214,40 +207,32 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <div>
-                    {page > 0 ? (
-                      <>
-                        <FirstPageIcon
-                          className="navigateIcon mt-6"
-                          onClick={() => setPage(0)}
-                        />
-                        <NavigateBeforeIcon
-                          className="navigateIcon mt-6 "
-                          onClick={() => movePage(-1)}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <FirstPageIcon
-                          className="navigateIcon mt-6"
-                          onClick={() => setPage(0)}
-                        />
-                        <NavigateBeforeIcon
-                          className="navigateIcon mt-6 mr-5"
-                          onClick={() => movePage(-1)}
-                        />
-                      </>
-                    )}
+                  <FirstPageIcon
+                    className={
+                      page > 0 ? "navigateIcon" : "disabledNavigateIcon"
+                    }
+                    onClick={() => setPage(0)}
+                  />
+                  <NavigateBeforeIcon
+                    className={
+                      page > 0 ? "navigateIcon" : "disabledNavigateIcon"
+                    }
+                    onClick={() => movePage(-1)}
+                  />
+
+                  <div className="b" style={{ width: "15px" }}>
+                    {" "}
+                    {page + 1}
                   </div>
-                  <div className="b f16"> {page + 1}</div>
-                  <div>
-                    {myOrder.length >= pageSize && (
-                      <NavigateNextIcon
-                        className="navigateIcon mt-6 ml-5"
-                        onClick={() => movePage(1)}
-                      />
-                    )}
-                  </div>
+
+                  <NavigateNextIcon
+                    className={
+                      myOrder.length >= pageSize
+                        ? "navigateIcon"
+                        : "disabledNavigateIcon"
+                    }
+                    onClick={() => movePage(1)}
+                  />
                 </div>
               </>
             </Hidden>
