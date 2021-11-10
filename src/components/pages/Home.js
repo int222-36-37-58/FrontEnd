@@ -112,7 +112,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         );
       } else {
         return (
-          <Grid item xs={12} key={`productCardNo${product.productId}`} >
+          <Grid item xs={12} key={`productCardNo${product.productId}`}>
             <ProductCard product={product} listStyle={listStyle} />
           </Grid>
         );
@@ -150,8 +150,9 @@ const Home = ({ filter, addResDialog, userInfo }) => {
           <Grid
             container
             direction="row"
-            justifyContent="space-between"
+            justifyContent="space-around"
             spacing={0}
+            style={{maxWidth: '90%'}}
           >
             <Grid item xs={12} md={3}>
               <FilterBox></FilterBox>

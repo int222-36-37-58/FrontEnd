@@ -9,6 +9,10 @@ body {
   outline: none;
 }
 
+.normalFont {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 10px;
@@ -33,6 +37,10 @@ body {
   flex: 1;
   padding-top: 60px;
   padding-bottom: 100px;
+}
+
+.baseColor {
+  color: #1895f5;
 }
 
 .center {
@@ -119,6 +127,7 @@ body {
 .b {
   font-weight: 900;
 }
+
 .p-6 {
   padding: 6px;
 }
@@ -163,6 +172,10 @@ body {
   padding-bottom: 20px;
 }
 
+.pb-30 {
+  padding-bottom: 30px;
+}
+
 .pl-5 {
   padding-left: 5px;
 }
@@ -181,6 +194,10 @@ body {
 
 .pr-0 {
   padding-right: 0;
+}
+
+.pr-5 {
+  padding-right: 5px;
 }
 
 .pr-10 {
@@ -263,6 +280,10 @@ body {
   margin-bottom: 20px;
 }
 
+.-mb-10 {
+  margin-bottom: -10px;
+}
+
 .flex-1 {
   flex: 1;
 }
@@ -297,7 +318,6 @@ body {
 }
 
 .delFromCart {
-  width: auto;
   color: #d83c2d;
   background-color: #ffccbb;
   border-color: #d83c2d;

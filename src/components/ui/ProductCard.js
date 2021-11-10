@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
+import CloseIcon from "@material-ui/icons/Close";
 
 function ProductCard(props, { addToCart, userInfo }) {
   const history = useHistory();
@@ -88,11 +89,31 @@ function ProductCard(props, { addToCart, userInfo }) {
 
   return (
     <Container
-      style={{ height: 325 + "px", margin: 10 + "px", marginBottom: 40 + "px" }}
+      style={{
+        margin: 10 + "px",
+        marginBottom: 40 + "px",
+      }}
     >
       {clickAdd && (
         <div className="modal">
           <div className="colorModalContent">
+            <div
+              style={{
+                textAlign: "right",
+                float: "right",
+                color: "#333435",
+                position: "relative",
+                width: "95%",
+                paddingTop: "10px",
+                marginBottom: "-20px",
+              }}
+            >
+              <CloseIcon
+                className="hoverCursor "
+                style={{ fontSize: "24px" }}
+                onClick={() => showColor(false)}
+              />
+            </div>
             <Grid
               container
               justifyItems="center"
@@ -112,34 +133,28 @@ function ProductCard(props, { addToCart, userInfo }) {
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <div className="productNameInModal  ">{props.product.name}</div>
-                <div className="f14  pt-10">
-                  วันที่ลงขาย {props.product.saleDate}
+                <div className="f13 pt-10 normalFont">
+                  วันวางจำหน่าย {props.product.saleDate}
                 </div>
 
-                <div className="f14  ">
+                <div className="f13 normalFont pt-5">
                   ขายโดย {props.product.user.userName}
                 </div>
 
-                <div className="radioGroup w100 text-left pt-20 pb-20">
+                <div className="radioGroup w100 text-left pt-30 pb-30">
                   <div className="b"> เลือกสีที่ต้องการ </div>
                   {productColor}
+                </div>
+                <div className="b -mb-10 baseColor f24">
+                  ฿{props.product.price}
                 </div>
                 <div className="plusMinus" style={{ color: "#333435" }}>
                   <h4>จำนวนที่ต้องการ</h4>
                   <div className="plusMinusQuantity">
-                    <div
-                      className="minusButton"
-                      style={{ paddingRight: 5 + "px" }}
-                      onClick={minusQuantity}
-                    >
+                    <div className="minusButton pr-5" onClick={minusQuantity}>
                       -
                     </div>
-                    <div
-                      className="currentQuantity"
-                      style={{ paddingRight: 5 + "px" }}
-                    >
-                      {quantity}
-                    </div>
+                    <div className="currentQuantity pr-5">{quantity}</div>
                     <div className="plusButton" onClick={plusQuantity}>
                       +
                     </div>
@@ -150,22 +165,24 @@ function ProductCard(props, { addToCart, userInfo }) {
                     </h5>
                   )}
                 </div>
-              </Grid>
-              <Grid item xs={12} className="text-center pt-20">
-                <button
-                  className="AddButton"
-                  style={{ width: 80 + "%", marginTop: -10 + "px" }}
-                  onClick={AddToCart}
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "90%",
+                  }}
                 >
-                  Add - ฿{props.product.price * quantity}
-                </button>
-                <button
-                  className="delFromCart"
-                  style={{ width: 80 + "%", padding: 5 + "px" }}
-                  onClick={() => showColor(false)}
-                >
-                  Cancel
-                </button>
+                  <button className="AddButton mlr-5 w40" onClick={AddToCart}>
+                    เพิ่ม - ฿{props.product.price * quantity}
+                  </button>
+                  <button
+                    className="delFromCart mlr-5 w40"
+                    onClick={() => showColor(false)}
+                  >
+                    ยกเลิก
+                  </button>
+                </div>
               </Grid>
             </Grid>
           </div>
@@ -218,14 +235,6 @@ function ProductCard(props, { addToCart, userInfo }) {
                 ),
               ]
             )}
-
-            <button
-              className="InfoButton"
-              style={{ width: 90 + "%" }}
-              onClick={seeInfo}
-            >
-              Information
-            </button>
           </div>
         </Box>
       ) : (
@@ -284,13 +293,6 @@ function ProductCard(props, { addToCart, userInfo }) {
                     ),
                   ]
                 )}
-                <button
-                  className="InfoButton"
-                  style={{ width: 90 + "%" }}
-                  onClick={seeInfo}
-                >
-                  Information
-                </button>
               </div>
             </div>{" "}
           </Grid>
