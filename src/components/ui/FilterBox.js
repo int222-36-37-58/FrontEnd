@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { clickedFilter, clearFilter } from "../../actions/uiStyle";
 import { connect } from "react-redux";
+import CloseIcon from "@material-ui/icons/Close";
 
 const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
   const [types, setTypes] = useState([]);
@@ -52,10 +53,14 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
               <div>
                 <button
                   className="AddButton"
-                  style={{ padding: "3px" }}
+                  style={{
+                    padding: "0px",
+                    display: "flex",
+                    borderRadius: "50%",
+                  }}
                   onClick={() => clearCheck()}
                 >
-                  ล้างค่า
+                  <CloseIcon style={{ fontSize: "16px" }} />
                 </button>
               </div>
             )}
@@ -144,10 +149,15 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                 {" "}
                 <button
                   className="AddButton"
-                  style={{ padding: "2px", marginTop: "10px" }}
+                  style={{
+                    padding: "0px",
+                    display: "flex",
+                    borderRadius: "50%",
+                    marginTop: "12px",
+                  }}
                   onClick={() => clearCheck()}
                 >
-                  ล้างค่า
+                  <CloseIcon style={{ fontSize: "16px" }} />
                 </button>
               </div>{" "}
             </div>

@@ -17,9 +17,13 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.SEARCH_MODAL_HANDLE:
       return { ...state, searchModalShow: action.payload.searchModalShow };
     case actionTypes.FILTER_CLICKED:
+      let isAlready = false;
+      if (state.filterType === action.payload.filterClicked) {
+        isAlready = true;
+      }
       return {
         ...state,
-        filterType: action.payload.filterClicked,
+        filterType: isAlready ? "" : action.payload.filterClicked,
       };
 
     case actionTypes.CLEAR_FILTER:
