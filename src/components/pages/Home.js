@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid, Hidden } from "@material-ui/core";
+import { CircularProgress, Container, Grid } from "@material-ui/core";
 import axios from "axios";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
@@ -76,7 +76,6 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             item
             xs={12}
             sm={6}
-            md={5}
             lg={3}
             ref={lastElementRef}
             key={`productCardNo${product.productId}`}
@@ -103,7 +102,6 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             item
             xs={12}
             sm={6}
-            md={5}
             lg={3}
             key={`productCardNo${product.productId}`}
           >
@@ -130,13 +128,12 @@ const Home = ({ filter, addResDialog, userInfo }) => {
               onClick={() => setListStyle(1)}
               style={{ color: listStyle === 1 ? "#333435" : null }}
             />
-            <Hidden smDown>
-              <DehazeIcon
-                className="p-10 hoverCursor"
-                onClick={() => setListStyle(2)}
-                style={{ color: listStyle === 2 ? "#333435" : null }}
-              />
-            </Hidden>
+
+            <DehazeIcon
+              className="p-10 hoverCursor"
+              onClick={() => setListStyle(2)}
+              style={{ color: listStyle === 2 ? "#333435" : null }}
+            />
           </div>
         </div>
         <div

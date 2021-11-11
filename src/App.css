@@ -649,8 +649,9 @@
 }
 
 .imageProduct {
-  max-width: 170px;
-  height: 170px;
+  max-width: 150px;
+  width: auto;
+  height: 155px;
   transition: 0.3s;
 }
 .imageProduct2 {
@@ -658,6 +659,14 @@
   height: auto;
   transition: 0.3s;
   width: 100%;
+}
+
+.imageProduct3 {
+  max-width: 140px;
+  width: auto;
+  max-height: 130px;
+  height: auto;
+  transition: 0.3s;
 }
 
 .homeContainer {
@@ -810,7 +819,6 @@
 }
 
 .menuProfile {
-  padding: 20px;
   font-size: 13px;
   margin-top: 20px;
   background-color: white;
@@ -822,6 +830,10 @@
   margin-top: 25px;
   display: flex;
   flex-direction: column;
+}
+
+.menuProfile * {
+  padding: 5px 20px;
 }
 
 .orderTable {

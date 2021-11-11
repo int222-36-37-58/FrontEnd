@@ -43,15 +43,6 @@ const ProfilePage = ({
             {" "}
             <Hidden smDown>
               <div className="menuProfile">
-                <h2
-                  style={{
-                    borderStyle: "solid",
-                    borderWidth: " 0 0 1px 0 ",
-                    paddingBottom: "7px",
-                  }}
-                >
-                  Menu
-                </h2>
                 <Link
                   to="/profile/info"
                   onClick={() => changeCurrentMenu("info")}
@@ -60,6 +51,7 @@ const ProfilePage = ({
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
+                  style={{ marginTop: "30px" }}
                 >
                   <div>ข้อมูลของฉัน</div>
                 </Link>
@@ -200,7 +192,8 @@ const ProfilePage = ({
                   </>
                 )}
                 <div
-                  className="hoverChangeBackground p-10"
+                  className="hoverChangeBackground mb-20"
+                  style={{ padding: "10px 40px" }}
                   onClick={() => handleLogOut()}
                 >
                   ออกจากระบบ

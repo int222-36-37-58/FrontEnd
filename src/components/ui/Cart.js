@@ -2,7 +2,7 @@ import { Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
-
+import CloseIcon from "@material-ui/icons/Close";
 const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -124,7 +124,7 @@ const Cart = (props) => {
                   }}
                   onClick={props.onHandleCart(false)}
                 >
-                  Close
+                  ปิด
                 </button>{" "}
               </span>
             </ListItem>
@@ -165,9 +165,16 @@ const Cart = (props) => {
                   <div style={{ textAlign: "right", marginRight: 25 + "px" }}>
                     <button
                       className="delFromCart"
+                      style={{
+                        padding: "3px",
+                        borderRadius: "5px",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
                       onClick={() => props.clearCart()}
                     >
-                      ล้างตะกร้า
+                      <div>ลบทั้งหมด</div>
+                      <CloseIcon style={{ fontSize: "15px" }} />
                     </button>
                   </div>
                 </div>

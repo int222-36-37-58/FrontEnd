@@ -45,6 +45,9 @@ const cart = (state = INITIAL_STATE, action = {}) => {
                     ...item,
                     quantity:
                       item.quantity + action.payload.orderDetail.quantity,
+                    totalPrice: (item.totalPrice +=
+                      action.payload.orderDetail.product.price *
+                      action.payload.orderDetail.quantity),
                   }
                 : item
             )
