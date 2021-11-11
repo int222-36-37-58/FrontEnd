@@ -19,7 +19,10 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
       const json = JSON.stringify({
         content: commentContent,
         product: { productId: props.odt.product.productId },
-        user: { userId: props.userInfo.userId, userName : props.userInfo.userName },
+        user: {
+          userId: props.userInfo.userId,
+          userName: props.userInfo.userName,
+        },
       });
 
       axios
@@ -139,7 +142,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
       </Hidden>
 
       <Hidden mdUp>
-        <div style={{ paddingBottom: "20px" }} key={props.odt.orderDetailId}>
+        <div className="pb-20" key={props.odt.orderDetailId}>
           <Link
             to={`/product/${props.odt.product.productId}`}
             style={{ textDecoration: "none" }}
@@ -156,13 +159,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
               }}
             />
           </Link>
-          <div
-            style={{
-              textAlign: "left",
-              paddingLeft: "20px",
-              fontWeight: 600,
-            }}
-          >
+          <div className="text-left p-20 b">
             ชื่อสินค้า
             <div>{props.odt.product.name}</div>
           </div>

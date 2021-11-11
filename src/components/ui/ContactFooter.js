@@ -112,7 +112,7 @@ const ContactFooter = () => {
                 <CheckIcon /> 3rd Year student from SIT KMUTT
               </h4>
               <h4>
-                <CheckIcon /> Our 2nd Project
+                <CheckIcon /> Our 2nd Group Project
               </h4>
               <h4>
                 <CheckIcon /> Thanks for visited

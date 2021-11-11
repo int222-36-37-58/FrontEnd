@@ -86,8 +86,8 @@ function AdminEditUserForm(props) {
         submit={submitEdit}
       />
       <h3>
-        Edit user at username :{" "}
-        <span style={{ color: "#d83c2d" }}>{userData.userName}</span>
+        กำลังแก้ไขข้อมูลของ :{" "}
+        <span className="baseColor3">{userData.userName}</span>
       </h3>
       <Grid container>
         {" "}

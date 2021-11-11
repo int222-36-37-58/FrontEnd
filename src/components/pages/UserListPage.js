@@ -154,9 +154,9 @@ const UserListPage = ({ addResDialog }) => {
 
       <Container maxWidth="lg" style={{ marginTop: 10 + "px" }}>
         <div
+          className="p-20"
           style={{
             backgroundColor: "white",
-            padding: 20 + "px",
             borderRadius: 10 + "px",
             boxShadow: "0px 0px 20px #e6e8eb",
           }}

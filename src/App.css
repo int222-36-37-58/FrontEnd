@@ -872,10 +872,6 @@ td {
   margin-bottom: -5px;
 }
 
-.filterFullItem:hover {
-  background-color: #f0f8f9;
-}
-
 .dialogContainer {
   width: 100%;
   display: flex;

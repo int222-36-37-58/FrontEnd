@@ -82,20 +82,18 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                           icon={
                             <div className="filterFullItem w100">
                               <CircleUnchecked className="f22 pl-5" />
-                              <div className="f18 b pl-5"> {filter.name}</div>
+                              <div className="f16 b pl-10"> {filter.name}</div>
                             </div>
                           }
                           checkedIcon={
                             <div
                               className="filterFullItem w100"
                               style={{
-                                transition: "0.25s",
-
                                 backgroundColor: "#f0f8f9",
                               }}
                             >
                               <CircleCheckedFilled className="f22 pl-5" />
-                              <div className="f18 b pl-5"> {filter.name}</div>
+                              <div className="f16 b pl-10"> {filter.name}</div>
                             </div>
                           }
                           onChange={onChange}

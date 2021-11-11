@@ -52,18 +52,15 @@ const OrderDetail = (props) => {
   return (
     <div className="orderDetailContainer">
       <div
+        className="f20 b p-20 m-0"
         style={{
           display: "flex",
           justifyItems: "center",
           alignItems: "center",
-          fontWeight: "900",
-          fontSize: "20px",
           borderStyle: "solid",
           borderColor: "#e4e4e4",
           backgroundColor: "#fafafa",
           borderWidth: "0 0 1px 0",
-          padding: "20px",
-          margin: 0,
         }}
       >
         <ArrowBackIcon
@@ -75,29 +72,9 @@ const OrderDetail = (props) => {
       </div>
 
       <Hidden smDown>
-        <div
-          style={{
-            padding: "20px",
-            paddingBottom: "5px",
-            fontSize: "16px",
-            textAlign: "left",
-            fontWeight: "900",
-          }}
-        >
-          {formatDate()}
-        </div>
+        <div className="f16 b text-left p-20 pb-5">{formatDate()}</div>
 
-        <div
-          style={{
-            padding: "20px",
-            paddingTop: "10px",
-            fontSize: "18px",
-            fontWeight: 600,
-            textAlign: "left",
-          }}
-        >
-          สินค้าที่สั่งซื้อ
-        </div>
+        <div className="p-20 pt-10 f18 b text-left">สินค้าที่สั่งซื้อ</div>
         <table
           className="orderTable "
           style={{
@@ -126,10 +103,9 @@ const OrderDetail = (props) => {
             <tr>
               <td
                 colSpan="10"
+                className="text-right b"
                 style={{
-                  textAlign: "right",
                   border: "none",
-                  fontWeight: "900",
                 }}
               >
                 ราคาสุทธิ ฿{totalPrice}
@@ -171,16 +147,7 @@ const OrderDetail = (props) => {
               borderColor: "#e4e4e4",
             }}
           >
-            <div
-              style={{
-                padding: "20px",
-                paddingBottom: "20px",
-                fontSize: "13px",
-                textAlign: "left",
-              }}
-            >
-              {formatDate()}
-            </div>
+            <div className="p-20 pb-20 f13 text-left">{formatDate()}</div>
 
             {props.order.orderDetail.map((odt) => {
               return (
@@ -191,12 +158,9 @@ const OrderDetail = (props) => {
             })}
 
             <div
+              className="text-right b pb-20 pr-10"
               style={{
-                textAlign: "right",
                 paddingTop: "1px",
-                paddingBottom: "20px",
-                fontWeight: "900",
-                paddingRight: "10px",
               }}
             >
               {" "}

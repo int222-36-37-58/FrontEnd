@@ -181,7 +181,10 @@ const ColorTable = ({ addResDialog }) => {
             เพิ่มสีใหม่ +
           </button>
         ) : (
-          <button className="disabledButton mr-30 p-5-10" style={{ float: "right" }}>
+          <button
+            className="disabledButton mr-30 p-5-10"
+            style={{ float: "right" }}
+          >
             เพิ่มสีใหม่ +
           </button>
         )}{" "}
@@ -259,7 +262,7 @@ const ColorTable = ({ addResDialog }) => {
         </div>
       )}
 
-      <Table style={{ width: 90 + "%", margin: "auto" }}>
+      <Table style={{ width: 90 + "%", margin: "0 auto" }}>
         <TableHead style={{ backgroundColor: "#1895f5" }}>
           <TableRow>
             <TableCell style={{ color: "white" }} align="right">

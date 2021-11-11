@@ -13,21 +13,18 @@ const ProductInCartBox = (props) => {
       </div>
 
       <div>
-        <div
-          className="InCartTitle"
-          style={{ fontWeight: 900, marginTop: "-30px" }}
-        >
+        <div className="InCartTitle b " style={{ marginTop: "-30px" }}>
           {props.orderDetail.product.name}
         </div>
 
         <div>
-          color : {props.orderDetail.color.colorName} / quantity :{" "}
+          สี : {props.orderDetail.color.colorName} / จำนวน :{" "}
           {props.orderDetail.quantity}
         </div>
       </div>
 
       <div>
-        <h5 style={{ fontWeight: 900, color: "#1895f5", marginTop: "-3px" }}>
+        <h5 className="baseColor b" style={{ marginTop: "-3px" }}>
           ฿{props.orderDetail.totalPrice}
         </h5>
         <button

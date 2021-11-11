@@ -51,9 +51,7 @@ const LoginForm = (props) => {
             alignItems="center"
             spacing={2}
           >
-            <div className="b" style={{ color: "#d83c2d" }}>
-              {props.loginErr}
-            </div>
+            <div className="b baseColor3">{props.loginErr}</div>
             <Grid item xs={12}>
               <TextField
                 required

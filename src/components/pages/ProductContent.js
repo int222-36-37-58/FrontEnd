@@ -179,14 +179,14 @@ const ProductContent = (props, { addResDialog }) => {
         <Grid item xs={12} sm={7} md={6}>
           <h3 className="f23">{product.name}</h3>
           <h5 style={{ marginTop: -5 + "px" }}>
-            วันที่ลงขาย : {product.saleDate}{" "}
+            วันวางจำหน่าย : {product.saleDate}{" "}
           </h5>
 
-          <h3 className="f23">฿{product.price} </h3>
+          <h3 className="f23 baseColor">฿{product.price} </h3>
 
           {product.color && (
             <div className="radioGroup">
-              <h4 style={{ marginBottom: 10 + "px" }}>color</h4>
+              <h4 style={{ marginBottom: 10 + "px" }}>สีทั้งหมด</h4>
               {product.color.map((col) => {
                 return (
                   <span key={`colorInContent#${col.colorId}`}>
@@ -210,7 +210,7 @@ const ProductContent = (props, { addResDialog }) => {
           )}
 
           <div className="plusMinus" style={{ color: "#545454" }}>
-            <h4>quantity</h4>
+            <h4>จำนวน</h4>
             <div className="plusMinusQuantity">
               <div className="minusButton" onClick={minusQuantity}>
                 -
@@ -254,7 +254,7 @@ const ProductContent = (props, { addResDialog }) => {
                   style={{ padding: 10 + "px", width: 45 + "%" }}
                   onClick={addToCart}
                 >
-                  Add - ฿{product.price * quantityAdd}{" "}
+                  เพิ่ม - ฿{product.price * quantityAdd}{" "}
                 </button>
               ) : (
                 <button
@@ -275,7 +275,7 @@ const ProductContent = (props, { addResDialog }) => {
           <Grid item xs={12}>
             <label htmlFor="infoProduct">
               <div className="infoBox f15">
-                <h2 className="infoText">Information</h2>
+                <h2 className="infoText">ข้อมูลสินค้า</h2>
                 {!isShowInfo ? (
                   <h5 className="plusIcon">
                     <AddIcon />{" "}
@@ -331,7 +331,7 @@ const ProductContent = (props, { addResDialog }) => {
           <Grid item xs={12}>
             <label htmlFor="commentsProduct">
               <div className="infoBox f15">
-                <h2 className="infoText">comments</h2>
+                <h2 className="infoText">ความคิดเห็น</h2>
                 {!isShowComments ? (
                   <h5 className="plusIcon">
                     <AddIcon />{" "}

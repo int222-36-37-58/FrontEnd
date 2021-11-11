@@ -98,19 +98,14 @@ function ProductCard(props, { addToCart, userInfo }) {
         <div className="modal">
           <div className="colorModalContent">
             <div
+              className="text-right w95 pt-10 baseColor2"
               style={{
-                textAlign: "right",
-                float: "right",
-                color: "#333435",
                 position: "relative",
-                width: "95%",
-                paddingTop: "10px",
                 marginBottom: "-20px",
               }}
             >
               <CloseIcon
-                className="hoverCursor "
-                style={{ fontSize: "24px" }}
+                className="hoverCursor"
                 onClick={() => showColor(false)}
               />
             </div>
@@ -148,7 +143,7 @@ function ProductCard(props, { addToCart, userInfo }) {
                 <div className="b -mb-10 baseColor f24">
                   ฿{props.product.price}
                 </div>
-                <div className="plusMinus" style={{ color: "#333435" }}>
+                <div className="plusMinus baseColor2">
                   <h4>จำนวนที่ต้องการ</h4>
                   <div className="plusMinusQuantity">
                     <div className="minusButton pr-5" onClick={minusQuantity}>
@@ -160,17 +155,15 @@ function ProductCard(props, { addToCart, userInfo }) {
                     </div>
                   </div>
                   {noColor && (
-                    <h5 style={{ color: "#D83C2D", marginTop: 5 + "px" }}>
-                      กรุณาเลือกสีที่ต้องการ!
-                    </h5>
+                    <h5 className="mt-5 baseColor3">กรุณาเลือกสีที่ต้องการ!</h5>
                   )}
                 </div>
 
                 <div
+                  className="w90"
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    width: "90%",
                   }}
                 >
                   <button className="AddButton mlr-5 w40" onClick={AddToCart}>
@@ -211,26 +204,23 @@ function ProductCard(props, { addToCart, userInfo }) {
             </h5>
 
             {props.product.quantity < 1 ? (
-              <button className="disabledButton " style={{ width: 90 + "%" }}>
-                Sold out
+              <button className="disabledButton" style={{ width: "90%" }}>
+                สินค้าหมด
               </button>
             ) : (
               [
                 props.userInfo.userId &&
                 props.product.user.userId === props.userInfo.userId ? (
-                  <button
-                    className="disabledButton"
-                    style={{ width: 90 + "%" }}
-                  >
-                    Add
+                  <button className="disabledButton" style={{ width: "90%" }}>
+                    เพิ่ม
                   </button>
                 ) : (
                   <button
                     className="AddButton"
-                    style={{ width: 90 + "%" }}
+                    style={{ width: "90%" }}
                     onClick={() => showColor(true)}
                   >
-                    Add - ฿{props.product.price}{" "}
+                    เพิ่ม - ฿{props.product.price}{" "}
                   </button>
                 ),
               ]
@@ -255,22 +245,11 @@ function ProductCard(props, { addToCart, userInfo }) {
             {" "}
             <div>
               {" "}
-              <div
-                style={{
-                  color: "#3595f6",
-                  fontSize: "24px",
-                }}
-                className="b"
-              >
-                ฿{props.product.price}{" "}
-              </div>
+              <div className="b baseColor f24">฿{props.product.price} </div>
               <div>
                 {props.product.quantity < 1 ? (
-                  <button
-                    className="disabledButton "
-                    style={{ width: 90 + "%" }}
-                  >
-                    Sold out
+                  <button className="disabledButton " style={{ width: "90%" }}>
+                    สินค้าหมด
                   </button>
                 ) : (
                   [
@@ -278,17 +257,17 @@ function ProductCard(props, { addToCart, userInfo }) {
                     props.product.user.userId === props.userInfo.userId ? (
                       <button
                         className="disabledButton"
-                        style={{ width: 90 + "%" }}
+                        style={{ width: "90%" }}
                       >
-                        Add
+                        เพิ่ม
                       </button>
                     ) : (
                       <button
                         className="AddButton"
-                        style={{ width: 90 + "%" }}
+                        style={{ width: "90%" }}
                         onClick={showColor}
                       >
-                        Add
+                        เพิ่ม
                       </button>
                     ),
                   ]

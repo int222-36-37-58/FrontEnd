@@ -27,7 +27,7 @@ function useSearchHandler(searchVal, type, page, pageSize) {
         setProducts((prevProd) => {
           return [...new Set([...prevProd, ...res.data])];
         });
-        setHasMore(res.data.length > 1);
+        setHasMore(res.data.length >= pageSize);
         setTimeout(() => {
           setLoading(false);
         }, 700);

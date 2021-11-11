@@ -47,6 +47,7 @@ const NavBar = ({
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
+
     const body = document.querySelector("body");
     if (uiStyle.searchModalShow) {
       return;

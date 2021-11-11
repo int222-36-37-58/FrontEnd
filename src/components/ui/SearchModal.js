@@ -49,6 +49,7 @@ const SearchModal = (props) => {
 
   useEffect(() => {
     setSearchVal(props.query);
+
     setPage(0);
     const body = document.querySelector("body");
     if (props.open) {

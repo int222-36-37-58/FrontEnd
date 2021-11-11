@@ -152,7 +152,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             direction="row"
             justifyContent="space-around"
             spacing={0}
-            style={{maxWidth: '90%'}}
+            style={{ maxWidth: "90%" }}
           >
             <Grid item xs={12} md={3}>
               <FilterBox></FilterBox>
@@ -161,10 +161,9 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             <Grid item xs={12} md={8}>
               <Container className="homeContainer">
                 <h4
+                  className="text-right baseColor"
                   style={{
-                    textAlign: "right",
                     marginTop: "-15px",
-                    color: "#3595f6",
                   }}
                 >
                   {productLength} รายการ

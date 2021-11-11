@@ -46,10 +46,12 @@ const ResponseDialog = (props) => {
   return (
     <div>
       <div className="responseDialog rightResDialog">
-        <div style={{ textAlign: "center" }}>{switchRender()}</div>
+        <div className="text-center">{switchRender()}</div>
         <div>
           {props.dialog && (
-            <h3 style={{ fontWeight: 500 ,padding: '0 0 0 10px'}}>{props.dialog.dialogContent}</h3>
+            <h3 style={{ fontWeight: 500, padding: "0 0 0 10px" }}>
+              {props.dialog.dialogContent}
+            </h3>
           )}
         </div>
         <div onClick={() => props.handleCloseBox(props.index)}>

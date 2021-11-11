@@ -110,9 +110,9 @@ const HandlePermission = (props, { addResdialog }) => {
         </div>
 
         <div
+          className="w100"
           style={{
             display: "flex",
-            width: "100%",
             justifyContent: "space-between",
           }}
         >

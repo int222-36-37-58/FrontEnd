@@ -43,6 +43,13 @@ body {
   color: #1895f5;
 }
 
+.baseColor2 {
+  color: #333435;
+}
+.baseColor3 {
+  color: #d83c2d;
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -223,6 +230,10 @@ body {
   width: 75%;
 }
 
+.w95 {
+  width: 95%;
+}
+
 .w100 {
   width: 100%;
 }
@@ -235,12 +246,31 @@ body {
   max-width: 75%;
 }
 
+.mw90 {
+  max-width: 90%;
+}
 .mw100 {
   max-width: 100%;
 }
 
+.m-auto {
+  margin: auto;
+}
+
+.m-center {
+  margin: 0 auto;
+}
+
+.m-0 {
+  margin: 0px;
+}
+
 .m-5 {
   margin: 5px;
+}
+
+.m-20 {
+  margin: 20px;
 }
 
 .mr-5 {
@@ -274,6 +304,10 @@ body {
 
 .mt-20 {
   margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
 }
 
 .mb-20 {
