@@ -112,7 +112,7 @@ function ProductCard(props, { userInfo }) {
                 </h3>{" "}
               </div>
               <div style={{ textAlign: "center" }}>
-                <div className="b baseColor f24">฿{props.product.price} </div>
+                <div className="b baseColor f20">฿{props.product.price} </div>
                 <div>
                   {props.product.quantity < 1 ? (
                     <button className="disabledButton ">สินค้าหมด</button>

@@ -43,7 +43,6 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
             style={{
               display: "flex",
               flexDirection: "row",
-              justifyItems: "center",
               alignItems: "center",
               justifyContent: "space-between",
             }}
@@ -116,7 +115,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
               className="headerRes hoverCursor infoBox pt-5 pb-5"
               onClick={handleShowType}
             >
-              <div className="b">ฟิลเตอร์</div>
+              <div className="b ">ฟิลเตอร์</div>
               {!showType ? (
                 <div>
                   <AddIcon className="f20" />{" "}
@@ -136,7 +135,6 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyItems: "center",
                 alignItems: "center",
                 justifyContent: "space-between",
               }}
@@ -154,50 +152,48 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
               </div>{" "}
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <Grid container justifyContent="center">
-                {types.map((filter) => {
-                  return (
-                    <Grid item xs={12} key={filter.typeId}>
-                      <FormControlLabel
-                        className="w100"
-                        control={
-                          <Checkbox
-                            disableRipple={true}
-                            color="primary"
-                            className="w100 mw100"
-                            checked={uiStyle.filterType === filter.name}
-                            style={{
-                              backgroundColor: "transparent",
-                            }}
-                            icon={
-                              <div className="filterFullItem w100">
-                                <CircleUnchecked className="f20 pl-5" />
-                                <div className="f16 b pl-5"> {filter.name}</div>
-                              </div>
-                            }
-                            checkedIcon={
-                              <div
-                                className="filterFullItem w100"
-                                style={{
-                                  transition: "0.25s",
-                                  backgroundColor: "#f0f8f9",
-                                }}
-                              >
-                                <CircleCheckedFilled className="f20 pl-5" />
-                                <div className="f16 b pl-5"> {filter.name}</div>
-                              </div>
-                            }
-                            onChange={onChange}
-                            value={filter.name}
-                          />
-                        }
-                      />
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </div>
+            <Grid container justifyContent="center">
+              {types.map((filter) => {
+                return (
+                  <Grid item xs={12} key={filter.typeId}>
+                    <FormControlLabel
+                      className="w100"
+                      control={
+                        <Checkbox
+                          disableRipple={true}
+                          color="primary"
+                          className="w100 mw100"
+                          checked={uiStyle.filterType === filter.name}
+                          style={{
+                            backgroundColor: "transparent",
+                          }}
+                          icon={
+                            <div className="filterFullItem w100">
+                              <CircleUnchecked className="f20 pl-5" />
+                              <div className="f16 b pl-5"> {filter.name}</div>
+                            </div>
+                          }
+                          checkedIcon={
+                            <div
+                              className="filterFullItem w100"
+                              style={{
+                                transition: "0.25s",
+                                backgroundColor: "#f0f8f9",
+                              }}
+                            >
+                              <CircleCheckedFilled className="f20 pl-5" />
+                              <div className="f16 b pl-5"> {filter.name}</div>
+                            </div>
+                          }
+                          onChange={onChange}
+                          value={filter.name}
+                        />
+                      }
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
           </div>
         </Container>
       </Hidden>

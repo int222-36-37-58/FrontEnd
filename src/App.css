@@ -265,11 +265,11 @@
 .headerHome {
   display: flex;
   justify-content: right;
-  padding-top: 45px;
+  padding-top: 50px;
   margin-bottom: -40px;
 }
 .headerHome > div {
-  margin-right: 20%;
+  margin-right: 15%;
   color: rgb(216, 216, 216);
 }
 

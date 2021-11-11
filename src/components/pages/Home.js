@@ -138,24 +138,25 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         </div>
         <div
           style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: 78 + "%",
-            marginTop: 1 + "rem",
+            display: "flex",
+            justifyContent: "center",
+            margin: "0 auto",
+            maxWidth: "80%",
+            marginTop: "30px",
           }}
         >
           <Grid
             container
             direction="row"
             justifyContent="space-around"
-            spacing={0}
+            spacing={3}
             style={{ maxWidth: "90%" }}
           >
             <Grid item xs={12} md={3}>
               <FilterBox></FilterBox>
             </Grid>
 
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={9}>
               <Container className="homeContainer">
                 <h4
                   className="text-right baseColor"
