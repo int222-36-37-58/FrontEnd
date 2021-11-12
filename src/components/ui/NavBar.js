@@ -12,11 +12,7 @@ import sitlogo from "../../images/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
-import {
-  addResDialog,
-  changeCurrentMenu,
-  openSearchModal,
-} from "../../actions/uiStyle";
+import { addResDialog, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
@@ -31,7 +27,6 @@ const NavBar = ({
   userLogout,
   removeFromCart,
   clearCartItem,
-  changeCurrentMenu,
   openSearchModal,
   addResDialog,
 }) => {
@@ -135,7 +130,6 @@ const NavBar = ({
               <div
                 className="hoverCursor"
                 onClick={() => {
-                  changeCurrentMenu("");
                   openSearchModal(false);
                   setSearchVal("");
                 }}
@@ -244,7 +238,7 @@ const NavBar = ({
             MenuListProps={{ onMouseLeave: () => setAnchorEl(false) }}
             PaperProps={{
               style: {
-                width: "195px",
+                width: "250px",
                 display: "flex",
                 textAlign: "right",
                 marginTop: "35px",
@@ -255,7 +249,7 @@ const NavBar = ({
               <div
                 onClick={() => {
                   setAnchorEl(null);
-                  changeCurrentMenu("info");
+
                   openSearchModal(false);
                 }}
                 style={{
@@ -263,15 +257,10 @@ const NavBar = ({
                   padding: "10px",
                   display: "flex",
                   justifyContent: "left",
-                  width: "195px",
+                  width: "250px",
                   fontWeight: "600",
-                  maxWidth: "195px",
                 }}
-                className={
-                  uiStyle.currentMenuClicked === "info"
-                    ? "currentClickStyle b hoverCursor"
-                    : "hoverCursor currentHoverStyle"
-                }
+                className="hoverCursor currentHoverStyle"
               >
                 <PersonIcon className="pr-10" /> ข้อมูลของฉัน
               </div>
@@ -280,7 +269,7 @@ const NavBar = ({
               <div
                 onClick={() => {
                   setAnchorEl(null);
-                  changeCurrentMenu("changepassword");
+
                   openSearchModal(false);
                 }}
                 style={{
@@ -291,11 +280,7 @@ const NavBar = ({
                   fontWeight: "600",
                   width: "100%",
                 }}
-                className={
-                  uiStyle.currentMenuClicked === "changepassword"
-                    ? "currentClickStyle b hoverCursor"
-                    : "hoverCursor currentHoverStyle"
-                }
+                className="hoverCursor currentHoverStyle"
               >
                 <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
               </div>
@@ -305,7 +290,7 @@ const NavBar = ({
               <div
                 onClick={() => {
                   setAnchorEl(null);
-                  changeCurrentMenu("order");
+
                   openSearchModal(false);
                 }}
                 style={{
@@ -316,11 +301,7 @@ const NavBar = ({
                   fontWeight: "600",
                   width: "100%",
                 }}
-                className={
-                  uiStyle.currentMenuClicked === "order"
-                    ? "currentClickStyle b hoverCursor"
-                    : "hoverCursor currentHoverStyle"
-                }
+                className="hoverCursor currentHoverStyle"
               >
                 <ListAltIcon className="pr-10" /> คำสั่งซื้อ
               </div>
@@ -331,7 +312,7 @@ const NavBar = ({
                 <div
                   onClick={() => {
                     setAnchorEl(null);
-                    changeCurrentMenu("startseller");
+
                     openSearchModal(false);
                   }}
                   style={{
@@ -342,11 +323,7 @@ const NavBar = ({
                     fontWeight: "600",
                     width: "100%",
                   }}
-                  className={
-                    uiStyle.currentMenuClicked === "createproduct"
-                      ? "currentClickStyle b hoverCursor"
-                      : "hoverCursor currentHoverStyle"
-                  }
+                  className="hoverCursor currentHoverStyle"
                 >
                   {" "}
                   <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
@@ -360,7 +337,7 @@ const NavBar = ({
                   <div
                     onClick={() => {
                       setAnchorEl(null);
-                      changeCurrentMenu("createproduct");
+
                       openSearchModal(false);
                     }}
                     style={{
@@ -371,11 +348,7 @@ const NavBar = ({
                       fontWeight: "600",
                       width: "100%",
                     }}
-                    className={
-                      uiStyle.currentMenuClicked === "createproduct"
-                        ? "currentClickStyle b hoverCursor"
-                        : "hoverCursor currentHoverStyle"
-                    }
+                    className="hoverCursor currentHoverStyle"
                   >
                     {" "}
                     <ShoppingCartOutlinedIcon className="pr-10" /> ลงขายสินค้า
@@ -415,7 +388,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
-    changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
+
     openSearchModal: (open) => dispatch(openSearchModal(open)),
     logout: () => logout(),
     userLogout: () => dispatch(userLogout()),

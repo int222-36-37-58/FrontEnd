@@ -1,12 +1,12 @@
 import { Grid, Container, Hidden } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
 import ProfileInfoPage from "./ProfileInfoPage";
 import UserOrderPage from "./UserOrderPage";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
-import { addResDialog, changeCurrentMenu } from "../../actions/uiStyle";
+import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
@@ -16,20 +16,20 @@ import MyShopPage from "./MyShopPage";
 import StartSellPage from "./StartSellPage";
 import MySellHistoryPage from "./MySellHistoryPage";
 
-const ProfilePage = ({
-  userInfo,
-  changeCurrentMenu,
-  uiStyle,
-  logout,
-  userLogout,
-  addResDialog,
-}) => {
+const ProfilePage = ({ userInfo, logout, userLogout, addResDialog }) => {
   const handleLogOut = () => {
     logout();
     userLogout();
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };
+
+  const [currentClickStyle, setCurrentClickStyle] = useState("");
+  const currentPath = useLocation().pathname;
+
+  useEffect(() => {
+    setCurrentClickStyle(currentPath);
+  }, [currentPath]);
 
   return (
     <>
@@ -45,9 +45,8 @@ const ProfilePage = ({
               <div className="menuProfile">
                 <Link
                   to="/profile/info"
-                  onClick={() => changeCurrentMenu("info")}
                   className={
-                    uiStyle.currentMenuClicked === "info"
+                    currentClickStyle === "/profile/info"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -57,9 +56,8 @@ const ProfilePage = ({
                 </Link>
                 <Link
                   to="/profile/changepassword"
-                  onClick={() => changeCurrentMenu("changepassword")}
                   className={
-                    uiStyle.currentMenuClicked === "changepassword"
+                    currentClickStyle === "/profile/changepassword"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -68,9 +66,8 @@ const ProfilePage = ({
                 </Link>
                 <Link
                   to="/profile/order"
-                  onClick={() => changeCurrentMenu("order")}
                   className={
-                    uiStyle.currentMenuClicked === "order"
+                    currentClickStyle === "/profile/order"
                       ? "clickChangeBackground p-10 "
                       : "hoverChangeBackground p-10"
                   }
@@ -80,9 +77,8 @@ const ProfilePage = ({
                 {userInfo.role === "ROLE_USER" && (
                   <Link
                     to="/profile/startseller"
-                    onClick={() => changeCurrentMenu("startseller")}
                     className={
-                      uiStyle.currentMenuClicked === "startseller"
+                      currentClickStyle === "/profile/startseller"
                         ? "clickChangeBackground p-10 "
                         : "hoverChangeBackground p-10"
                     }
@@ -95,9 +91,8 @@ const ProfilePage = ({
                   <>
                     <Link
                       to="/profile/createproduct"
-                      onClick={() => changeCurrentMenu("createproduct")}
                       className={
-                        uiStyle.currentMenuClicked === "createproduct"
+                        currentClickStyle === "/profile/createproduct"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -107,9 +102,8 @@ const ProfilePage = ({
 
                     <Link
                       to="/profile/myshop"
-                      onClick={() => changeCurrentMenu("myshop")}
                       className={
-                        uiStyle.currentMenuClicked === "myshop"
+                        currentClickStyle === "/profile/myshop"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -119,9 +113,8 @@ const ProfilePage = ({
 
                     <Link
                       to="/profile/mysellhistory"
-                      onClick={() => changeCurrentMenu("mysellhistory")}
                       className={
-                        uiStyle.currentMenuClicked === "mysellhistory"
+                        currentClickStyle === "/profile/mysellhistory"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -134,9 +127,8 @@ const ProfilePage = ({
                   <>
                     <Link
                       to="/profile/createproduct"
-                      onClick={() => changeCurrentMenu("createproduct")}
                       className={
-                        uiStyle.currentMenuClicked === "createproduct"
+                        currentClickStyle === "/profile/createproduct"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -146,9 +138,8 @@ const ProfilePage = ({
 
                     <Link
                       to="/profile/myshop"
-                      onClick={() => changeCurrentMenu("myshop")}
                       className={
-                        uiStyle.currentMenuClicked === "myshop"
+                        currentClickStyle === "/profile/myshop"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -157,9 +148,8 @@ const ProfilePage = ({
                     </Link>
                     <Link
                       to="/profile/mysellhistory"
-                      onClick={() => changeCurrentMenu("mysellhistory")}
                       className={
-                        uiStyle.currentMenuClicked === "mysellhistory"
+                        currentClickStyle === "/profile/mysellhistory"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -168,9 +158,8 @@ const ProfilePage = ({
                     </Link>
                     <Link
                       to="/profile/admin/basedata"
-                      onClick={() => changeCurrentMenu("basedata")}
                       className={
-                        uiStyle.currentMenuClicked === "basedata"
+                        currentClickStyle === "/profile/admin/basedata"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -180,9 +169,8 @@ const ProfilePage = ({
 
                     <Link
                       to="/profile/admin/users"
-                      onClick={() => changeCurrentMenu("users")}
                       className={
-                        uiStyle.currentMenuClicked === "users"
+                        currentClickStyle === "/profile/admin/users"
                           ? "clickChangeBackground p-10 "
                           : "hoverChangeBackground p-10"
                       }
@@ -281,14 +269,12 @@ const ProfilePage = ({
 
 const mapStateToProps = (state) => {
   return {
-    uiStyle: state.uiStyle,
     userInfo: state.user.userInfo,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentMenu: (change) => dispatch(changeCurrentMenu(change)),
     addResDialog: (content) => dispatch(addResDialog(content)),
     getUser: () => dispatch(getUser()),
     logout: () => logout(),

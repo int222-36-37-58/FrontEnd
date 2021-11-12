@@ -55,36 +55,47 @@ function ProfileDrawer(props) {
                 </div>
                 <div className=" w-100">
                   {" "}
+                  {props.role === "ROLE_USER" && (
+                    <Link
+                      to="/profile/startseller"
+                      onClick={props.close}
+                      className="link "
+                    >
+                      <div className=" p-10 hoverChangeBackground">
+                        เริ่มขายสินค้า
+                      </div>
+                    </Link>
+                  )}
                   {(props.role === "ROLE_SELLER" ||
                     props.role === "ROLE_ADMIN") && (
-                      <>
-                    <Link
-                      to="/profile/createproduct"
-                      onClick={props.close}
-                      className="link "
-                    >
-                      <div className=" p-10 hoverChangeBackground">
-                        ลงขายสินค้า
-                      </div>
-                    </Link>
-                    <Link
-                      to="/profile/myshop"
-                      onClick={props.close}
-                      className="link "
-                    >
-                      <div className=" p-10 hoverChangeBackground">
-                        ร้านค้าของฉัน
-                      </div>
-                    </Link>
-                    <Link
-                      to="/profile/mysellhistory"
-                      onClick={props.close}
-                      className="link "
-                    >
-                      <div className=" p-10 hoverChangeBackground">
-                        ลงขายสินค้า
-                      </div>
-                    </Link>
+                    <>
+                      <Link
+                        to="/profile/createproduct"
+                        onClick={props.close}
+                        className="link "
+                      >
+                        <div className=" p-10 hoverChangeBackground">
+                          ลงขายสินค้า
+                        </div>
+                      </Link>
+                      <Link
+                        to="/profile/myshop"
+                        onClick={props.close}
+                        className="link "
+                      >
+                        <div className=" p-10 hoverChangeBackground">
+                          ร้านค้าของฉัน
+                        </div>
+                      </Link>
+                      <Link
+                        to="/profile/mysellhistory"
+                        onClick={props.close}
+                        className="link "
+                      >
+                        <div className=" p-10 hoverChangeBackground">
+                          ลงขายสินค้า
+                        </div>
+                      </Link>
                     </>
                   )}
                   {props.role === "ROLE_ADMIN" && (

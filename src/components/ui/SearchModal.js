@@ -27,6 +27,7 @@ const SearchModal = (props) => {
     page,
     pageSize
   );
+
   const observer = useRef();
   const lastElementRef = useCallback(
     (el) => {
@@ -154,6 +155,16 @@ const SearchModal = (props) => {
               )}
               <div className="radioGroup pt-20 pb-20">
                 <span className="f18  pr-20">กรองการค้นหา</span>
+                <span>
+                  <input
+                    type="radio"
+                    id={"AllFilter"}
+                    name="type"
+                    defaultValue={""}
+                    onChange={chooseType}
+                  />
+                  <label htmlFor="AllFilter">ทั้งหมด</label>
+                </span>
                 {types.map((tp) => {
                   return (
                     <span key={tp.typeId}>

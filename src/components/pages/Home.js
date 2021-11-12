@@ -51,6 +51,10 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         });
     };
     getProductLength();
+
+    return () => {
+      setProductLength(0);
+    };
   }, [addResDialog]);
 
   const observer = useRef();
