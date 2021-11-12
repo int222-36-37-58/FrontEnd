@@ -26,6 +26,11 @@ const ProductContent = (props, { addResDialog }) => {
   const history = useHistory();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    return () => {};
+  }, []);
+
+  useEffect(() => {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/${id}`)
@@ -52,6 +57,8 @@ const ProductContent = (props, { addResDialog }) => {
         };
         props.addResDialog(data);
       });
+
+    return () => {};
   }, [props]);
 
   const chooseColor = (e) => {
