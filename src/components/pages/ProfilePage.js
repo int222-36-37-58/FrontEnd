@@ -15,6 +15,7 @@ import { logout, userLogout, getUser } from "../../actions/user";
 import MyShopPage from "./MyShopPage";
 import StartSellPage from "./StartSellPage";
 import MySellHistoryPage from "./MySellHistoryPage";
+import "../../css/profileMenu.css";
 
 const ProfilePage = ({ userInfo, logout, userLogout, addResDialog }) => {
   const handleLogOut = () => {

@@ -9,6 +9,8 @@ import ProductCard from "../ui/ProductCard";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
+import "../../css/home.css";
+
 const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);

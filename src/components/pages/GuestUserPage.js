@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import CloseIcon from "@material-ui/icons/Close";
+import "../../css/signinModal.css";
 const GuestUserPage = (props) => {
   const [formShow, setFormShow] = useState("login");
   useEffect(() => {
@@ -62,8 +63,10 @@ const GuestUserPage = (props) => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              {formShow === "login" && <LoginPage closeModal={closeModal}/>}
-              {formShow === "register" && <RegisterPage closeModal={closeModal}/>}
+              {formShow === "login" && <LoginPage closeModal={closeModal} />}
+              {formShow === "register" && (
+                <RegisterPage closeModal={closeModal} />
+              )}
             </div>
           </Grid>
         </Grid>

@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../../css/order.css";
 
 const MySellHistoryPage = () => {
   const [mySell, setMySell] = useState([]);
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/seller/order?pageNo=0&pageSize=1`).then((res) => {
-      setMySell(res.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/seller/order?pageNo=0&pageSize=1`)
+      .then((res) => {
+        setMySell(res.data);
+      });
   }, []);
 
   return (

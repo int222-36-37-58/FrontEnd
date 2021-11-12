@@ -1,7 +1,6 @@
 import * as actionTypes from "../actiontype";
 
 const INITIAL_STATE = {
-  currentMenuClicked: "",
   searchModalShow: false,
   filterType: [],
   responseDialog: [],
@@ -9,11 +8,6 @@ const INITIAL_STATE = {
 
 const uiStyle = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
-    case actionTypes.CURRENT_MENU_CLICKED:
-      return {
-        ...state,
-        currentMenuClicked: action.payload.currentMenuClicked,
-      };
     case actionTypes.SEARCH_MODAL_HANDLE:
       return { ...state, searchModalShow: action.payload.searchModalShow };
     case actionTypes.FILTER_CLICKED:

@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
+import "../../css/profileInfo.css";
+
 const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
   const [isEdit, setIsEdit] = useState(false);
 

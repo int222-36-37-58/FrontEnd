@@ -1,0 +1,77 @@
+.navBar {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  width: 100%;
+  background-color: #1895f5;
+  display: flex;
+  justify-content: center;
+}
+
+.navBar > .topNav {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: "Courier New", Courier, monospace;
+  padding-bottom: 3px;
+}
+
+.navBar > .topNav > div {
+  border-style: solid;
+  margin: 3px;
+  border-width: 0 1px 0 0px;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.topNav .searchNav {
+  width: 95%;
+  outline: none;
+  padding: 15px;
+
+  padding-right: 80px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+.topNav > .iconNav {
+  padding: 10px 8px 10px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBox {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex: auto;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 1px;
+  top: 2px;
+  background-color: #1895f5;
+  border-radius: 5px;
+  padding: 8px 15px 8px 15px;
+}
+
+.cartCount {
+  vertical-align: top;
+  position: absolute;
+  top: 1px;
+  margin-left: 18px;
+  color: white;
+  background-color: #d83c2d;
+  border-radius: 30px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  pointer-events: none;
+}

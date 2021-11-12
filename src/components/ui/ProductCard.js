@@ -2,7 +2,8 @@ import { Box, Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import AddModal from "./AddModal";
+import AddProductModal from "./AddProductModal";
+import "../../css/productCard.css";
 
 function ProductCard(props, { userInfo }) {
   const history = useHistory();
@@ -33,7 +34,10 @@ function ProductCard(props, { userInfo }) {
       }}
     >
       {clickAdd && (
-        <AddModal product={props.product} close={() => showModal(false)} />
+        <AddProductModal
+          product={props.product}
+          close={() => showModal(false)}
+        />
       )}
       {props.listStyle === 1 ? (
         <Box

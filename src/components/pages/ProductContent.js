@@ -9,6 +9,7 @@ import ConfirmDialog from "../ui/ConfirmDialog";
 import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";
 import { connect } from "react-redux";
+import "../../css/productContent.css";
 const ProductContent = (props, { addResDialog }) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);
@@ -212,11 +213,11 @@ const ProductContent = (props, { addResDialog }) => {
           <div className="plusMinus" style={{ color: "#545454" }}>
             <h4>จำนวน</h4>
             <div className="plusMinusQuantity">
-              <div className="minusButton" onClick={minusQuantity}>
+              <div className="minusButton hoverCursor" onClick={minusQuantity}>
                 -
               </div>
               <div className="currentQuantity">{quantityAdd}</div>
-              <div className="plusButton" onClick={plusQuantity}>
+              <div className="plusButton hoverCursor" onClick={plusQuantity}>
                 +
               </div>
             </div>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../../index.css";
 import { Hidden, Menu } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
@@ -18,6 +17,8 @@ import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
 import { logout, userLogout } from "../../actions/user";
 import { useEffect } from "react";
+import "../../css/navbar.css";
+
 const NavBar = ({
   isAuth,
   userInfo,
@@ -388,7 +389,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
-
     openSearchModal: (open) => dispatch(openSearchModal(open)),
     logout: () => logout(),
     userLogout: () => dispatch(userLogout()),

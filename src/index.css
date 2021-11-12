@@ -130,6 +130,10 @@ body {
   font-size: 24px;
 }
 
+.f28 {
+  font-size: 28px;
+}
+
 .b {
   font-weight: 900;
 }
@@ -192,6 +196,10 @@ body {
 
 .pl-20 {
   padding-left: 20px;
+}
+
+.pl-25 {
+  padding-left: 25px;
 }
 
 .pl-35 {
@@ -335,73 +343,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: right;
-}
-
-.InfoButton {
-  color: #7bcb34;
-  border-color: #7bcb34;
-  border-style: solid;
-  border-width: 2px;
-  font-weight: 900;
-  font-family: Prompt, sans-serif;
-  background-color: #d1eafd;
-  border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-}
-
-.InfoButton:hover {
-  cursor: pointer;
-  color: #d1eafd;
-  border-color: #7bcb34;
-  border-style: solid;
-  transition-duration: 0.5s;
-  background-color: #7bcb34;
-}
-
-.delFromCart {
-  color: #d83c2d;
-  background-color: #ffccbb;
-  border-color: #d83c2d;
-  border-style: solid;
-  border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-  font-family: Prompt, sans-serif;
-  border-width: 2px;
-  font-weight: 600;
-}
-
-.delFromCart:hover {
-  color: #ffccbb;
-  background-color: #d83c2d;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.AddButton {
-  border-width: 2px;
-  color: #3595f6;
-  border-color: #3595f6;
-  border-style: solid;
-  font-family: Prompt, sans-serif;
-  font-weight: 900;
-  background-color: #d1eafd;
-  border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-}
-
-.AddButton:hover {
-  cursor: pointer;
-  color: #d1eafd;
-  border-color: #3595f6;
-  border-style: solid;
-  transition-duration: 0.5s;
-  background-color: #3595f6;
 }
 
 .roundBorder {

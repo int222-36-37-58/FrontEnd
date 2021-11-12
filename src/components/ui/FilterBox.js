@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { clickedFilter, clearFilter } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
+import "../../css/filterBox.css";
 
 const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
   const [types, setTypes] = useState([]);

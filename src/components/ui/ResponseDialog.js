@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import CancelOutlined from "@material-ui/icons/CancelOutlined";
+import "../../css/responseDialog.css";
 
 const ResponseDialog = (props) => {
   useEffect(() => {
@@ -55,7 +56,7 @@ const ResponseDialog = (props) => {
           )}
         </div>
         <div onClick={() => props.handleCloseBox(props.index)}>
-          <CancelOutlined className="hoverBlack" />
+          <CancelOutlined className="hoverCloseDialog" />
         </div>
       </div>
     </div>

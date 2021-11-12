@@ -3,6 +3,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
 import CloseIcon from "@material-ui/icons/Close";
+import "../../css/cart.css";
+
 const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 

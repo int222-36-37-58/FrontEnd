@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { addToCart } from "../../actions/cart";
 import { connect } from "react-redux";
+import "../../css/addProductModal.css";
 
 const AddModal = (props, { addToCart }) => {
   const [colorChoose, setColorChoose] = useState(0);
@@ -67,7 +68,7 @@ const AddModal = (props, { addToCart }) => {
 
   return (
     <div className="modal">
-      <div className="colorModalContent">
+      <div className="productModalContent">
         <div
           className="text-right w95 pt-10 baseColor2"
           style={{
@@ -112,11 +113,14 @@ const AddModal = (props, { addToCart }) => {
             <div className="plusMinus baseColor2">
               <h4>จำนวนที่ต้องการ</h4>
               <div className="plusMinusQuantity">
-                <div className="minusButton pr-5" onClick={minusQuantity}>
+                <div
+                  className="minusButton pr-5 hoverCursor"
+                  onClick={minusQuantity}
+                >
                   -
                 </div>
                 <div className="currentQuantity pr-5">{quantity}</div>
-                <div className="plusButton" onClick={plusQuantity}>
+                <div className="plusButton hoverCursor" onClick={plusQuantity}>
                   +
                 </div>
               </div>

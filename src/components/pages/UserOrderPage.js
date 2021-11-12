@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
+import "../../css/order.css";
+
 const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);
   const [currentViewOrder, setCurrentViewOrder] = useState({});
