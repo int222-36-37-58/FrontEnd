@@ -67,6 +67,7 @@ const NavBar = ({
 
   const handleSearchModal = (open) => (event) => {
     const body = document.querySelector("body");
+
     openSearchModal(open);
     if (open === false) {
       body.style.overflow = "auto";
@@ -127,7 +128,7 @@ const NavBar = ({
       <>
         <div className="navBar ">
           <div className="topNav ">
-            <Link to="/">
+            <Link to="/shop">
               <div
                 className="hoverCursor"
                 onClick={() => {

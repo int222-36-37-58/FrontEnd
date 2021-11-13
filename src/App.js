@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
-import Home from "./components/pages/Home";
+import ShopPage from "./components/pages/ShopPage";
 import NavBar from "./components/ui/NavBar";
 import ProductPage from "./components/pages/ProductPage";
 import ProfilePage from "./components/pages/ProfilePage";
-
+import WelcomePage from "./components/pages/WelcomePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ProtectedRoute from "./components/etc/ProtectedRoute";
 import ResponseDialog from "./components/ui/ResponseDialog";
@@ -44,9 +44,10 @@ const App = ({ dialog, removeDialog }) => {
           );
         })}
       </div>
-      <div className="pageContent ">
+      <div className="pageContent">
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={WelcomePage} />
+          <Route path="/shop" exact component={ShopPage} />
           <Route path="/product/:id" component={ProductPage} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
           <Route component={NotFoundPage} />

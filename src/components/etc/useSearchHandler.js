@@ -13,14 +13,22 @@ function useSearchHandler(searchVal, type, page, pageSize) {
   useEffect(() => {
     setLoading(true);
     let api = `${process.env.REACT_APP_API_URL}/products/search?`;
+    if (searchVal !== "") {
+      let query = "";
+      if (searchVal !== "all") {
+        query = searchVal;
+      }
+      api = api + `&searchText=${query}`;
+    }
     if (type !== "") {
       api = api + `&type=${type}`;
     }
     let cancel;
+
     axios({
       method: "GET",
       url: api,
-      params: { searchText: searchVal, pageNo: page, pageSize: pageSize },
+      params: { pageNo: page, pageSize: pageSize },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })
       .then((res) => {
@@ -33,6 +41,7 @@ function useSearchHandler(searchVal, type, page, pageSize) {
         }, 700);
       })
       .catch((e) => {
+        setLoading(false);
         if (axios.isCancel(e)) {
           return;
         }

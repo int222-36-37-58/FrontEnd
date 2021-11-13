@@ -84,6 +84,21 @@
   min-height: 60px;
   line-height: 20px;
 }
+@media (max-width: 1440px) {
+  .titleWrap {
+    font-size: 14px;
+    text-align: left;
+    width: 165px;
+  }
+}
+
+@media (max-width: 1370px) {
+  .titleWrap {
+    font-size: 14px;
+    width: 160px;
+  }
+}
+
 @media (max-width: 425px) {
   .titleWrap {
     font-size: 14px;
@@ -119,12 +134,17 @@
 }
 
 .buttonRes {
-  width: 95%;
+  width: 100%;
 }
-
-@media (max-width: 1440px) {
+@media (max-width: 1510px) {
   .buttonRes {
     width: 85%;
+    font-size: 11px;
+  }
+}
+@media (max-width: 1440px) {
+  .buttonRes {
+    width: 90%;
     font-size: 11px;
   }
 }

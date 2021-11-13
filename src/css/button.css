@@ -92,8 +92,9 @@
 
 .goHomeButton:hover {
   cursor: pointer;
-  color: #1895f5;
-  background-color: black;
+  color: whitesmoke;
+  border-color: #333435;
+  background-color: #333435;
   transition: 0.5s;
 }
 

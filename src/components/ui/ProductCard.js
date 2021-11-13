@@ -70,7 +70,9 @@ function ProductCard(props, { userInfo }) {
                 [
                   props.userInfo.userId &&
                   props.product.user.userId === props.userInfo.userId ? (
-                    <button className="disabledButton buttonRes">เพิ่ม</button>
+                    <button className="disabledButton buttonRes">
+                      เหลือสินค้า {props.product.quantity} ชิ้น
+                    </button>
                   ) : (
                     <button
                       className="AddButton buttonRes  "
@@ -119,7 +121,7 @@ function ProductCard(props, { userInfo }) {
                           className="disabledButton"
                           style={{ padding: "5px 40px" }}
                         >
-                          เพิ่ม
+                          เหลือสินค้า {props.product.quantity} ชิ้น
                         </button>
                       ) : (
                         <button

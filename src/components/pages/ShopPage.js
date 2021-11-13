@@ -9,13 +9,13 @@ import ProductCard from "../ui/ProductCard";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
-import "../../css/home.css";
+import "../../css/shop.css";
 
 const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
-  const [searchVal] = useState("");
+  const [searchVal] = useState("all");
   const [type, setType] = useState("");
   const [listStyle, setListStyle] = useState(1);
   const { products, hasMore, loading } = useSearchHandler(
@@ -119,7 +119,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
           <Grid
             item
             xs={6}
-            md={5}
+            md={4}
             lg={3}
             key={`productCardNo${product.productId}`}
           >
@@ -139,23 +139,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
   return (
     <>
       <div className="shopContainer">
-        <Hidden mdDown>
-          <div className="headerHome">
-            <div>
-              <AppsIcon
-                className="p-10 hoverCursor"
-                onClick={() => setListStyle(1)}
-                style={{ color: listStyle === 1 ? "#333435" : null }}
-              />
-
-              <DehazeIcon
-                className="p-10 hoverCursor"
-                onClick={() => setListStyle(2)}
-                style={{ color: listStyle === 2 ? "#333435" : null }}
-              />
-            </div>
-          </div>{" "}
-        </Hidden>
+        {" "}
         <div
           style={{
             display: "flex",
@@ -176,30 +160,49 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             </Grid>
 
             <Grid item xs={12} md={8} lg={9}>
-              <Container className="productContainer">
-                <h4
-                  className="text-right baseColor"
-                  style={{
-                    marginTop: "-15px",
-                  }}
-                >
-                  {productLength} รายการ
-                </h4>
-                <Grid container direction="row" spacing={1}>
-                  {productList}
-                </Grid>
+              <>
+                <Container className="productContainer">
+                  <Hidden mdDown>
+                    <div className="headerHome">
+                      <div>
+                        <AppsIcon
+                          className="p-10 hoverCursor"
+                          onClick={() => setListStyle(1)}
+                          style={{ color: listStyle === 1 ? "#333435" : null }}
+                        />
 
-                {loading && (
-                  <Grid item xs={12}>
-                    <div className="text-center pt-20">
-                      <CircularProgress
-                        style={{ color: "#1895f5" }}
-                        disableShrink
-                      />
-                    </div>
+                        <DehazeIcon
+                          className="p-10 hoverCursor"
+                          onClick={() => setListStyle(2)}
+                          style={{ color: listStyle === 2 ? "#333435" : null }}
+                        />
+                      </div>
+                    </div>{" "}
+                  </Hidden>
+                  <h4
+                    className="text-right baseColor"
+                    style={{
+                      marginTop: "-15px",
+                    }}
+                  >
+                    {productLength} รายการ
+                  </h4>
+                  <Grid container direction="row" spacing={1}>
+                    {productList}
                   </Grid>
-                )}
-              </Container>
+
+                  {loading && (
+                    <Grid item xs={12}>
+                      <div className="text-center pt-20">
+                        <CircularProgress
+                          style={{ color: "#1895f5" }}
+                          disableShrink
+                        />
+                      </div>
+                    </Grid>
+                  )}
+                </Container>{" "}
+              </>
             </Grid>
           </Grid>
         </div>
