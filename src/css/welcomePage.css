@@ -184,14 +184,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-@media (max-width: 500px) {
-  .welcomeTopicContainer {
-    justify-content: center;
-    flex-direction: column;
-    font-size: 16px;
-  }
+  justify-content: center;
 }
 
 .imageTopic {
@@ -206,28 +199,32 @@
   font-weight: 600;
 }
 .contentTopic {
-  padding-left: 30px;
-}
-
-.optionTopic {
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  justify-content: center;
-  margin-top: 50px;
+  padding-left: 50px;
 }
 
 @media (max-width: 768px) {
-  .optionTopic {
+  .welcomeTopicContainer {
     flex-direction: column;
+    font-size: 16px;
+  }
+  .imageTopic {
     margin: 0 auto;
   }
+  .contentTopic {
+    padding-top: 35px;
+  }
+}
+
+.optionTopic {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding-top: 80px;
 }
 
 .optionTopic img {
   max-width: 300px;
   width: auto;
-  height:160px;
+  height: 160px;
   border-radius: 10px;
 }
 
@@ -235,4 +232,25 @@
   padding: 10px 30px;
   max-width: 300px;
   width: 100%;
+}
+@media (max-width: 1024px) {
+  .optionTopic {
+    grid-template-columns: auto auto;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .optionTopic img {
+    max-width: 250px;
+    width: auto;
+    height: 160px;
+    border-radius: 10px;
+  }
+
+  .optionTopic > div {
+    padding: 10px 10px;
+    max-width: 300px;
+    width: 100%;
+    font-size: 16px;
+  }
 }

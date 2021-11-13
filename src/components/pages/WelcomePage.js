@@ -37,7 +37,7 @@ const WelcomePage = () => {
           <img src={shoppingCart} className="imageTopic" alt="topic1" />{" "}
           <div className="contentTopic">
             <div className="headerTopic">เว็บไซต์นี้คือเว็บไซต์อะไร ?</div>
-            <div style={{ maxWidth: "600px", width: "100%" }}>
+            <div style={{maxWidth:'650px'}}>
               เป็นเว็บไซต์สำหรับซื้อขายสินค้า สำหรับทุกคน
               ไม่ว่าคุณจะสนใจเรื่องการขายสินค้าที่คุณมี
               หรือการซื้อสินค้าจากผู้อื่นพวกเราก็มีบริการรองรับสำหรับทุกคน
