@@ -1,20 +1,3 @@
-.shopContainer {
-  margin: 0 auto;
-  display: flex;
-}
-
-@media (min-width: 1025px) {
-  .shopContainer {
-    width: 75%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .shopContainer {
-    width: 100%;
-  }
-}
-
 .productContainer {
   padding: 30px;
   margin-top: 65px;

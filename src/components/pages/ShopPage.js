@@ -138,7 +138,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
 
   return (
     <>
-      <div className="shopContainer">
+      <Container maxWidth="lg">
         {" "}
         <div
           style={{
@@ -206,7 +206,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             </Grid>
           </Grid>
         </div>
-      </div>
+      </Container>
     </>
   );
 };
