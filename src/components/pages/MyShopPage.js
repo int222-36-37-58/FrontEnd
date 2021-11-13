@@ -32,13 +32,15 @@ const MyShopPage = ({ userInfo }) => {
         {myProduct.length === 0 && (
           <>
             <Grid item xs={12}>
-              <div style={{ textAlign: "center", paddingTop: "20px" }}>
+              <div className="text-center pt-20">
                 <img
                   src={squidgirlnotfound}
                   alt="noresult"
-                  style={{ opacity: "0.6", maxWidth: "200px" }}
+                  className="squidgirlnotfound"
                 />
-                <div className="b text-center pt-10 f18">ไม่มีสินค้าที่คุณวางขาย</div>
+                <div className="b text-center pt-10 f18">
+                  ไม่มีสินค้าที่คุณวางขาย
+                </div>
               </div>
             </Grid>
           </>

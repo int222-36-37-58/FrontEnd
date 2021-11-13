@@ -18,6 +18,11 @@ import MySellHistoryPage from "./MySellHistoryPage";
 import "../../css/profileMenu.css";
 
 const ProfilePage = ({ userInfo, logout, userLogout, addResDialog }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return () => {};
+  }, []);
+
   const handleLogOut = () => {
     logout();
     userLogout();

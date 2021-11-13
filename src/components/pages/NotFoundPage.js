@@ -11,7 +11,7 @@ const NotFoundPage = () => {
 
   return (
     <Container className="notFoundPage">
-      <h1 style={{ fontSize: 72 + "px" }}>404</h1>
+      <h1 className="f72">404</h1>
 
       <h3>Sorry, Page Not Found</h3>
       <h4>The page you requested could not be found</h4>
