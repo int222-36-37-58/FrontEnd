@@ -4,7 +4,7 @@
   flex-direction: column;
   position: fixed;
   margin-top: 80px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .responseDialog {
