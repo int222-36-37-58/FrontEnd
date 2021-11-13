@@ -222,6 +222,7 @@ const SearchModal = (props) => {
                         alt="noresult"
                         style={{ opacity: "0.6", maxWidth: "200px" }}
                       />
+                      <div>ไม่มีผลลัพธ์...</div>
                     </div>
                   </Grid>
                 )}
