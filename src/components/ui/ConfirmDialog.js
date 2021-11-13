@@ -1,6 +1,7 @@
 import { Dialog } from "@material-ui/core";
 import React from "react";
-
+import "../../css/confirmDialog.css";
+import squidgirl from "../../images/squidgirl.png";
 const ConfirmDialog = (props) => {
   const confirmCondition = () => {
     props.submit();
@@ -13,27 +14,36 @@ const ConfirmDialog = (props) => {
       fullWidth
       maxWidth="sm"
     >
-      <div style={{ padding: "30px", paddingTop: "35px" }}>
-        <div className="b f23" style={{ paddingBottom: "20px" }}>
+      <div className="p-30 pt-35">
+        <div className="confirmHead pb-20">
           {props.confirmInfo.confirmContent}
         </div>
-
+        <div
+          style={{
+            textAlign: "center",
+          }}
+        >
+          <img
+            src={squidgirl}
+            alt="squidgirl"
+            style={{
+              maxWidth: "250px",
+              width: "100%",
+            }}
+          />
+        </div>
         <div className="dialogButtonZone w100">
-          <div>
-            <button
-              className="delFromCart  "
-              style={{ marginRight: "10px",padding: '8px' }}
-              onClick={confirmCondition}
-            >
-              <div className="f16"> ยืนยัน</div>
-            </button>
-          </div>
-          <div>
-            <button className="AddButton " style={{padding: '8px'}} onClick={props.handleCloseBox}>
-              {" "}
-              <div className="f16"> ยกเลิก</div>{" "}
-            </button>
-          </div>
+          <button className="delFromCart mr-10 w50 " onClick={confirmCondition}>
+            <div className="f16"> ยืนยัน</div>
+          </button>
+
+          <button
+            className="AddButton mr-10 w50"
+            onClick={props.handleCloseBox}
+          >
+            {" "}
+            <div className="f16"> ยกเลิก</div>{" "}
+          </button>
         </div>
       </div>
     </Dialog>

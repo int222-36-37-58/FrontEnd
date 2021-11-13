@@ -10,6 +10,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import "../../css/order.css";
+import squidgirlnotfound from "../../images/squidgirlnotfound.png";
 
 const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);
@@ -115,6 +116,21 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                       </tr>
                     );
                   })}
+
+                  {myOrder.length === 0 && (
+                    <tr>
+                      <td colSpan="5">
+                        <img
+                          src={squidgirlnotfound}
+                          className="squidgirlnotfound"
+                          alt="squidgirl"
+                        />
+                        <div className="text-center b f18">
+                          คุณยังไม่มีประวัติการสั่งซื้อ
+                        </div>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
 
@@ -201,6 +217,19 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                     </div>
                   );
                 })}
+                {myOrder.length === 0 && (
+                  <>
+                    <img
+                      src={squidgirlnotfound}
+                      className="squidgirlnotfound"
+                      alt="squidgirl"
+                    />
+                    <div className="text-center b f18">
+                      คุณยังไม่มีประวัติการสั่งซื้อ
+                    </div>
+                  </>
+                )}
+
                 <div
                   style={{
                     display: "flex",

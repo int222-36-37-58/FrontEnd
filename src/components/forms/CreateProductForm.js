@@ -223,11 +223,13 @@ const CreateProductForm = (props) => {
               />
             </Button>
             {errors.imageName && (
-              <div style={{ color: "red" }} className="b">กรุณาใส่ภาพของสินค้า!</div>
+              <div style={{ color: "red" }} className="b">
+                กรุณาใส่ภาพของสินค้า!
+              </div>
             )}
             {errors.imageFormat && (
               <div style={{ color: "red" }} className="b">
-                กรุณาใส่ไฟล์ประเภท .jpg .jpeg .png 
+                กรุณาใส่ไฟล์ประเภท .jpg .jpeg .png
               </div>
             )}
           </Grid>
@@ -340,7 +342,9 @@ const CreateProductForm = (props) => {
                 })}
               </FormGroup>
               {errors.color && (
-                <div style={{ color: "red" }} className="b">กรุณาเลือกสีของสินค้า!</div>
+                <div style={{ color: "red" }} className="b">
+                  กรุณาเลือกสีของสินค้า!
+                </div>
               )}
             </div>
           </Grid>

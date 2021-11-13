@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import useSearchHandler from "../etc/useSearchHandler";
 import axios from "axios";
+import squidgirlnotfound from "../../images/squidgirlnotfound.png";
 
 const SearchModal = (props) => {
   const [searchVal, setSearchVal] = useState("");
@@ -213,6 +214,17 @@ const SearchModal = (props) => {
                   }
                 })}
 
+                {products.length === 0 && (
+                  <Grid item xs={12}>
+                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                      <img
+                        src={squidgirlnotfound}
+                        alt="noresult"
+                        style={{ opacity: "0.6", maxWidth: "200px" }}
+                      />
+                    </div>
+                  </Grid>
+                )}
                 {loading && (
                   <Grid item xs={12}>
                     <div style={{ textAlign: "center", paddingTop: "20px" }}>

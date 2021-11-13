@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../../css/order.css";
+import squidgirlnotfound from "../../images/squidgirlnotfound.png";
 
 const MySellHistoryPage = () => {
   const [mySell, setMySell] = useState([]);
@@ -47,6 +48,21 @@ const MySellHistoryPage = () => {
               </tr>
             );
           })}
+
+          {mySell.length === 0 && (
+            <tr>
+              <td colSpan="4">
+                <img
+                  src={squidgirlnotfound}
+                  className="squidgirlnotfound"
+                  alt="squidgirl"
+                />
+                <div className="text-center b f18">
+                  คุณยังไม่มีประวัติการขาย
+                </div>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

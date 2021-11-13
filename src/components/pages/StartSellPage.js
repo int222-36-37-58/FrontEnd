@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
 import ConfirmDialog from "../ui/ConfirmDialog";
+import squidgirl from "../../images/squidgirl.png";
 
 const StartSellPage = (props, { addResDialog, getUser }) => {
   const history = useHistory();
@@ -62,6 +63,14 @@ const StartSellPage = (props, { addResDialog, getUser }) => {
           onClick={openConfirmBox}
         >
           เริ่มเป็นผู้ขาย
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <img
+            src={squidgirl}
+            style={{ maxWidth: "300px", width: "100%", opacity: "0.85" }}
+            alt="bluehairgirl"
+          />
         </div>
       </div>
     </>

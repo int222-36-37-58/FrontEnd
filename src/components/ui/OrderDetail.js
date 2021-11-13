@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Hidden } from "@material-ui/core";
 import OrderDetailRow from "./OrderDetailRow";
+
 const OrderDetail = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -100,6 +101,7 @@ const OrderDetail = (props) => {
             {props.order.orderDetail.map((odt) => {
               return <OrderDetailRow odt={odt} key={odt.orderDetailId} />;
             })}
+
             <tr>
               <td
                 colSpan="10"
