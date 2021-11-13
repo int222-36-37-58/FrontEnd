@@ -174,10 +174,15 @@
 }
 
 .allWelcomeTopicContainer {
-  margin-top: 50px;
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  background-color: #333435;
+  color: white;
+  height: 100%;
+  padding-bottom: 50px;
+  border-radius: 5px;
 }
 
 .welcomeTopicContainer {
@@ -197,6 +202,8 @@
 .headerTopic {
   font-size: 24px;
   font-weight: 600;
+  color: #1895f5;
+  text-shadow: 0 0 10px #333435;
 }
 .contentTopic {
   padding-left: 50px;
@@ -212,13 +219,13 @@
   }
   .contentTopic {
     padding-top: 35px;
+    padding-left: 10px;
   }
 }
 
 .optionTopic {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  padding-top: 80px;
 }
 
 .optionTopic img {
@@ -252,5 +259,11 @@
     max-width: 300px;
     width: 100%;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .optionTopic {
+    grid-template-columns: auto;
   }
 }
