@@ -31,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
   font-size: 40px;
   color: whitesmoke;
   background-color: #1895f5;
@@ -131,7 +131,7 @@
   outline: none;
   opacity: 0.9;
   transition: 1s all ease;
-  z-index: 2;
+  z-index: 1;
   background: #333435;
   cursor: pointer;
 }

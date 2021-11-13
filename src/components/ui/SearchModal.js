@@ -160,7 +160,7 @@ const SearchModal = (props) => {
                     type="radio"
                     id={"AllFilter"}
                     name="type"
-                    defaultValue={""}
+                    defaultValue={"all"}
                     onChange={chooseType}
                   />
                   <label htmlFor="AllFilter">ทั้งหมด</label>

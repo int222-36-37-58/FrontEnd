@@ -21,7 +21,13 @@ function useSearchHandler(searchVal, type, page, pageSize) {
       api = api + `&searchText=${query}`;
     }
     if (type !== "") {
-      api = api + `&type=${type}`;
+      let query = "";
+      if (type !== "all") {
+        query = type;
+        api = api + `&type=${query}`;
+      } else if (searchVal === "") {
+        api = api + `searchText=`;
+      }
     }
     let cancel;
 
