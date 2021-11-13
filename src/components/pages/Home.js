@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from "@material-ui/core";
+import { CircularProgress, Container, Grid, Hidden } from "@material-ui/core";
 import axios from "axios";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
@@ -24,6 +24,18 @@ const Home = ({ filter, addResDialog, userInfo }) => {
     page,
     pageSize
   );
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListStyle(1);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (filter.length === 0) {
@@ -80,8 +92,8 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         return (
           <Grid
             item
-            xs={12}
-            sm={6}
+            xs={6}
+            md={4}
             lg={3}
             ref={lastElementRef}
             key={`productCardNo${product.productId}`}
@@ -106,8 +118,8 @@ const Home = ({ filter, addResDialog, userInfo }) => {
         return (
           <Grid
             item
-            xs={12}
-            sm={6}
+            xs={6}
+            md={5}
             lg={3}
             key={`productCardNo${product.productId}`}
           >
@@ -126,28 +138,30 @@ const Home = ({ filter, addResDialog, userInfo }) => {
 
   return (
     <>
-      <Container maxWidth="xl">
-        <div className="headerHome">
-          <div>
-            <AppsIcon
-              className="p-10 hoverCursor"
-              onClick={() => setListStyle(1)}
-              style={{ color: listStyle === 1 ? "#333435" : null }}
-            />
+      <div className="shopContainer">
+        <Hidden mdDown>
+          <div className="headerHome">
+            <div>
+              <AppsIcon
+                className="p-10 hoverCursor"
+                onClick={() => setListStyle(1)}
+                style={{ color: listStyle === 1 ? "#333435" : null }}
+              />
 
-            <DehazeIcon
-              className="p-10 hoverCursor"
-              onClick={() => setListStyle(2)}
-              style={{ color: listStyle === 2 ? "#333435" : null }}
-            />
-          </div>
-        </div>
+              <DehazeIcon
+                className="p-10 hoverCursor"
+                onClick={() => setListStyle(2)}
+                style={{ color: listStyle === 2 ? "#333435" : null }}
+              />
+            </div>
+          </div>{" "}
+        </Hidden>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             margin: "0 auto",
-            maxWidth: "80%",
+            maxWidth: "90%",
             marginTop: "30px",
           }}
         >
@@ -156,14 +170,13 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             direction="row"
             justifyContent="space-around"
             spacing={3}
-            style={{ maxWidth: "90%" }}
           >
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={4} lg={3}>
               <FilterBox></FilterBox>
             </Grid>
 
-            <Grid item xs={12} md={9}>
-              <Container className="homeContainer">
+            <Grid item xs={12} md={8} lg={9}>
+              <Container className="productContainer">
                 <h4
                   className="text-right baseColor"
                   style={{
@@ -172,7 +185,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
                 >
                   {productLength} รายการ
                 </h4>
-                <Grid container direction="row" spacing={2}>
+                <Grid container direction="row" spacing={1}>
                   {productList}
                 </Grid>
 
@@ -190,7 +203,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             </Grid>
           </Grid>
         </div>
-      </Container>
+      </div>
     </>
   );
 };

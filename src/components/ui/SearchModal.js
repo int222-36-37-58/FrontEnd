@@ -187,10 +187,9 @@ const SearchModal = (props) => {
                     return (
                       <Grid
                         item
-                        xs={12}
-                        sm={3}
-                        md={5}
-                        lg={3}
+                        xs={6}
+                        sm={4}
+                        md={3}
                         ref={lastElementRef}
                         key={i}
                       >
@@ -203,7 +202,7 @@ const SearchModal = (props) => {
                     );
                   } else {
                     return (
-                      <Grid item xs={12} sm={3} md={5} lg={3} key={i}>
+                      <Grid item xs={6} sm={4} md={3} key={i}>
                         <ProductCard
                           product={product}
                           listStyle={1}

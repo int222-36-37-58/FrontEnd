@@ -7,8 +7,7 @@
   font-family: Prompt, sans-serif;
   background-color: #d1eafd;
   border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px;
   margin-bottom: 5px;
 }
 
@@ -27,8 +26,7 @@
   border-color: #d83c2d;
   border-style: solid;
   border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px;
   margin-bottom: 5px;
   font-family: Prompt, sans-serif;
   border-width: 2px;
@@ -51,8 +49,7 @@
   font-weight: 900;
   background-color: #d1eafd;
   border-radius: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px;
   margin-bottom: 5px;
 }
 
@@ -77,8 +74,7 @@
   font-weight: 900;
   background-color: white;
   border-radius: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 7px;
   margin-bottom: 5px;
   opacity: 0.6;
 }

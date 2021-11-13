@@ -1,4 +1,20 @@
-.homeContainer {
+.shopContainer {
+  margin: 0 auto;
+}
+
+@media (min-width: 1025px) {
+  .shopContainer {
+    width: 75%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .shopContainer {
+    width: 100%;
+  }
+}
+
+.productContainer {
   padding: 30px;
   margin-top: 30px;
   padding-top: 50px;
@@ -14,7 +30,7 @@
   margin-bottom: -40px;
 }
 .headerHome > div {
-  margin-right: 15%;
+  margin-right: 5%;
   color: rgb(216, 216, 216);
 }
 

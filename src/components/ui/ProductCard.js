@@ -44,45 +44,36 @@ function ProductCard(props, { userInfo }) {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          style={{ marginLeft: "-10px", marginRight: "-10px" }}
+          justifyContent="center"
         >
           <div className="imageContainer hoverCursor" onClick={seeInfo}>
             <img
               src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
               alt={`${props.product.imageName}`}
-              className="hoverCursor imageProduct"
+              className="hoverCursor imageProductStyle1"
             />
             <div className="hoverImage">
               <h4 className="textInHoverImage">view</h4>
             </div>
           </div>
           <div className="hoverCursor">
-            <h5 className="titleWrap" onClick={seeInfo}>
+            <h5 className="titleWrap " onClick={seeInfo}>
               {props.product.name}
             </h5>
 
             <div className="text-center">
               {props.product.quantity < 1 ? (
-                <button
-                  className="disabledButton "
-                  style={{ width: "90%", padding: "6px" }}
-                >
+                <button className="disabledButton buttonRes  ">
                   สินค้าหมด
                 </button>
               ) : (
                 [
                   props.userInfo.userId &&
                   props.product.user.userId === props.userInfo.userId ? (
-                    <button
-                      className="disabledButton "
-                      style={{ width: "90%", padding: "6px" }}
-                    >
-                      เพิ่ม
-                    </button>
+                    <button className="disabledButton buttonRes">เพิ่ม</button>
                   ) : (
                     <button
-                      className="AddButton "
-                      style={{ width: "90%" }}
+                      className="AddButton buttonRes  "
                       onClick={() => showModal(true)}
                     >
                       เพิ่ม - ฿{props.product.price}{" "}
@@ -107,11 +98,11 @@ function ProductCard(props, { userInfo }) {
                 <img
                   src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
                   alt={`${props.product.imageName}`}
-                  className=" imageProduct3"
+                  className=" imageProductStyle2"
                 />
               </div>
-              <div>
-                <h3 onClick={seeInfo} className="f18 hoverChangeToNavBarColor">
+              <div className="titleStyle2">
+                <h3 onClick={seeInfo} className=" hoverChangeToNavBarColor">
                   {props.product.name}
                 </h3>{" "}
               </div>
