@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import welcomePageCover from "../../images/welcomePageCover.jpg";
 import "../../css/welcomePage.css";
 import { useHistory } from "react-router";
@@ -9,6 +9,10 @@ import comment from "../../images/comment.jpg";
 import stock from "../../images/stock.jpg";
 
 const WelcomePage = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return () => {};
+  }, []);
   const history = useHistory();
   const goShop = () => {
     history.push("/shop");
@@ -18,7 +22,7 @@ const WelcomePage = () => {
     <div className="welcomePageContainer">
       <div>
         <div className="welcomeHeader" onClick={goShop}>
-          welcome to onlinelnwshop
+          welcome to onlineinwshop
         </div>
         <div className="startButtonContainer">
           <div className="startButton" onClick={goShop}>
@@ -38,8 +42,8 @@ const WelcomePage = () => {
           <div className="contentTopic">
             <div className="headerTopic">เว็บไซต์นี้คือเว็บไซต์อะไร ?</div>
             <div style={{ maxWidth: "650px" }}>
-              เป็นเว็บไซต์สำหรับซื้อขายสินค้า สำหรับทุกคน
-              ไม่ว่าคุณจะสนใจเรื่องการขายสินค้าที่คุณมี
+              เป็นเว็บไซต์สำหรับซื้อขายสินค้าของเล่นหรือสินค้าเกี่ยวกับการ์ตูน
+              สำหรับทุกคน ไม่ว่าคุณจะสนใจเรื่องการขายสินค้าที่คุณมี
               หรือการซื้อสินค้าจากผู้อื่นพวกเราก็มีบริการรองรับสำหรับทุกคน
               ถ้าคุณสนใจแล้วก็อย่ารอช้า กดปุ่ม Start แล้วไปลุยกันเลย!~
             </div>
@@ -51,14 +55,16 @@ const WelcomePage = () => {
           <div>
             <img src={searchTopic} alt="searchWelcome" />
             <div className="headerTopic"> การค้นหาสินค้า</div>
-            คุณสามารถค้นหาสินค้าที่ต้องการผ่านช่องทางต่างๆในการค้นหาซึ่งจะช่วยให้คุณเจอสินค้าที่ต้องการได้ง่ายขึ้น
+            คุณสามารถค้นหาสินค้าที่ต้องการผ่านช่องทางต่างๆในการค้นหา
+            ซึ่งจะช่วยให้คุณเจอสินค้าที่ต้องการได้ง่ายขึ้น
           </div>
 
           <div>
             <img src={comment} alt="searchWelcome" />
             <div className="headerTopic"> การแสดงความคิดเห็นต่อสินค้า</div>
             คุณสามารถแสดงความเห็นต่อสินค้าที่คุณได้ซื้อ
-            เพื่อแนะนำผู้อื่นที่จะมาซื้อบ้างและช่วยให้การตัดสินใจในการซื้อของคุณง่ายขึ้น
+            เพื่อแนะนำผู้อื่นที่จะสนใจสินค้านั้นเหมือนกัน
+            และคุณยังสามารถอ่านความเห็นของผู้อื่นเพื่อช่วยให้การตัดสินใจในการซื้อของคุณง่ายขึ้นด้วย
           </div>
 
           <div>

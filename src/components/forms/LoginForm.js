@@ -78,6 +78,11 @@ const LoginForm = (props) => {
                 label="password"
                 onChange={onChange}
                 helperText="ประกอบด้วย ตัวอักษรภาษาอังกฤษ พิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    onSubmit();
+                  }
+                }}
               />
             </Grid>
 
@@ -85,7 +90,7 @@ const LoginForm = (props) => {
               <Button
                 fullWidth
                 style={{
-                  marginTop: 15 + "px",
+                  marginTop: "15px",
                   alignItems: "center",
                   backgroundColor: "#1895f5",
                   color: "white",

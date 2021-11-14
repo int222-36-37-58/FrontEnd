@@ -57,8 +57,8 @@ function ProductCard(props, { userInfo }) {
             </div>
           </div>
           <div className="hoverCursor">
-            <h5 className="titleWrap " onClick={seeInfo}>
-              {props.product.name}
+            <h5 className="titleWrap "  onClick={seeInfo}>
+            {props.product.name.length >= 50 ? <>{props.product.name.slice(0,props.product.name.length-7)}...</> : <>{props.product.name}</>} 
             </h5>
 
             <div className="text-center">

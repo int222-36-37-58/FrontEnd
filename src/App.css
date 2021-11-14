@@ -138,19 +138,12 @@
   width: 40%;
 }
 
-.notFoundPage {
-  color: #181818;
-  font-family: Prompt, sans-serif;
-}
-
 .imageProduct2 {
   max-width: 135px;
   height: auto;
   transition: 0.3s;
   width: 100%;
 }
-
-
 
 .hoverChangeBackground {
   font-size: 14px;

@@ -79,25 +79,6 @@
   opacity: 0.6;
 }
 
-.goHomeButton {
-  background: #1895f5;
-  color: white;
-  padding: 20px;
-  margin-top: 10px;
-  border-style: solid;
-  border-radius: 10px;
-  font-size: 20px;
-  border-color: #1895f5;
-}
-
-.goHomeButton:hover {
-  cursor: pointer;
-  color: whitesmoke;
-  border-color: #333435;
-  background-color: #333435;
-  transition: 0.5s;
-}
-
 .roleButton {
   padding: 8px;
   font-size: 16px;
