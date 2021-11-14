@@ -240,13 +240,13 @@ const CreateProductForm = (props) => {
               fullWidth
               error={errors.name}
               type="text"
-              inputProps={{ minLength: 3, maxLength: 40 }}
+              inputProps={{ minLength: 3, maxLength: 55 }}
               id="name"
               name="name"
               label="product name"
               value={data.name}
               onChange={onChange}
-              helperText="ชื่อสินค้าตั้งแต่ 3 - 40 ตัวอักษร"
+              helperText="ชื่อสินค้าตั้งแต่ 3 - 55 ตัวอักษร"
             />
           </Grid>
           <Grid item xs={12}>
@@ -256,13 +256,13 @@ const CreateProductForm = (props) => {
               multiline
               error={errors.description}
               type="textarea"
-              inputProps={{ minLength: 5, maxLength: 200 }}
+              inputProps={{ minLength: 5, maxLength: 550 }}
               id="description"
               name="description"
               label="description"
               value={data.description}
               onChange={onChange}
-              helperText="รายละเอียดของสินค้า ตั้งแต่ 5 - 200 ตัวอักษร"
+              helperText="รายละเอียดของสินค้า ตั้งแต่ 5 - 550 ตัวอักษร"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -353,7 +353,7 @@ const CreateProductForm = (props) => {
             <Button
               fullWidth
               style={{
-                marginTop: 15 + "px",
+                marginTop: "15px",
                 alignItems: "center",
                 backgroundColor: "#1895f5",
                 color: "white",

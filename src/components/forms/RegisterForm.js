@@ -61,9 +61,7 @@ const RegisterForm = (props) => {
     if (
       !e.password ||
       e.password.length <= 4 ||
-      (!e.password.match(/^[A-Z]/) &&
-        !e.password.match(/^[a-z]/) &&
-        !e.password.match(/^[0-9]/))
+      !e.password.match(/^[A-Za-z0-9]/)
     ) {
       errors.password = true;
     }
@@ -90,12 +88,12 @@ const RegisterForm = (props) => {
     <div
       className={!props.editMode ? "center" : null}
       style={{
-        maxWidth: 680 + "px",
+        maxWidth: "680px",
         width: "100%",
         height: "auto",
         backgroundColor: "white",
         borderRadius: "0 0 10px 10px",
-        marginBottom: 30 + "px",
+        marginBottom: "30px",
       }}
     >
       {props.editMode && (
@@ -127,7 +125,7 @@ const RegisterForm = (props) => {
                     disabled
                     required
                     type="text"
-                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    inputProps={{ minLength: 3, maxLength: 25 }}
                     id="userName"
                     name="userName"
                     label="Username"
@@ -140,11 +138,11 @@ const RegisterForm = (props) => {
                     required
                     error={errors.userName}
                     type="text"
-                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    inputProps={{ minLength: 3, maxLength: 25 }}
                     id="userName"
                     name="userName"
                     label="username"
-                    helperText="ตัวอักษรตั้งแต่ 3 - 20 ตัวอักษร"
+                    helperText="ตัวอักษรตั้งแต่ 3 - 25 ตัวอักษร"
                     onChange={onChange}
                     value={data.userName}
                   />
@@ -156,7 +154,7 @@ const RegisterForm = (props) => {
                   required
                   error={errors.fullName}
                   type="text"
-                  inputProps={{ minLength: 2, maxLength: 30 }}
+                  inputProps={{ minLength: 2, maxLength: 80 }}
                   id="fullName"
                   name="fullName"
                   label="full name"
@@ -172,7 +170,7 @@ const RegisterForm = (props) => {
                   required
                   error={errors.address}
                   type="textarea"
-                  inputProps={{ minLength: 5, maxLength: 90 }}
+                  inputProps={{ minLength: 5, maxLength: 150 }}
                   id="address"
                   name="address"
                   label="address"

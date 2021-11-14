@@ -32,15 +32,17 @@ function AdminEditUserForm(props) {
 
   const validate = (e) => {
     const errors = {};
-    if (!e.userName || e.userName.length <= 5 || !e.userName.match(/^[a-z]/)) {
+    if (
+      !e.userName ||
+      e.userName.length <= 5 ||
+      !e.userName.match(/^[a-z0-9]/)
+    ) {
       errors.userName = true;
     }
     if (
       !e.password ||
       e.password.length <= 4 ||
-      (!e.password.match(/^[A-Z]/) &&
-        !e.password.match(/^[a-z]/) &&
-        !e.password.match(/^[0-9]/))
+      !e.password.match(/^[A-Za-z0-9]/)
     ) {
       errors.password = true;
     }
@@ -104,6 +106,7 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
+            inputProps={{ minLength: 2, maxLength: 80 }}
             value={userData.fullName}
             error={errors.fullName}
             onChange={onChange}
@@ -115,6 +118,7 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
+            inputProps={{ minLength: 5, maxLength: 150 }}
             value={userData.address}
             error={errors.address}
             onChange={onChange}
@@ -126,6 +130,7 @@ function AdminEditUserForm(props) {
           <TextField
             type="password"
             fullWidth
+            inputProps={{ minLength: 3, maxLength: 20 }}
             value={userData.password}
             error={errors.password}
             onChange={onChange}
@@ -137,6 +142,7 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
+            inputProps={{ minLength: 10, maxLength: 10 }}
             onChange={onChange}
             value={userData.tel}
             name="tel"
