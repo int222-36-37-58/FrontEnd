@@ -10,6 +10,7 @@ import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
 import "../../css/shop.css";
+import squidgirlnotfound from "../../images/squidgirlnotfound.png";
 
 const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);
@@ -190,7 +191,18 @@ const Home = ({ filter, addResDialog, userInfo }) => {
                   <Grid container direction="row" spacing={1}>
                     {productList}
                   </Grid>
-
+                  {products.length === 0 && (
+                    <Grid item xs={12}>
+                      <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                        <img
+                          src={squidgirlnotfound}
+                          alt="noresult"
+                          className="squidgirlnotfound"
+                        />
+                        <div>ไม่มีผลลัพธ์...</div>
+                      </div>
+                    </Grid>
+                  )}
                   {loading && (
                     <Grid item xs={12}>
                       <div className="text-center pt-20">

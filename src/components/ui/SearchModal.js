@@ -220,7 +220,7 @@ const SearchModal = (props) => {
                       <img
                         src={squidgirlnotfound}
                         alt="noresult"
-                        style={{ opacity: "0.6", maxWidth: "200px" }}
+                        className="squidgirlnotfound"
                       />
                       <div>ไม่มีผลลัพธ์...</div>
                     </div>
