@@ -30,8 +30,8 @@
   opacity: 1;
 }
 
-.imageContainer:hover .imageProduct {
-  opacity: 0.6;
+.imageContainer:hover .imageProductStyle1 {
+  opacity: 0.75;
 }
 
 .imageProductStyle1 {
