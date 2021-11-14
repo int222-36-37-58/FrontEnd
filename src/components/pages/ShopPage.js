@@ -1,5 +1,4 @@
 import { CircularProgress, Container, Grid, Hidden } from "@material-ui/core";
-import axios from "axios";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "../../index.css";
@@ -52,25 +51,13 @@ const Home = ({ filter, addResDialog, userInfo }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const getProductLength = () => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/products`)
-        .then((res) => {
-          setProductLength(res.data.length);
-        })
-        .catch((err) => {
-          const data = {
-            status: 500,
-            dialogContent: err.message,
-          };
-          addResDialog(data);
-        });
+      setProductLength(products.length);
     };
     getProductLength();
-
     return () => {
       setProductLength(0);
     };
-  }, [addResDialog]);
+  }, [products]);
 
   const observer = useRef();
   const lastElementRef = useCallback(
