@@ -72,21 +72,14 @@ const Cart = (props) => {
                 ไม่มีสินค้าในตะกร้า
               </ListItem>
             ) : (
-              <div
-                className="cartHead"
-                style={{
-                  paddingTop: "15px",
-                  paddingBottom: "10px",
-                }}
-              >
-                <div>ตะกร้าสินค้า : </div>
+              <div className="cartHead pt-10 pb-10">
+                <div className="pl-10">ตะกร้าสินค้า : </div>
                 <div>
                   <button
-                    className="delFromCart"
-                    style={{ textAlign: "right", marginRight: 25 + "px" }}
+                    className="delFromCart text-right mr-5 "
                     onClick={() => props.clearCart()}
                   >
-                    ล้างตะกร้า
+                    ลบทั้งหมด
                   </button>{" "}
                 </div>
               </div>
@@ -98,22 +91,27 @@ const Cart = (props) => {
                 </ListItem>
               );
             })}
-            <h4 style={{ textAlign: "right", marginRight: 25 + "px" }}>
+            <h4 className="text-right mr-30">
               ราคารวมทั้งหมด : ฿ {totalPrice}
             </h4>
             <ListItem>
-              {props.listProduct.length > 0 && (
-                <span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "right",
+                  width: "100%",
+                }}
+              >
+                {props.listProduct.length > 0 && (
                   <button
                     className="AddButton"
-                    style={{ paddingLeft: 30 + "px", paddingRight: "30px" }}
+                    style={{ paddingLeft: "30px", paddingRight: "30px" }}
                     onClick={handleCheckOut}
                   >
                     สั่งซื้อ
                   </button>
-                </span>
-              )}
-              <span>
+                )}
                 <button
                   className="delFromCart"
                   style={{
@@ -128,7 +126,7 @@ const Cart = (props) => {
                 >
                   ปิด
                 </button>{" "}
-              </span>
+              </div>
             </ListItem>
           </List>
         </Drawer>
@@ -192,34 +190,23 @@ const Cart = (props) => {
             <h4 style={{ textAlign: "right", marginRight: 25 + "px" }}>
               ราคาสุทธิ ฿ {totalPrice}
             </h4>
-            <div style={{ float: "right", marginRight: 25 + "px" }}>
+            <div className="text-right pr-20">
               {props.listProduct.length > 0 && (
-                <span>
-                  <button
-                    className="AddButton"
-                    style={{ paddingLeft: 30 + "px", paddingRight: "30px" }}
-                    onClick={handleCheckOut}
-                  >
-                    สั่งซื้อ
-                  </button>
-                </span>
-              )}
-              <span>
                 <button
-                  className="delFromCart"
-                  style={{
-                    marginLeft: 10 + "px",
-                    paddingTop: 5 + "px",
-                    paddingBottom: 5 + "px",
-                    marginBottom: 5 + "px",
-                    paddingLeft: 30 + "px",
-                    paddingRight: "30px",
-                  }}
-                  onClick={props.onHandleCart(false)}
+                  className="AddButton"
+                  style={{ padding: "5px 30px" }}
+                  onClick={handleCheckOut}
                 >
-                  ปิด
-                </button>{" "}
-              </span>
+                  สั่งซื้อ
+                </button>
+              )}
+              <button
+                className="delFromCart  ml-5"
+                style={{ padding: "5px 30px" }}
+                onClick={props.onHandleCart(false)}
+              >
+                ปิด
+              </button>{" "}
             </div>
           </List>
         </Drawer>

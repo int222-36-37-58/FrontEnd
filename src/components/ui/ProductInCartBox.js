@@ -4,22 +4,22 @@ import PropTypes from "prop-types";
 const ProductInCartBox = (props) => {
   return (
     <div className="productInCart">
-      <div>
+      <div style={{ maxWidth: "100px" }}>
         <img
           src={`${process.env.REACT_APP_API_URL}/getImage/${props.orderDetail.product.imageName}`}
           alt="productInCart"
-          style={{ width: 75 + "px", height: "auto", maxHeight: "100px" }}
+          className="imgInCart"
         />
       </div>
 
       <div>
-        <div className="InCartTitle b " style={{ marginTop: "-30px" }}>
+        <div className="InCartTitle b text-left">
           {props.orderDetail.product.name}
         </div>
 
-        <div>
-          สี : {props.orderDetail.color.colorName} / จำนวน :{" "}
-          {props.orderDetail.quantity}
+        <div className="colorQuantity">
+          สี {props.orderDetail.color.colorName} / จำนวน{" "}
+          {props.orderDetail.quantity} ชิ้น
         </div>
       </div>
 
@@ -29,10 +29,9 @@ const ProductInCartBox = (props) => {
         </h5>
         <button
           className="delFromCart"
-          style={{ height: 30 + "%" }}
           onClick={() => props.remove(props.orderDetail)}
         >
-          นำออก
+          ลบ
         </button>
       </div>
     </div>
