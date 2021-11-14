@@ -20,6 +20,10 @@
 
 .imageContainer {
   position: relative;
+  display: flex;
+  justify-content: center;
+  height: 135px;
+  width: 150px;
 }
 
 .imageContainer:hover .hoverImage {
@@ -31,9 +35,10 @@
 }
 
 .imageProductStyle1 {
-  max-width: 150px;
+  max-width: 160px;
   width: auto;
-  height: 155px;
+  height: 100%;
+
   transition: 0.3s;
   border-radius: 5px;
 }
@@ -113,15 +118,15 @@
 }
 
 .titleStyle2 {
-  font-size: 18px;
+  font-size: 15px;
   word-wrap: break-word;
-  max-width: 250px;
+  max-width: 250x;
 }
 @media (max-width: 1439px) {
   .titleStyle2 {
-    font-size: 15px;
+    font-size: 14px;
     word-wrap: break-word;
-    max-width: 200px;
+    max-width: 225px;
   }
 }
 
