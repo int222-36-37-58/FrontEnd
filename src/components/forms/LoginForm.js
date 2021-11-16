@@ -58,12 +58,12 @@ const LoginForm = (props) => {
                 fullWidth
                 error={errors.username}
                 type="text"
-                inputProps={{ minLength: 3, maxLength: 20 }}
+                inputProps={{ minLength: 6, maxLength: 20 }}
                 id="username"
                 name="username"
                 label="username"
                 onChange={onChange}
-                helperText="ตัวอักษรตั้งแต่ 3 - 20 ตัวอักษร"
+                helperText="ตัวอักษรตั้งแต่ 6 - 20 ตัวอักษร"
               />
             </Grid>
             <Grid item xs={12}>
@@ -72,7 +72,7 @@ const LoginForm = (props) => {
                 fullWidth
                 error={errors.password}
                 type="password"
-                inputProps={{ minLength: 3, maxLength: 20 }}
+                inputProps={{ minLength: 6, maxLength: 20 }}
                 id="password"
                 name="password"
                 label="password"

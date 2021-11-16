@@ -60,7 +60,7 @@ const RegisterForm = (props) => {
     }
     if (
       !e.password ||
-      e.password.length <= 4 ||
+      e.password.length <= 5 ||
       !e.password.match(/^[A-Za-z0-9]/)
     ) {
       errors.password = true;
@@ -128,7 +128,7 @@ const RegisterForm = (props) => {
                     disabled
                     required
                     type="text"
-                    inputProps={{ minLength: 3, maxLength: 25 }}
+                    inputProps={{ minLength: 6, maxLength: 25 }}
                     id="userName"
                     name="userName"
                     label="Username"
@@ -141,11 +141,11 @@ const RegisterForm = (props) => {
                     required
                     error={errors.userName}
                     type="text"
-                    inputProps={{ minLength: 3, maxLength: 25 }}
+                    inputProps={{ minLength: 6, maxLength: 25 }}
                     id="userName"
                     name="userName"
                     label="username"
-                    helperText="ตัวอักษรตั้งแต่ 3 - 25 ตัวอักษร"
+                    helperText="ตัวอักษรตั้งแต่ 6 - 25 ตัวอักษร"
                     onChange={onChange}
                     value={data.userName}
                   />
@@ -204,11 +204,11 @@ const RegisterForm = (props) => {
                     required
                     error={errors.password}
                     type="password"
-                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    inputProps={{ minLength: 6, maxLength: 20 }}
                     id="password"
                     name="password"
                     label="password"
-                    helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 4 ตัวขึ้นไป"
+                    helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 6 ตัวขึ้นไป"
                     onChange={onChange}
                     value={data.password}
                   />
@@ -221,7 +221,7 @@ const RegisterForm = (props) => {
                     required
                     error={errors.confirmPassword}
                     type="password"
-                    inputProps={{ minLength: 3, maxLength: 20 }}
+                    inputProps={{ minLength: 6, maxLength: 20 }}
                     id="confirmPassword"
                     name="confirmPassword"
                     label="confirm password"
