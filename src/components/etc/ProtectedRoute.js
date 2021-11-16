@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+
 import { Redirect, Route } from "react-router";
 
 function ProtectedRoute({ isAuth, component: Component, ...rest }) {
@@ -7,7 +7,7 @@ function ProtectedRoute({ isAuth, component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) => {
-        if (isAuth) {
+        if (localStorage.getItem("token")) {
           return <Component />;
         } else {
           return (
@@ -19,10 +19,4 @@ function ProtectedRoute({ isAuth, component: Component, ...rest }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuth: state.user.isAuth,
-  };
-};
-
-export default connect(mapStateToProps)(ProtectedRoute);
+export default ProtectedRoute;
