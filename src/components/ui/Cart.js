@@ -40,7 +40,7 @@ const Cart = (props) => {
         .then((res) => {
           const data = {
             status: res.status,
-            dialogContent: "Check out success!!",
+            dialogContent: "ซื้อสินค้าสำเร็จ!!",
           };
           props.addResDialog(data);
         })

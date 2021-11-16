@@ -81,7 +81,7 @@ const UserListPage = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Update User at userid : ${res.data.userId} success!!`,
+          dialogContent: `แก้ไขข้อมูลผู้ใช้ของ ${res.data.userName} สำเร็จ!!`,
         };
         addResDialog(data);
       })
@@ -110,7 +110,7 @@ const UserListPage = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Add new account success!!`,
+          dialogContent: `เพิ่มบัญชีใหม่สำเร็จ!!`,
         };
         addResDialog(data);
       })

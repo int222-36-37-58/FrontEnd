@@ -45,7 +45,7 @@ const EditProductPage = ({ product, clearProduct, addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: "แก้ไขข้อมูลสำเร็จ",
+          dialogContent: "แก้ไขข้อมูลสินค้าสำเร็จ",
         };
         addResDialog(data);
       })
@@ -70,7 +70,7 @@ const EditProductPage = ({ product, clearProduct, addResDialog }) => {
     setEditProduct(data);
     setConfirmBox({
       showConfirm: true,
-      confirmContent: `ยืนยันที่จะแก้ไขข้อมูลไหม`,
+      confirmContent: `ยืนยันที่จะแก้ไขข้อมูลสินค้าไหม`,
     });
   };
 

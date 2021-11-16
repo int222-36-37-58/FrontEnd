@@ -50,11 +50,7 @@ const ProductContent = (props, { addResDialog }) => {
         setComments(res.data);
       })
       .catch((err) => {
-        const data = {
-          status: err.response.status,
-          dialogContent: err.message,
-        };
-        props.addResDialog(data);
+        return;
       });
 
     return () => {};
@@ -122,7 +118,7 @@ const ProductContent = (props, { addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: "Delete Success",
+          dialogContent: "ลบสินค้าสำเร็จ",
         };
         props.goMyShop();
         props.addResDialog(data);

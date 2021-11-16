@@ -59,7 +59,7 @@ const ColorTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: res.data,
+          dialogContent: "ลบสีสำเร็จ!!",
         };
         addResDialog(data);
       })
@@ -95,7 +95,7 @@ const ColorTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Add color ${res.data.colorName} success!!`,
+          dialogContent: `เพิ่มสี ${res.data.colorName} สำเร็จ!!`,
         };
         addResDialog(data);
       })
@@ -125,7 +125,7 @@ const ColorTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Update color success!!`,
+          dialogContent: `แก้ไขสีสำเร็จ!!`,
         };
         addResDialog(data);
       })

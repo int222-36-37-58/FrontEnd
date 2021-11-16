@@ -17,7 +17,10 @@ const StartSellPage = (props, { addResDialog, getUser }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/user/promotTo?role=seller`)
       .then((res) => {
-        const resData = { status: res.status, dialogContent: res.data };
+        const resData = {
+          status: res.status,
+          dialogContent: "ยินดีด้วยคุณได้เป็นผู้ขายแล้ว",
+        };
         props.addResDialog(resData);
       })
       .then(() => {

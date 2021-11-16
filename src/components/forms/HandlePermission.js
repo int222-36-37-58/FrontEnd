@@ -23,7 +23,7 @@ const HandlePermission = (props, { addResdialog }) => {
       .then((res) => {
         const content = {
           status: res.status,
-          dialogContent: res.data,
+          dialogContent: `ให้สิทธิ์ ${props.user.userName} เป็น ${role} สำเร็จ`,
         };
         props.addResDialog(content);
       })

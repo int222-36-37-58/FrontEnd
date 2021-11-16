@@ -54,7 +54,7 @@ const TypeTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: res.data,
+          dialogContent: "ลบ type สำเร็จ",
         };
         addResDialog(data);
       })
@@ -96,7 +96,7 @@ const TypeTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Add type ${res.data.name} success!!`,
+          dialogContent: `เพิ่ม type ${res.data.name} สำเร็จ!!`,
         };
         addResDialog(data);
       })
@@ -131,7 +131,7 @@ const TypeTable = ({ addResDialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: `Update type success!!`,
+          dialogContent: `แก้ไข type สำเร็จ!!`,
         };
         addResDialog(data);
       })
