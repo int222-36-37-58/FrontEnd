@@ -229,23 +229,6 @@ const RegisterForm = (props) => {
                 </Grid>
               )}
 
-              {props.editMode && (
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    required
-                    error={errors.confirmPassword}
-                    type="password"
-                    inputProps={{ minLength: 3, maxLength: 20 }}
-                    id="password"
-                    name="password"
-                    label="Password"
-                    helperText="ยืนยันด้วยรหัสผ่านของคุณ"
-                    onChange={onConfirmPassword}
-                  />
-                </Grid>
-              )}
-
               {props.adminMode && (
                 <Grid item xs={12}>
                   <FormControl>
