@@ -75,7 +75,10 @@ const RegisterForm = (props) => {
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
       errors.tel = true;
     }
-    if (!confirmPassword || confirmPassword !== e.password) {
+    if (
+      (!confirmPassword && !props.editMode) ||
+      (confirmPassword !== e.password && !props.editMode)
+    ) {
       errors.confirmPassword = true;
     }
     setErrors(errors);
