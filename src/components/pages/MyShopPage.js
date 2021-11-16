@@ -9,7 +9,7 @@ const MyShopPage = ({ userInfo }) => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/products/sellerproduct/${userInfo.userName}`
+        `${process.env.REACT_APP_API_URL}/seller/products/sellerproduct/${userInfo.userName}`
       )
       .then((res) => {
         setMyProduct(res.data);

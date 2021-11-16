@@ -14,7 +14,7 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
   const [clearForm, setClearForm] = useState(false);
   const submit = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/user/products/add`, productData, {
+      .post(`${process.env.REACT_APP_API_URL}/seller/products/add`, productData, {
         headers: {
           "Content-type": "multipart/form-data",
         },

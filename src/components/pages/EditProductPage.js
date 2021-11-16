@@ -34,7 +34,7 @@ const EditProductPage = ({ product, clearProduct, addResDialog }) => {
   const submitEditProduct = () => {
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/user/products/put/${product.productId}`,
+        `${process.env.REACT_APP_API_URL}/seller/products/put/${product.productId}`,
         editProduct,
         {
           headers: {

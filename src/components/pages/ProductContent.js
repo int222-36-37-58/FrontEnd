@@ -49,7 +49,7 @@ const ProductContent = (props, { addResDialog }) => {
       .then((res) => {
         setComments(res.data);
       })
-      .catch((err) => {
+      .catch(() => {
         return;
       });
 
@@ -113,7 +113,7 @@ const ProductContent = (props, { addResDialog }) => {
   const deleteThisProduct = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/user/products/${product.productId}`
+        `${process.env.REACT_APP_API_URL}/seller/products/${product.productId}`
       )
       .then((res) => {
         const data = {
@@ -265,7 +265,7 @@ const ProductContent = (props, { addResDialog }) => {
                   disabled
                   style={{ padding: 10 + "px", width: 45 + "%" }}
                 >
-                  Sold out
+                  สินค้าหมด
                 </button>
               ),
             ]
