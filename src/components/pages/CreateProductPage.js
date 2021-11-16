@@ -22,7 +22,7 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: "Add Success!",
+          dialogContent: "ลงขายสำเร็จ!",
         };
         addResDialog(data);
       })
