@@ -55,7 +55,7 @@ const ProductContent = (props, { addResDialog }) => {
         });
     }
     return () => {};
-  }, [props]);
+  }, [props, product]);
 
   const chooseColor = (e) => {
     setSelectedColor(e.target.value);
