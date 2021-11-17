@@ -89,13 +89,14 @@ const SearchModal = (props) => {
               maxWidth="lg"
               style={{
                 backgroundColor: "white",
-                padding: "50px",
+                padding: "30px",
                 display: "flex",
                 flexDirection: "column",
                 borderStyle: "solid",
                 borderRadius: "15px",
                 borderColor: "transparent",
                 marginTop: "30px",
+                marginBottom: "75px",
               }}
             >
               <div
@@ -107,11 +108,7 @@ const SearchModal = (props) => {
                   marginTop: "-20px",
                 }}
               >
-                <CloseIcon
-                  className="hoverCursor "
-                  style={{ fontSize: "24px" }}
-                  onClick={closeModal}
-                />
+                <CloseIcon className="hoverCursor f24" onClick={closeModal} />
               </div>
               <Hidden mdUp>
                 <div
@@ -154,7 +151,7 @@ const SearchModal = (props) => {
               ) : (
                 <div className="f24"> ไม่มีผลลัพธ์ของการค้นหานี้</div>
               )}
-              <div className="radioGroup pt-20 pb-20">
+              <div className="radioGroup pt-20 pb-40">
                 <span className="f18  pr-20">กรองการค้นหา</span>
                 <span>
                   <input
@@ -216,7 +213,7 @@ const SearchModal = (props) => {
 
                 {products.length === 0 && (
                   <Grid item xs={12}>
-                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                    <div className="text-center pt-20">
                       <img
                         src={squidgirlnotfound}
                         alt="noresult"
@@ -228,7 +225,7 @@ const SearchModal = (props) => {
                 )}
                 {loading && (
                   <Grid item xs={12}>
-                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                    <div className="text-center pt-20">
                       <CircularProgress
                         style={{ color: "#1895f5" }}
                         disableShrink

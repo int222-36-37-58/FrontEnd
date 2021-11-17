@@ -208,7 +208,7 @@ const RegisterForm = (props) => {
                     id="password"
                     name="password"
                     label="password"
-                    helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 6 ตัวขึ้นไป"
+                    helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 6 - 20 ตัว"
                     onChange={onChange}
                     value={data.password}
                   />

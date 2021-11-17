@@ -23,11 +23,11 @@
   max-width: 425px;
   width: auto;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 8%);
-  animation: fadeinout 9s linear forwards;
-  -webkit-animation: fadeinout 9s linear forwards;
-  -moz-animation: fadeinout 9s linear forwards;
-  -o-animation: fadeinout 9s linear forwards;
-  -ms-animation: fadeinout 9s linear forwards;
+  animation: fadeinout 5s linear forwards;
+  -webkit-animation: fadeinout 5s linear forwards;
+  -moz-animation: fadeinout 5s linear forwards;
+  -o-animation: fadeinout 5s linear forwards;
+  -ms-animation: fadeinout 5s linear forwards;
 }
 
 .rightResDialog {

@@ -259,7 +259,7 @@ const UserListPage = ({ addResDialog }) => {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((user) => {
                       return (
-                        <TableRow key={user.userName}>
+                        <TableRow key={`userNameIs${user.userName}`}>
                           <TableCell align="right">{user.userId}</TableCell>
                           <TableCell align="right">{user.userName}</TableCell>
                           <Hidden smDown>

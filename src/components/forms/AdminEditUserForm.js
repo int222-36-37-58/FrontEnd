@@ -5,6 +5,7 @@ import ConfirmDialog from "../ui/ConfirmDialog";
 function AdminEditUserForm(props) {
   const [userData, setUserData] = useState({});
   const [errors, setErrors] = useState({});
+  const [isChangePassword, setIsChangePassword] = useState(false);
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
@@ -15,10 +16,14 @@ function AdminEditUserForm(props) {
   };
 
   const openConfirmEdit = () => {
-    setConfirmBox({
-      showConfirm: true,
-      confirmContent: `ยืนยันที่จะแก้ไขข้อมูลของ ${userData.userName} ไหม`,
-    });
+    const invalid = validate(userData);
+
+    if (invalid !== "err") {
+      setConfirmBox({
+        showConfirm: true,
+        confirmContent: `ยืนยันที่จะแก้ไขข้อมูลของ ${userData.userName} ไหม`,
+      });
+    }
   };
 
   useEffect(() => {
@@ -30,44 +35,47 @@ function AdminEditUserForm(props) {
   const onChange = (e) =>
     setUserData({ ...userData, [e.target.name]: e.target.value });
 
+  const onChangePassword = (e) => {
+    setIsChangePassword(true);
+    setUserData({ ...userData, password: e.target.value });
+  };
+
   const validate = (e) => {
-    const errors = {};
+    const err = {};
     if (
       !e.userName ||
       e.userName.length <= 5 ||
       !e.userName.match(/^[a-z0-9]/)
     ) {
-      errors.userName = true;
+      err.userName = true;
     }
     if (
       !e.password ||
       e.password.length <= 4 ||
-      !e.password.match(/^[A-Za-z0-9]/)
+      (isChangePassword && !e.password.match(/^[A-Za-z0-9]/))
     ) {
-      errors.password = true;
+      err.password = true;
     }
     if (!e.fullName || e.fullName.length <= 3) {
-      errors.name = true;
+      err.name = true;
     }
     if (!e.address || e.address.length < 10) {
-      errors.address = true;
+      err.address = true;
     }
 
     if (!e.tel || e.tel.length !== 10 || /\D/.test(e.tel)) {
-      errors.tel = true;
+      err.tel = true;
     }
 
-    setErrors({ errors });
-    if (Object.keys(errors).length > 0) {
+    setErrors(err);
+
+    if (Object.keys(err).length > 0) {
       return "err";
     }
   };
 
   const submitEdit = () => {
-    const invalid = validate(userData);
-    if (invalid !== "err") {
-      props.submit(userData);
-    }
+    props.submit(userData);
   };
 
   return (
@@ -130,10 +138,10 @@ function AdminEditUserForm(props) {
           <TextField
             type="password"
             fullWidth
-            inputProps={{ minLength: 3, maxLength: 20 }}
+            inputProps={{ minLength: 3, maxLength: isChangePassword ? 20 : 90 }}
             value={userData.password}
             error={errors.password}
-            onChange={onChange}
+            onChange={onChangePassword}
             name="password"
             label="password"
           />

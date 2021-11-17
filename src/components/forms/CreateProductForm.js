@@ -204,9 +204,9 @@ const CreateProductForm = (props) => {
             style={{
               width: "auto",
               height: "auto",
-              maxWidth: 100 + "%",
-              maxHeight: 350 + "px",
-              borderRadius: 5 + "px",
+              maxWidth: "100%",
+              maxHeight: "350px",
+              borderRadius: "10px",
             }}
           />
 
@@ -223,14 +223,10 @@ const CreateProductForm = (props) => {
               />
             </Button>
             {errors.imageName && (
-              <div style={{ color: "red" }} className="b">
-                กรุณาใส่ภาพของสินค้า!
-              </div>
+              <div className="redb">กรุณาใส่ภาพของสินค้า!</div>
             )}
             {errors.imageFormat && (
-              <div style={{ color: "red" }} className="b">
-                กรุณาใส่ไฟล์ประเภท .jpg .jpeg .png
-              </div>
+              <div className="redb">กรุณาใส่ไฟล์ประเภท .jpg .jpeg .png</div>
             )}
           </Grid>
 

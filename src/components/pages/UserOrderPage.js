@@ -34,7 +34,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
       .then((res) => setMyOrder(res.data))
       .catch((err) => {
         const data = {
-          status: err.response.status,
+          status: err.response.data.status,
           dialogContent: err.message,
         };
         addResDialog(data);

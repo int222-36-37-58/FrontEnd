@@ -6,7 +6,7 @@ import "../../css/responseDialog.css";
 const ResponseDialog = (props) => {
   useEffect(() => {
     if (props.len > 0) {
-      setTimeout(() => props.handleCloseBox(props.index), 9000);
+      setTimeout(() => props.handleCloseBox(props.index), 5000);
     }
   }, [props]);
 
