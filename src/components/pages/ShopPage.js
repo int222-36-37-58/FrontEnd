@@ -49,7 +49,6 @@ const Home = ({ filter, addResDialog, userInfo }) => {
   }, [filter]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const getProductLength = () => {
       setProductLength(products.length);
     };
