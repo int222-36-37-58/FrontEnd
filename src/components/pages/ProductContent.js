@@ -31,28 +31,29 @@ const ProductContent = (props, { addResDialog }) => {
 
   useEffect(() => {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/products/${id}`)
-      .then((res) => {
-        const prods = res.data;
-        setProduct(prods);
-        setImageProduct(
-          `${process.env.REACT_APP_API_URL}/getImage/${prods.imageName}`
-        );
-      })
-      .catch(() => {
-        props.notFound();
-      });
+    if (Object.keys(product).length === 0) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/products/${id}`)
+        .then((res) => {
+          const prods = res.data;
+          setProduct(prods);
+          setImageProduct(
+            `${process.env.REACT_APP_API_URL}/getImage/${prods.imageName}`
+          );
+        })
+        .catch(() => {
+          props.notFound();
+        });
 
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/product/${id}/comment`)
-      .then((res) => {
-        setComments(res.data);
-      })
-      .catch(() => {
-        return;
-      });
-
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/product/${id}/comment`)
+        .then((res) => {
+          setComments(res.data);
+        })
+        .catch(() => {
+          return;
+        });
+    }
     return () => {};
   }, [props]);
 
@@ -120,8 +121,9 @@ const ProductContent = (props, { addResDialog }) => {
           status: res.status,
           dialogContent: "ลบสินค้าสำเร็จ",
         };
-        props.goMyShop();
+
         props.addResDialog(data);
+        props.goMyShop();
       })
       .catch((err) => {
         const data = {
