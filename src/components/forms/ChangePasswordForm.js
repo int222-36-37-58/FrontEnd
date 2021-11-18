@@ -62,7 +62,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
         .then((res) => {
           const data = {
             status: res.status,
-            dialogContent: "Update Success",
+            dialogContent: "เปลี่ยนรหัสผ่านสำเร็จ",
           };
           addResDialog(data);
           getUser();
@@ -89,7 +89,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
       <div className="headerRegister">
         <h3 style={{ marginBottom: 15 + "px" }}>เปลี่ยนรหัสผ่าน</h3>
       </div>
-     <div className="redb pt-20 pl-20"> {responseError}</div>
+      <div className="redb pt-20 pl-20"> {responseError}</div>
       <Grid
         container
         style={{ padding: 20 + "px", paddingBottom: 50 + "px" }}
@@ -139,6 +139,11 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             name="confirmNewPassword"
             label="ยืนยันรหัสผ่านใหม่"
             onChange={handleConfirmNewPassword}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                submit();
+              }
+            }}
           />
         </Grid>
 

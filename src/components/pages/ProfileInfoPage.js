@@ -16,7 +16,7 @@ const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: "Update Success",
+          dialogContent: "แก้ไขข้อมูลสำเร็จ",
         };
         addResDialog(data);
         getUser();

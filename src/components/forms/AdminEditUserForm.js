@@ -17,7 +17,7 @@ function AdminEditUserForm(props) {
 
   const openConfirmEdit = () => {
     const invalid = validate(userData);
-
+    console.log(userData);
     if (invalid !== "err") {
       setConfirmBox({
         showConfirm: true,

@@ -39,6 +39,7 @@ export const login = (data) => async (dispatch) => {
       return resp;
     })
     .catch((err) => {
+      localStorage.removeItem("token");
       if (err.response.data.message) {
         return err.response.data.message;
       } else {

@@ -15,19 +15,22 @@ const ContactFooter = () => {
     {
       id: "62130500036",
       name: "Thanasit Eksoragul",
-      role: "Back-end database",
+      role: "Back-end Database",
+      mail: "thanasit.eksoragul@mail.kmutt.ac.th",
       image: member36,
     },
     {
       id: "62130500037",
       name: "Thanapat Suwannaard",
-      role: "Front-end database",
+      role: "Front-end Database",
+      mail: "thanapat.thz@mail.kmutt.ac.th",
       image: member37,
     },
     {
       id: "62130500058",
       name: "Punthanat Ularnwiriyanont",
-      role: "DevOps database",
+      role: "DevOps Database",
+      mail: "punthanat.banjo@mail.kmutt.ac.th",
       image: member58,
     },
   ]);
@@ -44,7 +47,7 @@ const ContactFooter = () => {
         fullWidth
         maxWidth="lg"
       >
-        <h4 className="f28 pl-25">Members</h4>
+        <h4 className="f28 pl-25">ทีมงาน</h4>
         <DialogContent>
           <Grid container spacing={2}>
             {members.map((mem) => {
@@ -62,7 +65,8 @@ const ContactFooter = () => {
                       }}
                     />
                     <div className="b f17">{mem.id} </div>
-                    <div className="b f24"> {mem.name}</div>
+                    <div className="b f24"> {mem.name}</div>{" "}
+                    <div className="b f15"> {mem.mail}</div>
                     <div className="b f18"> {mem.role}</div>
                   </div>
                 </Grid>
@@ -70,7 +74,7 @@ const ContactFooter = () => {
             })}
           </Grid>
           <button className="AddButton w100" onClick={handleCloseBox}>
-            close
+            ปิด
           </button>
         </DialogContent>
       </Dialog>
