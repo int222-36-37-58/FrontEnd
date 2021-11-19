@@ -106,6 +106,15 @@ function AdminEditUserForm(props) {
             disabled
             fullWidth
             value={userData.userName}
+            inputProps={{
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             name="userName"
             label="userName"
           />
@@ -114,7 +123,17 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
-            inputProps={{ minLength: 2, maxLength: 80 }}
+            inputProps={{
+              minLength: 2,
+              maxLength: 80,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             value={userData.fullName}
             error={errors.fullName}
             onChange={onChange}
@@ -126,7 +145,17 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
-            inputProps={{ minLength: 5, maxLength: 150 }}
+            inputProps={{
+              minLength: 5,
+              maxLength: 150,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             value={userData.address}
             error={errors.address}
             onChange={onChange}
@@ -138,7 +167,17 @@ function AdminEditUserForm(props) {
           <TextField
             type="password"
             fullWidth
-            inputProps={{ minLength: 3, maxLength: isChangePassword ? 20 : 90 }}
+            inputProps={{
+              minLength: 3,
+              maxLength: isChangePassword ? 20 : 90,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             value={userData.password}
             error={errors.password}
             onChange={onChangePassword}
@@ -150,36 +189,37 @@ function AdminEditUserForm(props) {
           <TextField
             type="text"
             fullWidth
-            inputProps={{ minLength: 10, maxLength: 10 }}
+            inputProps={{
+              minLength: 10,
+              maxLength: 10,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             onChange={onChange}
             value={userData.tel}
             name="tel"
             label="tel"
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          className="p-10 mw-100 w-100"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
+        <Grid item xs={12} className="p-10 mw-100 w-100">
           <button
             className="InfoButton m-5 "
-            style={{ padding: "8px 30px 8px 30px" }}
+            style={{ width: "45%" }}
             onClick={openConfirmEdit}
           >
-            Submit
+            ยืนยันการแก้ไข
           </button>
           <button
             className="delFromCart m-5"
-            style={{ padding: "8px 30px 8px 30px" }}
+            style={{ width: "45%" }}
             onClick={props.onIsEdit}
           >
-            Cancel
+            ยกเลิก
           </button>
         </Grid>
       </Grid>

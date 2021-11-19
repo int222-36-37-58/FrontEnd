@@ -215,6 +215,17 @@ const TypeTable = ({ addResDialog }) => {
             onChange={handleType}
             label="type name"
             value={typeToAdd}
+            inputProps={{
+              minLength: 1,
+              maxLength: 45,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
           />{" "}
           <button
             className="InfoButton"
@@ -245,8 +256,19 @@ const TypeTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleEditType}
-            label="type name"
+            label="ชื่อประเภท"
             value={typeEdit.name}
+            inputProps={{
+              minLength: 1,
+              maxLength: 45,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
           />{" "}
           <button
             className="delFromCart p-5-10 ml-5"

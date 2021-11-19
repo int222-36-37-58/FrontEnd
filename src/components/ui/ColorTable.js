@@ -208,8 +208,19 @@ const ColorTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleColor}
-            label="color name"
+            label="ประเภทสี"
             value={colorToAdd}
+            inputProps={{
+              minLength: 1,
+              maxLength: 45,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
           />{" "}
           <button
             className="InfoButton"
@@ -240,8 +251,19 @@ const ColorTable = ({ addResDialog }) => {
             size="small"
             variant="outlined"
             onChange={handleColorEdit}
-            label="colorName"
+            label="ประเภทสี"
             value={colorEdit.colorName}
+            inputProps={{
+              minLength: 1,
+              maxLength: 45,
+              style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
           />{" "}
           <button
             className="delFromCart p-5-10 ml-5"
@@ -269,7 +291,7 @@ const ColorTable = ({ addResDialog }) => {
               ID
             </TableCell>
             <TableCell style={{ color: "white" }} align="right">
-              ชื่อสี
+              ประเภทสี
             </TableCell>
             <TableCell style={{ color: "white" }} align="right"></TableCell>
           </TableRow>

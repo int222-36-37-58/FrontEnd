@@ -236,7 +236,17 @@ const CreateProductForm = (props) => {
               fullWidth
               error={errors.name}
               type="text"
-              inputProps={{ minLength: 3, maxLength: 55 }}
+              inputProps={{
+                minLength: 3,
+                maxLength: 55,
+                style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontFamily: "Prompt, sans-serif",
+                  fontWeight: "600",
+                },
+              }}
               id="name"
               name="name"
               label="product name"
@@ -252,7 +262,17 @@ const CreateProductForm = (props) => {
               multiline
               error={errors.description}
               type="textarea"
-              inputProps={{ minLength: 5, maxLength: 550 }}
+              inputProps={{
+                minLength: 5,
+                maxLength: 550,
+                style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontFamily: "Prompt, sans-serif",
+                  fontWeight: "600",
+                },
+              }}
               id="description"
               name="description"
               label="description"
@@ -267,7 +287,17 @@ const CreateProductForm = (props) => {
               fullWidth
               error={errors.price}
               type="number"
-              inputProps={{ minLength: 1, maxLength: 10 }}
+              inputProps={{
+                minLength: 1,
+                maxLength: 10,
+                style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontFamily: "Prompt, sans-serif",
+                  fontWeight: "600",
+                },
+              }}
               id="price"
               name="price"
               label="price"
@@ -282,7 +312,17 @@ const CreateProductForm = (props) => {
               fullWidth
               error={errors.quantity}
               type="number"
-              inputProps={{ minLength: 1, maxLength: 10 }}
+              inputProps={{
+                minLength: 1,
+                maxLength: 10,
+                style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontFamily: "Prompt, sans-serif",
+                  fontWeight: "600",
+                },
+              }}
               id="quantity"
               name="quantity"
               label="quantity"

@@ -84,9 +84,6 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <button
                   className="AddButton"
-                  style={{
-                    padding: "3px",
-                  }}
                   onClick={() => setComment(!comment)}
                 >
                   คอมเมนท์
@@ -94,8 +91,11 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                 {comment && (
                   <button
                     className="delFromCart"
-                    style={{ padding: "3px", marginLeft: "5px" }}
-                    onClick={() => setComment(false)}
+                    style={{ marginLeft: "5px" }}
+                    onClick={() => {
+                      setComment(false);
+                      setCommentContent("");
+                    }}
                   >
                     ยกเลิก
                   </button>
@@ -120,12 +120,24 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     style={{ width: "85%" }}
                     size="small"
                     error={errs}
+                    inputProps={{
+                      minLength: 1,
+                      maxLength: 180,
+                      style: { fontFamily: "Prompt, sans-serif" },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     onChange={(e) => setCommentContent(e.target.value)}
                     label={`ใส่ความเห็นต่อ ${props.odt.product.name.slice(
                       0,
                       11
                     )}...`}
                     value={commentContent}
+                    helperText="ใส่ความเห็นไม่เกิน 180 ตัวอักษร"
                   />{" "}
                   <button
                     className="InfoButton "
@@ -219,7 +231,10 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                 <button
                   className="delFromCart"
                   style={{ padding: "7px", marginLeft: "5px" }}
-                  onClick={() => setComment(false)}
+                  onClick={() => {
+                    setComment(false);
+                    setCommentContent("");
+                  }}
                 >
                   ยกเลิก
                 </button>
@@ -243,6 +258,8 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     error={errs}
                     onChange={(e) => setCommentContent(e.target.value)}
                     label="ใส่ความเห็นของคุณ"
+                    inputProps={{ minLength: 1, maxLength: 180 }}
+                    helperText="ใส่ความเห็นไม่เกิน 180 ตัวอักษร"
                     value={commentContent}
                   />{" "}
                   <button

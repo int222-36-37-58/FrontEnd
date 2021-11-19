@@ -129,7 +129,20 @@ const RegisterForm = (props) => {
                     disabled
                     required
                     type="text"
-                    inputProps={{ minLength: 6, maxLength: 25 }}
+                    inputProps={{
+                      minLength: 6,
+                      maxLength: 25,
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     id="userName"
                     name="userName"
                     label="Username"
@@ -142,7 +155,20 @@ const RegisterForm = (props) => {
                     required
                     error={errors.userName}
                     type="text"
-                    inputProps={{ minLength: 6, maxLength: 25 }}
+                    inputProps={{
+                      minLength: 6,
+                      maxLength: 25,
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     id="userName"
                     name="userName"
                     label="username"
@@ -158,7 +184,20 @@ const RegisterForm = (props) => {
                   required
                   error={errors.fullName}
                   type="text"
-                  inputProps={{ minLength: 2, maxLength: 80 }}
+                  inputProps={{
+                    minLength: 2,
+                    maxLength: 80,
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
                   id="fullName"
                   name="fullName"
                   label="full name"
@@ -174,7 +213,20 @@ const RegisterForm = (props) => {
                   required
                   error={errors.address}
                   type="textarea"
-                  inputProps={{ minLength: 5, maxLength: 150 }}
+                  inputProps={{
+                    minLength: 5,
+                    maxLength: 150,
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
                   id="address"
                   name="address"
                   label="address"
@@ -188,7 +240,20 @@ const RegisterForm = (props) => {
                   required
                   type="text"
                   error={errors.tel}
-                  inputProps={{ minLength: 10, maxLength: 10 }}
+                  inputProps={{
+                    minLength: 10,
+                    maxLength: 10,
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
                   id="tel"
                   name="tel"
                   label="telephone"
@@ -205,7 +270,20 @@ const RegisterForm = (props) => {
                     required
                     error={errors.password}
                     type="password"
-                    inputProps={{ minLength: 6, maxLength: 20 }}
+                    inputProps={{
+                      minLength: 6,
+                      maxLength: 20,
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     id="password"
                     name="password"
                     label="password"
@@ -222,7 +300,20 @@ const RegisterForm = (props) => {
                     required
                     error={errors.confirmPassword}
                     type="password"
-                    inputProps={{ minLength: 6, maxLength: 20 }}
+                    inputProps={{
+                      minLength: 6,
+                      maxLength: 20,
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     id="confirmPassword"
                     name="confirmPassword"
                     label="confirm password"
@@ -256,10 +347,12 @@ const RegisterForm = (props) => {
                 <Button
                   fullWidth
                   style={{
-                    marginTop: 15 + "px",
+                    marginTop: "15px",
                     alignItems: "center",
                     backgroundColor: "#1895f5",
                     color: "white",
+                    fontFamily: "Prompt, sans-serif",
+                    width: "45%",
                   }}
                   onClick={onSubmit}
                 >
@@ -270,10 +363,13 @@ const RegisterForm = (props) => {
                   <Button
                     fullWidth
                     style={{
-                      marginTop: 15 + "px",
+                      marginLeft: "5px",
+                      marginTop: "15px",
                       alignItems: "center",
                       backgroundColor: "#d83c2d",
                       color: "white",
+                      fontFamily: "Prompt, sans-serif",
+                      width: "45%",
                     }}
                     onClick={() => {
                       props.onIsEdit();

@@ -76,18 +76,16 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
 
   return (
     <div
-      className="w100"
+      className="w100 mt-20"
       style={{
         backgroundColor: "white",
-        marginTop: "20px",
         maxWidth: 680 + "px",
-
         borderRadius: 20 + "px",
         boxShadow: "0px 0px 20px rgb(0 0 0 / 8%)",
       }}
     >
       <div className="headerRegister">
-        <h3 style={{ marginBottom: 15 + "px" }}>เปลี่ยนรหัสผ่าน</h3>
+        <h3 className="mb-15">เปลี่ยนรหัสผ่าน</h3>
       </div>
       <div className="redb pt-20 pl-20"> {responseError}</div>
       <Grid
@@ -102,7 +100,20 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             required
             type="password"
             error={errors.currentPassword}
-            inputProps={{ minLength: 3, maxLength: 20 }}
+            inputProps={{
+              minLength: 3,
+              maxLength: 20,
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             id="currentPassword"
             name="currentPassword"
             label="รหัสผ่านปัจจุบัน"
@@ -118,7 +129,20 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             fullWidth
             type="password"
             error={errors.newPassword}
-            inputProps={{ minLength: 3, maxLength: 20 }}
+            inputProps={{
+              minLength: 3,
+              maxLength: 20,
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             id="newPassword"
             name="newPassword"
             label="รหัสผ่านใหม่"
@@ -134,7 +158,19 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             fullWidth
             type="password"
             error={errors.confirmNewPassword}
-            inputProps={{ minLength: 3, maxLength: 20 }}
+            inputProps={{
+              minLength: 3,
+              maxLength: 20,
+              style: {
+                fontFamily: "Prompt, sans-serif",
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
+              },
+            }}
             id="confirmNewPassword"
             name="confirmNewPassword"
             label="ยืนยันรหัสผ่านใหม่"

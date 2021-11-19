@@ -188,7 +188,7 @@ const UserListPage = ({ addResDialog }) => {
                       paddingRight: "10px",
                     }}
                   >
-                    เพิ่ม admin
+                    เพิ่ม
                   </button>
                 </>
               ) : (
