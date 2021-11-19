@@ -58,7 +58,20 @@ const LoginForm = (props) => {
                 fullWidth
                 error={errors.username}
                 type="text"
-                inputProps={{ minLength: 6, maxLength: 20 }}
+                inputProps={{
+                  minLength: 6,
+                  maxLength: 20,
+                  style: {
+                    fontFamily: "Prompt, sans-serif",
+                    fontWeight: "600",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Prompt, sans-serif",
+                    fontWeight: "600",
+                  },
+                }}
                 id="username"
                 name="username"
                 label="username"
@@ -72,7 +85,20 @@ const LoginForm = (props) => {
                 fullWidth
                 error={errors.password}
                 type="password"
-                inputProps={{ minLength: 6, maxLength: 20 }}
+                inputProps={{
+                  minLength: 6,
+                  maxLength: 20,
+                  style: {
+                    fontFamily: "Prompt, sans-serif",
+                    fontWeight: "600",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Prompt, sans-serif",
+                    fontWeight: "600",
+                  },
+                }}
                 id="password"
                 name="password"
                 label="password"
@@ -94,6 +120,7 @@ const LoginForm = (props) => {
                   alignItems: "center",
                   backgroundColor: "#1895f5",
                   color: "white",
+                  fontFamily: "Prompt, sans-serif",
                 }}
                 onClick={onSubmit}
               >
