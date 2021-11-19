@@ -11,13 +11,13 @@ import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
-import { logout, userLogout, getUser } from "../../actions/user";
+import { logout, getUser } from "../../actions/user";
 import MyShopPage from "./MyShopPage";
 import StartSellPage from "./StartSellPage";
 import MySellHistoryPage from "./MySellHistoryPage";
 import "../../css/profileMenu.css";
 
-const ProfilePage = ({ userInfo, logout, userLogout, addResDialog }) => {
+const ProfilePage = ({ userInfo, logout, addResDialog }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return () => {};
@@ -25,7 +25,7 @@ const ProfilePage = ({ userInfo, logout, userLogout, addResDialog }) => {
 
   const handleLogOut = () => {
     logout();
-    userLogout();
+
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };
@@ -283,8 +283,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addResDialog: (content) => dispatch(addResDialog(content)),
     getUser: () => dispatch(getUser()),
-    logout: () => logout(),
-    userLogout: () => dispatch(userLogout()),
+    logout: () => dispatch(logout()),
   };
 };
 

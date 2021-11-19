@@ -1,6 +1,7 @@
 import * as type from "../actiontype";
 import axios from "axios";
 import SetDefaultHeader from "../components/etc/SetDefaultHeader.js";
+import { clearCartItem } from "./cart";
 
 export const getUserInfo = (data) => ({
   type: type.GET_USER_INFO,
@@ -40,7 +41,7 @@ export const login = (data) => async (dispatch) => {
     })
     .catch((err) => {
       localStorage.removeItem("token");
-      if (err.response.data.message) {
+      if (err.response) {
         return err.response.data.message;
       } else {
         return err.message;
@@ -49,12 +50,9 @@ export const login = (data) => async (dispatch) => {
   return response;
 };
 
-export const logout = () => {
+export const logout = () => (dispatch) => {
   localStorage.removeItem("token");
   SetDefaultHeader("");
-};
-
-export const handleLogOut = () => (dispatch) => {
-  logout();
-  dispatch(userLogout);
+  dispatch(userLogout());
+  dispatch(clearCartItem());
 };

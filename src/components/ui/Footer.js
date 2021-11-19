@@ -65,9 +65,9 @@ const ContactFooter = () => {
                       }}
                     />
                     <div className="b f17">{mem.id} </div>
-                    <div className="b f24"> {mem.name}</div>{" "}
-                    <div className="b f15"> {mem.mail}</div>
-                    <div className="b f18"> {mem.role}</div>
+                    <div className="b resFontName"> {mem.name}</div>{" "}
+                    <div className="b resFontMail"> {mem.mail}</div>
+                    <div className="b resFontRole"> {mem.role}</div>
                   </div>
                 </Grid>
               );
@@ -110,8 +110,8 @@ const ContactFooter = () => {
             item
             xs={12}
             sm={6}
-            className="b f17"
-            style={{ paddingLeft: "40px" }}
+            className="b f17 pl-40"
+             
           >
             <div>
               <h4>

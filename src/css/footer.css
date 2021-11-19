@@ -52,3 +52,51 @@
 
   font-weight: 100;
 }
+
+.resFontName {
+  font-size: 20px;
+}
+
+.resFontMail {
+  font-size: 16px;
+}
+
+.resFontRole {
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+  .resFontName {
+    font-size: 13px;
+  }
+
+  .resFontMail {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .resFontName {
+    font-size: 10px;
+  }
+
+  .resFontMail {
+    font-size: 9px;
+  }
+  .resFontRole {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 425px) {
+  .resFontName {
+    font-size: 16px;
+  }
+
+  .resFontMail {
+    font-size: 13px;
+  }
+  .resFontRole {
+    font-size: 14px;
+  }
+}

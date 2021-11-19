@@ -15,7 +15,7 @@ import { addResDialog, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/GuestUserPage";
-import { logout, userLogout } from "../../actions/user";
+import { logout } from "../../actions/user";
 import { useEffect } from "react";
 import "../../css/navbar.css";
 
@@ -25,7 +25,7 @@ const NavBar = ({
   cart,
   uiStyle,
   logout,
-  userLogout,
+
   removeFromCart,
   clearCartItem,
   openSearchModal,
@@ -82,7 +82,7 @@ const NavBar = ({
 
   const handleLogout = () => {
     logout();
-    userLogout();
+    // userLogout();
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };
@@ -391,8 +391,7 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
-    logout: () => logout(),
-    userLogout: () => dispatch(userLogout()),
+    logout: () => dispatch(logout()),
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
