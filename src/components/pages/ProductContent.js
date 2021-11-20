@@ -380,7 +380,10 @@ const ProductContent = (props, { addResDialog }) => {
                       }}
                     >
                       <h3>ความเห็นจากคุณ : {cm.user.userName}</h3>
-                      <h3> {cm.content}</h3>
+                      <h3 style={{ maxHeight: "100%", overflowY: "hidden" }}>
+                        {" "}
+                        {cm.content}
+                      </h3>
                     </div>
                   );
                 })}

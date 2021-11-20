@@ -13,7 +13,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
   const sendComment = () => {
     console.log(props.userInfo.userId);
     setErrs(false);
-    if (commentContent.length < 1 || commentContent.length > 90) {
+    if (commentContent.length < 1 || commentContent.length > 180) {
       setErrs(true);
     } else {
       const json = JSON.stringify({
