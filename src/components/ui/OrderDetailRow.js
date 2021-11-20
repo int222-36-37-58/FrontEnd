@@ -11,7 +11,6 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
   const [errs, setErrs] = useState(false);
 
   const sendComment = () => {
-    console.log(props.userInfo.userId);
     setErrs(false);
     if (commentContent.length < 1 || commentContent.length > 180) {
       setErrs(true);

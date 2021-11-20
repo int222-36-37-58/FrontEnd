@@ -74,8 +74,8 @@ const ProductCard = (props, { userInfo }) => {
                   สินค้าหมด
                 </button>
               ) : (
-                [
-                  props.product.user.userId === props.userInfo.userId ? (
+                <>
+                  {props.product.user.userId === props.userInfo.userId ? (
                     <button className="disabledButton buttonRes">
                       เหลือ {props.product.quantity} ชิ้น
                     </button>
@@ -86,8 +86,8 @@ const ProductCard = (props, { userInfo }) => {
                     >
                       เพิ่ม - ฿{props.product.price}{" "}
                     </button>
-                  ),
-                ]
+                  )}
+                </>
               )}
             </div>
           </div>

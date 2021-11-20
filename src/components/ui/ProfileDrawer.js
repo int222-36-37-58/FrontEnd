@@ -87,13 +87,14 @@ function ProfileDrawer(props) {
                           ร้านค้าของฉัน
                         </div>
                       </Link>
+
                       <Link
                         to="/profile/mysellhistory"
                         onClick={props.close}
                         className="link "
                       >
                         <div className=" p-10 hoverChangeBackground">
-                          ลงขายสินค้า
+                          ประวัติการขาย
                         </div>
                       </Link>
                     </>

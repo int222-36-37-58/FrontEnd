@@ -192,8 +192,8 @@ const UserListPage = ({ addResDialog }) => {
                   </button>
                 </>
               ) : (
-                [
-                  isAdd || isHandleRole ? (
+                <>
+                  {isAdd || isHandleRole ? (
                     <button
                       className="delFromCart p-5-10"
                       style={{
@@ -210,16 +210,16 @@ const UserListPage = ({ addResDialog }) => {
                     <button
                       className="InfoButton p-5-10"
                       style={{
-                        marginLeft: "85%",
+                        marginLeft: "90%",
                       }}
                       onClick={() => {
                         setIsAdd(!isAdd);
                       }}
                     >
-                      เพิ่มผู้ใช้งาน
+                      เพิ่มผู้ใช้
                     </button>
-                  ),
-                ]
+                  )}
+                </>
               )}
               {isHandleRole && (
                 <HandlePermission
@@ -231,7 +231,11 @@ const UserListPage = ({ addResDialog }) => {
                 />
               )}
               {isAdd && (
-                <RegisterForm submit={openConfirmAdd} adminMode={true} />
+                <RegisterForm
+                  submit={openConfirmAdd}
+                  adminMode={true}
+                  editMode={false}
+                />
               )}
 
               <Table>

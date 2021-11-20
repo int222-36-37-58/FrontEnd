@@ -250,8 +250,8 @@ const ProductContent = (props, { addResDialog }) => {
               </button>
             </>
           ) : (
-            [
-              product.quantity > 1 ? (
+            <>
+              {product.quantity > 1 ? (
                 <button
                   className="AddButton"
                   style={{ padding: 10 + "px", width: 45 + "%" }}
@@ -267,8 +267,8 @@ const ProductContent = (props, { addResDialog }) => {
                 >
                   สินค้าหมด
                 </button>
-              ),
-            ]
+              )}
+            </>
           )}
         </Grid>
       </Grid>

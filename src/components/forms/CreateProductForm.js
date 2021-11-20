@@ -345,7 +345,7 @@ const CreateProductForm = (props) => {
                 name="type"
                 value={data.type}
                 onChange={onChange}
-                defaultValue="0"
+                defaultValue={types[0]}
               >
                 {types.map((typeRow) => {
                   return (

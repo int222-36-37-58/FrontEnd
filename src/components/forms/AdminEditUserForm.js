@@ -2,8 +2,15 @@ import { Grid, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import ConfirmDialog from "../ui/ConfirmDialog";
 
-function AdminEditUserForm(props) {
-  const [userData, setUserData] = useState({});
+const AdminEditUserForm = (props) => {
+  const [userData, setUserData] = useState({
+    userName: "",
+    fullName: "",
+    address: "",
+    tel: "",
+    password: "",
+    role: "",
+  });
   const [errors, setErrors] = useState({});
   const [isChangePassword, setIsChangePassword] = useState(false);
   const [confirmBox, setConfirmBox] = useState({
@@ -225,6 +232,6 @@ function AdminEditUserForm(props) {
       </Grid>
     </div>
   );
-}
+};
 
 export default AdminEditUserForm;
