@@ -55,102 +55,100 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
   return (
     <>
       <Hidden smDown>
-        <>
-          <tr key={props.odt.orderDetailId} style={{ fontWeight: 900 }}>
-            <td style={{ padding: "5px" }}>
-              <Link
-                to={`/product/${props.odt.product.productId}`}
-                style={{ textDecoration: "none" }}
+        <tr key={props.odt.orderDetailId} style={{ fontWeight: 900 }}>
+          <td className="p-5">
+            <Link
+              to={`/product/${props.odt.product.productId}`}
+              style={{ textDecoration: "none" }}
+            >
+              <img
+                src={`${process.env.REACT_APP_API_URL}/getImage/${props.odt.product.imageName}`}
+                alt={props.odt.product.imageName}
+                style={{
+                  maxWidth: "100px",
+                  height: "auto",
+                  paddingTop: "5px",
+                }}
+              />
+              <p style={{ textDecoration: "none", color: "black" }}>
+                {props.odt.product.name}
+              </p>
+            </Link>
+          </td>
+          <td>฿{props.odt.product.price}</td>
+          <td>{props.odt.quantity}</td>
+          <td>{props.odt.color.colorName}</td>
+          <td>฿{props.odt.totalPrice}</td>
+          <td>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <button
+                className="AddButton"
+                onClick={() => setComment(!comment)}
               >
-                <img
-                  src={`${process.env.REACT_APP_API_URL}/getImage/${props.odt.product.imageName}`}
-                  alt={props.odt.product.imageName}
-                  style={{
-                    maxWidth: "100px",
-                    height: "auto",
-                    paddingTop: "5px",
-                  }}
-                />
-                <p style={{ textDecoration: "none", color: "black" }}>
-                  {props.odt.product.name}
-                </p>
-              </Link>
-            </td>
-            <td>฿{props.odt.product.price}</td>
-            <td>{props.odt.quantity}</td>
-            <td>{props.odt.color.colorName}</td>
-            <td>฿{props.odt.totalPrice}</td>
-            <td>
-              <div style={{ display: "flex", flexDirection: "column" }}>
+                คอมเมนท์
+              </button>
+              {comment && (
                 <button
-                  className="AddButton"
-                  onClick={() => setComment(!comment)}
+                  className="delFromCart"
+                  style={{ marginLeft: "5px" }}
+                  onClick={() => {
+                    setComment(false);
+                    setCommentContent("");
+                  }}
                 >
-                  คอมเมนท์
+                  ยกเลิก
                 </button>
-                {comment && (
-                  <button
-                    className="delFromCart"
-                    style={{ marginLeft: "5px" }}
-                    onClick={() => {
-                      setComment(false);
-                      setCommentContent("");
-                    }}
-                  >
-                    ยกเลิก
-                  </button>
-                )}
+              )}
+            </div>
+          </td>
+        </tr>
+        {comment && (
+          <tr>
+            <td colSpan="6">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  transition: "0.3s",
+                  alignItems: "center",
+                  justifyContent: "right",
+                }}
+              >
+                <TextField
+                  multiline
+                  style={{ width: "85%" }}
+                  size="small"
+                  error={errs}
+                  inputProps={{
+                    minLength: 1,
+                    maxLength: 180,
+                    style: { fontFamily: "Prompt, sans-serif" },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
+                  }}
+                  onChange={(e) => setCommentContent(e.target.value)}
+                  label={`ใส่ความเห็นต่อ ${props.odt.product.name.slice(
+                    0,
+                    11
+                  )}...`}
+                  value={commentContent}
+                  helperText={`${commentContent.length}/180`}
+                />{" "}
+                <button
+                  className="InfoButton "
+                  style={{ marginTop: "5px", marginLeft: "10px" }}
+                  onClick={() => sendComment()}
+                >
+                  ส่งความเห็น
+                </button>
               </div>
             </td>
           </tr>
-          {comment && (
-            <>
-              <td colSpan="6">
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    transition: "0.3s",
-                    alignItems: "center",
-                    justifyContent: "right",
-                  }}
-                >
-                  <TextField
-                    multiline
-                    style={{ width: "85%" }}
-                    size="small"
-                    error={errs}
-                    inputProps={{
-                      minLength: 1,
-                      maxLength: 180,
-                      style: { fontFamily: "Prompt, sans-serif" },
-                    }}
-                    InputLabelProps={{
-                      style: {
-                        fontFamily: "Prompt, sans-serif",
-                        fontWeight: "600",
-                      },
-                    }}
-                    onChange={(e) => setCommentContent(e.target.value)}
-                    label={`ใส่ความเห็นต่อ ${props.odt.product.name.slice(
-                      0,
-                      11
-                    )}...`}
-                    value={commentContent}
-                    helperText={`${commentContent.length}/180`}
-                  />{" "}
-                  <button
-                    className="InfoButton "
-                    style={{ marginTop: "5px", marginLeft: "10px" }}
-                    onClick={() => sendComment()}
-                  >
-                    ส่งความเห็น
-                  </button>
-                </div>
-              </td>
-            </>
-          )}
-        </>
+        )}
       </Hidden>
 
       <Hidden mdUp>
