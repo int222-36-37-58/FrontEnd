@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { removeFromCart, clearCartItem } from "../../actions/cart";
 import Cart from "./Cart";
-import sitlogo from "../../images/sitlogo.png";
+import sitlogo from "../../images/asset/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";

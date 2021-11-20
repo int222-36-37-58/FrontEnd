@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import InfoIcon from "@material-ui/icons/Info";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import CheckIcon from "@material-ui/icons/Check";
-import member36 from "../../images/member36.jpg";
-import member37 from "../../images/member37.jpg";
-import member58 from "../../images/member58.jpg";
-import sitlogo from "../../images/sitlogo.png";
+import member36 from "../../images/member/member36.jpg";
+import member37 from "../../images/member/member37.jpg";
+import member58 from "../../images/member/member58.jpg";
+import sitlogo from "../../images/asset/sitlogo.png";
 import { Dialog, DialogContent, Grid } from "@material-ui/core";
 import "../../css/footer.css";
 
@@ -106,13 +106,7 @@ const ContactFooter = () => {
               </div>
             </button>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            className="b f17 pl-40"
-             
-          >
+          <Grid item xs={12} sm={6} className="b f17 pl-40">
             <div>
               <h4>
                 <CheckIcon /> 3rd Year student from SIT KMUTT

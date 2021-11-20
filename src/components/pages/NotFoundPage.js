@@ -1,7 +1,7 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
-import notFound from "../../images/pageNotFoundCover.jpg";
+import notFound from "../../images/asset/pageNotFoundCover.jpg";
 import "../../css/notFound.css";
 
 const NotFoundPage = () => {

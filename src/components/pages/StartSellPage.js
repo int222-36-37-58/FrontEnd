@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";
 import { getUser } from "../../actions/user";
 import ConfirmDialog from "../ui/ConfirmDialog";
-import squidgirl from "../../images/squidgirl.png";
+import squidgirl from "../../images/asset/squidgirl.png";
 
 const StartSellPage = (props, { addResDialog, getUser }) => {
   const history = useHistory();

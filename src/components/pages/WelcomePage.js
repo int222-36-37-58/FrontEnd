@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import welcomePageCover from "../../images/welcomePageCover.jpg";
+import welcomePageCover from "../../images/welcomepage/welcomePageCover.jpg";
 import "../../css/welcomePage.css";
 import { useHistory } from "react-router";
-import shoppingCart from "../../images/shoppingCart.gif";
-import searchTopic from "../../images/searchTopic.jpg";
-import sell from "../../images/sell.jpg";
-import comment from "../../images/comment.jpg";
-import stock from "../../images/stock.jpg";
+import shoppingCart from "../../images/welcomepage/shoppingCart.gif";
+import searchTopic from "../../images/welcomepage/searchTopic.jpg";
+import sell from "../../images/welcomepage/sell.jpg";
+import comment from "../../images/welcomepage/comment.jpg";
+import stock from "../../images/welcomepage/stock.jpg";
 
 const WelcomePage = () => {
   useEffect(() => {

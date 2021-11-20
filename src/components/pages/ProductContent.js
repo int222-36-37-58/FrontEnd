@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import noImage from "../../images/noImage.jpg";
+import noImage from "../../images/asset/noImage.jpg";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import { useHistory } from "react-router";
 import { addResDialog } from "../../actions/uiStyle";

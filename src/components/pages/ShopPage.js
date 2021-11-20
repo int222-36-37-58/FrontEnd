@@ -9,7 +9,7 @@ import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
 import { addResDialog } from "../../actions/uiStyle";
 import "../../css/shop.css";
-import squidgirlnotfound from "../../images/squidgirlnotfound.png";
+import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
 
 const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);

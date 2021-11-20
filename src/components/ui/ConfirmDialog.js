@@ -1,7 +1,7 @@
 import { Dialog } from "@material-ui/core";
 import React from "react";
 import "../../css/confirmDialog.css";
-import squidgirl from "../../images/squidgirl.png";
+import squidgirl from "../../images/asset/squidgirl.png";
 const ConfirmDialog = (props) => {
   const confirmCondition = () => {
     props.submit();

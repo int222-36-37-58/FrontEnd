@@ -54,7 +54,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
   return (
     <>
       <Hidden smDown>
-        <tr key={props.odt.orderDetailId} style={{ fontWeight: 900 }}>
+        <tr key={props.odt.orderDetailId} className="b">
           <td className="p-5">
             <Link
               to={`/product/${props.odt.product.productId}`}

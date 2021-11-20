@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import useSearchHandler from "../etc/useSearchHandler";
 import axios from "axios";
-import squidgirlnotfound from "../../images/squidgirlnotfound.png";
+import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
 
 const SearchModal = (props) => {
   const [searchVal, setSearchVal] = useState("");

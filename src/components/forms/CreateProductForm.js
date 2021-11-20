@@ -7,7 +7,7 @@ import {
 import { Grid, TextField, Button, Select } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import noImage from "../../images/noImage.jpg";
+import noImage from "../../images/asset/noImage.jpg";
 import Checkbox from "@material-ui/core/Checkbox";
 import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
 import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";

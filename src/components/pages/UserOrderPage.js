@@ -10,7 +10,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import "../../css/order.css";
-import squidgirlnotfound from "../../images/squidgirlnotfound.png";
+import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
 
 const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import CloseIcon from "@material-ui/icons/Close";
 const ProductInCartBox = (props) => {
   return (
     <div className="productInCart">
@@ -29,9 +29,10 @@ const ProductInCartBox = (props) => {
         </h5>
         <button
           className="delFromCart"
+          style={{ padding: "3px", display: "flex", alignItems: "center" }}
           onClick={() => props.remove(props.orderDetail)}
         >
-          ลบ
+          ลบ <CloseIcon style={{ fontSize: "13px" }} />
         </button>
       </div>
     </div>
