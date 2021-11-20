@@ -207,9 +207,7 @@ const ProductContent = (props, { addResDialog }) => {
                 );
               })}
               {noColor && (
-                <h5 style={{ color: "red", marginTop: 5 + "px" }}>
-                  กรุณาเลือกสีที่ต้องการ!
-                </h5>
+                <h5 className="redb mt-5">กรุณาเลือกสีที่ต้องการ!</h5>
               )}
             </div>
           )}
@@ -371,7 +369,7 @@ const ProductContent = (props, { addResDialog }) => {
                     ยังไม่มีความคิดเห็นในตอนนี้
                   </div>
                 )}
-                {comments.map((cm, i) => {
+                {comments.map((cm) => {
                   return (
                     <div
                       key={`commentInContent${cm.commentId}`}
@@ -381,9 +379,7 @@ const ProductContent = (props, { addResDialog }) => {
                         borderColor: "#e4e4e4",
                       }}
                     >
-                      <h3>
-                        ความเห็นที่ {i + 1} โดย : {cm.user.userName}
-                      </h3>
+                      <h3>ความเห็นจากคุณ : {cm.user.userName}</h3>
                       <h3> {cm.content}</h3>
                     </div>
                   );

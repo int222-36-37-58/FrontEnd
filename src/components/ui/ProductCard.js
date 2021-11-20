@@ -1,11 +1,11 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AddProductModal from "./AddProductModal";
 import "../../css/productCard.css";
 
-function ProductCard(props, { userInfo }) {
+const ProductCard = (props, { userInfo }) => {
   const history = useHistory();
   const [clickAdd, setClickAdd] = useState(false);
 
@@ -75,10 +75,9 @@ function ProductCard(props, { userInfo }) {
                 </button>
               ) : (
                 [
-                  props.userInfo.userId &&
                   props.product.user.userId === props.userInfo.userId ? (
                     <button className="disabledButton buttonRes">
-                      เหลือสินค้า {props.product.quantity} ชิ้น
+                      เหลือ {props.product.quantity} ชิ้น
                     </button>
                   ) : (
                     <button
@@ -94,62 +93,57 @@ function ProductCard(props, { userInfo }) {
           </div>
         </Box>
       ) : (
-        <Grid container alignItems="center">
-          <Grid item xs={12} style={{ maxHeight: "280px", height: "100%" }}>
-            <div
-              className="flexRes"
-              style={{
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div className="imageContainer hoverCursor" onClick={seeInfo}>
-                <img
-                  src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
-                  alt={`${props.product.imageName}`}
-                  className=" imageProductStyle2"
-                />
-              </div>
-              <div className="titleStyle2">
-                <h3 onClick={seeInfo} className=" hoverChangeToNavBarColor">
-                  {props.product.name}
-                </h3>{" "}
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <div className="b baseColor f20">฿{props.product.price} </div>
-                <div>
-                  {props.product.quantity < 1 ? (
-                    <button className="disabledButton ">สินค้าหมด</button>
+        <div
+          className="flexRes"
+          style={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div className="imageContainer hoverCursor" onClick={seeInfo}>
+            <img
+              src={`${process.env.REACT_APP_API_URL}/getImage/${props.product.imageName}`}
+              alt={`${props.product.imageName}`}
+              className=" imageProductStyle2"
+            />
+          </div>
+          <div className="titleStyle2">
+            <h3 onClick={seeInfo} className=" hoverChangeToNavBarColor">
+              {props.product.name}
+            </h3>
+          </div>
+          <div className="text-center">
+            <div className="b baseColor f20">฿{props.product.price} </div>
+            <div>
+              {props.product.quantity < 1 ? (
+                <button className="disabledButton ">สินค้าหมด</button>
+              ) : (
+                [
+                  props.product.user.userId === props.userInfo.userId ? (
+                    <button
+                      className="disabledButton"
+                      style={{ padding: "5px 40px" }}
+                    >
+                      เหลือ {props.product.quantity} ชิ้น
+                    </button>
                   ) : (
-                    [
-                      props.userInfo.userId &&
-                      props.product.user.userId === props.userInfo.userId ? (
-                        <button
-                          className="disabledButton"
-                          style={{ padding: "5px 40px" }}
-                        >
-                          เหลือสินค้า {props.product.quantity} ชิ้น
-                        </button>
-                      ) : (
-                        <button
-                          className="AddButton"
-                          style={{ padding: "5px 40px" }}
-                          onClick={showModal}
-                        >
-                          เพิ่ม
-                        </button>
-                      ),
-                    ]
-                  )}
-                </div>
-              </div>
+                    <button
+                      className="AddButton"
+                      style={{ padding: "5px 40px" }}
+                      onClick={showModal}
+                    >
+                      เพิ่ม
+                    </button>
+                  ),
+                ]
+              )}
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       )}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

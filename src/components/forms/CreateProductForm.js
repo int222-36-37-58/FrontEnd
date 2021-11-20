@@ -378,9 +378,7 @@ const CreateProductForm = (props) => {
                 })}
               </FormGroup>
               {errors.color && (
-                <div style={{ color: "red" }} className="b">
-                  กรุณาเลือกสีของสินค้า!
-                </div>
+                <div className="redb">กรุณาเลือกสีของสินค้า!</div>
               )}
             </div>
           </Grid>
@@ -393,6 +391,8 @@ const CreateProductForm = (props) => {
                 alignItems: "center",
                 backgroundColor: "#1895f5",
                 color: "white",
+                fontFamily: "Prompt, sans-serif",
+                fontWeight: "600",
               }}
               onClick={onSubmit}
             >

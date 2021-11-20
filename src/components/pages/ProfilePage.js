@@ -25,7 +25,6 @@ const ProfilePage = ({ userInfo, logout, addResDialog }) => {
 
   const handleLogOut = () => {
     logout();
-
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };

@@ -61,14 +61,14 @@ const StartSellPage = (props, { addResDialog, getUser }) => {
           ปลดล็อคสิทธิ์การเป็นผู้ขาย เพื่อขายสินค้ากับเรา
         </div>
         <div
-          className="AddButton mt-20"
-          style={{ textAlign: "center", width: "40%" }}
+          className="AddButton mt-20 text-center"
+          style={{ width: "40%" }}
           onClick={openConfirmBox}
         >
           เริ่มเป็นผู้ขาย
         </div>
 
-        <div style={{ textAlign: "center" }}>
+        <div className="text-center">
           <img
             src={squidgirl}
             style={{ maxWidth: "300px", width: "100%", opacity: "0.85" }}

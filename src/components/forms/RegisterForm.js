@@ -202,6 +202,7 @@ const RegisterForm = (props) => {
                   name="fullName"
                   label="full name"
                   helperText="กรอกชื่อจริงของคุณ"
+                                                                    
                   onChange={onChange}
                   value={data.fullName}
                 />

@@ -101,7 +101,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   {myOrder.map((order) => {
                     return (
                       <tr key={order.userOrderId}>
-                        <td style={{ padding: "5px" }}>#{order.userOrderId}</td>
+                        <td className="p-5">#{order.userOrderId}</td>
                         <td> {formatDate(order.date)}</td>
                         <td>฿{computedPrice(order)}</td>
                         <td>Success!</td>
@@ -172,11 +172,9 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
                   return (
                     <div
                       key={order.userOrderId}
-                      className="roundContainer"
+                      className="roundContainer text-left mb-20"
                       style={{
                         padding: " 50px",
-                        marginBottom: "20px",
-                        textAlign: "left",
                       }}
                     >
                       <Grid container spacing={3}>

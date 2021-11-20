@@ -83,7 +83,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             md={4}
             lg={3}
             ref={lastElementRef}
-            key={`productCardNo${product.productId}`}
+            key={`productCardLastNo${product.productId}`}
           >
             <ProductCard product={product} listStyle={listStyle} />
           </Grid>
@@ -94,7 +94,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
             item
             xs={12}
             ref={lastElementRef}
-            key={`productCardNo${product.productId}`}
+            key={`productCardLastNo${product.productId}`}
           >
             <ProductCard product={product} listStyle={listStyle} />
           </Grid>
@@ -179,7 +179,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
                   </Grid>
                   {products.length === 0 && (
                     <Grid item xs={12}>
-                      <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                      <div className="text-center pt-20">
                         <img
                           src={squidgirlnotfound}
                           alt="noresult"

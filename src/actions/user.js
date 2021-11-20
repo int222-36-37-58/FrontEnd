@@ -1,7 +1,6 @@
 import * as type from "../actiontype";
 import axios from "axios";
 import SetDefaultHeader from "../components/etc/SetDefaultHeader.js";
-import { clearCartItem } from "./cart";
 
 export const getUserInfo = (data) => ({
   type: type.GET_USER_INFO,
@@ -54,5 +53,4 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("token");
   SetDefaultHeader("");
   dispatch(userLogout());
-  dispatch(clearCartItem());
 };

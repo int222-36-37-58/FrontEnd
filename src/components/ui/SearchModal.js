@@ -100,8 +100,8 @@ const SearchModal = (props) => {
               }}
             >
               <div
+                className="text-right"
                 style={{
-                  textAlign: "right",
                   color: "#333435",
                   outline: "none",
                   position: "relative",

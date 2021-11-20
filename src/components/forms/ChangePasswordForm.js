@@ -183,7 +183,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
           />
         </Grid>
 
-        <Grid item xs={12} className="pt-20" style={{ textAlign: "center" }}>
+        <Grid item xs={12} className="pt-20 text-center">
           <button
             className="AddButton"
             onClick={submit}

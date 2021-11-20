@@ -82,7 +82,7 @@ const NavBar = ({
 
   const handleLogout = () => {
     logout();
-    // userLogout();
+
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };
@@ -362,7 +362,7 @@ const NavBar = ({
               onClick={() => handleLogout()}
               style={{
                 fontSize: "14px",
-                padding: "10px",
+
                 display: "flex",
                 justifyContent: "left",
               }}

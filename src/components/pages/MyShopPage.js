@@ -16,18 +16,20 @@ const MyShopPage = ({ userInfo }) => {
       });
   }, [userInfo.userName]);
 
+  const myProd = myProduct.map((mProd) => {
+    return (
+      <Grid item xs={6} md={4} lg={3} key={`myProductNo${mProd.productId}`}>
+        <ProductCard product={mProd} listStyle={1}></ProductCard>
+      </Grid>
+    );
+  });
+
   return (
     <div className="profileBox">
       <div className="headerWithUnderline">สินค้าทั้งหมดของคุณ</div>
 
       <Grid container>
-        {myProduct.map((mp) => {
-          return (
-            <Grid item xs={6} md={4} lg={3} key={`myProductNo${mp.productId}`}>
-              <ProductCard product={mp} listStyle={1}></ProductCard>
-            </Grid>
-          );
-        })}
+        {myProd}
 
         {myProduct.length === 0 && (
           <>
