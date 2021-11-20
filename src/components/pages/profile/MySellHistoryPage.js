@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../../css/order.css";
-import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
+import "../../../css/order.css";
+import squidgirlnotfound from "../../../images/asset/squidgirlnotfound.png";
 
 const MySellHistoryPage = () => {
   const [mySell, setMySell] = useState([]);

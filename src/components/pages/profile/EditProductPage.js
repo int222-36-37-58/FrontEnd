@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import CreateProductForm from "../forms/CreateProductForm";
-import { clearProduct } from "../../actions/product";
+import CreateProductForm from "../../forms/CreateProductForm";
+import { clearProduct } from "../../../actions/product";
 import axios from "axios";
-import ConfirmDialog from "../ui/ConfirmDialog";
-import { addResDialog } from "../../actions/uiStyle";
+import ConfirmDialog from "../../ui/ConfirmDialog";
+import { addResDialog } from "../../../actions/uiStyle";
 
 const EditProductPage = ({ product, clearProduct, addResDialog }) => {
   const [prd, setPrd] = useState({});

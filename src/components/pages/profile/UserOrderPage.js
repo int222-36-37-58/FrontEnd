@@ -3,14 +3,14 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import OrderDetail from "../ui/OrderDetail";
-import { addResDialog } from "../../actions/uiStyle";
+import OrderDetail from "../../ui/OrderDetail";
+import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
-import "../../css/order.css";
-import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
+import "../../../css/order.css";
+import squidgirlnotfound from "../../../images/asset/squidgirlnotfound.png";
 
 const UserOrderPage = ({ addResDialog, userInfo }) => {
   const [myOrder, setMyOrder] = useState([]);

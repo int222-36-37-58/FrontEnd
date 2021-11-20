@@ -1,15 +1,15 @@
 import { CircularProgress, Container, Grid, Hidden } from "@material-ui/core";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import "../../index.css";
-import useSearchHandler from "../etc/useSearchHandler";
-import FilterBox from "../ui/FilterBox";
-import ProductCard from "../ui/ProductCard";
+import "../../../index.css";
+import useSearchHandler from "../../etc/useSearchHandler";
+import FilterBox from "../../ui/FilterBox";
+import ProductCard from "../../ui/ProductCard";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AppsIcon from "@material-ui/icons/Apps";
-import { addResDialog } from "../../actions/uiStyle";
-import "../../css/shop.css";
-import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
+import { addResDialog } from "../../../actions/uiStyle";
+import "../../../css/shop.css";
+import squidgirlnotfound from "../../../images/asset/squidgirlnotfound.png";
 
 const Home = ({ filter, addResDialog, userInfo }) => {
   const [page, setPage] = useState(0);

@@ -2,8 +2,8 @@ import { Grid } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import ProductCard from "../ui/ProductCard";
-import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
+import ProductCard from "../../ui/ProductCard";
+import squidgirlnotfound from "../../../images/asset/squidgirlnotfound.png";
 const MyShopPage = ({ userInfo }) => {
   const [myProduct, setMyProduct] = useState([]);
   useEffect(() => {

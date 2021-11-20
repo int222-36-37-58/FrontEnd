@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { addResDialog } from "../../actions/uiStyle";
-import { getUser } from "../../actions/user";
-import ConfirmDialog from "../ui/ConfirmDialog";
-import squidgirl from "../../images/asset/squidgirl.png";
+import { addResDialog } from "../../../actions/uiStyle";
+import { getUser } from "../../../actions/user";
+import ConfirmDialog from "../../ui/ConfirmDialog";
+import squidgirl from "../../../images/asset/squidgirl.png";
 
 const StartSellPage = (props, { addResDialog, getUser }) => {
   const history = useHistory();

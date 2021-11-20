@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import RegisterForm from "../forms/RegisterForm";
+import RegisterForm from "../../forms/RegisterForm";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { connect } from "react-redux";
 import axios from "axios";
-import { addResDialog } from "../../actions/uiStyle";
-import { getUser } from "../../actions/user";
-import "../../css/profileInfo.css";
+import { addResDialog } from "../../../actions/uiStyle";
+import { getUser } from "../../../actions/user";
+import "../../../css/Info.css";
 
-const ProfileInfoPage = ({ userInfo, addResDialog, getUser }) => {
+const InfoPage = ({ userInfo, addResDialog, getUser }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const submit = (data) => {
@@ -97,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfoPage);
+export default connect(mapStateToProps, mapDispatchToProps)(InfoPage);

@@ -1,9 +1,9 @@
-import CreateProductForm from "../forms/CreateProductForm";
-import { addResDialog } from "../../actions/uiStyle";
+import CreateProductForm from "../../forms/CreateProductForm";
+import { addResDialog } from "../../../actions/uiStyle";
 import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import ConfirmDialog from "../ui/ConfirmDialog";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 
 const CreateProductPage = ({ addResDialog, userInfo }) => {
   const [productData, setProductData] = useState({});
@@ -14,11 +14,15 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
   const [clearForm, setClearForm] = useState(false);
   const submit = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/seller/products/add`, productData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      })
+      .post(
+        `${process.env.REACT_APP_API_URL}/seller/products/add`,
+        productData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         const data = {
           status: res.status,

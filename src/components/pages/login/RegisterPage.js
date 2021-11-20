@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import RegisterForm from "../forms/RegisterForm";
+import RegisterForm from "../../forms/RegisterForm";
 import axios from "axios";
-import { addResDialog } from "../../actions/uiStyle";
+import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
-import { login, getUser } from "../../actions/user";
+import { login, getUser } from "../../../actions/user";
 
 const RegisterPage = (props, { addResDialog, login, getUser }) => {
   const [regisErr, setRegisErr] = useState("");

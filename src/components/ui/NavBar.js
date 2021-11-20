@@ -14,7 +14,7 @@ import { VpnKey } from "@material-ui/icons";
 import { addResDialog, openSearchModal } from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
-import GuestUserPage from "../pages/GuestUserPage";
+import GuestUserPage from "../pages/login/GuestUserPage";
 import { logout } from "../../actions/user";
 import { useEffect } from "react";
 import "../../css/navbar.css";

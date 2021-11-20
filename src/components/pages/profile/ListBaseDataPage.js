@@ -1,7 +1,7 @@
 import { Container, Grid } from "@material-ui/core";
 import React from "react";
-import ColorTable from "../ui/ColorTable";
-import TypeTable from "../ui/TypeTable";
+import ColorTable from "../../ui/ColorTable";
+import TypeTable from "../../ui/TypeTable";
 
 const ListBaseDataPage = () => {
   return (

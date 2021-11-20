@@ -13,11 +13,11 @@ import {
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { addResDialog } from "../../actions/uiStyle";
-import AdminEditUserForm from "../forms/AdminEditUserForm";
-import HandlePermission from "../forms/HandlePermission";
-import RegisterForm from "../forms/RegisterForm";
-import ConfirmDialog from "../ui/ConfirmDialog";
+import { addResDialog } from "../../../actions/uiStyle";
+import AdminEditUserForm from "../../forms/AdminEditUserForm";
+import HandlePermission from "../../forms/HandlePermission";
+import RegisterForm from "../../forms/RegisterForm";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 
 const UserListPage = ({ addResDialog }) => {
   const [user, setUser] = useState([]);

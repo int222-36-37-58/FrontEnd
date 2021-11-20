@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import CloseIcon from "@material-ui/icons/Close";
-import "../../css/signinModal.css";
+import "../../../css/signinModal.css";
 const GuestUserPage = (props) => {
   const [formShow, setFormShow] = useState("login");
   useEffect(() => {

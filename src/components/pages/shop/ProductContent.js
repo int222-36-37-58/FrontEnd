@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import noImage from "../../images/asset/noImage.jpg";
-import ConfirmDialog from "../ui/ConfirmDialog";
+import noImage from "../../../images/asset/noImage.jpg";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 import { useHistory } from "react-router";
-import { addResDialog } from "../../actions/uiStyle";
+import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
-import "../../css/productContent.css";
+import "../../../css/productContent.css";
 const ProductContent = (props, { addResDialog }) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);

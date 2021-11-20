@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
-import ShopPage from "./components/pages/ShopPage";
+import ShopPage from "./components/pages/shop/ShopPage";
 import NavBar from "./components/ui/NavBar";
-import ProductPage from "./components/pages/ProductPage";
-import ProfilePage from "./components/pages/ProfilePage";
+import ProductPage from "./components/pages/shop/ProductPage";
+import ProfilePage from "./components/pages/profile/ProfilePage";
 import WelcomePage from "./components/pages/WelcomePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ProtectedRoute from "./components/etc/ProtectedRoute";

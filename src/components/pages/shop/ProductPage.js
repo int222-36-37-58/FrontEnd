@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { addToCart } from "../../actions/cart";
-import { editProduct } from "../../actions/product";
+import { addToCart } from "../../../actions/cart";
+import { editProduct } from "../../../actions/product";
 import ProductContent from "./ProductContent";
-import { addResDialog } from "../../actions/uiStyle";
-const ProductPage = ({ addToCart, editProduct, addResDialog,userInfo }) => {
+import { addResDialog } from "../../../actions/uiStyle";
+const ProductPage = ({ addToCart, editProduct, addResDialog, userInfo }) => {
   const history = useHistory();
   const notFound = () => {
     history.push("/notfound");
@@ -26,7 +26,6 @@ const ProductPage = ({ addToCart, editProduct, addResDialog,userInfo }) => {
     />
   );
 };
-
 
 const mapStateToProps = (state) => {
   return {

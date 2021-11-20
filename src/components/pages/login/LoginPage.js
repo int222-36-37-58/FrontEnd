@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addResDialog } from "../../actions/uiStyle";
-import { login } from "../../actions/user";
+import { addResDialog } from "../../../actions/uiStyle";
+import { login } from "../../../actions/user";
 
-import LoginForm from "../forms/LoginForm";
+import LoginForm from "../../forms/LoginForm";
 
 const LoginPage = (props, { login, addResDialog }) => {
   const [err, setErr] = useState("");

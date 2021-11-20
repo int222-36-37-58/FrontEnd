@@ -1,21 +1,21 @@
 import { Grid, Container, Hidden } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import ChangePasswordForm from "../forms/ChangePasswordForm";
-import ProfileInfoPage from "./ProfileInfoPage";
+import ChangePasswordForm from "../../forms/ChangePasswordForm";
+import InfoPage from "./InfoPage";
 import UserOrderPage from "./UserOrderPage";
 import { Route, Switch, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
-import { addResDialog } from "../../actions/uiStyle";
+import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
 import EditProductPage from "./EditProductPage";
 import UserListPage from "./UserListPage";
 import ListBaseDataPage from "./ListBaseDataPage";
-import { logout, getUser } from "../../actions/user";
+import { logout, getUser } from "../../../actions/user";
 import MyShopPage from "./MyShopPage";
 import StartSellPage from "./StartSellPage";
 import MySellHistoryPage from "./MySellHistoryPage";
-import "../../css/profileMenu.css";
+import "../../../css/profileMenu.css";
 
 const ProfilePage = ({ userInfo, logout, addResDialog }) => {
   useEffect(() => {
@@ -198,7 +198,7 @@ const ProfilePage = ({ userInfo, logout, addResDialog }) => {
           <Grid item xs={12} md={8}>
             <Switch>
               <Route path={"/profile/info"}>
-                <ProfileInfoPage />
+                <InfoPage />
               </Route>
               <Route path={"/profile/changepassword"}>
                 {" "}
