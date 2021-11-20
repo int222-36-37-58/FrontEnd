@@ -137,7 +137,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                       11
                     )}...`}
                     value={commentContent}
-                    helperText="ใส่ความเห็นไม่เกิน 180 ตัวอักษร"
+                    helperText={`${commentContent.length}/180`}
                   />{" "}
                   <button
                     className="InfoButton "
@@ -259,7 +259,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     onChange={(e) => setCommentContent(e.target.value)}
                     label="ใส่ความเห็นของคุณ"
                     inputProps={{ minLength: 1, maxLength: 180 }}
-                    helperText="ใส่ความเห็นไม่เกิน 180 ตัวอักษร"
+                    helperText={`${commentContent.length}/180`}
                     value={commentContent}
                   />{" "}
                   <button

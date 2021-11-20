@@ -278,7 +278,11 @@ const CreateProductForm = (props) => {
               label="description"
               value={data.description}
               onChange={onChange}
-              helperText="รายละเอียดของสินค้า ตั้งแต่ 5 - 550 ตัวอักษร"
+              helperText={
+                data.description
+                  ? `รายละเอียดสินค้า 5ตัวอักษรขึ้นไป ${data.description.length}/550`
+                  : `รายละเอียดสินค้า 5 - 550 ตัวอักษร `
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6}>
