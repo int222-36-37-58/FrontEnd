@@ -37,6 +37,9 @@ const OrderDetail = (props) => {
     let date = buyDate.getDate();
     let hours = buyDate.getHours();
     let mins = buyDate.getMinutes();
+    if (String(mins).length === 1) {
+      mins = "0" + String(mins);
+    }
     let dateformat =
       date +
       " " +

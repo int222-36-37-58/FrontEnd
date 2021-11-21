@@ -7,7 +7,7 @@ const MySellHistoryPage = () => {
   const [mySell, setMySell] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/seller/order?pageNo=0&pageSize=1`)
+      .get(`${process.env.REACT_APP_API_URL}/seller/order`)
       .then((res) => {
         setMySell(res.data);
       });
@@ -30,7 +30,7 @@ const MySellHistoryPage = () => {
         }}
       >
         <thead className="orderTableHeader">
-          <tr className="f13">
+          <tr className="f13 b">
             <th>สินค้า</th>
             <th>สี</th>
             <th>จำนวน</th>
@@ -40,7 +40,7 @@ const MySellHistoryPage = () => {
         <tbody>
           {mySell.map((sell) => {
             return (
-              <tr key={`sellerproduct${sell.orderDetailId}`} className="f13">
+              <tr key={`sellerproduct${sell.orderDetailId}`} className="f13 b">
                 <td className="p-20-5 ">{sell.product.name}</td>
                 <td className="p-20-5">{sell.color.colorName}</td>
                 <td className="p-20-5">{sell.quantity}</td>

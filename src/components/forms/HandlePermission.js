@@ -51,7 +51,7 @@ const HandlePermission = (props, { addResdialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: res.data,
+          dialogContent: "ลบบัญชีสำเร็จ",
         };
         props.addResDialog(data);
       })

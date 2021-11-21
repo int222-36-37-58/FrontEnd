@@ -122,7 +122,7 @@ const ProductCard = (props, { userInfo }) => {
                   props.product.user.userId === props.userInfo.userId ? (
                     <button
                       className="disabledButton"
-                      style={{ padding: "5px 40px" }}
+                      style={{ padding: "5px 15px" }}
                     >
                       เหลือ {props.product.quantity} ชิ้น
                     </button>

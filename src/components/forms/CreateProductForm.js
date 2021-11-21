@@ -318,7 +318,7 @@ const CreateProductForm = (props) => {
               type="number"
               inputProps={{
                 minLength: 1,
-                maxLength: 10,
+                maxLength: 7,
                 style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
               }}
               InputLabelProps={{

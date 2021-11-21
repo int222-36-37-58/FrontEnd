@@ -23,7 +23,6 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
           userName: props.userInfo.userName,
         },
       });
-
       axios
         .post(`${process.env.REACT_APP_API_URL}/user/addcomment`, json, {
           headers: {
@@ -121,7 +120,10 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                   inputProps={{
                     minLength: 1,
                     maxLength: 180,
-                    style: { fontFamily: "Prompt, sans-serif" },
+                    style: {
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    },
                   }}
                   InputLabelProps={{
                     style: {
@@ -222,7 +224,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                 className="AddButton"
                 onClick={() => setComment(!comment)}
               >
-                แสดงความคิดเห็น
+                คอมเมนท์
               </button>
               {comment && (
                 <button
@@ -255,7 +257,14 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     error={errs}
                     onChange={(e) => setCommentContent(e.target.value)}
                     label="ใส่ความเห็นของคุณ"
-                    inputProps={{ minLength: 1, maxLength: 180 }}
+                    inputProps={{
+                      minLength: 1,
+                      maxLength: 180,
+                      style: {
+                        fontFamily: "Prompt, sans-serif",
+                        fontWeight: "600",
+                      },
+                    }}
                     helperText={`${commentContent.length}/180`}
                     value={commentContent}
                   />{" "}

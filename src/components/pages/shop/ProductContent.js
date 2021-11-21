@@ -1,4 +1,7 @@
 import { Container, Grid } from "@material-ui/core";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import FirstPageIcon from "@material-ui/icons/FirstPage";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
@@ -23,6 +26,9 @@ const ProductContent = (props, { addResDialog }) => {
     showConfirm: false,
     confirmContent: "",
   });
+  const [commentPage, setCommentPage] = useState(0);
+  const [commentPageSize] = useState(5);
+
   const history = useHistory();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,18 +50,34 @@ const ProductContent = (props, { addResDialog }) => {
         .catch(() => {
           props.notFound();
         });
-
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/product/${id}/comment`)
-        .then((res) => {
-          setComments(res.data);
-        })
-        .catch(() => {
-          return;
-        });
     }
     return () => {};
   }, [props, product]);
+
+  useEffect(() => {
+    let id = window.location.pathname.slice(9, window.location.pathname.length);
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/product/${id}/comment?pageSize=${commentPageSize}&pageNo=${commentPage}`
+      )
+      .then((res) => {
+        setComments(res.data);
+      })
+      .catch(() => {
+        return;
+      });
+  }, [commentPage]);
+
+  const movePage = (n) => {
+    if (
+      (commentPage === 0 && n === -1) ||
+      (comments.length < commentPageSize && n === 1)
+    ) {
+      return;
+    } else {
+      setCommentPage(commentPage + n);
+    }
+  };
 
   const chooseColor = (e) => {
     setSelectedColor(e.target.value);
@@ -366,9 +388,14 @@ const ProductContent = (props, { addResDialog }) => {
                       padding: "30px",
                     }}
                   >
-                    ยังไม่มีความคิดเห็นในตอนนี้
+                    {commentPage === 0 ? (
+                      <>ยังไม่มีความคิดเห็นในตอนนี้</>
+                    ) : (
+                      <>ไม่มีความเห็นเพิ่มเติม</>
+                    )}
                   </div>
                 )}
+
                 {comments.map((cm) => {
                   return (
                     <div
@@ -387,6 +414,41 @@ const ProductContent = (props, { addResDialog }) => {
                     </div>
                   );
                 })}
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <FirstPageIcon
+                  className={
+                    commentPage > 0 ? "navigateIcon" : "disabledNavigateIcon"
+                  }
+                  onClick={() => setCommentPage(0)}
+                />
+                <NavigateBeforeIcon
+                  className={
+                    commentPage > 0 ? "navigateIcon" : "disabledNavigateIcon"
+                  }
+                  onClick={() => movePage(-1)}
+                />
+
+                <div className="b text-center" style={{ width: "15px" }}>
+                  {commentPage + 1}
+                </div>
+
+                <NavigateNextIcon
+                  className={
+                    comments.length >= commentPageSize
+                      ? "navigateIcon"
+                      : "disabledNavigateIcon"
+                  }
+                  onClick={() => movePage(1)}
+                />
               </div>
             </div>
           </Grid>

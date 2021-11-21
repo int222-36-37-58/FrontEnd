@@ -64,6 +64,9 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
     let date = buyDate.getDate();
     let hours = buyDate.getHours();
     let mins = buyDate.getMinutes();
+    if (String(mins).length === 1) {
+      mins = "0" + String(mins);
+    }
     let dateformat = date + "/" + month + "/" + year + " " + hours + ":" + mins;
     return dateformat;
   };
