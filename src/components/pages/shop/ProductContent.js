@@ -66,7 +66,7 @@ const ProductContent = (props, { addResDialog }) => {
       .catch(() => {
         return;
       });
-  }, [commentPage]);
+  }, [commentPage,commentPageSize]);
 
   const movePage = (n) => {
     if (
