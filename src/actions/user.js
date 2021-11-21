@@ -1,6 +1,7 @@
 import * as type from "../actiontype";
 import axios from "axios";
 import SetDefaultHeader from "../components/etc/SetDefaultHeader.js";
+import { removeYourProduct } from "./cart";
 
 export const getUserInfo = (data) => ({
   type: type.GET_USER_INFO,
@@ -33,6 +34,7 @@ export const login = (data) => async (dispatch) => {
       const resp = await axios
         .get(`${process.env.REACT_APP_API_URL}/user/getbyname`)
         .then((res) => {
+          dispatch(removeYourProduct(res.data.userId));
           dispatch(getUserInfo(res.data));
           return res.status;
         });

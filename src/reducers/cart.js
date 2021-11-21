@@ -62,6 +62,17 @@ const cart = (state = INITIAL_STATE, action = {}) => {
             JSON.stringify(item) !== JSON.stringify(action.payload.orderDetail)
         ),
       };
+    case actionTypes.REMOVE_YOUR_PRODUCT_FROM_CART:
+      if (state.cart.length > 0) {
+        return {
+          ...state,
+          cart: state.cart.filter(
+            (item) => item.product.user.userId !== action.payload.userId
+          ),
+        };
+      } else {
+        return state;
+      }
     case actionTypes.CLEAR_CART:
       return { ...state, cart: [] };
     default:

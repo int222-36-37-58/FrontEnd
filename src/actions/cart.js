@@ -14,6 +14,13 @@ export const removeFromCart = (productToCart) => ({
   },
 });
 
+export const removeYourProduct = (userId) => ({
+  type: type.REMOVE_YOUR_PRODUCT_FROM_CART,
+  payload: {
+    userId: userId,
+  },
+});
+
 export const clearCartItem = () => ({
   type: type.CLEAR_CART,
 });
