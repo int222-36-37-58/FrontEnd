@@ -83,7 +83,6 @@ const RegisterForm = (props) => {
     }
     setErrors(errors);
     if (Object.keys(errors).length > 0) {
-      console.log(errors);
       return "err";
     }
   };
@@ -202,7 +201,6 @@ const RegisterForm = (props) => {
                   name="fullName"
                   label="full name"
                   helperText="กรอกชื่อจริงของคุณ"
-                                                                    
                   onChange={onChange}
                   value={data.fullName}
                 />

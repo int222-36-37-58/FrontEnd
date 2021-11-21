@@ -177,6 +177,10 @@ body {
   padding: 5px 10px 5px 10px;
 }
 
+.p-20-5 {
+  padding: 20px 5px 20px 5px;
+}
+
 .pt-5 {
   padding-top: 5px;
 }

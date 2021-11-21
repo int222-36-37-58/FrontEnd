@@ -30,7 +30,7 @@ const MySellHistoryPage = () => {
         }}
       >
         <thead className="orderTableHeader">
-          <tr>
+          <tr className="f13">
             <th>สินค้า</th>
             <th>สี</th>
             <th>จำนวน</th>
@@ -40,11 +40,11 @@ const MySellHistoryPage = () => {
         <tbody>
           {mySell.map((sell) => {
             return (
-              <tr key={`sellerproduct${sell.orderDetailId}`}>
-                <td>{sell.product.name}</td>
-                <td>{sell.color.colorName}</td>
-                <td>{sell.quantity}</td>
-                <td>฿{sell.totalPrice}</td>
+              <tr key={`sellerproduct${sell.orderDetailId}`} className="f13">
+                <td className="p-20-5 ">{sell.product.name}</td>
+                <td className="p-20-5">{sell.color.colorName}</td>
+                <td className="p-20-5">{sell.quantity}</td>
+                <td className="p-20-5">฿{sell.totalPrice}</td>
               </tr>
             );
           })}
