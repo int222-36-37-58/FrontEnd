@@ -34,15 +34,9 @@ const FilterBox = ({
   const [showType, setShowType] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/types`, {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      })
-      .then((res) => {
-        setTypes(res.data);
-      });
+    axios.get(`${process.env.REACT_APP_API_URL}/types`).then((res) => {
+      setTypes(res.data);
+    });
   }, []);
 
   const onChangeFilter = (e) => {

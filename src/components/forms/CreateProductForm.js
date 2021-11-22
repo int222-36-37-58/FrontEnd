@@ -108,7 +108,7 @@ const CreateProductForm = (props) => {
       productData.saleDate = today;
       var bodyFormData = new FormData();
       var blob = new Blob([JSON.stringify(productData)], {
-        type: "application/json",
+        type: "application/json; charset=utf-8",
       });
       bodyFormData.append("imageFile", imageFile);
       bodyFormData.append("product", blob);
