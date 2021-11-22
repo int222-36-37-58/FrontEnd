@@ -4,8 +4,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { addToCart } from "../../actions/cart";
 import { connect } from "react-redux";
 import "../../css/addProductModal.css";
+import { addResDialog } from "../../actions/uiStyle";
 
-const AddModal = (props, { addToCart }) => {
+const AddModal = (props, { addToCart, addResDialog }) => {
   const [colorChoose, setColorChoose] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [noColor, setNoColor] = useState(false);
@@ -43,6 +44,17 @@ const AddModal = (props, { addToCart }) => {
         color: colorObj,
         product: productToCart,
       };
+      const data = {
+        status: 200,
+        dialogContent: `เพิ่ม ${
+          props.product.name.length > 25
+            ? props.product.name.slice(0, props.product.name.length - 20) +
+              `...`
+            : props.product.name
+        } ลงตะกร้า`,
+      };
+      props.addResDialog(data);
+
       props.addToCart(orderDetails);
       setNoColor(false);
       setColorChoose(0);
@@ -102,7 +114,8 @@ const AddModal = (props, { addToCart }) => {
             </div>
 
             <div className="f13 normalFont pt-5">
-              ขายโดย {props.product.user.userName}
+              ขายโดย {props.product.user.userName} | มีสินค้า{" "}
+              {props.product.quantity} ชิ้น
             </div>
 
             <div className="radioGroup w100 text-left pt-30 pb-30">
@@ -153,6 +166,7 @@ const AddModal = (props, { addToCart }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
+    addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 

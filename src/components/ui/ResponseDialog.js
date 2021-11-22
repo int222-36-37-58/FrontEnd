@@ -50,7 +50,7 @@ const ResponseDialog = (props) => {
         <div className="text-center">{switchRender()}</div>
         <div>
           {props.dialog && (
-            <h3 style={{ fontWeight: 500, padding: "0 0 0 10px" }}>
+            <h3 style={{ padding: "0 0 0 10px" }} className="f14 b">
               {props.dialog.dialogContent}
             </h3>
           )}

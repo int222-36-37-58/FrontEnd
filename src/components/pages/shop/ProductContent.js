@@ -122,6 +122,15 @@ const ProductContent = (props, { addResDialog }) => {
         color: colorObj,
         product: productToCart,
       };
+      const data = {
+        status: 200,
+        dialogContent: `เพิ่ม ${
+          product.name.length > 30
+            ? product.name.slice(0, product.name.length - 12)
+            : product.name
+        } ลงตะกร้า`,
+      };
+      props.addResDialog(data);
 
       props.addItem(orderDetails);
       setQuantityAdd(1);
@@ -345,7 +354,8 @@ const ProductContent = (props, { addResDialog }) => {
                       color: "black",
                     }}
                   >
-                    | ขายโดย : {product.user.userName}{" "}
+                    | ขายโดย : {product.user.userName} | มีสินค้า :{" "}
+                    {product.quantity} ชิ้น{" "}
                   </span>
                 </span>
               )}
