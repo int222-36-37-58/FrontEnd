@@ -2,8 +2,8 @@ import * as actionTypes from "../actiontype";
 
 const INITIAL_STATE = {
   searchModalShow: false,
-  filterType: [],
-  sort: [],
+  filterType: "",
+  sort: "",
   responseDialog: [],
 };
 
@@ -30,8 +30,8 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
         sort: isAlreadySort ? "" : action.payload.sortClicked,
       };
 
-    case actionTypes.CLEAR_FILTER:
-      return { ...state, filterType: "" };
+    case actionTypes.CLEAR_FILTER_SORT:
+      return { ...state, filterType: "", sort: "" };
     case actionTypes.ADD_RES_DIALOG:
       return {
         ...state,

@@ -20,8 +20,8 @@ export const clickedSort = (val) => ({
   },
 });
 
-export const clearFilter = () => ({
-  type: type.CLEAR_FILTER,
+export const clearFilterSort = () => ({
+  type: type.CLEAR_FILTER_SORT,
 });
 
 export const openSearchModal = (open) => ({

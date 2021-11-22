@@ -17,7 +17,7 @@ const Home = ({ filter, addResDialog, userInfo, sortBy }) => {
   const [productLength, setProductLength] = useState(0);
   const [searchVal] = useState("all");
   const [type, setType] = useState("");
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("productId");
   const [listStyle, setListStyle] = useState(1);
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
@@ -51,7 +51,11 @@ const Home = ({ filter, addResDialog, userInfo, sortBy }) => {
   }, [filter]);
 
   useEffect(() => {
-    setSort(sortBy);
+    if (sortBy === "") {
+      setSort("productId");
+    } else {
+      setSort(sortBy);
+    }
     setPage(0);
   }, [sortBy]);
 

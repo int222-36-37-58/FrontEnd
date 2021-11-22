@@ -9,15 +9,16 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import { useEffect } from "react";
-import { clickedFilter, clearFilter, clickedSort } from "../../actions/uiStyle";
+import { clickedFilter, clearFilterSort, clickedSort } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/filterBox.css";
 
-const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
+const FilterBox = ({ uiStyle, clickedFilter, clearFilterSort, clickedSort }) => {
   const [types, setTypes] = useState([]);
   const [sortBy] = useState([
     { name: "วันที่ขาย", val: "saleDate" },
+    { name: "ชื่อสินค้า A-Z", val: "name" },
     { name: "ราคาน้อยไปมาก", val: "minPrice" },
     { name: "ราคามากไปน้อย", val: "maxPrice" },
   ]);
@@ -43,7 +44,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
   };
 
   const clearCheck = () => {
-    clearFilter();
+    clearFilterSort();
   };
   return (
     <>
@@ -95,8 +96,8 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                           }}
                           icon={
                             <div className="filterFullItem w100">
-                              <CircleUnchecked className="f22 pl-5" />
-                              <div className="f16 b pl-10"> {filter.name}</div>
+                              <CircleUnchecked className=" pl-5" />
+                              <div className="f14 b pl-10"> {filter.name}</div>
                             </div>
                           }
                           checkedIcon={
@@ -106,8 +107,8 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                                 backgroundColor: "#f0f8f9",
                               }}
                             >
-                              <CircleCheckedFilled className="f22 pl-5" />
-                              <div className="f16 b pl-10"> {filter.name}</div>
+                              <CircleCheckedFilled className="  pl-5" />
+                              <div className="f14 b pl-10"> {filter.name}</div>
                             </div>
                           }
                           onChange={onChangeFilter}
@@ -140,8 +141,8 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                           }}
                           icon={
                             <div className="filterFullItem w100">
-                              <CircleUnchecked className="f22 pl-5" />
-                              <div className="f16 b pl-10"> {sort.name}</div>
+                              <CircleUnchecked className=" pl-5" />
+                              <div className="f14 b pl-10"> {sort.name}</div>
                             </div>
                           }
                           checkedIcon={
@@ -151,8 +152,8 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                                 backgroundColor: "#f0f8f9",
                               }}
                             >
-                              <CircleCheckedFilled className="f22 pl-5" />
-                              <div className="f16 b pl-10"> {sort.name}</div>
+                              <CircleCheckedFilled className="  pl-5" />
+                              <div className="f14 b pl-10"> {sort.name}</div>
                             </div>
                           }
                           onChange={onChangeSortBy}
@@ -234,7 +235,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                           }}
                           icon={
                             <div className="filterFullItem w100">
-                              <CircleUnchecked className="f20 pl-5" />
+                              <CircleUnchecked className=" pl-5" />
                               <div className="f16 b pl-5"> {filter.name}</div>
                             </div>
                           }
@@ -246,7 +247,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                                 backgroundColor: "#f0f8f9",
                               }}
                             >
-                              <CircleCheckedFilled className="f20 pl-5" />
+                              <CircleCheckedFilled className=" pl-5" />
                               <div className="f16 b pl-5"> {filter.name}</div>
                             </div>
                           }
@@ -279,7 +280,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                             }}
                             icon={
                               <div className="filterFullItem w100">
-                                <CircleUnchecked className="f22 pl-5" />
+                                <CircleUnchecked className=" pl-5" />
                                 <div className="f16 b pl-10"> {sort.name}</div>
                               </div>
                             }
@@ -290,7 +291,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
                                   backgroundColor: "#f0f8f9",
                                 }}
                               >
-                                <CircleCheckedFilled className="f22 pl-5" />
+                                <CircleCheckedFilled className=" pl-5" />
                                 <div className="f16 b pl-10"> {sort.name}</div>
                               </div>
                             }
@@ -320,7 +321,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clickedFilter: (e) => dispatch(clickedFilter(e)),
     clickedSort: (e) => dispatch(clickedSort(e)),
-    clearFilter: () => dispatch(clearFilter()),
+    clearFilterSort: () => dispatch(clearFilterSort()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilterBox);
