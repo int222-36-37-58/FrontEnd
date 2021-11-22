@@ -60,7 +60,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilterSort, clickedSort }) => 
             }}
           >
             <div>ฟิลเตอร์</div>
-            {uiStyle.filterType && uiStyle.filterType.length > 0 && (
+            { (uiStyle.filterType || uiStyle.sort)  && (
               <div>
                 <button
                   className="AddButton"
