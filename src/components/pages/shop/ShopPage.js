@@ -11,18 +11,20 @@ import { addResDialog } from "../../../actions/uiStyle";
 import "../../../css/shop.css";
 import squidgirlnotfound from "../../../images/asset/squidgirlnotfound.png";
 
-const Home = ({ filter, addResDialog, userInfo }) => {
+const Home = ({ filter, addResDialog, userInfo, sortBy }) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [productLength, setProductLength] = useState(0);
   const [searchVal] = useState("all");
   const [type, setType] = useState("");
+  const [sort, setSort] = useState("");
   const [listStyle, setListStyle] = useState(1);
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
     page,
-    pageSize
+    pageSize,
+    sort
   );
 
   useEffect(() => {
@@ -47,6 +49,11 @@ const Home = ({ filter, addResDialog, userInfo }) => {
       setPage(0);
     }
   }, [filter]);
+
+  useEffect(() => {
+    setSort(sortBy);
+    setPage(0);
+  }, [sortBy]);
 
   useEffect(() => {
     const getProductLength = () => {
@@ -212,6 +219,7 @@ const Home = ({ filter, addResDialog, userInfo }) => {
 const mapStateToProps = (state) => {
   return {
     filter: state.uiStyle.filterType,
+    sortBy: state.uiStyle.sort,
     userInfo: state.user.userInfo,
   };
 };

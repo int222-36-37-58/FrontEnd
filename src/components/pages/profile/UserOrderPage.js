@@ -43,6 +43,8 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
 
   useEffect(() => {
     getMyOrderHistory();
+
+    return () => {};
   }, [getMyOrderHistory]);
 
   const showOrderDetail = (order) => {

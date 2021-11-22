@@ -13,6 +13,12 @@ export const clickedFilter = (val) => ({
     filterClicked: val,
   },
 });
+export const clickedSort = (val) => ({
+  type: type.SORT_CLICKED,
+  payload: {
+    sortClicked: val,
+  },
+});
 
 export const clearFilter = () => ({
   type: type.CLEAR_FILTER,

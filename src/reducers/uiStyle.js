@@ -3,6 +3,7 @@ import * as actionTypes from "../actiontype";
 const INITIAL_STATE = {
   searchModalShow: false,
   filterType: [],
+  sort: [],
   responseDialog: [],
 };
 
@@ -18,6 +19,15 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
       return {
         ...state,
         filterType: isAlready ? "" : action.payload.filterClicked,
+      };
+    case actionTypes.SORT_CLICKED:
+      let isAlreadySort = false;
+      if (state.sort === action.payload.sortClicked) {
+        isAlreadySort = true;
+      }
+      return {
+        ...state,
+        sort: isAlreadySort ? "" : action.payload.sortClicked,
       };
 
     case actionTypes.CLEAR_FILTER:

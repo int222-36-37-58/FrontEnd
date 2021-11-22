@@ -9,13 +9,18 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import { useEffect } from "react";
-import { clickedFilter, clearFilter } from "../../actions/uiStyle";
+import { clickedFilter, clearFilter, clickedSort } from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/filterBox.css";
 
-const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
+const FilterBox = ({ uiStyle, clickedFilter, clearFilter, clickedSort }) => {
   const [types, setTypes] = useState([]);
+  const [sortBy] = useState([
+    { name: "วันที่ขาย", val: "saleDate" },
+    { name: "ราคาน้อยไปมาก", val: "minPrice" },
+    { name: "ราคามากไปน้อย", val: "maxPrice" },
+  ]);
   const [showType, setShowType] = useState(false);
 
   useEffect(() => {
@@ -24,9 +29,13 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
     });
   }, []);
 
-  const onChange = (e) => {
+  const onChangeFilter = (e) => {
     let val = e.target.value;
     clickedFilter(val);
+  };
+
+  const onChangeSortBy = (e) => {
+    clickedSort(e.target.value);
   };
 
   const handleShowType = () => {
@@ -101,8 +110,53 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                               <div className="f16 b pl-10"> {filter.name}</div>
                             </div>
                           }
-                          onChange={onChange}
+                          onChange={onChangeFilter}
                           value={filter.name}
+                        />
+                      }
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </div>
+
+          <div>
+            <div className="pt-5 pb-5">เรียงตาม</div>
+            <Grid container justifyContent="center">
+              {sortBy.map((sort) => {
+                return (
+                  <Grid item xs={12} key={sort.name}>
+                    <FormControlLabel
+                      className="w100"
+                      control={
+                        <Checkbox
+                          className="mw100 w100"
+                          disableRipple={true}
+                          checked={uiStyle.sort === sort.val}
+                          color="primary"
+                          style={{
+                            backgroundColor: "transparent",
+                          }}
+                          icon={
+                            <div className="filterFullItem w100">
+                              <CircleUnchecked className="f22 pl-5" />
+                              <div className="f16 b pl-10"> {sort.name}</div>
+                            </div>
+                          }
+                          checkedIcon={
+                            <div
+                              className="filterFullItem w100"
+                              style={{
+                                backgroundColor: "#f0f8f9",
+                              }}
+                            >
+                              <CircleCheckedFilled className="f22 pl-5" />
+                              <div className="f16 b pl-10"> {sort.name}</div>
+                            </div>
+                          }
+                          onChange={onChangeSortBy}
+                          value={sort.val}
                         />
                       }
                     />
@@ -196,7 +250,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                               <div className="f16 b pl-5"> {filter.name}</div>
                             </div>
                           }
-                          onChange={onChange}
+                          onChange={onChangeFilter}
                           value={filter.name}
                         />
                       }
@@ -205,6 +259,51 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilter }) => {
                 );
               })}
             </Grid>
+
+            <div>
+              <div className="pt-5 pb-5">เรียงตาม</div>
+              <Grid container justifyContent="center">
+                {sortBy.map((sort) => {
+                  return (
+                    <Grid item xs={12} key={sort.name}>
+                      <FormControlLabel
+                        className="w100"
+                        control={
+                          <Checkbox
+                            className="mw100 w100"
+                            disableRipple={true}
+                            checked={uiStyle.sort === sort.val}
+                            color="primary"
+                            style={{
+                              backgroundColor: "transparent",
+                            }}
+                            icon={
+                              <div className="filterFullItem w100">
+                                <CircleUnchecked className="f22 pl-5" />
+                                <div className="f16 b pl-10"> {sort.name}</div>
+                              </div>
+                            }
+                            checkedIcon={
+                              <div
+                                className="filterFullItem w100"
+                                style={{
+                                  backgroundColor: "#f0f8f9",
+                                }}
+                              >
+                                <CircleCheckedFilled className="f22 pl-5" />
+                                <div className="f16 b pl-10"> {sort.name}</div>
+                              </div>
+                            }
+                            onChange={onChangeSortBy}
+                            value={sort.val}
+                          />
+                        }
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </div>
           </div>
         </Container>
       </Hidden>
@@ -220,6 +319,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clickedFilter: (e) => dispatch(clickedFilter(e)),
+    clickedSort: (e) => dispatch(clickedSort(e)),
     clearFilter: () => dispatch(clearFilter()),
   };
 };

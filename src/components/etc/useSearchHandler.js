@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function useSearchHandler(searchVal, type, page, pageSize) {
+function useSearchHandler(searchVal, type, page, pageSize, sort) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+  const [sortB, setSortB] = useState("");
 
   useEffect(() => {
     setProducts([]);
@@ -29,6 +30,22 @@ function useSearchHandler(searchVal, type, page, pageSize) {
         api = api + `searchText=`;
       }
     }
+
+    if (sort === "" && sortB !== "") {
+      setProducts([]);
+      setSortB("");
+    }
+
+    if (sort !== "" && sort !== sortB) {
+      setProducts([]);
+      setSortB(sort);
+      api += `&sortBy=${sort}`;
+    }
+
+    if (sortB === sort) {
+      api += `&sortBy=${sortB}`;
+    }
+
     let cancel;
 
     axios({
@@ -54,7 +71,7 @@ function useSearchHandler(searchVal, type, page, pageSize) {
       });
 
     return () => cancel();
-  }, [searchVal, type, page, pageSize]);
+  }, [searchVal, type, page, pageSize, sort, sortB]);
 
   return { loading, products, hasMore };
 }

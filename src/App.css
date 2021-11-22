@@ -88,21 +88,21 @@
   font-family: Prompt, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  border: 1px solid #545454;
+  border: 1px solid #333435;
   border-radius: 4px;
 }
 
 .radioGroup input[type="radio"]:checked + label {
   color: white;
-  background-color: #545454;
-  border-color: #545454;
+  background-color: #333435;
+  border-color: #333435;
 }
 
 .radioGroup input[type="radio"]:hover + label {
   cursor: pointer;
   color: white;
-  background-color: #545454;
-  border-color: #545454;
+  background-color: #333435;
+  border-color: #333435;
 }
 .plusMinus * {
   outline: none;

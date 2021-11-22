@@ -15,6 +15,7 @@ import ProductCard from "./ProductCard";
 import useSearchHandler from "../etc/useSearchHandler";
 import axios from "axios";
 import squidgirlnotfound from "../../images/asset/squidgirlnotfound.png";
+import "../../css/searchModal.css";
 
 const SearchModal = (props) => {
   const [searchVal, setSearchVal] = useState("");
@@ -22,11 +23,19 @@ const SearchModal = (props) => {
   const [types, setTypes] = useState([]);
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
+  const [sort, setSort] = useState("productId");
+  const [sortBy] = useState([
+    { name: "วันที่ขาย", val: "saleDate" },
+    { name: "ราคาน้อยไปมาก", val: "minPrice" },
+    { name: "ราคามากไปน้อย", val: "maxPrice" },
+  ]);
+
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
     page,
-    pageSize
+    pageSize,
+    sort
   );
 
   const observer = useRef();
@@ -146,11 +155,42 @@ const SearchModal = (props) => {
                 </div>{" "}
               </Hidden>
 
-              {products.length > 0 ? (
-                <div className="f24">ผลลัพธ์การค้นหา</div>
-              ) : (
-                <div className="f24"> ไม่มีผลลัพธ์ของการค้นหานี้</div>
-              )}
+              <div className="f24">
+                <div>
+                  {" "}
+                  {products.length > 0 ? (
+                    <> ผลลัพธ์การค้นหา</>
+                  ) : (
+                    <>ไม่มีผลลัพธ์ของการค้นหานี้ </>
+                  )}{" "}
+                </div>
+                <div
+                  className="f13"
+                  style={{
+                    display: "flex",
+                    width: "150px",
+                    flexDirection: "column",
+                  }}
+                >
+                  {" "}
+                  <div className="text-left b "> เรียงตาม </div>
+                  <select
+                    className="sortBy"
+                    value={sort}
+                    onChange={(e) => {
+                      setPage(0);
+                      setSort(e.target.value);
+                    }}
+                  >
+                    {sortBy.map((s) => (
+                      <option key={s.name} value={s.val}>
+                        {s.name}{" "}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div className="radioGroup pt-20 pb-40">
                 <span className="f18  pr-20">กรองการค้นหา</span>
                 <span>
