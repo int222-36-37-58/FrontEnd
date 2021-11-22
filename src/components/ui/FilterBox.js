@@ -69,7 +69,7 @@ const FilterBox = ({
             }}
           >
             <div>ฟิลเตอร์</div>
-            {(uiStyle.filterType || uiStyle.sort) && (
+            {(uiStyle.filterType !== "" || uiStyle.sort.name !== undefined) && (
               <div>
                 <button
                   className="AddButton"
@@ -211,19 +211,22 @@ const FilterBox = ({
             >
               <div className="pt-10">ประเภท </div>
               <div>
-                {" "}
-                <button
-                  className="AddButton"
-                  style={{
-                    padding: "0px",
-                    display: "flex",
-                    borderRadius: "50%",
-                    marginTop: "12px",
-                  }}
-                  onClick={() => clearCheck()}
-                >
-                  <CloseIcon style={{ fontSize: "16px" }} />
-                </button>
+                {(uiStyle.filterType !== "" ||
+                  uiStyle.sort.name !== undefined) && (
+                  <div>
+                    <button
+                      className="AddButton"
+                      style={{
+                        padding: "0px",
+                        display: "flex",
+                        borderRadius: "50%",
+                      }}
+                      onClick={() => clearCheck()}
+                    >
+                      <CloseIcon style={{ fontSize: "16px" }} />
+                    </button>
+                  </div>
+                )}
               </div>{" "}
             </div>
 
@@ -273,7 +276,7 @@ const FilterBox = ({
             <div>
               <div className="pt-5 pb-5">เรียงตาม</div>
               <Grid container justifyContent="center">
-                {sortBy.map((sort,i) => {
+                {sortBy.map((sort, i) => {
                   return (
                     <Grid item xs={12} key={sort.name}>
                       <FormControlLabel
