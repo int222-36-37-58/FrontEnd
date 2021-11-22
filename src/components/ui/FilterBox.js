@@ -273,7 +273,7 @@ const FilterBox = ({
             <div>
               <div className="pt-5 pb-5">เรียงตาม</div>
               <Grid container justifyContent="center">
-                {sortBy.map((sort) => {
+                {sortBy.map((sort,i) => {
                   return (
                     <Grid item xs={12} key={sort.name}>
                       <FormControlLabel
@@ -282,7 +282,7 @@ const FilterBox = ({
                           <Checkbox
                             className="mw100 w100"
                             disableRipple={true}
-                            checked={uiStyle.sort === sort.val}
+                            checked={uiStyle.sort.name === sort.name}
                             color="primary"
                             style={{
                               backgroundColor: "transparent",
@@ -305,7 +305,7 @@ const FilterBox = ({
                               </div>
                             }
                             onChange={onChangeSortBy}
-                            value={sort.val}
+                            value={i}
                           />
                         }
                       />
