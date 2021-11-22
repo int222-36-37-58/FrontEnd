@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function useSearchHandler(searchVal, type, page, pageSize, sort) {
+function useSearchHandler(searchVal, type, page, pageSize, sort, isdescending) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   const [sortB, setSortB] = useState("");
+  const [isdescendingOld, setIsDescendingOld] = useState("");
 
   useEffect(() => {
     setProducts([]);
@@ -38,16 +39,18 @@ function useSearchHandler(searchVal, type, page, pageSize, sort) {
       if (sort === "" && sortB !== "") {
         setProducts([]);
         setSortB("");
+        setIsDescendingOld("");
       }
 
-      if (sort !== "" && sort !== sortB) {
+      if ((sort !== "" && sort !== sortB) || isdescending !== isdescendingOld) {
         setProducts([]);
         setSortB(sort);
-        api += `&sortBy=${sort}`;
+        setIsDescendingOld(isdescending);
+        api += `&sortBy=${sort}&isdescending=${isdescending}`;
       }
 
-      if (sortB === sort) {
-        api += `&sortBy=${sortB}`;
+      if (sortB === sort && isdescending === isdescendingOld) {
+        api += `&sortBy=${sortB}&isdescending=${isdescendingOld}`;
       }
 
       let cancel;
@@ -75,7 +78,16 @@ function useSearchHandler(searchVal, type, page, pageSize, sort) {
         });
       return () => cancel();
     }
-  }, [searchVal, type, page, pageSize, sort, sortB]);
+  }, [
+    searchVal,
+    type,
+    page,
+    pageSize,
+    sort,
+    sortB,
+    isdescending,
+    isdescendingOld,
+  ]);
 
   return { loading, products, hasMore };
 }

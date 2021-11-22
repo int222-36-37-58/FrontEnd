@@ -3,7 +3,7 @@ import * as actionTypes from "../actiontype";
 const INITIAL_STATE = {
   searchModalShow: false,
   filterType: "",
-  sort: "",
+  sort: {},
   responseDialog: [],
 };
 
@@ -31,7 +31,11 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
       };
 
     case actionTypes.CLEAR_FILTER_SORT:
-      return { ...state, filterType: "", sort: "" };
+      return {
+        ...state,
+        filterType: "",
+        sort: {},
+      };
     case actionTypes.ADD_RES_DIALOG:
       return {
         ...state,

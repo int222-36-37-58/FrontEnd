@@ -26,10 +26,10 @@ const FilterBox = ({
 }) => {
   const [types, setTypes] = useState([]);
   const [sortBy] = useState([
-    { name: "วันที่ขาย", val: "saleDate" },
-    { name: "ชื่อสินค้า A-Z", val: "nameAtoZ" },
-    { name: "ราคาน้อยไปมาก", val: "minPrice" },
-    { name: "ราคามากไปน้อย", val: "maxPrice" },
+    { name: "วันที่ขาย", val: "saleDate", isdescending: "yes" },
+    { name: "ชื่อสินค้า A-Z", val: "name", isdescending: "no" },
+    { name: "ราคาน้อยไปมาก", val: "price", isdescending: "no" },
+    { name: "ราคามากไปน้อย", val: "price", isdescending: "yes" },
   ]);
   const [showType, setShowType] = useState(false);
 
@@ -45,7 +45,7 @@ const FilterBox = ({
   };
 
   const onChangeSortBy = (e) => {
-    clickedSort(e.target.value);
+    clickedSort(sortBy[e.target.value]);
   };
 
   const handleShowType = () => {
@@ -134,7 +134,7 @@ const FilterBox = ({
           <div>
             <div className="pt-5 pb-5">เรียงตาม</div>
             <Grid container justifyContent="center">
-              {sortBy.map((sort) => {
+              {sortBy.map((sort, i) => {
                 return (
                   <Grid item xs={12} key={sort.name}>
                     <FormControlLabel
@@ -143,7 +143,7 @@ const FilterBox = ({
                         <Checkbox
                           className="mw100 w100"
                           disableRipple={true}
-                          checked={uiStyle.sort === sort.val}
+                          checked={uiStyle.sort.name === sort.name}
                           color="primary"
                           style={{
                             backgroundColor: "transparent",
@@ -166,7 +166,7 @@ const FilterBox = ({
                             </div>
                           }
                           onChange={onChangeSortBy}
-                          value={sort.val}
+                          value={i}
                         />
                       }
                     />

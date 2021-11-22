@@ -24,11 +24,14 @@ const SearchModal = (props) => {
   const [page, setPage] = useState(0);
   const [pageSize] = useState(8);
   const [sort, setSort] = useState("productId");
+  const [isdescending, setIsdescending] = useState("no");
+  const [sortIndex, setSortIndex] = useState(0);
   const [sortBy] = useState([
-    { name: "วันที่ขาย", val: "saleDate" },
-    { name: "ชื่อสินค้า A-Z", val: "nameAtoZ" },
-    { name: "ราคาน้อยไปมาก", val: "minPrice" },
-    { name: "ราคามากไปน้อย", val: "maxPrice" },
+    { name: "วันที่ขายล่าสุด", val: "saleDate", isdescending: "yes" },
+    { name: "ชื่อสินค้า A-Z", val: "name", isdescending: "no" },
+    { name: "ชื่อสินค้า Z-A", val: "name", isdescending: "yes" },
+    { name: "ราคาน้อยไปมาก", val: "price", isdescending: "no" },
+    { name: "ราคามากไปน้อย", val: "price", isdescending: "yes" },
   ]);
 
   const { products, hasMore, loading } = useSearchHandler(
@@ -36,7 +39,8 @@ const SearchModal = (props) => {
     type,
     page,
     pageSize,
-    sort
+    sort,
+    isdescending
   );
 
   const observer = useRef();
@@ -83,6 +87,13 @@ const SearchModal = (props) => {
     setType("");
     setSort("productId");
     props.close();
+  };
+
+  const onChangeFilterSort = (e) => {
+    setPage(0);
+    setSortIndex(e.target.value);
+    setSort(sortBy[e.target.value].val);
+    setIsdescending(sortBy[e.target.value].isdescending);
   };
 
   return (
@@ -178,14 +189,11 @@ const SearchModal = (props) => {
                   <div className="text-left b "> เรียงตาม </div>
                   <select
                     className="sortBy"
-                    value={sort}
-                    onChange={(e) => {
-                      setPage(0);
-                      setSort(e.target.value);
-                    }}
+                    value={sortIndex}
+                    onChange={onChangeFilterSort}
                   >
-                    {sortBy.map((s) => (
-                      <option key={s.name} value={s.val}>
+                    {sortBy.map((s, i) => (
+                      <option key={s.name} value={i}>
                         {s.name}{" "}
                       </option>
                     ))}

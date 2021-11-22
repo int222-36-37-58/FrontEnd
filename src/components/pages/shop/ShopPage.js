@@ -18,13 +18,15 @@ const Home = ({ filter, addResDialog, userInfo, sortBy }) => {
   const [searchVal] = useState("all");
   const [type, setType] = useState("");
   const [sort, setSort] = useState("productId");
+  const [isdescending, setIsdescending] = useState("");
   const [listStyle, setListStyle] = useState(1);
   const { products, hasMore, loading } = useSearchHandler(
     searchVal,
     type,
     page,
     pageSize,
-    sort
+    sort,
+    isdescending
   );
 
   useEffect(() => {
@@ -51,10 +53,12 @@ const Home = ({ filter, addResDialog, userInfo, sortBy }) => {
   }, [filter]);
 
   useEffect(() => {
-    if (sortBy === "") {
+    if (sortBy.val === undefined) {
       setSort("productId");
+      setIsdescending("yes");
     } else {
-      setSort(sortBy);
+      setSort(sortBy.val);
+      setIsdescending(sortBy.isdescending);
     }
     setPage(0);
   }, [sortBy]);
