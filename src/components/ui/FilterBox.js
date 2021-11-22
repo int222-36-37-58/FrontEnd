@@ -9,16 +9,25 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import { useEffect } from "react";
-import { clickedFilter, clearFilterSort, clickedSort } from "../../actions/uiStyle";
+import {
+  clickedFilter,
+  clearFilterSort,
+  clickedSort,
+} from "../../actions/uiStyle";
 import { connect } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/filterBox.css";
 
-const FilterBox = ({ uiStyle, clickedFilter, clearFilterSort, clickedSort }) => {
+const FilterBox = ({
+  uiStyle,
+  clickedFilter,
+  clearFilterSort,
+  clickedSort,
+}) => {
   const [types, setTypes] = useState([]);
   const [sortBy] = useState([
     { name: "วันที่ขาย", val: "saleDate" },
-    { name: "ชื่อสินค้า A-Z", val: "name" },
+    { name: "ชื่อสินค้า A-Z", val: "nameAtoZ" },
     { name: "ราคาน้อยไปมาก", val: "minPrice" },
     { name: "ราคามากไปน้อย", val: "maxPrice" },
   ]);
@@ -60,7 +69,7 @@ const FilterBox = ({ uiStyle, clickedFilter, clearFilterSort, clickedSort }) => 
             }}
           >
             <div>ฟิลเตอร์</div>
-            { (uiStyle.filterType || uiStyle.sort)  && (
+            {(uiStyle.filterType || uiStyle.sort) && (
               <div>
                 <button
                   className="AddButton"

@@ -26,7 +26,7 @@ const SearchModal = (props) => {
   const [sort, setSort] = useState("productId");
   const [sortBy] = useState([
     { name: "วันที่ขาย", val: "saleDate" },
-    { name: "ชื่อสินค้า A-Z", val: "name" },
+    { name: "ชื่อสินค้า A-Z", val: "nameAtoZ" },
     { name: "ราคาน้อยไปมาก", val: "minPrice" },
     { name: "ราคามากไปน้อย", val: "maxPrice" },
   ]);
