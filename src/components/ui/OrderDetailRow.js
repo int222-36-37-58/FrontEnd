@@ -26,7 +26,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
       axios
         .post(`${process.env.REACT_APP_API_URL}/user/addcomment`, json, {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
           },
         })
         .then((res) => {

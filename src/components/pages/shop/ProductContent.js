@@ -39,7 +39,11 @@ const ProductContent = (props, { addResDialog }) => {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
     if (Object.keys(product).length === 0) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/products/${id}`)
+        .get(`${process.env.REACT_APP_API_URL}/products/${id}`, {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })
         .then((res) => {
           const prods = res.data;
           setProduct(prods);
@@ -58,7 +62,12 @@ const ProductContent = (props, { addResDialog }) => {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/product/${id}/comment?pageSize=${commentPageSize}&pageNo=${commentPage}`
+        `${process.env.REACT_APP_API_URL}/product/${id}/comment?pageSize=${commentPageSize}&pageNo=${commentPage}`,
+        {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        }
       )
       .then((res) => {
         setComments(res.data);
@@ -66,7 +75,7 @@ const ProductContent = (props, { addResDialog }) => {
       .catch(() => {
         return;
       });
-  }, [commentPage,commentPageSize]);
+  }, [commentPage, commentPageSize]);
 
   const movePage = (n) => {
     if (

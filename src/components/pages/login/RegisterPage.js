@@ -13,7 +13,7 @@ const RegisterPage = (props, { addResDialog, login, getUser }) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/register`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
       .then(async () => {

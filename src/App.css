@@ -209,11 +209,11 @@
   right: 1%;
   bottom: 2%;
   z-index: 1;
-  animation: fadein 1s;
   -webkit-animation: fadein 1s;
   -moz-animation: fadein 1s;
   -o-animation: fadein 1s;
   -ms-animation: fadein 1s;
+  animation: fadein 1s;
 }
 
 .headerWithUnderline {

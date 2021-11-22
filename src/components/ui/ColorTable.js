@@ -88,7 +88,7 @@ const ColorTable = ({ addResDialog }) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/addcolor`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
 
@@ -118,7 +118,7 @@ const ColorTable = ({ addResDialog }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/editcolor`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
 

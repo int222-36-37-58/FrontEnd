@@ -29,7 +29,12 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
   const getMyOrderHistory = useCallback(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/user/getuserorder?pageNo=${page}&pageSize=${pageSize}`
+        `${process.env.REACT_APP_API_URL}/user/getuserorder?pageNo=${page}&pageSize=${pageSize}`,
+        {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        }
       )
       .then((res) => setMyOrder(res.data))
       .catch((err) => {

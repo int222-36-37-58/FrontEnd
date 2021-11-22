@@ -23,7 +23,7 @@ export const login = (data) => async (dispatch) => {
   const response = await axios
     .post(`${process.env.REACT_APP_API_URL}/authenticate`, data, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json; charset=utf-8",
       },
     })
     .then((res) => {

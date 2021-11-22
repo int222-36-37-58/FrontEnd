@@ -58,6 +58,7 @@ function useSearchHandler(searchVal, type, page, pageSize, sort, isdescending) {
       axios({
         method: "GET",
         url: api,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
         params: { pageNo: page, pageSize: pageSize },
         cancelToken: new axios.CancelToken((c) => (cancel = c)),
       })

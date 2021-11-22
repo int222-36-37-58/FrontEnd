@@ -89,7 +89,7 @@ const TypeTable = ({ addResDialog }) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/addtype`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
 
@@ -123,7 +123,7 @@ const TypeTable = ({ addResDialog }) => {
         json,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
           },
         }
       )

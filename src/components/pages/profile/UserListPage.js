@@ -74,7 +74,7 @@ const UserListPage = ({ addResDialog }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/admin/edituser`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
 
@@ -103,7 +103,7 @@ const UserListPage = ({ addResDialog }) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/register`, json, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
       })
 
