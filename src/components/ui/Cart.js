@@ -9,6 +9,15 @@ const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
+    const body = document.querySelector("body");
+    if (props.isShowCart) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
+  }, [props]);
+
+  useEffect(() => {
     let total = 0;
     if (props.listProduct) {
       for (let i = 0; i < props.listProduct.length; i++) {
@@ -64,6 +73,7 @@ const Cart = (props) => {
         <Drawer
           open={props.isShowCart}
           anchor={"right"}
+          inputProps={{ style: { overflowX: "hidden" } }}
           onClose={props.onHandleCart(false)}
         >
           <List style={{ width: "90%", paddingLeft: "25px" }}>
@@ -137,6 +147,7 @@ const Cart = (props) => {
           open={props.isShowCart}
           anchor={"right"}
           onClose={props.onHandleCart(false)}
+          style={{ overflowX: "hidden" }}
         >
           <List style={{ width: "550px", maxWidth: "550px" }}>
             {props.listProduct.length === 0 ? (

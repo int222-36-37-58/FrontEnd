@@ -6,8 +6,9 @@ import "../../css/responseDialog.css";
 const ResponseDialog = (props) => {
   useEffect(() => {
     if (props.len > 0) {
-      setTimeout(() => props.handleCloseBox(props.index), 5000);
+      setTimeout(() => props.handleCloseBox(props.dialog.key), 7000);
     }
+    return () => {};
   }, [props]);
 
   const switchRender = () => {
@@ -45,7 +46,7 @@ const ResponseDialog = (props) => {
   };
 
   return (
-    <div>
+    <span>
       <div className="responseDialog rightResDialog">
         <div className="text-center">{switchRender()}</div>
         <div>
@@ -59,7 +60,7 @@ const ResponseDialog = (props) => {
           <CancelOutlined className="hoverCloseDialog" />
         </div>
       </div>
-    </div>
+    </span>
   );
 };
 

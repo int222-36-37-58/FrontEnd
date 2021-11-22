@@ -35,15 +35,16 @@ export const addResDialog = (content) => ({
   type: type.ADD_RES_DIALOG,
   payload: {
     dialogContent: {
+      key: (Math.random() + 1).toString(36).substring(2, 10),
       status: content.status,
       dialogContent: content.dialogContent,
     },
   },
 });
 
-export const removeResDialog = (ind) => ({
+export const removeResDialog = (key) => ({
   type: type.REMOVE_RES_DIALOG,
   payload: {
-    index: ind,
+    key: key,
   },
 });

@@ -29,21 +29,20 @@ const App = ({ dialog, removeDialog }) => {
     <div className="pageContainer">
       <NavBar />
 
-      <div className="dialogContainer">
+      <span className="dialogContainer">
         {dialog.map((di, i) => {
           return (
-            <div key={i}>
+            <span key={i}>
               <ResponseDialog
                 showDialog={true}
                 dialog={di}
                 len={dialog.length}
-                index={i}
                 handleCloseBox={removeDialog}
               />
-            </div>
+            </span>
           );
         })}
-      </div>
+      </span>
       <div className="pageContent">
         <Switch>
           <Route path="/" exact component={WelcomePage} />

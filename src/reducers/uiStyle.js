@@ -45,7 +45,7 @@ const uiStyle = (state = INITIAL_STATE, action = {}) => {
       return {
         ...state,
         responseDialog: state.responseDialog.filter(
-          (res) => res !== state.responseDialog[action.payload.index]
+          (res) => res.key !== action.payload.key
         ),
       };
     default:
