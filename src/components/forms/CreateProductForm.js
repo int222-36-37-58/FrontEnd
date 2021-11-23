@@ -124,13 +124,13 @@ const CreateProductForm = (props) => {
     if (!e.imageName) {
       errors.imageName = true;
     }
-    if (!e.name || e.name.length < 2) {
+    if (!e.name || e.name.length < 3) {
       errors.name = true;
     }
     if (!e.description || e.description.length < 10) {
       errors.description = true;
     }
-    if (!e.price || e.price < 0) {
+    if (!e.price || e.price < 0 || e.price.length > 10) {
       errors.price = true;
     }
     if (!e.type) {
@@ -139,7 +139,8 @@ const CreateProductForm = (props) => {
     if (
       !e.quantity ||
       (!props.productToEdit && e.quantity < 1) ||
-      e.quantity < 0
+      e.quantity < 0 ||
+      e.quantity.length > 10
     ) {
       errors.quantity = true;
     }
@@ -270,7 +271,7 @@ const CreateProductForm = (props) => {
               error={errors.description}
               type="textarea"
               inputProps={{
-                minLength: 5,
+                minLength: 10,
                 maxLength: 550,
                 style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
               }}
@@ -287,8 +288,8 @@ const CreateProductForm = (props) => {
               onChange={onChange}
               helperText={
                 data.description
-                  ? `รายละเอียดสินค้า 5ตัวอักษรขึ้นไป ${data.description.length}/550`
-                  : `รายละเอียดสินค้า 5 - 550 ตัวอักษร `
+                  ? `รายละเอียดสินค้า 10 - 550 ตัวอักษร ${data.description.length}/550`
+                  : `รายละเอียดสินค้า 10 - 550 ตัวอักษร `
               }
             />
           </Grid>
@@ -314,7 +315,7 @@ const CreateProductForm = (props) => {
               label="price"
               value={data.price}
               onChange={onChange}
-              helperText="ราคาของสินค้า"
+              helperText="ราคาของสินค้า ไม่เกิน 10 หลัก"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -325,7 +326,7 @@ const CreateProductForm = (props) => {
               type="number"
               inputProps={{
                 minLength: 1,
-                maxLength: 7,
+                maxLength: 10,
                 style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
               }}
               InputLabelProps={{
@@ -339,7 +340,7 @@ const CreateProductForm = (props) => {
               label="quantity"
               value={data.quantity}
               onChange={onChange}
-              helperText="จำนวนของสินค้าที่มี"
+              helperText="จำนวนของสินค้าที่มี ไม่เกิน 10 หลัก"
             />
           </Grid>
 

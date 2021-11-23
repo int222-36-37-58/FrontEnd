@@ -69,21 +69,22 @@ const FilterBox = ({
             }}
           >
             <div>ฟิลเตอร์</div>
-            {(uiStyle.filterType !== "" || uiStyle.sort.name !== undefined) && (
-              <div>
-                <button
-                  className="AddButton"
-                  style={{
-                    padding: "0px",
-                    display: "flex",
-                    borderRadius: "50%",
-                  }}
-                  onClick={() => clearCheck()}
-                >
-                  <CloseIcon style={{ fontSize: "16px" }} />
-                </button>
-              </div>
-            )}
+            {(uiStyle.filterType !== "" || uiStyle.sort.name !== undefined) &&
+              uiStyle.filterType !== "all" && (
+                <div>
+                  <button
+                    className="AddButton"
+                    style={{
+                      padding: "0px",
+                      display: "flex",
+                      borderRadius: "50%",
+                    }}
+                    onClick={() => clearCheck()}
+                  >
+                    <CloseIcon style={{ fontSize: "16px" }} />
+                  </button>
+                </div>
+              )}
           </div>
 
           <div>
@@ -212,21 +213,22 @@ const FilterBox = ({
               <div className="pt-10">ประเภท </div>
               <div>
                 {(uiStyle.filterType !== "" ||
-                  uiStyle.sort.name !== undefined) && (
-                  <div>
-                    <button
-                      className="AddButton"
-                      style={{
-                        padding: "0px",
-                        display: "flex",
-                        borderRadius: "50%",
-                      }}
-                      onClick={() => clearCheck()}
-                    >
-                      <CloseIcon style={{ fontSize: "16px" }} />
-                    </button>
-                  </div>
-                )}
+                  uiStyle.sort.name !== undefined) &&
+                  uiStyle.filterType !== "all" && (
+                    <div>
+                      <button
+                        className="AddButton"
+                        style={{
+                          padding: "0px",
+                          display: "flex",
+                          borderRadius: "50%",
+                        }}
+                        onClick={() => clearCheck()}
+                      >
+                        <CloseIcon style={{ fontSize: "16px" }} />
+                      </button>
+                    </div>
+                  )}
               </div>{" "}
             </div>
 

@@ -167,7 +167,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       .catch((err) => {
         const data = {
           status: err.status,
-          dialogContent: err.response.message,
+          dialogContent: err.response.data.message,
         };
         props.addResDialog(data);
       })
