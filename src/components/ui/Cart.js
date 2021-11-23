@@ -73,7 +73,6 @@ const Cart = (props) => {
         <Drawer
           open={props.isShowCart}
           anchor={"right"}
-          inputProps={{ style: { overflowX: "hidden" } }}
           onClose={props.onHandleCart(false)}
         >
           <List style={{ width: "90%", paddingLeft: "25px" }}>

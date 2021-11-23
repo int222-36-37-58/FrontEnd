@@ -1,15 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import CancelOutlined from "@material-ui/icons/CancelOutlined";
 import "../../css/responseDialog.css";
 
 const ResponseDialog = (props) => {
+  const [count, setCount] = useState(false);
   useEffect(() => {
-    if (props.len > 0) {
-      setTimeout(() => props.handleCloseBox(props.dialog.key), 7000);
+    if (props.len === 0) {
+      setTimeout(() => props.handleCloseBox(props.dialog.key), 4000);
+      return;
+    }
+
+    if (!count && props.len > 0) {
+      setCount(true);
+    }
+
+    if (!count) {
+      setTimeout(() => props.handleCloseBox(props.dialog.key), 4000);
+      return;
     }
     return () => {};
-  }, [props]);
+  }, [props, count]);
 
   const switchRender = () => {
     let stat = "";
