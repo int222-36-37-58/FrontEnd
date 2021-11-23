@@ -32,18 +32,21 @@ const CreateProductForm = (props) => {
   const [imagePreview, setImagePreview] = useState(noImage);
   const [errors, setErrors] = useState({});
 
-  const onChange = (e) =>
+  const onChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
-
+    setErrors({ ...errors, [e.target.name]: false });
+  };
   const chooseColor = (e) => {
     let colorList = [...data.color, e.target.value];
     if (data.color.findIndex((f) => f === e.target.value) !== -1) {
       colorList = colorList.filter((f) => f !== e.target.value);
     }
     setData({ ...data, color: colorList });
+
+    setErrors({ ...errors, color: false });
   };
 
   useEffect(() => {
@@ -127,13 +130,17 @@ const CreateProductForm = (props) => {
     if (!e.description || e.description.length < 10) {
       errors.description = true;
     }
-    if (!e.price) {
+    if (!e.price || e.price < 0) {
       errors.price = true;
     }
     if (!e.type) {
       errors.type = true;
     }
-    if (!e.quantity || (!props.productToEdit && e.quantity < 1)) {
+    if (
+      !e.quantity ||
+      (!props.productToEdit && e.quantity < 1) ||
+      e.quantity < 0
+    ) {
       errors.quantity = true;
     }
 
@@ -160,7 +167,7 @@ const CreateProductForm = (props) => {
       setImageFile(imgFile);
       setImagePreview(imgPreview);
 
-      setErrors({ ...errors, imageFormat: false });
+      setErrors({ ...errors, imageFormat: false, imageName: false });
     } else {
       setErrors({ ...errors, imageFormat: true });
       setImageFile(null);
