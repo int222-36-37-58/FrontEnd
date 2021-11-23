@@ -13,6 +13,7 @@ function useSearchHandler(searchVal, type, page, pageSize, sort, isdescending) {
   }, [searchVal, type]);
 
   useEffect(() => {
+    setLoading(false);
     if (searchVal || type) {
       setLoading(true);
       let api = `${process.env.REACT_APP_API_URL}/products/search?`;
