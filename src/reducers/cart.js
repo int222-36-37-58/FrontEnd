@@ -41,6 +41,7 @@ const cart = (state = INITIAL_STATE, action = {}) => {
               {
                 productId: action.payload.orderDetail.product.productId,
                 quantity: action.payload.orderDetail.quantity,
+                userId: action.payload.orderDetail.product.user.userId,
               },
             ],
 
@@ -89,6 +90,9 @@ const cart = (state = INITIAL_STATE, action = {}) => {
           ...state,
           cart: state.cart.filter(
             (item) => item.product.user.userId !== action.payload.userId
+          ),
+          productCounter: state.productCounter.filter(
+            (item) => item.userId !== action.payload.userId
           ),
         };
       } else {
