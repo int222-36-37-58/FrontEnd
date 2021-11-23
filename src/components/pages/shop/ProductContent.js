@@ -33,8 +33,6 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
     return obj.productId === product.productId;
   });
 
-  console.log(prodToAdd);
-
   const history = useHistory();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
