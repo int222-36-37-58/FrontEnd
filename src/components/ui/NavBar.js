@@ -11,7 +11,11 @@ import sitlogo from "../../images/asset/sitlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
-import { addResDialog, openSearchModal } from "../../actions/uiStyle";
+import {
+  addResDialog,
+  clickedFilter,
+  openSearchModal,
+} from "../../actions/uiStyle";
 import ProfileDrawer from "./ProfileDrawer";
 import SearchModal from "./SearchModal";
 import GuestUserPage from "../pages/login/GuestUserPage";
@@ -25,7 +29,7 @@ const NavBar = ({
   cart,
   uiStyle,
   logout,
-
+  clickedFilter,
   removeFromCart,
   clearCartItem,
   openSearchModal,
@@ -100,6 +104,7 @@ const NavBar = ({
         remove={removeFromCart}
         clearCart={clearCartItem}
         isAuth={isAuth}
+        filter={clickedFilter}
         userInfo={userInfo}
         showLoginForm={handleShowGuestModal(true)}
         addResDialog={addResDialog}
@@ -391,6 +396,7 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     clearCartItem: () => dispatch(clearCartItem()),
     openSearchModal: (open) => dispatch(openSearchModal(open)),
+    clickedFilter: (e) => dispatch(clickedFilter(e)),
     logout: () => dispatch(logout()),
     addResDialog: (content) => dispatch(addResDialog(content)),
   };

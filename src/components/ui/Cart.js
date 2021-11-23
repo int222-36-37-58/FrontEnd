@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/cart.css";
-
 const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -55,6 +54,7 @@ const Cart = (props) => {
         })
         .then(props.onHandleCart(false))
         .then(props.clearCart())
+        .then(props.filter("all"))
         .catch((err) => {
           const data = {
             status: err.response.status,
