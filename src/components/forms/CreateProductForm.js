@@ -133,7 +133,7 @@ const CreateProductForm = (props) => {
     if (!e.type) {
       errors.type = true;
     }
-    if (!e.quantity || e.quantity < 1) {
+    if (!e.quantity || (!props.productToEdit && e.quantity < 1)) {
       errors.quantity = true;
     }
 
