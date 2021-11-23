@@ -13,7 +13,7 @@ import { useHistory } from "react-router";
 import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
 import "../../../css/productContent.css";
-const ProductContent = (props, { addResDialog }) => {
+const ProductContent = (props, { addResDialog, productCounter }) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);
   const [imageProduct, setImageProduct] = useState(noImage);
@@ -28,6 +28,12 @@ const ProductContent = (props, { addResDialog }) => {
   });
   const [commentPage, setCommentPage] = useState(0);
   const [commentPageSize] = useState(5);
+
+  const prodToAdd = props.productCounter.filter((obj) => {
+    return obj.productId === product.productId;
+  });
+
+  console.log(prodToAdd);
 
   const history = useHistory();
   useEffect(() => {
@@ -91,9 +97,13 @@ const ProductContent = (props, { addResDialog }) => {
   };
 
   const plusQuantity = () => {
-    if (quantityAdd < product.quantity) {
-      let quantity = quantityAdd + 1;
-      setQuantityAdd(quantity);
+    if (
+      (prodToAdd.length === 0 && quantityAdd < product.quantity) ||
+      (prodToAdd[0] !== undefined &&
+        quantityAdd < product.quantity - prodToAdd[0].quantity)
+    ) {
+      let currentQuantity = quantityAdd + 1;
+      setQuantityAdd(currentQuantity);
     }
   };
 
@@ -282,14 +292,28 @@ const ProductContent = (props, { addResDialog }) => {
             </>
           ) : (
             <>
-              {product.quantity > 1 ? (
-                <button
-                  className="AddButton"
-                  style={{ padding: 10 + "px", width: 45 + "%" }}
-                  onClick={addToCart}
-                >
-                  เพิ่ม - ฿{product.price * quantityAdd}{" "}
-                </button>
+              {product && product.quantity > 1 ? (
+                <>
+                  {prodToAdd.length === 0 ||
+                  (prodToAdd[0] !== undefined &&
+                    prodToAdd[0].quantity < product.quantity) ? (
+                    <button
+                      className="AddButton"
+                      style={{ padding: 10 + "px", width: 45 + "%" }}
+                      onClick={addToCart}
+                    >
+                      เพิ่ม - ฿{product.price * quantityAdd}{" "}
+                    </button>
+                  ) : (
+                    <button
+                      className="disabledButton"
+                      disabled
+                      style={{ padding: 10 + "px", width: 45 + "%" }}
+                    >
+                      สินค้าเกินจำนวนที่มี
+                    </button>
+                  )}
+                </>
               ) : (
                 <button
                   className="disabledButton"
@@ -474,10 +498,16 @@ ProductContent.propTypes = {
   editProduct: PropTypes.func,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    productCounter: state.cart.productCounter,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addResDialog: (content) => dispatch(addResDialog(content)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductContent);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductContent);

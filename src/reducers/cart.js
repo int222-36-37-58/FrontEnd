@@ -1,30 +1,13 @@
-import axios from "axios";
 import * as actionTypes from "../actiontype";
 
 const INITIAL_STATE = {
   cart: [],
+  productCounter: [],
 };
-
-let proCount = [];
 
 const cart = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/products/${action.payload.orderDetail.product.productId}`
-        )
-        .then((res) => {
-          if (
-            proCount.length === 0 ||
-            proCount.find(
-              (pro) =>
-                pro.productId !== action.payload.orderDetail.product.productId
-            )
-          ) {
-            proCount.push(res.data);
-          }
-        });
       const isAlready = state.cart.find(
         (it) =>
           it.product.productId ===
@@ -34,8 +17,33 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         ? true
         : false;
 
+      const isAlreadyById = state.cart.find(
+        (it) =>
+          it.product.productId === action.payload.orderDetail.product.productId
+      )
+        ? true
+        : false;
+
       return {
         ...state,
+        productCounter: isAlreadyById
+          ? state.productCounter.map((item) =>
+              item.productId === action.payload.orderDetail.product.productId
+                ? {
+                    ...item,
+                    quantity:
+                      item.quantity + action.payload.orderDetail.quantity,
+                  }
+                : item
+            )
+          : [
+              ...state.productCounter,
+              {
+                productId: action.payload.orderDetail.product.productId,
+                quantity: action.payload.orderDetail.quantity,
+              },
+            ],
+
         cart: isAlready
           ? state.cart.map((item) =>
               item.product.productId ===
@@ -57,6 +65,19 @@ const cart = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,
+        productCounter: state.productCounter.map((item) =>
+          item.productId === action.payload.orderDetail.product.productId &&
+          item.quantity - action.payload.orderDetail.quantity > 0
+            ? {
+                ...item,
+                quantity: item.quantity - action.payload.orderDetail.quantity,
+              }
+            : state.productCounter.filter(
+                (pro) =>
+                  pro.productId !== action.payload.orderDetail.product.productId
+              )
+        ),
+
         cart: state.cart.filter(
           (item) =>
             JSON.stringify(item) !== JSON.stringify(action.payload.orderDetail)
@@ -74,7 +95,7 @@ const cart = (state = INITIAL_STATE, action = {}) => {
         return state;
       }
     case actionTypes.CLEAR_CART:
-      return { ...state, cart: [] };
+      return { ...state, cart: [], productCounter: [] };
     default:
       return state;
   }

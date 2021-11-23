@@ -6,11 +6,13 @@ import { connect } from "react-redux";
 import "../../css/addProductModal.css";
 import { addResDialog } from "../../actions/uiStyle";
 
-const AddModal = (props, { addToCart, addResDialog }) => {
+const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
   const [colorChoose, setColorChoose] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [noColor, setNoColor] = useState(false);
-
+  const prodToAdd = props.productCounter.filter((obj) => {
+    return obj.productId === props.product.productId;
+  });
   const minusQuantity = () => {
     if (quantity > 1) {
       let currentQuantity = quantity - 1;
@@ -19,7 +21,11 @@ const AddModal = (props, { addToCart, addResDialog }) => {
   };
 
   const plusQuantity = () => {
-    if (quantity < props.product.quantity) {
+    if (
+      (prodToAdd.length === 0 && quantity < props.product.quantity) ||
+      (prodToAdd[0] !== undefined &&
+        quantity < props.product.quantity - prodToAdd[0].quantity)
+    ) {
       let currentQuantity = quantity + 1;
       setQuantity(currentQuantity);
     }
@@ -149,9 +155,17 @@ const AddModal = (props, { addToCart, addResDialog }) => {
                 flexDirection: "row",
               }}
             >
-              <button className="AddButton mlr-5 w40" onClick={AddToCart}>
-                เพิ่ม - ฿{props.product.price * quantity}
-              </button>
+              {prodToAdd.length === 0 ||
+              (prodToAdd[0] !== undefined &&
+                prodToAdd[0].quantity < props.product.quantity) ? (
+                <button className="AddButton mlr-5 w40" onClick={AddToCart}>
+                  เพิ่ม - ฿{props.product.price * quantity}
+                </button>
+              ) : (
+                <button className="disabledButton mlr-5 w40">
+                  สินค้าเกินจำนวนที่มี
+                </button>
+              )}
               <button className="delFromCart mlr-5 w40" onClick={props.close}>
                 ยกเลิก
               </button>
@@ -163,6 +177,12 @@ const AddModal = (props, { addToCart, addResDialog }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    productCounter: state.cart.productCounter,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product) => dispatch(addToCart(product)),
@@ -170,4 +190,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddModal);
