@@ -134,11 +134,12 @@ const CreateProductForm = (props) => {
       !e.price ||
       e.price < 0 ||
       e.price.length > 9 ||
-      e.price.indexOf(".") > 7 ||
+      e.price.indexOf(".") >= 7 ||
       (e.price.length >= 7 && e.price.indexOf(".") === -1)
     ) {
       errors.price = true;
     }
+    console.log(e.price.indexOf("."));
     if (!e.type) {
       errors.type = true;
     }
