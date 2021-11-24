@@ -56,6 +56,7 @@ const Cart = (props) => {
         .then(props.clearCart())
         .then(props.filter("all"))
         .catch((err) => {
+          props.onHandleCart(false);
           const data = {
             status: err.response.status,
             dialogContent: err.response.data.message,
