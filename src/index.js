@@ -15,9 +15,8 @@ if (localStorage.token) {
 }
 
 if (
-  localStorage.getItem("persist:root") &&
-  (localStorage.getItem("persist:root").indexOf("productCounter") === -1 ||
-    localStorage.getItem("persist:root").indexOf("cart") === -1)
+  localStorage.getItem("persist:root").indexOf("cart") === -1 ||
+  localStorage.getItem("persist:root").indexOf("productCounter") === -1
 ) {
   localStorage.removeItem("persist:root");
 }
