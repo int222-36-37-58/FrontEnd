@@ -130,17 +130,16 @@ const CreateProductForm = (props) => {
     if (!e.description || e.description.length < 10) {
       errors.description = true;
     }
-    if (!e.price || e.price < 0 || e.price.length > 10) {
+    if (!e.price || e.price < 0 || e.price.length > 9) {
       errors.price = true;
     }
     if (!e.type) {
       errors.type = true;
     }
     if (
-      !e.quantity ||
-      (!props.productToEdit && e.quantity < 1) ||
-      e.quantity < 0 ||
-      e.quantity.length > 10
+      e.quantity.length < 1 ||
+      e.quantity.length > 10 ||
+      (e.quantity < 1 && !props.productToEdit)
     ) {
       errors.quantity = true;
     }
@@ -301,7 +300,7 @@ const CreateProductForm = (props) => {
               type="number"
               inputProps={{
                 minLength: 1,
-                maxLength: 10,
+                maxLength: 9,
                 style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
               }}
               InputLabelProps={{
@@ -315,7 +314,7 @@ const CreateProductForm = (props) => {
               label="price"
               value={data.price}
               onChange={onChange}
-              helperText="ราคาของสินค้า ไม่เกิน 10 หลัก"
+              helperText="ราคาของสินค้า ไม่เกิน 6 หลัก ทศนิยมได้ 2 ตำแหน่ง"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
