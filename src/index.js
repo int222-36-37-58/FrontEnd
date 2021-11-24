@@ -16,6 +16,7 @@ if (localStorage.token) {
 
 console.log(localStorage.getItem("persist:root").indexOf("productCounter"));
 if (localStorage.getItem("persist:root").indexOf("productCounter") === -1) {
+  console.log("imwork");
   localStorage.removeItem("persist:root");
 }
 
