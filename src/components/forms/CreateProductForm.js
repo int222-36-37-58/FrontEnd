@@ -139,7 +139,7 @@ const CreateProductForm = (props) => {
     ) {
       errors.price = true;
     }
-    console.log(e.price.indexOf("."));
+
     if (!e.type) {
       errors.type = true;
     }
