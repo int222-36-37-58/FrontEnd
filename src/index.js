@@ -14,10 +14,8 @@ if (localStorage.token) {
   store.dispatch(getUser());
 }
 
-if (
-  localStorage.getItem("persist:root").indexOf("cart") === -1 ||
-  localStorage.getItem("persist:root").indexOf("productCounter") === -1
-) {
+console.log(localStorage.getItem("persist:root").indexOf("productCounter"));
+if (localStorage.getItem("persist:root").indexOf("productCounter") === -1) {
   localStorage.removeItem("persist:root");
 }
 
