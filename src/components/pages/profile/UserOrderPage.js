@@ -61,7 +61,7 @@ const UserOrderPage = ({ addResDialog, userInfo }) => {
     for (let i = 0; i < order.orderDetail.length; i++) {
       total += order.orderDetail[i].totalPrice;
     }
-    return total;
+    return total.toFixed(2);
   };
 
   const formatDate = (orderDate) => {

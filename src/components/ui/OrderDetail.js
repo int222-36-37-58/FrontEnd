@@ -13,7 +13,7 @@ const OrderDetail = (props) => {
         total += props.order.orderDetail[i].totalPrice;
       }
     }
-    setTotalPrice(total);
+    setTotalPrice(total.toFixed(2));
   }, [props.order]);
 
   const formatDate = () => {
