@@ -6,7 +6,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import uiStyle from "./reducers/uiStyle";
 const persistConfig = {
-  key: "root",
+  key: "cart",
   storage,
   whitelist: ["cart"],
 };

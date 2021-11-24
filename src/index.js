@@ -13,12 +13,7 @@ if (localStorage.token) {
   SetDefaultHeader(localStorage.token);
   store.dispatch(getUser());
 }
-
-console.log(localStorage.getItem("persist:root").indexOf("productCounter"));
-if (localStorage.getItem("persist:root").indexOf("productCounter") === -1) {
-  console.log("imwork");
-  localStorage.removeItem("persist:root");
-}
+localStorage.removeItem("persist:root");
 
 ReactDOM.render(
   <Provider store={store}>
