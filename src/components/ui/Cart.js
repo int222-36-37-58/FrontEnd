@@ -52,17 +52,17 @@ const Cart = (props) => {
           };
           props.addResDialog(data);
         })
-        .then(props.onHandleCart(false))
-        .then(props.clearCart())
-        .then(props.filter("all"))
+
         .catch((err) => {
-          props.onHandleCart(false);
           const data = {
             status: err.response.status,
             dialogContent: err.response.data.message,
           };
           props.addResDialog(data);
-        });
+        })
+        .then(props.onHandleCart(false))
+        .then(props.clearCart())
+        .then(props.filter("all"));
     } else {
       props.showLoginForm();
     }
