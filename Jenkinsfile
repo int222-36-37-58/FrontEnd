@@ -33,7 +33,7 @@ pipeline {
             }
         }  
         
-        stage('(deploy) start contianer') {
+        stage('deploy') {
             steps {
                 sh 'docker-compose up -d'
             }
