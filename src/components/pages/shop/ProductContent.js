@@ -215,9 +215,10 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
               style={{
                 marginTop: "10px",
                 height: "auto",
-
+                width: " auto",
                 maxHeight: "375px",
-                maxWidth: "300px",
+                maxWidth: "400px",
+                borderRadius: "5px",
               }}
             />
           )}

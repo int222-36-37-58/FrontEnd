@@ -191,10 +191,13 @@ const NavBar = ({
 
             <div
               className="iconNav hoverCursor"
-              onMouseOver={handleOpenMenu}
+              onMouseEnter={handleOpenMenu}
               onClick={() => {
                 if (isToken) {
-                  handleProfileDrawer(true);
+                  handleProfileDrawer(!isShowProfileDrawer);
+                }
+                if (anchorEl !== null) {
+                  setAnchorEl(null);
                 } else {
                   setShowGuestModal(true);
                 }
