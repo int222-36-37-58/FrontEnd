@@ -12,7 +12,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
 
   const sendComment = () => {
     setErrs(false);
-    if (commentContent.length < 1 || commentContent.length > 180) {
+    if (commentContent.length < 1 || commentContent.length > 200) {
       setErrs(true);
     } else {
       const json = JSON.stringify({
@@ -119,7 +119,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                   error={errs}
                   inputProps={{
                     minLength: 1,
-                    maxLength: 180,
+                    maxLength: 200,
                     style: {
                       fontFamily: "Prompt, sans-serif",
                       fontWeight: "600",
@@ -137,7 +137,7 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     11
                   )}...`}
                   value={commentContent}
-                  helperText={`${commentContent.length}/180`}
+                  helperText={`${commentContent.length}/200`}
                 />{" "}
                 <button
                   className="InfoButton "
@@ -259,13 +259,13 @@ const OrderDetailRow = (props, { addResDialog, userInfo }) => {
                     label="ใส่ความเห็นของคุณ"
                     inputProps={{
                       minLength: 1,
-                      maxLength: 180,
+                      maxLength: 200,
                       style: {
                         fontFamily: "Prompt, sans-serif",
                         fontWeight: "600",
                       },
                     }}
-                    helperText={`${commentContent.length}/180`}
+                    helperText={`${commentContent.length}/200`}
                     value={commentContent}
                   />{" "}
                   <button
