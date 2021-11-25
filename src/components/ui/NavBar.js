@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Hidden, Menu } from "@material-ui/core";
+import { Hidden, MenuList, Paper, Popper } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
@@ -236,110 +236,45 @@ const NavBar = ({
       </>
       {isToken && (
         <Hidden mdDown>
-          <Menu
-            id="menu"
-            anchorEl={anchorEl}
+          <Popper
             open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-            MenuListProps={{ onMouseLeave: () => setAnchorEl(false) }}
-            PaperProps={{
-              style: {
-                width: "250px",
-                display: "flex",
-                textAlign: "right",
-                marginTop: "35px",
-              },
-            }}
+            anchorEl={anchorEl}
+            onMouseLeave={() => setAnchorEl(null)}
+            style={{ zIndex: "10" }}
           >
-            <Link to="/profile/info" className="link">
-              <div
-                onClick={() => {
-                  setAnchorEl(null);
-
-                  openSearchModal(false);
-                }}
-                style={{
-                  fontSize: "14px",
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "left",
-                  width: "250px",
-                  fontWeight: "600",
-                }}
-                className="hoverCursor currentHoverStyle"
-              >
-                <PersonIcon className="pr-10" /> ข้อมูลของฉัน
-              </div>
-            </Link>
-            <Link to="/profile/changepassword" className="link">
-              <div
-                onClick={() => {
-                  setAnchorEl(null);
-
-                  openSearchModal(false);
-                }}
-                style={{
-                  fontSize: "14px",
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "left",
-                  fontWeight: "600",
-                  width: "100%",
-                }}
-                className="hoverCursor currentHoverStyle"
-              >
-                <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
-              </div>
-            </Link>
-
-            <Link to="/profile/order" className="link">
-              <div
-                onClick={() => {
-                  setAnchorEl(null);
-
-                  openSearchModal(false);
-                }}
-                style={{
-                  fontSize: "14px",
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "left",
-                  fontWeight: "600",
-                  width: "100%",
-                }}
-                className="hoverCursor currentHoverStyle"
-              >
-                <ListAltIcon className="pr-10" /> คำสั่งซื้อ
-              </div>
-            </Link>
-
-            {userInfo.role === "ROLE_USER" && (
-              <Link to="/profile/startseller" className="link">
-                <div
-                  onClick={() => {
-                    setAnchorEl(null);
-
-                    openSearchModal(false);
-                  }}
-                  style={{
-                    fontSize: "14px",
-                    padding: "10px",
+            <Paper>
+              <MenuList
+                id="menu"
+                PaperProps={{
+                  style: {
+                    width: "250px",
                     display: "flex",
-                    justifyContent: "left",
-                    fontWeight: "600",
-                    width: "100%",
-                  }}
-                  className="hoverCursor currentHoverStyle"
-                >
-                  {" "}
-                  <ShoppingCartOutlinedIcon className="pr-10" /> เริ่มขายสินค้า
-                </div>
-              </Link>
-            )}
+                    textAlign: "right",
+                    marginTop: "35px",
+                  },
+                }}
+              >
+                <Link to="/profile/info" className="link">
+                  <div
+                    onClick={() => {
+                      setAnchorEl(null);
 
-            {userInfo.role === "ROLE_SELLER" ||
-              (userInfo.role === "ROLE_ADMIN" && (
-                <Link to="/profile/createproduct" className="link">
+                      openSearchModal(false);
+                    }}
+                    style={{
+                      fontSize: "14px",
+                      padding: "10px",
+                      display: "flex",
+                      justifyContent: "left",
+                      width: "250px",
+                      fontWeight: "600",
+                    }}
+                    className="hoverCursor currentHoverStyle"
+                  >
+                    <PersonIcon className="pr-10" /> ข้อมูลของฉัน
+                  </div>
+                </Link>
+                <Link to="/profile/changepassword" className="link">
                   <div
                     onClick={() => {
                       setAnchorEl(null);
@@ -352,29 +287,100 @@ const NavBar = ({
                       display: "flex",
                       justifyContent: "left",
                       fontWeight: "600",
-                      width: "100%",
+                      width: "250px",
                     }}
                     className="hoverCursor currentHoverStyle"
                   >
-                    {" "}
-                    <ShoppingCartOutlinedIcon className="pr-10" /> ลงขายสินค้า
+                    <VpnKey className="pr-10" /> เปลี่ยนรหัสผ่าน
                   </div>
                 </Link>
-              ))}
 
-            <div
-              onClick={() => handleLogout()}
-              style={{
-                fontSize: "14px",
+                <Link to="/profile/order" className="link">
+                  <div
+                    onClick={() => {
+                      setAnchorEl(null);
 
-                display: "flex",
-                justifyContent: "left",
-              }}
-              className="hoverCursor b p-10 currentHoverStyle"
-            >
-              ออกจากระบบ
-            </div>
-          </Menu>
+                      openSearchModal(false);
+                    }}
+                    style={{
+                      fontSize: "14px",
+                      padding: "10px",
+                      display: "flex",
+                      justifyContent: "left",
+                      fontWeight: "600",
+                      width: "250px",
+                    }}
+                    className="hoverCursor currentHoverStyle"
+                  >
+                    <ListAltIcon className="pr-10" /> คำสั่งซื้อ
+                  </div>
+                </Link>
+
+                {userInfo.role === "ROLE_USER" && (
+                  <Link to="/profile/startseller" className="link">
+                    <div
+                      onClick={() => {
+                        setAnchorEl(null);
+
+                        openSearchModal(false);
+                      }}
+                      style={{
+                        fontSize: "14px",
+                        padding: "10px",
+                        display: "flex",
+                        justifyContent: "left",
+                        fontWeight: "600",
+                        width: "250px",
+                      }}
+                      className="hoverCursor currentHoverStyle"
+                    >
+                      {" "}
+                      <ShoppingCartOutlinedIcon className="pr-10" />{" "}
+                      เริ่มขายสินค้า
+                    </div>
+                  </Link>
+                )}
+
+                {userInfo.role === "ROLE_SELLER" ||
+                  (userInfo.role === "ROLE_ADMIN" && (
+                    <Link to="/profile/createproduct" className="link">
+                      <div
+                        onClick={() => {
+                          setAnchorEl(null);
+
+                          openSearchModal(false);
+                        }}
+                        style={{
+                          fontSize: "14px",
+                          padding: "10px",
+                          display: "flex",
+                          justifyContent: "left",
+                          fontWeight: "600",
+                          width: "250px",
+                        }}
+                        className="hoverCursor currentHoverStyle"
+                      >
+                        {" "}
+                        <ShoppingCartOutlinedIcon className="pr-10" />{" "}
+                        ลงขายสินค้า
+                      </div>
+                    </Link>
+                  ))}
+
+                <div
+                  onClick={() => handleLogout()}
+                  style={{
+                    fontSize: "14px",
+                    display: "flex",
+                    justifyContent: "left",
+                  }}
+                  className="hoverCursor b p-10 currentHoverStyle"
+                >
+                  ออกจากระบบ
+                </div>
+              </MenuList>
+            </Paper>
+          </Popper>
         </Hidden>
       )}
     </>

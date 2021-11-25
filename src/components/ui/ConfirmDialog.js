@@ -33,12 +33,12 @@ const ConfirmDialog = (props) => {
           />
         </div>
         <div className="dialogButtonZone w100">
-          <button className="delFromCart mr-10 w50 " onClick={confirmCondition}>
+          <button className="AddButton mr-10 w50 " onClick={confirmCondition}>
             <div className="f16"> ยืนยัน</div>
           </button>
 
           <button
-            className="AddButton mr-10 w50"
+            className="delFromCart mr-10 w50"
             onClick={props.handleCloseBox}
           >
             {" "}
