@@ -8,11 +8,15 @@ import { store, persistor } from "./store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import SetDefaultHeader from "./components/etc/SetDefaultHeader";
-import { getUser } from "./actions/user";
+import { getUser, logout } from "./actions/user";
+
 if (localStorage.token) {
   SetDefaultHeader(localStorage.token);
   store.dispatch(getUser());
+} else {
+  store.dispatch(logout());
 }
+
 localStorage.removeItem("persist:root");
 
 ReactDOM.render(

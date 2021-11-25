@@ -1,16 +1,15 @@
 import * as type from "../actiontype";
 
 const INITIAL_STATE = {
-  userInfo:  {},
-  isAuth: false,
+  userInfo: {},
 };
 
 export default function user(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case type.GET_USER_INFO:
-      return { userInfo: action.payload.userInfo, isAuth: true };
+      return { userInfo: action.payload.userInfo };
     case type.LOGGED_OUT:
-      return { userInfo: {}, isAuth: false };
+      return { userInfo: {} };
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Redirect, Route } from "react-router";
 
-function ProtectedRoute({ isAuth, component: Component, ...rest }) {
+function ProtectedRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}

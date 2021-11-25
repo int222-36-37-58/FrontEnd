@@ -14,8 +14,10 @@ import { connect } from "react-redux";
 import "./App.css";
 import "./css/button.css";
 import Footer from "./components/ui/Footer";
+import { logout } from "./actions/user";
 
-const App = ({ dialog, removeDialog }) => {
+const App = ({ dialog, removeDialog, logout }) => {
+  const isToken = localStorage.token;
   const [current, setCurrent] = useState(0);
   const handlePosition = useCallback(() => {
     setCurrent(window.scrollY);
@@ -24,6 +26,12 @@ const App = ({ dialog, removeDialog }) => {
   useEffect(() => {
     window.addEventListener("scroll", handlePosition);
   }, [handlePosition]);
+
+  useEffect(() => {
+    if (!isToken) {
+      logout();
+    }
+  }, [isToken, logout]);
 
   return (
     <div className="pageContainer">
@@ -74,6 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    logout: () => dispatch(logout()),
     removeDialog: (index) => dispatch(removeResDialog(index)),
   };
 };

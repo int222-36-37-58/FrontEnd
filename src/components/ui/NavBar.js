@@ -24,7 +24,6 @@ import { useEffect } from "react";
 import "../../css/navbar.css";
 
 const NavBar = ({
-  isAuth,
   userInfo,
   cart,
   uiStyle,
@@ -40,7 +39,7 @@ const NavBar = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [isShowProfileDrawer, setIsShowProfileDrawer] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
-
+  const isToken = localStorage.token;
   const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -93,7 +92,7 @@ const NavBar = ({
 
   useEffect(() => {
     setAnchorEl(null);
-  }, [isAuth]);
+  }, [isToken]);
 
   return (
     <>
@@ -103,7 +102,7 @@ const NavBar = ({
         isShowCart={isShowCart}
         remove={removeFromCart}
         clearCart={clearCartItem}
-        isAuth={isAuth}
+        isAuth={isToken ? true : false}
         filter={clickedFilter}
         userInfo={userInfo}
         showLoginForm={handleShowGuestModal(true)}
@@ -112,7 +111,7 @@ const NavBar = ({
 
       <ProfileDrawer
         open={isShowProfileDrawer}
-        isAuth={isAuth}
+        isAuth={isToken ? true : false}
         role={userInfo.role}
         showLoginForm={handleShowGuestModal(true)}
         close={() => handleProfileDrawer(false)}
@@ -195,7 +194,7 @@ const NavBar = ({
               className="iconNav hoverCursor"
               onMouseOver={handleOpenMenu}
               onClick={() => {
-                if (isAuth) {
+                if (isToken) {
                   handleProfileDrawer(true);
                 } else {
                   setShowGuestModal(true);
@@ -235,7 +234,7 @@ const NavBar = ({
           <div style={{ position: "absolute", paddingTop: "75px" }}></div>
         </div>
       </>
-      {isAuth && (
+      {isToken && (
         <Hidden mdDown>
           <Menu
             id="menu"
@@ -387,7 +386,6 @@ const mapStateToProps = (state) => {
     userInfo: state.user.userInfo,
     cart: state.cart.cart,
     uiStyle: state.uiStyle,
-    isAuth: state.user.isAuth,
   };
 };
 
