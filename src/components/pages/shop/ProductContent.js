@@ -436,6 +436,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
                         borderStyle: "solid",
                         borderWidth: "0 0 1px 0 ",
                         borderColor: "#e4e4e4",
+                        wordBreak: "break-word",
                       }}
                     >
                       <h3>ความเห็นจากคุณ : {cm.user.userName}</h3>
