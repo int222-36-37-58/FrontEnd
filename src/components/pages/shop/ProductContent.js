@@ -13,6 +13,9 @@ import { useHistory } from "react-router";
 import { addResDialog } from "../../../actions/uiStyle";
 import { connect } from "react-redux";
 import "../../../css/productContent.css";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+
 const ProductContent = (props, { addResDialog, productCounter }) => {
   const [product, setProduct] = useState({});
   const [comments, setComments] = useState([]);
@@ -265,29 +268,34 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
           </div>
 
           {product.user && product.user.userId === props.userInfo.userId ? (
-            <>
-              <button
-                className="InfoButton"
+            <div style={{ display: "flex" }}>
+              <span
+                className="InfoButton mr-5"
                 style={{
                   padding: 10 + "px",
                   width: 45 + "%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
                 onClick={editThisProduct}
               >
-                แก้ไข
-              </button>
-              <button
+                <EditOutlinedIcon className="mr-10" /> <div> แก้ไข</div>
+              </span>
+              <span
                 className="delFromCart"
                 style={{
                   padding: 10 + "px",
                   width: 45 + "%",
-                  marginLeft: 10 + "px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
                 onClick={openConfirmBox}
               >
-                ลบสินค้านี้
-              </button>
-            </>
+                <DeleteOutlineIcon className="mr-10" /> <div> ลบสินค้านี้</div>
+              </span>
+            </div>
           ) : (
             <>
               {product && product.quantity > 1 ? (

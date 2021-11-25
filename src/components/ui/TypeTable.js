@@ -13,6 +13,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
 import ConfirmDialog from "./ConfirmDialog";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 const TypeTable = ({ addResDialog }) => {
   const [type, setType] = useState([]);
@@ -209,6 +211,7 @@ const TypeTable = ({ addResDialog }) => {
             marginRight: "auto",
           }}
         >
+          <div className="f16 b pb-20">กำลังเพิ่ม type ใหม่</div>
           <TextField
             size="small"
             variant="outlined"
@@ -252,6 +255,9 @@ const TypeTable = ({ addResDialog }) => {
             marginRight: "auto",
           }}
         >
+          <div className="f16 b pb-20">
+            กำลังแก้ไข type หมายเลข {typeEdit.typeId}
+          </div>
           <TextField
             size="small"
             variant="outlined"
@@ -314,18 +320,20 @@ const TypeTable = ({ addResDialog }) => {
                     <TableCell align="right">{type.typeId}</TableCell>
                     <TableCell align="right">{type.name}</TableCell>
                     <TableCell align="right">
-                      <button
-                        className="InfoButton p-5-10"
-                        onClick={() => editType(type)}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "end",
+                          alignItems: "center",
+                        }}
                       >
-                        แก้ไข
-                      </button>
-                      <button
-                        className="delFromCart p-5-10 ml-5"
-                        onClick={() => deletingType(type)}
-                      >
-                        ลบ
-                      </button>
+                        <span onClick={() => editType(type)}>
+                          <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
+                        </span>
+                        <span onClick={() => deletingType(type)}>
+                          <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
+                        </span>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

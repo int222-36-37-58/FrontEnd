@@ -13,6 +13,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
 import ConfirmDialog from "./ConfirmDialog";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 const ColorTable = ({ addResDialog }) => {
   const [color, setColor] = useState([]);
@@ -204,6 +206,7 @@ const ColorTable = ({ addResDialog }) => {
             marginRight: "auto",
           }}
         >
+          <div className="f16 b pb-20">กำลังเพิ่ม color ใหม่</div>
           <TextField
             size="small"
             variant="outlined"
@@ -247,6 +250,9 @@ const ColorTable = ({ addResDialog }) => {
             marginRight: "auto",
           }}
         >
+          <div className="f16 b pb-20">
+            กำลังแก้ไข color หมายเลข {colorEdit.colorId}
+          </div>
           <TextField
             size="small"
             variant="outlined"
@@ -309,18 +315,20 @@ const ColorTable = ({ addResDialog }) => {
                     <TableCell align="right">{col.colorId}</TableCell>
                     <TableCell align="right">{col.colorName}</TableCell>
                     <TableCell align="right">
-                      <button
-                        className="InfoButton p-5-10"
-                        onClick={() => editColor(col)}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "end",
+                          alignItems: "center",
+                        }}
                       >
-                        แก้ไข
-                      </button>
-                      <button
-                        className="delFromCart p-5-10 ml-5"
-                        onClick={() => deletingColor(col)}
-                      >
-                        ลบ
-                      </button>
+                        <span onClick={() => editColor(col)}>
+                          <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
+                        </span>
+                        <span onClick={() => deletingColor(col)}>
+                          <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
+                        </span>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

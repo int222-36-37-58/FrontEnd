@@ -26,7 +26,19 @@ const MyShopPage = ({ userInfo }) => {
 
   return (
     <div className="profileBox">
-      <div className="headerWithUnderline">สินค้าทั้งหมดของคุณ</div>
+      <div
+        className="text-center"
+        style={{
+          borderWidth: "0 0 2px 0",
+          borderStyle: "solid",
+          borderColor: "#333435",
+          marginBottom: "40px",
+          color: "black",
+        }}
+      >
+        <div className="  f28 b">สินค้าทั้งหมดของคุณ</div>
+        <div className="f16 pb-5">รวมสินค้าทั้งหมดที่คุณวางขาย</div>
+      </div>
 
       <Grid container>
         {myProd}
