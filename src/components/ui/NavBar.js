@@ -85,7 +85,6 @@ const NavBar = ({
 
   const handleLogout = () => {
     logout();
-
     let data = { status: 200, dialogContent: "คุณออกจากระบบแล้ว" };
     addResDialog(data);
   };

@@ -25,6 +25,8 @@
   justify-content: center;
   height: 135px;
   width: 150px;
+  overflow: hidden;
+  border-radius: 5px;
 }
 
 .imageContainer:hover .hoverImage {
@@ -36,7 +38,7 @@
 }
 
 .imageProductStyle1 {
-  max-width: 160px;
+  max-width: 250px;
   width: auto;
   height: 100%;
 
@@ -46,7 +48,6 @@
 
 @media (max-width: 1440px) {
   .imageProductStyle1 {
-    max-width: 130px;
     height: 135px;
     width: auto;
   }
