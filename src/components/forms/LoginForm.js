@@ -103,7 +103,7 @@ const LoginForm = (props) => {
                 name="password"
                 label="password"
                 onChange={onChange}
-                helperText="ประกอบด้วย ตัวอักษรภาษาอังกฤษ พิมพ์ใหญ่ พิมพ์เล็ก"
+                helperText="กรอกรหัสผ่าน"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     onSubmit();

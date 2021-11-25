@@ -54,7 +54,8 @@ const RegisterForm = (props) => {
     if (
       !e.userName ||
       e.userName.length <= 5 ||
-      !e.userName.match(/^[a-z0-9]/)
+      !e.userName.match(/^[a-z0-9]/) ||
+      !e.userName.match(/^[a-z]/)
     ) {
       errors.userName = true;
     }
@@ -171,7 +172,7 @@ const RegisterForm = (props) => {
                     id="userName"
                     name="userName"
                     label="username"
-                    helperText="ตัวอักษรตั้งแต่ 6 - 25 ตัวอักษร"
+                    helperText="ตัวอักษรพิมพ์เล็ก มีตัวเลขได้ ยาว 6 - 25 ตัวอักษร"
                     onChange={onChange}
                     value={data.userName}
                   />
@@ -200,7 +201,7 @@ const RegisterForm = (props) => {
                   id="fullName"
                   name="fullName"
                   label="full name"
-                  helperText="กรอกชื่อจริงของคุณ"
+                  helperText="กรอกชื่อจริงของคุณ ไม่เกิน 80 ตัว"
                   onChange={onChange}
                   value={data.fullName}
                 />
@@ -230,7 +231,7 @@ const RegisterForm = (props) => {
                   name="address"
                   label="address"
                   onChange={onChange}
-                  helperText="ที่อยู่ของคุณ"
+                  helperText="ที่อยู่ของคุณ ไม่เกิน 150 ตัว"
                   value={data.address}
                 />
               </Grid>
