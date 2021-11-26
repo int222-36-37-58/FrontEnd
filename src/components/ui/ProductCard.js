@@ -1,9 +1,11 @@
-import { Box } from "@material-ui/core";
+import { Box, Hidden } from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AddProductModal from "./AddProductModal";
 import "../../css/productCard.css";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 
 const ProductCard = (props, { userInfo }) => {
   const history = useHistory();
@@ -70,21 +72,31 @@ const ProductCard = (props, { userInfo }) => {
 
             <div className="text-center">
               {props.product.quantity < 1 ? (
-                <button className="disabledButton buttonRes  ">
-                  สินค้าหมด
+                <button className="disabledButton buttonRes flex-center ">
+                  <Hidden smDown>
+                    {" "}
+                    <ErrorOutlineOutlinedIcon className="mr-10" />
+                  </Hidden>
+                  <div> สินค้าหมด</div>
                 </button>
               ) : (
                 <>
                   {props.product.user.userId === props.userInfo.userId ? (
-                    <button className="disabledButton buttonRes">
-                      เหลือ {props.product.quantity} ชิ้น
+                    <button className="disabledButton buttonRes flex-center">
+                      <Hidden smDown>
+                        <ShoppingCartOutlinedIcon className="mr-5" />
+                      </Hidden>
+                      <div> เหลือ {props.product.quantity} ชิ้น</div>
                     </button>
                   ) : (
                     <button
-                      className="AddButton buttonRes  "
+                      className="AddButton buttonRes flex-center "
                       onClick={() => showModal(true)}
                     >
-                      เพิ่ม - ฿{props.product.price}{" "}
+                      <Hidden smDown>
+                        <ShoppingCartOutlinedIcon className="mr-5" />
+                      </Hidden>
+                      <div> เพิ่ม - ฿{props.product.price} </div>
                     </button>
                   )}
                 </>
@@ -116,23 +128,27 @@ const ProductCard = (props, { userInfo }) => {
             <div className="b baseColor f20">฿{props.product.price} </div>
             <div>
               {props.product.quantity < 1 ? (
-                <button className="disabledButton ">สินค้าหมด</button>
+                <button className="disabledButton flex-center">
+                  {" "}
+                  <ErrorOutlineOutlinedIcon className="mr-10" /> สินค้าหมด
+                </button>
               ) : (
                 [
                   props.product.user.userId === props.userInfo.userId ? (
                     <button
-                      className="disabledButton"
+                      className="disabledButton flex-center"
                       style={{ padding: "5px 15px" }}
                     >
-                      เหลือ {props.product.quantity} ชิ้น
+                      <ShoppingCartOutlinedIcon className="mr-5" />{" "}
+                      <div>เหลือ {props.product.quantity} ชิ้น</div>
                     </button>
                   ) : (
                     <button
-                      className="AddButton"
+                      className="AddButton flex-center"
                       style={{ padding: "5px 40px" }}
                       onClick={showModal}
                     >
-                      เพิ่ม
+                      <ShoppingCartOutlinedIcon className="mr-5" /> เพิ่ม
                     </button>
                   ),
                 ]

@@ -195,8 +195,6 @@ const NavBar = ({
               onClick={() => {
                 if (isToken) {
                   handleProfileDrawer(!isShowProfileDrawer);
-                }
-                if (isToken && anchorEl !== null) {
                   setAnchorEl(null);
                 } else {
                   setShowGuestModal(true);

@@ -5,6 +5,8 @@ import { addToCart } from "../../actions/cart";
 import { connect } from "react-redux";
 import "../../css/addProductModal.css";
 import { addResDialog } from "../../actions/uiStyle";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 
 const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
   const [colorChoose, setColorChoose] = useState(0);
@@ -158,12 +160,17 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
               {prodToAdd.length === 0 ||
               (prodToAdd[0] !== undefined &&
                 prodToAdd[0].quantity < props.product.quantity) ? (
-                <button className="AddButton mlr-5 w40" onClick={AddToCart}>
-                  เพิ่ม - ฿{props.product.price * quantity}
+                <button
+                  className="AddButton mlr-5 w40  flex-center"
+                  onClick={AddToCart}
+                >
+                  <ShoppingCartOutlinedIcon className="mr-10" /> เพิ่ม - ฿
+                  {props.product.price * quantity}
                 </button>
               ) : (
-                <button className="disabledButton mlr-5 w40">
-                  สินค้าเกินจำนวนที่มี
+                <button className="disabledButton mlr-5 w40 flex-center">
+                  <ErrorOutlineOutlinedIcon className="mr-10" />{" "}
+                  <div> สินค้าเกินจำนวนที่มี</div>
                 </button>
               )}
               <button className="delFromCart mlr-5 w40" onClick={props.close}>

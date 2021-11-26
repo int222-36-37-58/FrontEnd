@@ -86,3 +86,8 @@
 
   margin-bottom: -15px;
 }
+
+.deleteIcon:hover {
+  cursor: pointer;
+  color: tomato;
+}

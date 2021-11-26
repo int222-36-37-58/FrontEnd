@@ -2,8 +2,9 @@ import { Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
-import CloseIcon from "@material-ui/icons/Close";
+ 
 import "../../css/cart.css";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -185,7 +186,7 @@ const Cart = (props) => {
                       onClick={() => props.clearCart()}
                     >
                       <div>ลบทั้งหมด</div>
-                      <CloseIcon style={{ fontSize: "15px" }} />
+                      <DeleteOutlineIcon style={{ fontSize: "15px" }} />
                     </button>
                   </div>
                 </div>

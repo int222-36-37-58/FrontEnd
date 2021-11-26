@@ -15,6 +15,8 @@ import { connect } from "react-redux";
 import "../../../css/productContent.css";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 
 const ProductContent = (props, { addResDialog, productCounter }) => {
   const [product, setProduct] = useState({});
@@ -206,18 +208,22 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       />
 
       <Grid container alignItems="center" justifyContent="center" spacing={0}>
-        <Grid item xs={12} sm={8} md={6} style={{ textAlign: "center" }}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={6}
+          style={{ textAlign: "center", width: "100%", maxWidth: "100%" }}
+        >
           {product && (
             <img
               src={`${imageProduct}`}
               alt={`${product.imageName}`}
-              className="w100"
               style={{
                 marginTop: "10px",
-                height: "auto",
-                width: " auto",
-                maxHeight: "375px",
-                maxWidth: "400px",
+                height: "100%",
+                maxHeight: "400px",
+                maxWidth: "85%",
                 borderRadius: "5px",
               }}
             />
@@ -271,26 +277,20 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
           {product.user && product.user.userId === props.userInfo.userId ? (
             <div style={{ display: "flex" }}>
               <span
-                className="InfoButton mr-5"
+                className="InfoButton mr-5  flex-center"
                 style={{
                   padding: 10 + "px",
                   width: 45 + "%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                 }}
                 onClick={editThisProduct}
               >
                 <EditOutlinedIcon className="mr-10" /> <div> แก้ไข</div>
               </span>
               <span
-                className="delFromCart"
+                className="delFromCart flex-center"
                 style={{
                   padding: 10 + "px",
                   width: 45 + "%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                 }}
                 onClick={openConfirmBox}
               >
@@ -306,28 +306,37 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
                     prodToAdd[0].quantity < product.quantity) ? (
                     <button
                       className="AddButton"
-                      style={{ padding: 10 + "px", width: 45 + "%" }}
+                      style={{
+                        padding: 10 + "px",
+                        width: 45 + "%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                       onClick={addToCart}
                     >
-                      เพิ่ม - ฿{product.price * quantityAdd}{" "}
+                      <ShoppingCartOutlinedIcon className="mr-10" /> เพิ่ม - ฿
+                      {product.price * quantityAdd}{" "}
                     </button>
                   ) : (
                     <button
-                      className="disabledButton"
+                      className="disabledButton flex-center"
                       disabled
                       style={{ padding: 10 + "px", width: 45 + "%" }}
                     >
-                      สินค้าเกินจำนวนที่มี
+                      <ErrorOutlineOutlinedIcon className="mr-10" />{" "}
+                      <div>สินค้าเกินจำนวนที่มี</div>
                     </button>
                   )}
                 </>
               ) : (
                 <button
-                  className="disabledButton"
+                  className="disabledButton flex-center"
                   disabled
                   style={{ padding: 10 + "px", width: 45 + "%" }}
                 >
-                  สินค้าหมด
+                  <ErrorOutlineOutlinedIcon className="mr-10" />
+                  <div> สินค้าหมด</div>
                 </button>
               )}
             </>
@@ -459,11 +468,9 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
               </div>
 
               <div
+                className=" flex-center"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
                   alignContent: "center",
-                  justifyContent: "center",
                 }}
               >
                 <FirstPageIcon
