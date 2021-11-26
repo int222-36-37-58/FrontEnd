@@ -55,7 +55,7 @@ const ColorTable = ({ addResDialog }) => {
   const delColor = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/colordelete/${colorWillDelete.colorId}`
+        `${process.env.REACT_APP_API_URL}/admin/colordelete/${colorWillDelete.colorId}`
       )
 
       .then((res) => {
@@ -88,7 +88,7 @@ const ColorTable = ({ addResDialog }) => {
   const submitColor = () => {
     const json = JSON.stringify({ colorName: colorToAdd });
     axios
-      .post(`${process.env.REACT_APP_API_URL}/addcolor`, json, {
+      .post(`${process.env.REACT_APP_API_URL}/admin/addcolor`, json, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -118,7 +118,7 @@ const ColorTable = ({ addResDialog }) => {
       colorName: colorEdit.colorName,
     });
     axios
-      .put(`${process.env.REACT_APP_API_URL}/editcolor`, json, {
+      .put(`${process.env.REACT_APP_API_URL}/admin/editcolor`, json, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },

@@ -50,7 +50,7 @@ const TypeTable = ({ addResDialog }) => {
   const delType = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/deletetype/${typeWillDelete.typeId}`
+        `${process.env.REACT_APP_API_URL}/admin/deletetype/${typeWillDelete.typeId}`
       )
 
       .then((res) => {
@@ -89,7 +89,7 @@ const TypeTable = ({ addResDialog }) => {
     const json = JSON.stringify({ name: typeToAdd });
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/addtype`, json, {
+      .post(`${process.env.REACT_APP_API_URL}/admin/addtype`, json, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -121,7 +121,7 @@ const TypeTable = ({ addResDialog }) => {
 
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/edittype/${typeEdit.typeId}`,
+        `${process.env.REACT_APP_API_URL}/admin/edittype/${typeEdit.typeId}`,
         json,
         {
           headers: {
