@@ -22,7 +22,7 @@ const WelcomePage = () => {
     <div className="welcomePageContainer">
       <div>
         <div className="welcomeHeader" onClick={goShop}>
-          welcome to onlineinwshop
+          welcome to Squid NEXT
         </div>
         <div className="startButtonContainer">
           <div className="startButton" onClick={goShop}>

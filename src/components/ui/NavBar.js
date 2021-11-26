@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Hidden, MenuList, Paper, Popper } from "@material-ui/core";
+import { Hidden, Paper, Popper } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { removeFromCart, clearCartItem } from "../../actions/cart";
 import Cart from "./Cart";
-import sitlogo from "../../images/asset/sitlogo.png";
+import squidlogo from "../../images/asset/squidlogo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { VpnKey } from "@material-ui/icons";
@@ -139,15 +139,7 @@ const NavBar = ({
                   setSearchVal("");
                 }}
               >
-                <img
-                  src={sitlogo}
-                  alt="โฮมเพจ"
-                  style={{
-                    maxWidth: "110px",
-                    width: "100%",
-                    marginRight: "30px",
-                  }}
-                />
+                <img src={squidlogo} alt="โฮมเพจ" className="logoImage" />
               </div>
             </Link>
 
@@ -157,6 +149,7 @@ const NavBar = ({
                 style={{
                   maxWidth: "570px",
                   width: "100%",
+
                   borderWidth: "0px",
                   zIndex: "2147483647",
                   position: "static",
@@ -242,18 +235,18 @@ const NavBar = ({
             onMouseLeave={() => setAnchorEl(null)}
             style={{ zIndex: "10" }}
           >
-            <Paper>
-              <MenuList
-                id="menu"
-                PaperProps={{
-                  style: {
-                    width: "250px",
-                    display: "flex",
-                    textAlign: "right",
-                    marginTop: "35px",
-                  },
-                }}
-              >
+            <Paper
+              id="menu"
+              paperprops={{
+                style: {
+                  width: "250px",
+                  display: "flex",
+                  textAlign: "right",
+                  marginTop: "35px",
+                },
+              }}
+            >
+              <>
                 <Link to="/profile/info" className="link">
                   <div
                     onClick={() => {
@@ -378,7 +371,7 @@ const NavBar = ({
                 >
                   ออกจากระบบ
                 </div>
-              </MenuList>
+              </>
             </Paper>
           </Popper>
         </Hidden>
