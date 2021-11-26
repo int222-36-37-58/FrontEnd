@@ -2,7 +2,7 @@ import { Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductInCartBox from "./ProductInCartBox";
- 
+
 import "../../css/cart.css";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 const Cart = (props) => {
@@ -77,7 +77,7 @@ const Cart = (props) => {
           anchor={"right"}
           onClose={props.onHandleCart(false)}
         >
-          <List style={{ width: "90%", paddingLeft: "25px" }}>
+          <List style={{ paddingLeft: "15px" }}>
             {props.listProduct.length === 0 ? (
               <ListItem style={{ fontWeight: 800 }}>
                 ไม่มีสินค้าในตะกร้า
@@ -103,7 +103,7 @@ const Cart = (props) => {
               );
             })}
             <h4 className="text-right mr-30">
-              ราคารวมทั้งหมด : ฿ {totalPrice}
+              ราคารวมทั้งหมด : ฿ {totalPrice.toFixed(2)}
             </h4>
             <ListItem>
               <div
@@ -200,7 +200,7 @@ const Cart = (props) => {
               );
             })}
             <h4 style={{ textAlign: "right", marginRight: 25 + "px" }}>
-              ราคาสุทธิ ฿ {totalPrice}
+              ราคาสุทธิ ฿ {totalPrice.toFixed(2)}
             </h4>
             <div className="text-right pr-20">
               {props.listProduct.length > 0 && (

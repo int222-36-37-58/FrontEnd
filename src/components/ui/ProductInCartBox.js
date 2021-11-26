@@ -13,7 +13,7 @@ const ProductInCartBox = (props) => {
         />
       </div>
 
-      <div>
+      <div style={{ margin: "0 3px" }}>
         <div className="InCartTitle b text-left">
           {props.orderDetail.product.name}
         </div>
@@ -24,8 +24,19 @@ const ProductInCartBox = (props) => {
         </div>
       </div>
 
-      <div>
-        <h5 className="baseColor b" style={{ marginTop: "-3px" }}>
+      <div
+        style={{
+          maxWidth: "45px",
+        }}
+      >
+        <h5
+          style={{ marginTop: "-3px" }}
+          className={
+            String(props.orderDetail.totalPrice).length > 6
+              ? "f12 baseColor"
+              : "f16 baseColor b"
+          }
+        >
           ฿{props.orderDetail.totalPrice}
         </h5>
         <span

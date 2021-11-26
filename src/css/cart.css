@@ -91,3 +91,13 @@
   cursor: pointer;
   color: tomato;
 }
+
+.maxWidthTitle100px {
+  max-width: 100px;
+  text-align: center;
+}
+
+.maxWidthTitle120px {
+  max-width: 120px;
+  text-align: center;
+}
