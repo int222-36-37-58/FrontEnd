@@ -47,7 +47,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
       var intColor = parseInt(colorChoose);
       var colorObj = props.product.color.find((c) => c.colorId === intColor);
       var orderDetails = {
-        quantity: quantity,
+        quantity: parseInt(quantity),
         totalPrice: productToCart.price * quantity,
         color: colorObj,
         product: productToCart,

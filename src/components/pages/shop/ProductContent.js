@@ -130,7 +130,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       var colorObj = product.color.find((c) => c.colorId === intColor);
 
       var orderDetails = {
-        quantity: quantityAdd,
+        quantity: parseInt(quantityAdd),
         totalPrice: productToCart.price * quantityAdd,
         color: colorObj,
         product: productToCart,
