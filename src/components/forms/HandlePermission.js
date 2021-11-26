@@ -51,7 +51,7 @@ const HandlePermission = (props, { addResdialog }) => {
       .then((res) => {
         const data = {
           status: res.status,
-          dialogContent: "ลบบัญชีสำเร็จ",
+          dialogContent: "ปิดการใช้งานบัญชีสำเร็จ",
         };
         props.addResDialog(data);
       })
@@ -84,8 +84,12 @@ const HandlePermission = (props, { addResdialog }) => {
   const openConfirmDeleteAccount = () => {
     setConfirmDeleteBox({
       showConfirm: true,
-      confirmContent: `ยืนยันที่จะลบบัญชีของ ${props.user.userName} ไหม?`,
+      confirmContent: `ยืนยันที่จะปิดการใช้งานบัญชีของ ${props.user.userName} ไหม? 
+      (หากเป็นผู้ใช้ที่ไม่เคยซื้อ หรือขายของในระบบ บัญชีจะถูกลบ)`,
     });
+  };
+  const restoreAccount = () => {
+    props.restore();
   };
 
   return (
@@ -133,12 +137,21 @@ const HandlePermission = (props, { addResdialog }) => {
             ให้สิทธิ์เป็น admin
           </div>
         </div>
-        <div
-          className="w100 delFromCart text-center mt-20"
-          onClick={openConfirmDeleteAccount}
-        >
-          ลบบัญชีนี้
-        </div>
+        {props.user.status === "active" ? (
+          <div
+            className="w100 delFromCart text-center mt-20"
+            onClick={openConfirmDeleteAccount}
+          >
+            ปิดการใช้งานบัญชี
+          </div>
+        ) : (
+          <div
+            className="w100 delFromCart text-center mt-20"
+            onClick={restoreAccount}
+          >
+            กู้คืนบัญชี
+          </div>
+        )}
       </div>
     </>
   );

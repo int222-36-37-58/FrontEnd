@@ -18,6 +18,7 @@ const RegisterForm = (props) => {
     tel: "",
     password: "",
     role: "ROLE_USER",
+    status: "active",
   });
 
   const [confirmPassword, setConfirmPassword] = useState("");

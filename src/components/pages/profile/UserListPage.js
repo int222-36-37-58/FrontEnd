@@ -18,6 +18,8 @@ import AdminEditUserForm from "../../forms/AdminEditUserForm";
 import HandlePermission from "../../forms/HandlePermission";
 import RegisterForm from "../../forms/RegisterForm";
 import ConfirmDialog from "../../ui/ConfirmDialog";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import BuildIcon from "@material-ui/icons/Build";
 
 const UserListPage = ({ addResDialog }) => {
   const [user, setUser] = useState([]);
@@ -144,6 +146,13 @@ const UserListPage = ({ addResDialog }) => {
     });
   };
 
+  const restoreAccount = () => {
+    let userRestore = Object.assign({}, userEdit);
+    userRestore.status = "active";
+
+    updateUser(userRestore);
+  };
+
   return (
     <>
       <ConfirmDialog
@@ -224,6 +233,7 @@ const UserListPage = ({ addResDialog }) => {
               {isHandleRole && (
                 <HandlePermission
                   user={userEdit}
+                  restore={restoreAccount}
                   close={() => {
                     setIsHandleRole(false);
                   }}
@@ -251,6 +261,10 @@ const UserListPage = ({ addResDialog }) => {
                       <TableCell style={{ color: "white" }} align="right">
                         Role
                       </TableCell>
+
+                      <TableCell style={{ color: "white" }} align="right">
+                        status
+                      </TableCell>
                     </Hidden>
                     <TableCell
                       style={{ color: "white" }}
@@ -264,15 +278,54 @@ const UserListPage = ({ addResDialog }) => {
                     .map((user) => {
                       return (
                         <TableRow key={`userNameIs${user.userName}`}>
-                          <TableCell align="right">{user.userId}</TableCell>
-                          <TableCell align="right">{user.userName}</TableCell>
+                          <TableCell
+                            align="right"
+                            style={{
+                              fontFamily: "Prompt, sans-serif",
+                              fontWeight: "600",
+                            }}
+                          >
+                            {user.userId}
+                          </TableCell>
+                          <TableCell
+                            align="right"
+                            style={{
+                              fontFamily: "Prompt, sans-serif",
+                              fontWeight: "600",
+                            }}
+                          >
+                            {user.userName}
+                          </TableCell>
                           <Hidden smDown>
-                            <TableCell align="right">
+                            <TableCell
+                              align="right"
+                              style={{
+                                fontFamily: "Prompt, sans-serif",
+                                fontWeight: "600",
+                              }}
+                            >
                               {user.role.replace("ROLE_", "").toLowerCase()}
                             </TableCell>
                           </Hidden>
+                          <Hidden smDown>
+                            <TableCell
+                              align="right"
+                              style={{
+                                fontFamily: "Prompt, sans-serif",
+                                fontWeight: "600",
+                              }}
+                            >
+                              {user.status}
+                            </TableCell>
+                          </Hidden>
                           {user.role !== "ROLE_ADMIN" ? (
-                            <TableCell align="right">
+                            <TableCell
+                              align="right"
+                              style={{
+                                fontFamily: "Prompt, sans-serif",
+                                fontWeight: "600",
+                              }}
+                            >
                               {isEdit || isAdd || isHandleRole ? (
                                 <button
                                   className="disabledButton hoverCursor"
@@ -282,22 +335,26 @@ const UserListPage = ({ addResDialog }) => {
                                     );
                                   }}
                                 >
-                                  แก้ไข
+                                  <EditOutlinedIcon
+                                    style={{ fontSize: "16px" }}
+                                  />
                                 </button>
                               ) : (
                                 <button
-                                  className="AddButton p-5-10"
+                                  className="AddButton  hoverCursor"
                                   onClick={() => editUser(user)}
                                 >
-                                  แก้ไข
+                                  <EditOutlinedIcon
+                                    style={{ fontSize: "16px" }}
+                                  />
                                 </button>
                               )}
 
                               <button
-                                className="delFromCart p-5-10 ml-5"
+                                className="delFromCart ml-5"
                                 onClick={() => openHandleRole(user)}
                               >
-                                จัดการบัญชี
+                                <BuildIcon style={{ fontSize: "16px" }} />
                               </button>
                             </TableCell>
                           ) : (
