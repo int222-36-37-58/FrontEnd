@@ -123,7 +123,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  max-width: 80px;
   border-style: solid;
   border-color: #ebebeb;
   border-width: 2px;
@@ -131,13 +131,18 @@
   font-weight: 900;
   font-size: 16px;
   margin-bottom: 25px;
-  padding: 10px 15px;
+  padding: 10px 20px;
   text-align: center;
 }
 
 .plusMinusQuantity > * {
   flex: auto;
 }
+
+.plusButton , .minusButton {
+  font-size: 20px;
+}
+
 
 .plusIcon {
   text-align: right;

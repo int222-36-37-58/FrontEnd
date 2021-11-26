@@ -105,7 +105,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       (prodToAdd[0] !== undefined &&
         quantityAdd < product.quantity - prodToAdd[0].quantity)
     ) {
-      let currentQuantity = quantityAdd + 1;
+      let currentQuantity = parseInt(quantityAdd) + 1;
       setQuantityAdd(currentQuantity);
     }
   };
@@ -294,10 +294,11 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
                   style={{
                     border: "none",
                     background: "none",
-                    width: "85px",
+                    width: "60px",
                     textAlign: "center",
                     fontFamily: "Prompt, sans-serif",
                     fontWeight: "600",
+                    fontSize: "16px",
                   }}
                   maxLength="10"
                   onChange={changeQuantity}
@@ -355,7 +356,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
                       onClick={addToCart}
                     >
                       <ShoppingCartOutlinedIcon className="mr-10" /> เพิ่ม - ฿
-                      {product.price * quantityAdd}{" "}
+                      {(product.price * quantityAdd).toFixed(2)}{" "}
                     </button>
                   ) : (
                     <button

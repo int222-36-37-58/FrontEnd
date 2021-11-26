@@ -28,7 +28,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
       (prodToAdd[0] !== undefined &&
         quantity < props.product.quantity - prodToAdd[0].quantity)
     ) {
-      let currentQuantity = quantity + 1;
+      let currentQuantity = parseInt(quantity) + 1;
       setQuantity(currentQuantity);
     }
   };
@@ -164,10 +164,11 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
                     style={{
                       border: "none",
                       background: "none",
-                      width: "85px",
+                      width: "60px",
                       textAlign: "center",
                       fontFamily: "Prompt, sans-serif",
                       fontWeight: "600",
+                      fontSize: "16px",
                     }}
                     maxLength="10"
                     onChange={changeQuantity}
@@ -204,7 +205,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
                     {" "}
                     <ShoppingCartOutlinedIcon className="mr-10" />
                   </Hidden>{" "}
-                  เพิ่ม - ฿{props.product.price * quantity}
+                  เพิ่ม - ฿{(props.product.price * quantity).toFixed(2)}
                 </button>
               ) : (
                 <button className="disabledButton mlr-5 w40 flex-center">
