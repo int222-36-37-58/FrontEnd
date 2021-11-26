@@ -339,7 +339,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
             </div>
           ) : (
             <>
-              {product && product.quantity > 1 ? (
+              {product && product.quantity >= 1 ? (
                 <>
                   {prodToAdd.length === 0 ||
                   (prodToAdd[0] !== undefined &&
@@ -497,7 +497,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
                         wordBreak: "break-word",
                       }}
                     >
-                      <h3>ความเห็นจากคุณ : {cm.user.userName}</h3>
+                      <h3>ความเห็นจาก : {cm.user.userName}</h3>
                       <h3 style={{ maxHeight: "100%", overflowY: "hidden" }}>
                         {" "}
                         {cm.content}
