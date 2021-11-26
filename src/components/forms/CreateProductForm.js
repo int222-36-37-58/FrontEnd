@@ -145,7 +145,7 @@ const CreateProductForm = (props) => {
     }
     if (
       e.quantity.length < 1 ||
-      e.quantity.length > 10 ||
+      e.quantity.length > 6 ||
       e.quantity < 0 ||
       (e.quantity < 1 && !props.productToEdit)
     ) {
@@ -333,7 +333,7 @@ const CreateProductForm = (props) => {
               type="number"
               inputProps={{
                 minLength: 1,
-                maxLength: 10,
+                maxLength: 6,
                 style: { fontFamily: "Prompt, sans-serif", fontWeight: "600" },
               }}
               InputLabelProps={{
@@ -347,7 +347,7 @@ const CreateProductForm = (props) => {
               label="quantity"
               value={data.quantity}
               onChange={onChange}
-              helperText="จำนวนของสินค้าที่มี ไม่เกิน 10 หลัก"
+              helperText="จำนวนของสินค้าที่มี ไม่เกิน 6 หลัก ไม่มีทศนิยม"
             />
           </Grid>
 

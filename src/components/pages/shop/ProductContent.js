@@ -190,6 +190,23 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
     });
   };
 
+  const changeQuantity = (e) => {
+    if (/[^0-9]/.test(e.target.value)) {
+      return quantityAdd;
+    }
+    if (
+      prodToAdd[0] !== undefined &&
+      e.target.value > product.quantity - prodToAdd[0].quantity
+    ) {
+      setQuantityAdd(product.quantity - prodToAdd[0].quantity);
+    }
+    if (prodToAdd[0] === undefined && e.target.value > product.quantity) {
+      setQuantityAdd(product.quantity);
+    } else {
+      setQuantityAdd(e.target.value);
+    }
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -264,13 +281,35 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
           <div className="plusMinus" style={{ color: "#545454" }}>
             <h4>จำนวน</h4>
             <div className="plusMinusQuantity">
-              <div className="minusButton hoverCursor" onClick={minusQuantity}>
+              <button
+                className="minusButton hoverCursor"
+                style={{ border: "none", background: "none" }}
+                onClick={minusQuantity}
+              >
                 -
+              </button>
+              <div className="currentQuantity">
+                <input
+                  value={quantityAdd}
+                  style={{
+                    border: "none",
+                    background: "none",
+                    width: "85px",
+                    textAlign: "center",
+                    fontFamily: "Prompt, sans-serif",
+                    fontWeight: "600",
+                  }}
+                  maxLength="10"
+                  onChange={changeQuantity}
+                />
               </div>
-              <div className="currentQuantity">{quantityAdd}</div>
-              <div className="plusButton hoverCursor" onClick={plusQuantity}>
+              <button
+                className="plusButton hoverCursor"
+                style={{ border: "none", background: "none" }}
+                onClick={plusQuantity}
+              >
                 +
-              </div>
+              </button>
             </div>
           </div>
 

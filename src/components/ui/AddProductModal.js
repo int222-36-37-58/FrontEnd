@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Hidden } from "@material-ui/core";
 import React, { useState } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { addToCart } from "../../actions/cart";
@@ -71,6 +71,23 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
     }
   };
 
+  const changeQuantity = (e) => {
+    if (/[^0-9]/.test(e.target.value)) {
+      return quantity;
+    }
+    if (
+      prodToAdd[0] !== undefined &&
+      e.target.value > props.product.quantity - prodToAdd[0].quantity
+    ) {
+      setQuantity(props.product.quantity - prodToAdd[0].quantity);
+    }
+    if (prodToAdd[0] === undefined && e.target.value > props.product.quantity) {
+      setQuantity(props.product.quantity);
+    } else {
+      setQuantity(e.target.value);
+    }
+  };
+
   const productColor = props.product.color.map((color, i) => {
     return (
       <React.Fragment key={`colorInCard${color.colorId}`}>
@@ -133,17 +150,36 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
             <div className="b -mb-10 baseColor f24">฿{props.product.price}</div>
             <div className="plusMinus baseColor2">
               <h4>จำนวนที่ต้องการ</h4>
-              <div className="plusMinusQuantity">
-                <div
+              <div className="plusMinusQuantity" style={{ width: "100px" }}>
+                <button
                   className="minusButton pr-5 hoverCursor"
+                  style={{ border: "none", background: "none" }}
                   onClick={minusQuantity}
                 >
                   -
+                </button>
+                <div className="currentQuantity pr-5">
+                  <input
+                    value={quantity}
+                    style={{
+                      border: "none",
+                      background: "none",
+                      width: "85px",
+                      textAlign: "center",
+                      fontFamily: "Prompt, sans-serif",
+                      fontWeight: "600",
+                    }}
+                    maxLength="10"
+                    onChange={changeQuantity}
+                  />
                 </div>
-                <div className="currentQuantity pr-5">{quantity}</div>
-                <div className="plusButton hoverCursor" onClick={plusQuantity}>
+                <button
+                  className="plusButton hoverCursor"
+                  style={{ border: "none", background: "none" }}
+                  onClick={plusQuantity}
+                >
                   +
-                </div>
+                </button>
               </div>
               {noColor && (
                 <h5 className="mt-5 baseColor3">กรุณาเลือกสีที่ต้องการ!</h5>
@@ -164,8 +200,11 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
                   className="AddButton mlr-5 w40  flex-center"
                   onClick={AddToCart}
                 >
-                  <ShoppingCartOutlinedIcon className="mr-10" /> เพิ่ม - ฿
-                  {props.product.price * quantity}
+                  <Hidden smDown>
+                    {" "}
+                    <ShoppingCartOutlinedIcon className="mr-10" />
+                  </Hidden>{" "}
+                  เพิ่ม - ฿{props.product.price * quantity}
                 </button>
               ) : (
                 <button className="disabledButton mlr-5 w40 flex-center">
