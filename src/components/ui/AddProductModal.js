@@ -38,6 +38,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
     setColorChoose(0);
     let color = e.target.value;
     setColorChoose(color);
+    setNoColor(false);
   };
 
   const AddToCart = () => {
@@ -194,7 +195,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
               )}
             </div>
             {noQuantity && (
-              <div className="redb mb-10">กรุณาเพิ่มจำนวนสินค้า</div>
+              <h5 className="redb mb-10">กรุณาเพิ่มจำนวนสินค้า</h5>
             )}
             <div
               className="w90"

@@ -91,6 +91,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
 
   const chooseColor = (e) => {
     setSelectedColor(e.target.value);
+    setNoColor(false);
   };
 
   const minusQuantity = () => {
@@ -320,7 +321,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
               </button>
             </div>
           </div>
-          {noQuantity && <div className="redb mb-20">กรุณาเพิ่มจำนวนสินค้า</div>}
+          {noQuantity && <h5 className="redb mb-20">กรุณาเพิ่มจำนวนสินค้า</h5>}
 
           {product.user && product.user.userId === props.userInfo.userId ? (
             <div style={{ display: "flex" }}>
