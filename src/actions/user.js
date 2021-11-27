@@ -42,6 +42,7 @@ export const login = (data) => async (dispatch) => {
     })
     .catch((err) => {
       localStorage.removeItem("token");
+      SetDefaultHeader("");
       if (err.response) {
         return err.response.data.message;
       } else {
