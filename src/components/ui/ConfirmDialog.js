@@ -18,6 +18,10 @@ const ConfirmDialog = (props) => {
         <div className="confirmHead pb-20">
           {props.confirmInfo.confirmContent}
         </div>
+        {props.confirmInfo.warning && (
+          <div className="redb pb-20">{props.confirmInfo.warning}</div>
+        )}
+
         <div
           style={{
             textAlign: "center",

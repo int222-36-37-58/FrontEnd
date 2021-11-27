@@ -80,9 +80,15 @@ const HandleUserRole = (props, { addResdialog }) => {
 
   const openConfirmChangeRole = (role) => {
     setRole(role);
+    let warning = "";
+    if (role === "admin") {
+      warning =
+        "***หลังจากคุณยืนยันการให้สิทธิ์ admin กับผู้ใช้นี้คุณจะไม่สามารถแก้ไขข้อมูลของบัญชีนี้ได้";
+    }
     setConfirmBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่จะให้สิทธิ์ ${props.user.userName} เป็น ${role} ไหม?`,
+      warning: warning,
     });
   };
 
@@ -90,7 +96,8 @@ const HandleUserRole = (props, { addResdialog }) => {
     setConfirmDeleteBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่จะปิดการใช้งานบัญชีของ ${props.user.userName} ไหม? 
-                ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ`,
+               `,
+      warning: ` ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ`,
     });
   };
   const restoreAccount = () => {
@@ -193,12 +200,15 @@ const HandleUserRole = (props, { addResdialog }) => {
         {props.user.status === "active" ? (
           <>
             <div className="f18 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
-            <div className="redb">
+            <div className="b" style={{ color: "#333435" }}>
               การปิดการใช้งานบัญชีผู้ใช้
               จะทำให้ผู้ใช้นี้ไม่สามารถเข้าระบบด้วยบัญชีนี้ได้ <br />
               และสินค้าที่ถูกขายโดยผู้ใช้นี้จะไม่ถูกแสดง <br />
-              ****หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ
-              บัญชีที่เลือกนี้จะถูกลบ
+              <span className="redb">
+                {" "}
+                ****หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ
+                บัญชีที่เลือกนี้จะถูกลบ
+              </span>
             </div>
             <div
               className=" w50 delFromCart text-center mt-20"

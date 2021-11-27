@@ -69,7 +69,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
           history.push("/profile/info");
         })
         .catch((err) => {
-          setResponseError(err.response.data.message);
+          setResponseError("รหัสผ่านปัจจุบันไม่ถูกต้อง โปรดลองอีกครั้ง หรือติดต่อ admin");
         });
     }
   };
