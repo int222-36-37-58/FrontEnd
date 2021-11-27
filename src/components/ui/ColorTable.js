@@ -29,7 +29,7 @@ const ColorTable = ({ addResDialog }) => {
     showConfirm: false,
     confirmContent: "",
   });
-
+  const [errors, setErrors] = useState(false);
   const getColor = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/colors`)
@@ -78,6 +78,7 @@ const ColorTable = ({ addResDialog }) => {
   };
 
   const handleColor = (e) => {
+    setErrors(false);
     setColorToAdd(e.target.value);
   };
 
@@ -86,6 +87,10 @@ const ColorTable = ({ addResDialog }) => {
   };
 
   const submitColor = () => {
+    if (colorToAdd.length <= 1) {
+      setErrors(true);
+      return;
+    }
     const json = JSON.stringify({ colorName: colorToAdd });
     axios
       .post(`${process.env.REACT_APP_API_URL}/admin/addcolor`, json, {
@@ -175,13 +180,18 @@ const ColorTable = ({ addResDialog }) => {
         {" "}
         สีในระบบ{" "}
         {!isEdit ? (
-          <button
-            className="AddButton mr-30 p-5-10"
-            style={{ float: "right" }}
-            onClick={() => setAddColor(!addColor)}
-          >
-            เพิ่มสีใหม่ +
-          </button>
+          <>
+            <button
+              className="AddButton mr-30 p-5-10"
+              style={{ float: "right" }}
+              onClick={() => {
+                setAddColor(!addColor);
+                setErrors(false);
+              }}
+            >
+              เพิ่มสีใหม่ +
+            </button>
+          </>
         ) : (
           <button
             className="disabledButton mr-30 p-5-10"
@@ -213,6 +223,7 @@ const ColorTable = ({ addResDialog }) => {
             onChange={handleColor}
             label="ประเภทสี"
             value={colorToAdd}
+            error={errors}
             inputProps={{
               minLength: 1,
               maxLength: 45,
@@ -224,7 +235,18 @@ const ColorTable = ({ addResDialog }) => {
                 fontWeight: "600",
               },
             }}
+            helperText="กรอกชื่อสี ความยาว 1 - 45 ตัวอักษร"
           />{" "}
+          <button
+            className="delFromCart ml-5"
+            style={{ float: "right" }}
+            onClick={() => {
+              setAddColor(!addColor);
+              setErrors(false);
+            }}
+          >
+            ยกเลิก
+          </button>
           <button
             className="InfoButton"
             style={{ float: "right" }}
@@ -322,12 +344,32 @@ const ColorTable = ({ addResDialog }) => {
                           alignItems: "center",
                         }}
                       >
-                        <span onClick={() => editColor(col)}>
-                          <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
-                        </span>
-                        <span onClick={() => deletingColor(col)}>
-                          <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
-                        </span>
+                        {isEdit || addColor ? (
+                          <>
+                            {" "}
+                            <span>
+                              <EditOutlinedIcon
+                                className="m-5"
+                                style={{ color: "#333435", opacity: "0.6" }}
+                              />
+                            </span>
+                            <span>
+                              <DeleteOutlineIcon
+                                className="m-5"
+                                style={{ color: "#333435", opacity: "0.6" }}
+                              />
+                            </span>{" "}
+                          </>
+                        ) : (
+                          <>
+                            <span onClick={() => editColor(col)}>
+                              <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
+                            </span>
+                            <span onClick={() => deletingColor(col)}>
+                              <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
+                            </span>{" "}
+                          </>
+                        )}
                       </div>
                     </TableCell>
                   </TableRow>

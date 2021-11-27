@@ -107,19 +107,31 @@ const HandlePermission = (props, { addResdialog }) => {
       />
 
       <div className="roundBorder">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span className="f20 b pb-20">
-            กำหนดสิทธิ์ของ {props.user.userName} เป็น
-          </span>
+        <div
+          className="f20 b pb-20 text-center"
+          style={{
+            borderStyle: "solid",
+            borderWidth: "0 0 2px 0",
+            borderColor: "#ebebeb",
+          }}
+        >
+          กำลังจัดการสิทธิ์ของบัญชี {props.user.userName}
         </div>
 
         <div
-          className="w100"
+          className="pt-20 pb-20"
           style={{
-            display: "flex",
-            justifyContent: "space-between",
+            borderStyle: "solid",
+            borderWidth: "0 0 2px 0",
+            borderColor: "#ebebeb",
           }}
         >
+          <div className="f16 b ">ให้ผู้ใช้เป็น Seller</div>
+          <div>
+            {" "}
+            ทำให้ผู้ใช้ที่สามารถลงขายสินค้า และตรวจสอบประวัติการขาย
+            รวมถึงสินค้าทั้งหมดที่เขาได้ลงขาย
+          </div>
           <div
             className="InfoButton w50 m-5 flex-1  text-center"
             onClick={() => {
@@ -127,6 +139,21 @@ const HandlePermission = (props, { addResdialog }) => {
             }}
           >
             ให้สิทธิ์เป็น seller
+          </div>
+        </div>
+        <div
+          className="pt-20 pb-20"
+          style={{
+            borderStyle: "solid",
+            borderWidth: "0 0 2px 0",
+            borderColor: "#ebebeb",
+          }}
+        >
+          <div className="f16 b ">ให้ผู้ใช้เป็น Admin</div>
+          <div>
+            {" "}
+            เพิ่มความสามารถให้ผู้ใช้นี้ สามารถจัดการข้อมูลในระบบ
+            และสามารถจัดการข้อมูลผู้ใช้ได้
           </div>
           <div
             className="AddButton w50 m-5 flex-1  alignCenter text-center"
@@ -138,19 +165,30 @@ const HandlePermission = (props, { addResdialog }) => {
           </div>
         </div>
         {props.user.status === "active" ? (
-          <div
-            className="w100 delFromCart text-center mt-20"
-            onClick={openConfirmDeleteAccount}
-          >
-            ปิดการใช้งานบัญชี
-          </div>
+          <>
+            <div className="f16 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
+            <div>
+              ทำให้ผู้ใช้นั้นไม่สามารถเข้าระบบด้วยบัญชีนั้น ๆ ได้
+              แต่หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ บัญชีนี้จะถูกลบ
+            </div>
+            <div
+              className=" w50 delFromCart text-center mt-20"
+              onClick={openConfirmDeleteAccount}
+            >
+              ปิดการใช้งานบัญชี
+            </div>
+          </>
         ) : (
-          <div
-            className="w100 delFromCart text-center mt-20"
-            onClick={restoreAccount}
-          >
-            กู้คืนบัญชี
-          </div>
+          <>
+            <div className="f16 b pt-20">กู้คืนบัญชี</div>
+            <div>ทำให้ผู้ใช้นั้นสามารถกลับมาใช้งานบัญชีนั้นๆ ได้อีกครั้ง</div>
+            <div
+              className="w50  delFromCart text-center mt-20"
+              onClick={restoreAccount}
+            >
+              กู้คืนบัญชี
+            </div>
+          </>
         )}
       </div>
     </>

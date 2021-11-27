@@ -29,7 +29,7 @@ const TypeTable = ({ addResDialog }) => {
     showConfirm: false,
     confirmContent: "",
   });
-
+  const [errors, setErrors] = useState(false);
   const getType = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/types`)
@@ -86,6 +86,10 @@ const TypeTable = ({ addResDialog }) => {
     setTypeEdit(type);
   };
   const submitType = () => {
+    if (String(typeToAdd.length) <= 1) {
+      setErrors(true);
+      return;
+    }
     const json = JSON.stringify({ name: typeToAdd });
 
     axios
@@ -183,7 +187,10 @@ const TypeTable = ({ addResDialog }) => {
           <button
             className="AddButton mr-30 p-5-10"
             style={{ float: "right" }}
-            onClick={() => setAddType(!addType)}
+            onClick={() => {
+              setAddType(!addType);
+              setErrors(false);
+            }}
           >
             เพิ่ม Type +
           </button>
@@ -217,7 +224,9 @@ const TypeTable = ({ addResDialog }) => {
             variant="outlined"
             onChange={handleType}
             label="type name"
+            error={errors}
             value={typeToAdd}
+            helperText="กรอกชื่อประเภท ความยาว 1 - 45 ตัวอักษร"
             inputProps={{
               minLength: 1,
               maxLength: 45,
@@ -230,6 +239,16 @@ const TypeTable = ({ addResDialog }) => {
               },
             }}
           />{" "}
+          <button
+            className="delFromCart ml-5"
+            style={{ float: "right" }}
+            onClick={() => {
+              setAddType(!addType);
+              setErrors(false);
+            }}
+          >
+            ยกเลิก
+          </button>
           <button
             className="InfoButton"
             style={{ float: "right" }}
@@ -327,12 +346,33 @@ const TypeTable = ({ addResDialog }) => {
                           alignItems: "center",
                         }}
                       >
-                        <span onClick={() => editType(type)}>
-                          <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
-                        </span>
-                        <span onClick={() => deletingType(type)}>
-                          <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
-                        </span>
+                        {isEdit || addType ? (
+                          <>
+                            {" "}
+                            <span>
+                              <EditOutlinedIcon
+                                className="m-5"
+                                style={{ color: "#333435", opacity: "0.6" }}
+                              />
+                            </span>
+                            <span>
+                              <DeleteOutlineIcon
+                                className="m-5"
+                                style={{ color: "#333435", opacity: "0.6" }}
+                              />
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            {" "}
+                            <span onClick={() => editType(type)}>
+                              <EditOutlinedIcon className="hoverChangeToNavBarColor m-5" />
+                            </span>
+                            <span onClick={() => deletingType(type)}>
+                              <DeleteOutlineIcon className="hoverChangeToNavBarColor m-5" />
+                            </span>{" "}
+                          </>
+                        )}
                       </div>
                     </TableCell>
                   </TableRow>

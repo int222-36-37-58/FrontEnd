@@ -327,35 +327,37 @@ const UserListPage = ({ addResDialog }) => {
                               }}
                             >
                               {isEdit || isAdd || isHandleRole ? (
-                                <button
-                                  className="disabledButton hoverCursor"
-                                  onClick={() => {
-                                    alert(
-                                      "Please Click Submit or Cancel before edit other user"
-                                    );
-                                  }}
-                                >
-                                  <EditOutlinedIcon
-                                    style={{ fontSize: "16px" }}
-                                  />
-                                </button>
+                                <>
+                                  <button className="disabledButton hoverCursor">
+                                    <EditOutlinedIcon
+                                      style={{ fontSize: "16px" }}
+                                    />
+                                  </button>
+                                  <button
+                                    className="disabledButton hoverCursor ml-5"
+                                    onClick={() => openHandleRole(user)}
+                                  >
+                                    <BuildIcon style={{ fontSize: "16px" }} />
+                                  </button>
+                                </>
                               ) : (
-                                <button
-                                  className="AddButton  hoverCursor"
-                                  onClick={() => editUser(user)}
-                                >
-                                  <EditOutlinedIcon
-                                    style={{ fontSize: "16px" }}
-                                  />
-                                </button>
+                                <>
+                                  <button
+                                    className="AddButton  hoverCursor"
+                                    onClick={() => editUser(user)}
+                                  >
+                                    <EditOutlinedIcon
+                                      style={{ fontSize: "16px" }}
+                                    />
+                                  </button>
+                                  <button
+                                    className="delFromCart ml-5"
+                                    onClick={() => openHandleRole(user)}
+                                  >
+                                    <BuildIcon style={{ fontSize: "16px" }} />
+                                  </button>
+                                </>
                               )}
-
-                              <button
-                                className="delFromCart ml-5"
-                                onClick={() => openHandleRole(user)}
-                              >
-                                <BuildIcon style={{ fontSize: "16px" }} />
-                              </button>
                             </TableCell>
                           ) : (
                             <TableCell />
