@@ -118,53 +118,55 @@ const HandlePermission = (props, { addResdialog }) => {
         >
           กำลังจัดการสิทธิ์ของบัญชี {props.user.userName}
         </div>
+        {props.user.status === "active" && (
+          <>
+            <div
+              className="pt-20 pb-20"
+              style={{
+                borderStyle: "solid",
+                borderWidth: "0 0 2px 0",
+                borderColor: "#ebebeb",
+              }}
+            >
+              <div className="f16 b ">ให้ผู้ใช้เป็น Seller</div>
+              <div>
+                ทำให้ผู้ใช้ที่สามารถลงขายสินค้า และตรวจสอบประวัติการขาย
+                รวมถึงสินค้าทั้งหมดที่เขาได้ลงขาย
+              </div>
+              <div
+                className="InfoButton w50 m-5 flex-1  text-center"
+                onClick={() => {
+                  openConfirmChangeRole("seller");
+                }}
+              >
+                ให้สิทธิ์เป็น seller
+              </div>
+            </div>
+            <div
+              className="pt-20 pb-20"
+              style={{
+                borderStyle: "solid",
+                borderWidth: "0 0 2px 0",
+                borderColor: "#ebebeb",
+              }}
+            >
+              <div className="f16 b ">ให้ผู้ใช้เป็น Admin</div>
+              <div>
+                เพิ่มความสามารถให้ผู้ใช้นี้ สามารถจัดการข้อมูลในระบบ
+                และสามารถจัดการข้อมูลผู้ใช้ได้
+              </div>
+              <div
+                className="AddButton w50 m-5 flex-1  alignCenter text-center"
+                onClick={() => {
+                  openConfirmChangeRole("admin");
+                }}
+              >
+                ให้สิทธิ์เป็น admin
+              </div>
+            </div>
+          </>
+        )}
 
-        <div
-          className="pt-20 pb-20"
-          style={{
-            borderStyle: "solid",
-            borderWidth: "0 0 2px 0",
-            borderColor: "#ebebeb",
-          }}
-        >
-          <div className="f16 b ">ให้ผู้ใช้เป็น Seller</div>
-          <div>
-            {" "}
-            ทำให้ผู้ใช้ที่สามารถลงขายสินค้า และตรวจสอบประวัติการขาย
-            รวมถึงสินค้าทั้งหมดที่เขาได้ลงขาย
-          </div>
-          <div
-            className="InfoButton w50 m-5 flex-1  text-center"
-            onClick={() => {
-              openConfirmChangeRole("seller");
-            }}
-          >
-            ให้สิทธิ์เป็น seller
-          </div>
-        </div>
-        <div
-          className="pt-20 pb-20"
-          style={{
-            borderStyle: "solid",
-            borderWidth: "0 0 2px 0",
-            borderColor: "#ebebeb",
-          }}
-        >
-          <div className="f16 b ">ให้ผู้ใช้เป็น Admin</div>
-          <div>
-            {" "}
-            เพิ่มความสามารถให้ผู้ใช้นี้ สามารถจัดการข้อมูลในระบบ
-            และสามารถจัดการข้อมูลผู้ใช้ได้
-          </div>
-          <div
-            className="AddButton w50 m-5 flex-1  alignCenter text-center"
-            onClick={() => {
-              openConfirmChangeRole("admin");
-            }}
-          >
-            ให้สิทธิ์เป็น admin
-          </div>
-        </div>
         {props.user.status === "active" ? (
           <>
             <div className="f16 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
