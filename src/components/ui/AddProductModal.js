@@ -12,6 +12,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
   const [colorChoose, setColorChoose] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [noColor, setNoColor] = useState(false);
+  const [noQuantity, setNoQuantity] = useState(false);
   const prodToAdd = props.productCounter.filter((obj) => {
     return obj.productId === props.product.productId;
   });
@@ -46,8 +47,13 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
       var productToCart = Object.assign({}, props.product);
       var intColor = parseInt(colorChoose);
       var colorObj = props.product.color.find((c) => c.colorId === intColor);
+      let qty = parseInt(quantity);
+      if (qty < 1 || String(quantity).length < 1) {
+        setNoQuantity(true);
+        return;
+      }
       var orderDetails = {
-        quantity: parseInt(quantity),
+        quantity: qty,
         totalPrice: productToCart.price * quantity,
         color: colorObj,
         product: productToCart,
@@ -75,6 +81,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
     if (/[^0-9]/.test(e.target.value)) {
       return quantity;
     }
+
     if (
       prodToAdd[0] !== undefined &&
       e.target.value > props.product.quantity - prodToAdd[0].quantity
@@ -186,7 +193,9 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
                 <h5 className="mt-5 baseColor3">กรุณาเลือกสีที่ต้องการ!</h5>
               )}
             </div>
-
+            {noQuantity && (
+              <div className="redb mb-10">กรุณาเพิ่มจำนวนสินค้า</div>
+            )}
             <div
               className="w90"
               style={{

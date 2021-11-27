@@ -27,6 +27,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
   const [isShowComments, setIsShowComments] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
   const [noColor, setNoColor] = useState(false);
+  const [noQuantity, setNoQuantity] = useState(false);
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
@@ -128,6 +129,11 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       var productToCart = Object.assign({}, product);
       var intColor = parseInt(selectedColor);
       var colorObj = product.color.find((c) => c.colorId === intColor);
+      let qty = parseInt(quantityAdd);
+      if (qty < 1 || String(quantityAdd).length < 1) {
+        setNoQuantity(true);
+        return;
+      }
 
       var orderDetails = {
         quantity: parseInt(quantityAdd),
@@ -191,6 +197,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
   };
 
   const changeQuantity = (e) => {
+    setNoQuantity(false);
     if (/[^0-9]/.test(e.target.value)) {
       return quantityAdd;
     }
@@ -313,6 +320,7 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
               </button>
             </div>
           </div>
+          {noQuantity && <div className="redb mb-20">กรุณาเพิ่มจำนวนสินค้า</div>}
 
           {product.user && product.user.userId === props.userInfo.userId ? (
             <div style={{ display: "flex" }}>
