@@ -12,6 +12,10 @@ const HandlePermission = (props, { addResdialog }) => {
     showConfirm: false,
     confirmContent: "",
   });
+  const [confirmRestore, setConfirmRestore] = useState({
+    showConfirm: false,
+    confirmContent: "",
+  });
 
   const [role, setRole] = useState("");
 
@@ -71,6 +75,7 @@ const HandlePermission = (props, { addResdialog }) => {
   const handleCloseConfirm = () => {
     setConfirmBox({ showConfirm: false, confirmContent: "" });
     setConfirmDeleteBox({ showConfirm: false, confirmContent: "" });
+    setConfirmRestore({ showConfirm: false, confirmContent: "" });
   };
 
   const openConfirmChangeRole = (role) => {
@@ -93,6 +98,13 @@ const HandlePermission = (props, { addResdialog }) => {
     props.close();
   };
 
+  const openConfirmRestoreAccount = () => {
+    setConfirmRestore({
+      showConfirm: true,
+      confirmContent: `ยืนยันที่กู้คืนบัญชีของ ${props.user.userName} ไหม?`,
+    });
+  };
+
   return (
     <>
       <ConfirmDialog
@@ -105,6 +117,12 @@ const HandlePermission = (props, { addResdialog }) => {
         confirmInfo={confirmDeleteBox}
         handleCloseBox={handleCloseConfirm}
         submit={deleteAccount}
+      />
+
+      <ConfirmDialog
+        confirmInfo={confirmRestore}
+        handleCloseBox={handleCloseConfirm}
+        submit={restoreAccount}
       />
 
       <div className="roundBorder">
@@ -172,7 +190,8 @@ const HandlePermission = (props, { addResdialog }) => {
             <div className="f16 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
             <div>
               ทำให้ผู้ใช้นั้นไม่สามารถเข้าระบบด้วยบัญชีนั้น ๆ ได้
-              แต่หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ บัญชีนี้จะถูกลบ
+              แต่หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ
+              บัญชีที่เลือกนี้จะถูกลบ
             </div>
             <div
               className=" w50 delFromCart text-center mt-20"
@@ -187,7 +206,7 @@ const HandlePermission = (props, { addResdialog }) => {
             <div>ทำให้ผู้ใช้นั้นสามารถกลับมาใช้งานบัญชีนั้นๆ ได้อีกครั้ง</div>
             <div
               className="w50  delFromCart text-center mt-20"
-              onClick={restoreAccount}
+              onClick={openConfirmRestoreAccount}
             >
               กู้คืนบัญชี
             </div>
