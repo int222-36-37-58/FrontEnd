@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
 import ConfirmDialog from "../ui/ConfirmDialog";
-const HandlePermission = (props, { addResdialog }) => {
+const HandleUserRole = (props, { addResdialog }) => {
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
     confirmContent: "",
@@ -90,7 +90,7 @@ const HandlePermission = (props, { addResdialog }) => {
     setConfirmDeleteBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่จะปิดการใช้งานบัญชีของ ${props.user.userName} ไหม? 
-                ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ***`,
+                ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ`,
     });
   };
   const restoreAccount = () => {
@@ -230,4 +230,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(HandlePermission);
+export default connect(null, mapDispatchToProps)(HandleUserRole);

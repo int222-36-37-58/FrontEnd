@@ -63,7 +63,9 @@ const RegisterForm = (props) => {
     if (
       !e.password ||
       (e.password.length <= 5 && !props.editMode) ||
-      (!e.password.match(/^[A-Za-z0-9]/) && !props.editMode)
+      (!e.password.match(/[a-z]/) && !props.editMode) ||
+      (!e.password.match(/[A-Z]/) && !props.editMode) ||
+      (!e.password.match(/[0-9]/) && !props.editMode)
     ) {
       errors.password = true;
     }

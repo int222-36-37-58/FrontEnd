@@ -35,10 +35,10 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
 
     if (
       !newPassword ||
-      newPassword.length <= 4 ||
-      (!newPassword.match(/^[A-Z]/) &&
-        !newPassword.match(/^[a-z]/) &&
-        !newPassword.match(/^[0-9]/))
+      newPassword.length <= 5 ||
+      !newPassword.match(/[A-Z]/) ||
+      !newPassword.match(/[a-z]/) ||
+      !newPassword.match(/[0-9]/)
     ) {
       errs.newPassword = true;
     }
@@ -146,6 +146,7 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
             id="newPassword"
             name="newPassword"
             label="รหัสผ่านใหม่"
+            helperText="ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข 6 - 20 ตัว"
             onChange={handleNewPassword}
             style={{ fontFamily: "Prompt, sans-serif" }}
           />

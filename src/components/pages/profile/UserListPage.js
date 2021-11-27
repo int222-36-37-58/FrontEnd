@@ -15,7 +15,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../../actions/uiStyle";
 import AdminEditUserForm from "../../forms/AdminEditUserForm";
-import HandlePermission from "../../forms/HandlePermission";
+import HandleUserRole from "../../forms/HandleUserRole";
 import RegisterForm from "../../forms/RegisterForm";
 import ConfirmDialog from "../../ui/ConfirmDialog";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
@@ -231,7 +231,7 @@ const UserListPage = ({ addResDialog }) => {
                 </>
               )}
               {isHandleRole && (
-                <HandlePermission
+                <HandleUserRole
                   user={userEdit}
                   restore={restoreAccount}
                   close={() => {
