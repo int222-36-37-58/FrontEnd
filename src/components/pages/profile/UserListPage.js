@@ -137,12 +137,18 @@ const UserListPage = ({ addResDialog }) => {
 
   const openConfirmAdd = (data) => {
     setUserEdit(data);
+    let warning = "";
+    if (data.role === "ROLE_ADMIN") {
+      warning =
+        "***หลังคุณยืนยันการสร้างบัญชีนี้เป็น admin คุณจะไม่สามารถแก้ไขข้อมูลของบัญชีนี้ได้";
+    }
     setConfirmBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่เพิ่ม ${data.userName} เป็น ${data.role.replace(
         "ROLE_",
         ""
       )} ไหม`,
+      warning: warning,
     });
   };
 

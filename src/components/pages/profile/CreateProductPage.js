@@ -49,6 +49,7 @@ const CreateProductPage = ({ addResDialog, userInfo }) => {
     setConfirmBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่ลงขายสินค้าไหม?`,
+      warning: "***หากคุณยืนยันการลงขาย สินค้าจะถูกลงขายทันที",
     });
     setProductData(data);
   };

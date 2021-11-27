@@ -68,8 +68,10 @@ const ChangePasswordForm = ({ addResDialog, getUser, userInfo }) => {
           getUser();
           history.push("/profile/info");
         })
-        .catch((err) => {
-          setResponseError("รหัสผ่านปัจจุบันไม่ถูกต้อง โปรดลองอีกครั้ง หรือติดต่อ admin");
+        .catch(() => {
+          setResponseError(
+            "รหัสผ่านปัจจุบันไม่ถูกต้อง โปรดลองอีกครั้ง หรือติดต่อผู้ดูแลระบบ"
+          );
         });
     }
   };

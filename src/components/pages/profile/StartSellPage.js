@@ -46,6 +46,7 @@ const StartSellPage = (props, { addResDialog, getUser }) => {
     setConfirmBox({
       showConfirm: true,
       confirmContent: `ยืนยันการสมัครเป็นผู้ขายกับเรา?`,
+      warning: "***เมื่อคุณยืนยันการสมัครคุณจะสามารถลงขายสินค้าได้ทันที",
     });
   };
 
