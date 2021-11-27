@@ -90,7 +90,7 @@ const HandlePermission = (props, { addResdialog }) => {
     setConfirmDeleteBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่จะปิดการใช้งานบัญชีของ ${props.user.userName} ไหม? 
-      (หากเป็นผู้ใช้ที่ไม่เคยซื้อ หรือขายของในระบบ บัญชีจะถูกลบ)`,
+                ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ***`,
     });
   };
   const restoreAccount = () => {
@@ -146,9 +146,9 @@ const HandlePermission = (props, { addResdialog }) => {
                 borderColor: "#ebebeb",
               }}
             >
-              <div className="f16 b ">ให้ผู้ใช้เป็น Seller</div>
-              <div>
-                ทำให้ผู้ใช้ที่สามารถลงขายสินค้า และตรวจสอบประวัติการขาย
+              <div className="f18 b ">ให้ผู้ใช้เป็น Seller</div>
+              <div className="b" style={{ color: "#333435" }}>
+                ทำให้ผู้ใช้นี้สามารถลงขายสินค้า และตรวจสอบประวัติการขาย
                 รวมถึงสินค้าทั้งหมดที่เขาได้ลงขาย
               </div>
               <div
@@ -168,10 +168,15 @@ const HandlePermission = (props, { addResdialog }) => {
                 borderColor: "#ebebeb",
               }}
             >
-              <div className="f16 b ">ให้ผู้ใช้เป็น Admin</div>
-              <div>
-                เพิ่มความสามารถให้ผู้ใช้นี้ สามารถจัดการข้อมูลในระบบ
-                และสามารถจัดการข้อมูลผู้ใช้ได้
+              <div className="f18 b ">ให้ผู้ใช้เป็น Admin</div>
+              <div className="b" style={{ color: "#333435" }}>
+                ทำให้ผู้ใช้นี้ มีความสามารถเหมือน Seller
+                และสามารถจัดการข้อมูลในระบบ
+                รวมถึงสามารถจัดการข้อมูลของผู้ใช้ในระบบได้ <br />
+                <span className="redb">
+                  ***หลังจากคุณยืนยันการให้สิทธิ์ admin กับผู้ใช้นี้
+                  คุณจะไม่สามารถแก้ไขข้อมูลของบัญชีนี้ได้
+                </span>
               </div>
               <div
                 className="AddButton w50 m-5 flex-1  alignCenter text-center"
@@ -187,10 +192,12 @@ const HandlePermission = (props, { addResdialog }) => {
 
         {props.user.status === "active" ? (
           <>
-            <div className="f16 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
-            <div>
-              ทำให้ผู้ใช้นั้นไม่สามารถเข้าระบบด้วยบัญชีนั้น ๆ ได้
-              แต่หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ
+            <div className="f18 b pt-20">ปิดการใช้งานบัญชีผู้ใช้</div>
+            <div className="redb">
+              การปิดการใช้งานบัญชีผู้ใช้
+              จะทำให้ผู้ใช้นี้ไม่สามารถเข้าระบบด้วยบัญชีนี้ได้ <br />
+              และสินค้าที่ถูกขายโดยผู้ใช้นี้จะไม่ถูกแสดง <br />
+              ****หากผู้ใช้นี้ไม่เคยมีการซื้อ หรือขายในระบบ
               บัญชีที่เลือกนี้จะถูกลบ
             </div>
             <div
