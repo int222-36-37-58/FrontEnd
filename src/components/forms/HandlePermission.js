@@ -90,6 +90,7 @@ const HandlePermission = (props, { addResdialog }) => {
   };
   const restoreAccount = () => {
     props.restore();
+    props.close();
   };
 
   return (
