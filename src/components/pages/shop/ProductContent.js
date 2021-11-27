@@ -107,8 +107,13 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       (prodToAdd[0] !== undefined &&
         quantityAdd < product.quantity - prodToAdd[0].quantity)
     ) {
-      let currentQuantity = parseInt(quantityAdd) + 1;
-      setQuantityAdd(currentQuantity);
+      setNoQuantity(false);
+      if (String(quantityAdd).length < 1) {
+        setQuantityAdd(1);
+      } else {
+        let currentQuantity = parseInt(quantityAdd) + 1;
+        setQuantityAdd(currentQuantity);
+      }
     }
   };
 

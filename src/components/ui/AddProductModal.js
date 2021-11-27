@@ -29,8 +29,13 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
       (prodToAdd[0] !== undefined &&
         quantity < props.product.quantity - prodToAdd[0].quantity)
     ) {
-      let currentQuantity = parseInt(quantity) + 1;
-      setQuantity(currentQuantity);
+      setNoQuantity(false);
+      if (String(quantity).length < 1) {
+        setQuantity(1);
+      } else {
+        let currentQuantity = parseInt(quantity) + 1;
+        setQuantity(currentQuantity);
+      }
     }
   };
 
@@ -79,6 +84,7 @@ const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
   };
 
   const changeQuantity = (e) => {
+    setNoQuantity(false);
     if (/[^0-9]/.test(e.target.value)) {
       return quantity;
     }
