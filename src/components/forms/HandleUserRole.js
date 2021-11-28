@@ -81,14 +81,18 @@ const HandleUserRole = (props, { addResdialog }) => {
   const openConfirmChangeRole = (role) => {
     setRole(role);
     let warning = "";
+    let crit = false;
     if (role === "admin") {
       warning =
         "***หลังจากคุณยืนยันการให้สิทธิ์ admin กับผู้ใช้นี้คุณจะไม่สามารถแก้ไขข้อมูลของบัญชีนี้ได้";
+      crit = true;
     }
+
     setConfirmBox({
       showConfirm: true,
       confirmContent: `ยืนยันที่จะให้สิทธิ์ ${props.user.userName} เป็น ${role} ไหม?`,
       warning: warning,
+      criticalConfirm: crit,
     });
   };
 
@@ -98,6 +102,7 @@ const HandleUserRole = (props, { addResdialog }) => {
       confirmContent: `ยืนยันที่จะปิดการใช้งานบัญชีของ ${props.user.userName} ไหม? 
                `,
       warning: ` ***หากเป็นบัญชีที่ไม่เคยซื้อ/ขายในระบบ บัญชีจะถูกลบ`,
+      criticalConfirm: true,
     });
   };
   const restoreAccount = () => {
@@ -109,6 +114,7 @@ const HandleUserRole = (props, { addResdialog }) => {
     setConfirmRestore({
       showConfirm: true,
       confirmContent: `ยืนยันที่กู้คืนบัญชีของ ${props.user.userName} ไหม?`,
+      criticalConfirm: true,
     });
   };
 
