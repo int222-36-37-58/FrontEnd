@@ -57,13 +57,14 @@ const ConfirmDialog = (props) => {
         </div>
         {props.confirmInfo.criticalConfirm && (
           <div className="text-center pb-20">
-            <div className="b">กรอกคำว่า confirm เพื่อทำการยืนยัน</div>
+            <div className="b pb-5">กรอกคำว่า confirm เพื่อทำการยืนยัน</div>
             <TextField
               size="small"
               fullWidth
               variant="outlined"
               onChange={onChange}
               error={error}
+              label="ข้อความยืนยัน"
               value={critConfirmInput}
               inputProps={{
                 minLength: 7,
@@ -77,7 +78,7 @@ const ConfirmDialog = (props) => {
                 },
               }}
             />
-            {error && <div className="redb">กรุณากรอกคำว่า confirm ในช่อง</div>}
+            {error && <div className="redb text-left">กรุณากรอกคำว่า confirm ในช่อง</div>}
           </div>
         )}
         <div className="dialogButtonZone w100">
