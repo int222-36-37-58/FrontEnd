@@ -147,7 +147,8 @@ const CreateProductForm = (props) => {
       e.quantity.length < 1 ||
       e.quantity.length > 5 ||
       e.quantity < 0 ||
-      (e.quantity < 1 && !props.productToEdit)
+      (e.quantity < 1 && !props.productToEdit) ||
+      String(e.quantity).indexOf(".") !== -1
     ) {
       errors.quantity = true;
     }
