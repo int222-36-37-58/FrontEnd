@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addResDialog } from "../../actions/uiStyle";
-import ConfirmDialog from "../ui/ConfirmDialog";
+import ConfirmDialog from "./ConfirmDialog";
 const HandleUserRole = (props, { addResdialog }) => {
   const [confirmBox, setConfirmBox] = useState({
     showConfirm: false,
