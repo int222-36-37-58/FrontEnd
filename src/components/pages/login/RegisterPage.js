@@ -42,7 +42,7 @@ const RegisterPage = (props, { addResDialog, login, getUser }) => {
 
   return (
     <>
-      <RegisterForm submit={submit} regisErr={regisErr} editMode={false} />
+      <RegisterForm submit={submit} regisErr={regisErr} />
     </>
   );
 };

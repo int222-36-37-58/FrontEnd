@@ -392,7 +392,7 @@ const RegisterForm = (props) => {
 
 RegisterForm.propTypes = {
   submit: PropTypes.func.isRequired,
-  editMode: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool,
   userData: PropTypes.shape({
     id: PropTypes.number,
     userName: PropTypes.string.isRequired,

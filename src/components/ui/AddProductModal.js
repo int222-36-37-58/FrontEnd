@@ -8,7 +8,10 @@ import { addResDialog } from "../../actions/uiStyle";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 
-const AddModal = (props, { addToCart, addResDialog, productCounter }) => {
+const AddProductModal = (
+  props,
+  { addToCart, addResDialog, productCounter }
+) => {
   const [colorChoose, setColorChoose] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [noColor, setNoColor] = useState(false);
@@ -253,4 +256,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddProductModal);

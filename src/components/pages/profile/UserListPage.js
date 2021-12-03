@@ -250,11 +250,7 @@ const UserListPage = ({ addResDialog }) => {
                 />
               )}
               {isAdd && (
-                <RegisterForm
-                  submit={openConfirmAdd}
-                  adminMode={true}
-                  editMode={false}
-                />
+                <RegisterForm submit={openConfirmAdd} adminMode={true} />
               )}
 
               <Table>
