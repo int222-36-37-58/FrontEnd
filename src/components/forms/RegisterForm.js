@@ -234,7 +234,7 @@ const RegisterForm = (props) => {
                   name="address"
                   label="address"
                   onChange={onChange}
-                  helperText="ที่อยู่ของคุณ ไม่เกิน 150 ตัว"
+                  helperText="ที่อยู่ของคุณ 10 - 150 ตัว"
                   value={data.address}
                 />
               </Grid>
