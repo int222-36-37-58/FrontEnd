@@ -97,11 +97,14 @@ const AddProductModal = (
       e.target.value > props.product.quantity - prodToAdd[0].quantity
     ) {
       setQuantity(props.product.quantity - prodToAdd[0].quantity);
+       return;
     }
     if (prodToAdd[0] === undefined && e.target.value > props.product.quantity) {
       setQuantity(props.product.quantity);
+       return;
     } else {
       setQuantity(e.target.value);
+       return;
     }
   };
 
