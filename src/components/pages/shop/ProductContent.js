@@ -212,11 +212,14 @@ const ProductContent = (props, { addResDialog, productCounter }) => {
       e.target.value > product.quantity - prodToAdd[0].quantity
     ) {
       setQuantityAdd(product.quantity - prodToAdd[0].quantity);
+      return;
     }
     if (prodToAdd[0] === undefined && e.target.value > product.quantity) {
       setQuantityAdd(product.quantity);
+      return;
     } else {
       setQuantityAdd(e.target.value);
+      return;
     }
   };
 
